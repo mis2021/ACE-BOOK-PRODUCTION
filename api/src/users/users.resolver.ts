@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { UsersService } from './users.service';
+import Muser from '../../models/User';
 import { User } from './entities/user.entity';
 import {
   AuthResponse,
@@ -33,6 +34,15 @@ export class UsersResolver {
   async register(
     @Args('input') createUserInput: RegisterInput,
   ): Promise<AuthResponse> {
+
+    const newUser = new Muser({
+      username: "jacky",
+      email: "james@gmail.com",
+      password: "incgbfjdk",
+    });
+    await newUser.save();
+    console.log("newUser", newUser)
+
     return this.usersService.register(createUserInput);
   }
 
