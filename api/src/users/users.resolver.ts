@@ -25,6 +25,7 @@ import { ProfileInput } from './dto/create-profile.input';
 import { Profile } from './entities/profile.entity';
 import { UpdateProfileArgs } from './dto/update-profile.args';
 import { MakeOrRevokeAdminInput } from './dto/make-revoke-admin.input';
+import bcrypt from 'bcryptjs';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -36,11 +37,12 @@ export class UsersResolver {
   ): Promise<AuthResponse> {
 
     const newUser = new Muser({
-      username: "jacky",
-      email: "james@gmail.com",
-      password: "incgbfjdk",
+      username: createUserInput.name,
+      email:createUserInput.email,
+      password: await bcrypt.hash(createUserInput.password, 10) ,
     });
     await newUser.save();
+    console.log("RegisterInput", createUserInput)
     console.log("newUser", newUser)
 
     return this.usersService.register(createUserInput);
