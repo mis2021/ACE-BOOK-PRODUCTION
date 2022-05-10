@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { scroller } from 'react-scroll';
 import { getStaticPaths, getStaticProps } from '@/framework/home-pages.ssr';
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { InferGetStaticPropsType } from 'next';
 import { adminOnly } from '@/utils/auth-utils';
 export { getStaticPaths, getStaticProps };
@@ -62,14 +61,6 @@ Home.getLayout = function getLayout(page) {
   return <HomeLayout layout={page.props.layout}>{page}</HomeLayout>;
 };
 
-Home.authenticate = {
-  permissions: adminOnly,
-};
-
-
 export default Home;
-
-
-
 
 
