@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { UsersService } from './users.service';
+import Muser from '../../models/User';
 import { User } from './entities/user.entity';
 import {
   AuthResponse,
@@ -24,6 +25,7 @@ import { ProfileInput } from './dto/create-profile.input';
 import { Profile } from './entities/profile.entity';
 import { UpdateProfileArgs } from './dto/update-profile.args';
 import { MakeOrRevokeAdminInput } from './dto/make-revoke-admin.input';
+import bcrypt from 'bcryptjs';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -33,6 +35,16 @@ export class UsersResolver {
   async register(
     @Args('input') createUserInput: RegisterInput,
   ): Promise<AuthResponse> {
+
+    const newUser = new Muser({
+      username: createUserInput.name,
+      email:createUserInput.email,
+      password: await bcrypt.hash(createUserInput.password, 10) ,
+    });
+    await newUser.save();
+    console.log("RegisterInput", createUserInput)
+    console.log("newUser", newUser)
+
     return this.usersService.register(createUserInput);
   }
 
