@@ -1,12 +1,9 @@
 import React from "react";
-import Loader from '@/components/ui/loaders/spinner/spinner';
-import { useRouter } from 'next/router';
-import { BackArrowRound } from '@/components/icons/back-arrow-round';
-import { useUser } from '@/framework/user';
-import LoginView from '@/components/auth/login-form';
-import { getAuthCredentials, hasAccess } from "@/utils/auth-utils";
-import { ROUTES } from '@/lib/routes';
-import AccessDeniedPage from "@/components/common/access-denied";
+import { useRouter } from "next/router";
+import { getAuthCredentials, hasAccess } from "./auth-utils";
+import Loader from "@components/ui/loader/loader";
+import AccessDeniedPage from "@components/common/access-denied";
+import { ROUTES } from "./routes";
 
 const PrivateRoute: React.FC<{ authProps: any }> = ({
   children,
