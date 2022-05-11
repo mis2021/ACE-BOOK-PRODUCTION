@@ -44,9 +44,9 @@ const LoginForm = () => {
           router.push(ROUTES.HOME);
           return;
         }
-        setErrorMessage("form:error-enough-permission");
+        setErrorMessage("Premission Issues");
       } else {
-        setErrorMessage("form:error-credential-wrong");
+        setErrorMessage("Credential Issues");
       }
     },
   });

@@ -1,10 +1,10 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { GetStaticProps } from 'next';
-import { getLayout } from '@/components/layouts/layout';
 import Home from './feed/[[...pages]]';
 import { ROUTES } from '@/lib/routes';
 import type { GetServerSideProps } from 'next';
+import HomeLayout from '@/components/layouts/_home';
 import {
   getAuthCredentials,
   allowedRoles,
@@ -12,9 +12,10 @@ import {
   isAuthenticated,
 } from '@/utils/auth-utils';
 import dynamic from 'next/dynamic';
+import { ReactElement } from 'react';
 
 const DynamicHome = dynamic(() => import('./feed/[[...pages]]'), {
-  ssr: false,
+  ssr: true,
 });
 
 const templateVar ={
@@ -42,6 +43,10 @@ export default function IndexPage({ userPermissions }: any) {
   const { t } = useTranslation();
   return <><DynamicHome variables={templateVar} layout={"classic"} /> </>;
 }
+
+IndexPage.getLayout = function getLayout(page : ReactElement) {
+  return <HomeLayout layout={"classic"}>{page}</HomeLayout>;
+};
 
 // LoginPage.getLayout = getLayout;
 

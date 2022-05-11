@@ -19,6 +19,9 @@ import { paginate } from 'src/common/pagination/paginate';
 import { plainToClass } from 'class-transformer';
 import { GetUsersArgs, UserPaginator } from './dto/get-users.args';
 import { MakeOrRevokeAdminInput } from './dto/make-revoke-admin.input';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import Muser from '../../models/User';
 
 const users = plainToClass(User, usersJson);
 const options = {
@@ -49,10 +52,33 @@ export class UsersService {
 
   async login(loginInput: LoginInput): Promise<AuthResponse> {
     console.log(loginInput);
-    return {
-      token: 'jwt token',
-      permissions: ['super_admin', 'store_owner', 'customer'],
-    };
+    console.log("email", loginInput.email);
+    
+    const user = await Muser.findOne({ email: loginInput.email });
+    if (user && (await bcrypt.compare(loginInput.password, user.password))) {
+      const token = jwt.sign(
+        { user_id: user._id, email: loginInput.email },
+        "ACEMCACEBOOK11",
+        {
+          expiresIn: "2h",
+        }
+      );
+     
+      return {
+        token: token,
+        permissions: ['super_admin', 'store_owner', 'customer'],
+        // permissions: ['super_admin', 'store_owner', 'customer'],
+      };
+    }
+    else{
+
+      return {
+        token: '',
+        permissions: [''],
+      };
+      
+    }
+    
   }
 
   async changePassword(
