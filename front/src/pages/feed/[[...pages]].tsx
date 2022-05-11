@@ -36,6 +36,9 @@ const Home: NextPageWithLayout<
   const { width } = useWindowSize();
   // const { layout, page } = useLayout();
 
+  console.log("variables", variables)
+  console.log("layout", layout)
+
   useEffect(() => {
     if (query.text || query.category) {
       scroller.scrollTo('grid', {
