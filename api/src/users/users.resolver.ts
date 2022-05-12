@@ -50,6 +50,7 @@ export class UsersResolver {
 
   @Mutation(() => AuthResponse)
   async login(@Args('input') loginInput: LoginInput): Promise<AuthResponse> {
+    console.log("logggg");
     return this.usersService.login(loginInput);
   }
 
@@ -57,7 +58,7 @@ export class UsersResolver {
   async socialLogin(
     @Args('input') socialLoginInput: SocialLoginInput,
   ): Promise<AuthResponse> {
-    console.log(socialLoginInput);
+    console.log("socialLoginInput", socialLoginInput);
     return {
       token: 'jwt token',
       permissions: ['super_admin', 'customer'],

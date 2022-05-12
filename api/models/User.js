@@ -6,6 +6,8 @@ const userSchema = new Schema({
   password: { type: String },
   role: {type : String},
   token: { type: String },
-});
+},
+{ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
+);
 
 module.exports = model("Muser", userSchema);
