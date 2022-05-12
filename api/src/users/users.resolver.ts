@@ -42,15 +42,12 @@ export class UsersResolver {
       password: await bcrypt.hash(createUserInput.password, 10) ,
     });
     await newUser.save();
-    console.log("RegisterInput", createUserInput)
-    console.log("newUser", newUser)
 
     return this.usersService.register(createUserInput);
   }
 
   @Mutation(() => AuthResponse)
   async login(@Args('input') loginInput: LoginInput): Promise<AuthResponse> {
-    console.log("logggg");
     return this.usersService.login(loginInput);
   }
 

@@ -51,13 +51,10 @@ export class UsersService {
   }
 
   async login(loginInput: LoginInput): Promise<AuthResponse> {
-    console.log(loginInput);
-    console.log("email", loginInput.email);
-    
-    const user = await Muser.findOne({ email: loginInput.email });
+    const user = await Muser.findOne({ username: loginInput.username });
     if (user && (await bcrypt.compare(loginInput.password, user.password))) {
       const token = jwt.sign(
-        { user_id: user._id, email: loginInput.email },
+        { user_id: user._id, username: loginInput.username },
         "ACEMCACEBOOK11",
         {
           expiresIn: "2h",
@@ -71,7 +68,6 @@ export class UsersService {
       };
     }
     else{
-
       return {
         token: '',
         permissions: [''],
