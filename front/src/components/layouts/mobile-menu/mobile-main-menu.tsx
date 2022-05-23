@@ -31,21 +31,21 @@ export default function MobileMainMenu() {
         <ul className="flex-grow">
         {/* <ul className="flex-grow"> */}
           {headerLinks.map(({ href, label, icon }) => (
-            // <li key={`${href}${label}`}>
-            //   <button
-            //     onClick={() => handleClick(href)}
-            //     className="flex items-center py-3 px-5 md:px-8 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent cursor-pointer"
-            //   >
-            //     {t(label)}
-            //   </button>
-            // </li>
-            <SidebarItem
-              key={label}
-              href={href}
-              // href={href(shop?.toString()!)}
-              label={t(label)}
-              icon={icon}
-            />
+            <li key={`${href}${label}`}>
+              <button
+                onClick={() => handleClick(href)}
+                className="flex items-center py-3 px-5 md:px-8 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent cursor-pointer"
+              >
+                {t(label)}
+              </button>
+            </li>
+            // <SidebarItem
+            //   key={label}
+            //   href={href}
+            //   // href={href(shop?.toString()!)}
+            //   label={t(label)}
+            //   icon={icon}
+            // />
           ))}
         </ul>
       </div>

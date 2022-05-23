@@ -29,7 +29,7 @@ export default function MobileNavigation({
   const { totalUniqueItems } = useCart();
 
   function handleSidebar(view: string) {
-    setDrawerView({ display: true, view });
+    setDrawerView({ display: true, view});
   }
 
   function handleJoin() {
@@ -41,7 +41,8 @@ export default function MobileNavigation({
       <nav className="h-12 md:h-14 w-full py-1.5 px-2 flex justify-between fixed ltr:left-0 rtl:right-0 bottom-0 z-10 bg-light shadow-400">
         <motion.button
           whileTap={{ scale: 0.88 }}
-          onClick={() => handleSidebar('MAIN_MENU_VIEW')}
+          onClick={() => handleSidebar('FILTER_VIEW')}
+          // onClick={() => handleSidebar('MAIN_MENU_VIEW')}
           className="flex items-center justify-center h-full p-2 focus:outline-none focus:text-accent"
         >
           <span className="sr-only">{t('text-burger-menu')}</span>
