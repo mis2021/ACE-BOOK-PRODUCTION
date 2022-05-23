@@ -41,50 +41,43 @@ const DeptPage: NextPageWithLayout = () => {
   }
 
   const handleSearch = () => {
-    console.log('fdfds');
+    console.log('fdsafdsafsd');
   };
 
   return (
     <ModClassicLayout>
       <div className="bg-gray min-h-screen  ">
-        {/* <div className="min-h-screen bg-light "> */}
-        <div className="mx-auto flex w-full max-w-6xl flex-col p-8 pt-14">
-          {/* <h3 className="mb-8 text-2xl font-bold text-heading">
-          Departments
-        </h3> */}
-
+        <div className="mx-auto flex w-full max-w-none flex-col  pt-14">
+         
           <Card className="mb-8 flex flex-col items-center xl:flex-row">
-            <div className="mb-4 md:w-1/4 xl:mb-0">
+            <div className="mb-4 md:w-2/4 xl:mb-0">
               <h1 className="text-xl font-semibold text-heading">
                 Departments
-                {/* {t('common:sidebar-nav-item-tags')} */}
               </h1>
             </div>
 
-            <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-y-0 xl:w-1/2">
-              {/* <Search 
-            onSearch={handleSearch}
-             /> */}
+            <div className="ms-auto flex w-full flex-col items-center space-y-4 md:space-x-4 md:flex-row md:space-y-0 xl:w-1/2">
+            {/* <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-y-0 xl:w-1/2 mx-6"> */}
+              <Search onSearch={handleSearch} />
 
               <LinkButton
                 href="/departments/create"
-                className="md:ms-6 h-12 w-full md:w-auto"
+                className="md:ms-6 mx-3 h-12 w-full md:w-auto"
               >
                 <span className="block md:hidden xl:block">
                   + New Department
-                  {/* + {t('form:button-label-add-tag')} */}
                 </span>
                 <span className="hidden md:block xl:hidden">
                   + New Department
-                  {/* + {t('form:button-label-add')} */}
                 </span>
               </LinkButton>
             </div>
           </Card>
 
-          <Card className="mb-8 flex flex-col items-center xl:flex-row ">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
-            {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"> */}
+          <Card className=" mb-8 flex  flex-col items-center xl:flex-row">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ">
+              {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"> */}
+
               {isLoading && !shops.length ? (
                 <>
                   {rangeMap(limit, (i) => (

@@ -29,39 +29,21 @@ import { tagValidationSchema } from './formvalidations/tag-validation-schema';
 import { Tag } from '__generated__/__types__';
 import { NextPageWithLayout } from '@/types';
 import { gql, useMutation } from '@apollo/client';
+import {UPSERT_DEPARTMENT} from '@graphql/operations/departments/departmentMutations'
 
 type FormValues = {
-  name: string;
   deptName: string;
   description: string;
-  type: any;
-  details: string;
-  image: any;
-  icon: any;
 };
 
 const defaultValues = {
-  image: '',
   deptName: '',
   description: '',
-  name: '',
-  details: '',
-  icon: '',
-  type: '',
 };
 
 type IProps = {
   initialValues?: null;
 };
-
-const UPSERT_DEPARTMENT = gql`
-  mutation UpsertDepartment($input: UpsertDepartmentInput!) {
-    upsertDepartment(input: $input) {
-      name
-      _id
-    }
-  }
-`;
 
 const DepartmentForm: NextPageWithLayout = () => {
   const router = useRouter();
