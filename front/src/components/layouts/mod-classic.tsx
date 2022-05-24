@@ -9,11 +9,9 @@ import { getLayout } from '@/components/layouts/layout';
 import BreadcrumbSolidBg from '../ui/breadcrumps/breadcrumpSolidBg';
 import { breadcrumbType } from '@/types/custom';
 
-
-
 type Props = {
   children: JSX.Element;
-  breadcrumb?:Array <breadcrumbType>;
+  breadcrumb?: Array<breadcrumbType>;
 };
 
 function ModClassicLayout({ children, breadcrumb }: Props) {
@@ -47,8 +45,15 @@ function ModClassicLayout({ children, breadcrumb }: Props) {
 
         <div className="w-full">
           <div className="bg-gray mx-6 md:mx-14 ">
-            {breadcrumb ? <BreadcrumbSolidBg data={breadcrumb} /> : <></>}
-            {children}
+
+            <div className="bg-gray min-h-screen  ">
+              <div className="mx-auto flex w-full max-w-none flex-col  pt-3">
+              {/* <div className="mx-auto flex w-full max-w-none flex-col  pt-14"> */}
+                {breadcrumb ? <BreadcrumbSolidBg data={breadcrumb} /> : <></>}
+                {children}
+              </div>
+            </div>
+
           </div>
         </div>
 

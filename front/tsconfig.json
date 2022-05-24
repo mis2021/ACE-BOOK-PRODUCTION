@@ -18,6 +18,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@graphql/*": ["graphql/*"],
+      "@utils/*": ["src/utils/*"],
       "@/framework/*": ["src/framework/graphql/*"],
       "@/framework/static/*": ["src/framework/static/*"]
     },
