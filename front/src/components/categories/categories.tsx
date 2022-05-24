@@ -30,15 +30,27 @@ interface CategoriesProps {
   variables: any;
   className?: string;
 }
+
+const defaultVar = {
+  limit: 1000,
+  parent:null,
+  type: "grocery"
+}
+
 export default function Categories({
   layout,
   className,
-  variables,
+  variables = defaultVar,
+  // variables,
 }: CategoriesProps) {
   const { categories, isLoading, error } = useCategories(variables);
+  // const { categories, isLoading, error } = useCategories(variables);
 
   if (error) return <ErrorMessage message={error.message} />;
   const Component = MAP_CATEGORY_TO_GROUP[layout];
+
+  console.log("variables", variables)
+  console.log("categories", categories)
   return (
     <Component
       notFound={!Boolean(categories.length)}

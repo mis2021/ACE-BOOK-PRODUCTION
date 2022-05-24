@@ -17,6 +17,7 @@
     "jsx": "preserve",
     "paths": {
       "@/*": ["src/*"],
+      "@graphql/*": ["graphql/*"],
       "@/framework/*": ["src/framework/graphql/*"],
       "@/framework/static/*": ["src/framework/static/*"]
     },

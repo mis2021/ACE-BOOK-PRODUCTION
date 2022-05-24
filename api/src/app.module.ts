@@ -23,6 +23,7 @@ import { RefundsModule } from './refunds/refunds.module';
 import { AuthorsModule } from './authors/authors.module';
 import { ManufacturersModule } from './manufacturers/manufacturers.module';
 import { MuserModule } from './musers/musers.modules';
+import { DepartmentModule } from './acebook/masterdata/department/department.modules';
 
 @Module({
   imports: [
@@ -52,7 +53,8 @@ import { MuserModule } from './musers/musers.modules';
     AuthorsModule,
     ManufacturersModule,
     
-    MuserModule
+    MuserModule,
+    DepartmentModule
   ],
   controllers: [],
   providers: [],

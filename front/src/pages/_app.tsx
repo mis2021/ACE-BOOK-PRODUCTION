@@ -27,9 +27,6 @@ function CustomApp({
   const authenticationRequired = Component.authenticationRequired ?? false;
   const authProps = (Component as any).authenticate ;
   // const authProps = (Component as any).authenticate;
-
-  console.log('authProps', authProps);
-  console.log('getLayout', getLayout);
   return (
     <SessionProvider session={session}>
       <QueryProvider pageProps={pageProps}>
