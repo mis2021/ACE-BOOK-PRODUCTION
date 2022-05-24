@@ -14,9 +14,9 @@ export { getStaticProps } from '@/framework/shops-page.ssr';
 import { gql, useQuery } from '@apollo/client';
 import { GET_ALL_DEPTS } from '../../graphql/queries/departments/departmentQueries';
 import _ from 'lodash';
-import Card from '@/components/admin/components/common/card';
-import Search from '@/components/admin/components/common/search';
-import LinkButton from '@/components/admin/components/ui/link-button';
+import Card from '@admin/components/common/card';
+import Search from '@admin/components/common/search';
+import LinkButton from '@admin/components/ui/link-button';
 import ModClassicLayout from '@/components/layouts/mod-classic';
 import HeaderDetails from '@/components/ui/headers/header-details';
 
@@ -48,7 +48,7 @@ const DeptPage: NextPageWithLayout = () => {
   return (
     <ModClassicLayout>
       <>
-        <HeaderDetails title={'Departments'} buttonName={'+ New Department'} />
+        <HeaderDetails title={'Departments'} buttonName={'+ New Department'} buttonRoute={"/departments/create"} />
 
         <Card className=" mb-8 flex  flex-col items-center xl:flex-row">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ">

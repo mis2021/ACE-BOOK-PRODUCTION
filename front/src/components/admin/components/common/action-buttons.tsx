@@ -1,14 +1,14 @@
-import { BanUser } from "@/components/admin/components/icons/ban-user";
-import { EditIcon } from "@/components/admin/components/icons/edit";
+import { BanUser } from "@admin/components/icons/ban-user";
+import { EditIcon } from "@admin/components/icons/edit";
 import Trash from "@/components/icons/trash";
 import { Eye } from "@/components/icons/eye-icon";
 import Link from "@/components/ui/link";
 import { useTranslation } from "next-i18next";
-import { CheckMarkCircle } from "@/components/admin/components/icons/checkmark-circle";
+import { CheckMarkCircle } from "@admin/components/icons/checkmark-circle";
 import { useModalAction } from "@/components/ui/modal/modal.context";
-import { CloseFillIcon } from "@/components/admin/components/icons/close-fill";
-import { WalletPointsIcon } from "@/components/admin/components/icons/wallet-point";
-import { AdminIcon } from "@/components/admin/components/icons/admin-icon";
+import { CloseFillIcon } from "@admin/components/icons/close-fill";
+import { WalletPointsIcon } from "@admin/components/icons/wallet-point";
+import { AdminIcon } from "@admin/components/icons/admin-icon";
 
 type Props = {
   id: string;

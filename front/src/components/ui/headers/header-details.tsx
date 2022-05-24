@@ -1,16 +1,17 @@
 import Link from '@/components/ui/link';
 import { breadcrumbType } from '@/types/custom';
-import Card from '@/components/admin/components/common/card';
-import Search from '@/components/admin/components/common/search';
-import LinkButton from '@/components/admin/components/ui/link-button';
-import Title from '@/components/admin/components/ui/title';
+import Card from '@admin/components/common/card';
+import Search from '@admin/components/common/search';
+import LinkButton from '@admin/components/ui/link-button';
+import Title from '@admin/components/ui/title';
 
 type Props = {
   title?: String;
   buttonName?: String;
+  buttonRoute?: String;
 };
 
-const HeaderDetails = ({title, buttonName}: Props) => {
+const HeaderDetails = ({title, buttonName, buttonRoute}: Props) => {
   const handleSearch = () => {
     console.log('fdsafdsafsd');
   };
@@ -26,7 +27,7 @@ const HeaderDetails = ({title, buttonName}: Props) => {
         <Search onSearch={handleSearch} />
 
         <LinkButton
-          href="/departments/create"
+          href={buttonRoute ? buttonRoute : '/'}
           className="md:ms-6 mx-3 h-12 w-full md:w-auto"
         >
           <span className="block md:hidden xl:block">{buttonName}</span>

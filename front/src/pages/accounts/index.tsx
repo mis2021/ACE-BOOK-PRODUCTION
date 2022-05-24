@@ -7,12 +7,16 @@ import ACDataTable from '@/components/tables/data-table';
 
 const AccountsPage: NextPageWithLayout = () => {
   return (
-    <ModClassicLayout>
+    <ModClassicLayout >
       {/* Transfered to ModClassicLayout component */}
       {/* <div className="bg-gray min-h-screen  ">
         <div className="mx-auto flex w-full max-w-none flex-col  pt-14"> */}
       <>
-        <HeaderDetails title={'Accounts'} buttonName={'+ New Account'} />
+        <HeaderDetails
+          title={'Accounts'}
+          buttonName={'+ New Account'}
+          buttonRoute={'/accounts/create'}
+        />
 
         <ACDataTable />
       </>

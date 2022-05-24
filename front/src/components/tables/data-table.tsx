@@ -1,7 +1,7 @@
 import React, {useState, useMemo} from 'react';
 import { Table } from '@/components/ui/table';
 import { useTranslation } from 'next-i18next';
-import TitleWithSort from '@/components/admin/components/ui/title-with-sort';
+import TitleWithSort from '@admin/components/ui/title-with-sort';
 import {
   TagPaginator,
   QueryTagsOrderByColumn,
@@ -9,13 +9,13 @@ import {
 } from '__generated__/__types__';
 import { useIsRTL } from '@/utils/locals';
 import debounce from "lodash/debounce";
-import ActionButtons from "@/components/admin/components/common/action-buttons";
+import ActionButtons from "@admin/components/common/action-buttons";
 
 
 const ACDataTable = () => {
   const { t } = useTranslation();
   const rowExpandable = (record: any) => record.children?.length;
-  const { alignLeft } = useIsRTL();
+  const { alignLeft, alignRight } = useIsRTL();
 
   const [order, setOrder] = useState<SortOrder>(SortOrder.Desc);
   const [column, setColumn] = useState<string>();
@@ -45,13 +45,13 @@ const ACDataTable = () => {
 
 
   const columns = [
-    {
-      title:"ID",
-      dataIndex: 'id',
-      key: 'id',
-      align: 'center',
-      width: 60,
-    },
+    // {
+    //   title:"ID",
+    //   dataIndex: 'id',
+    //   key: 'id',
+    //   align: 'center',
+    //   width: 60,
+    // },
     {
       title: (
         <TitleWithSort
@@ -79,7 +79,7 @@ const ACDataTable = () => {
       title:"Type",
       dataIndex: 'type',
       key: 'type',
-      align: alignLeft,
+      align: alignRight,
 
       render: (type: any) => (
         <div
