@@ -4,6 +4,8 @@ export { getStaticProps } from '@/framework/shops-page.ssr';
 import ModClassicLayout from '@/components/layouts/mod-classic';
 import HeaderDetails from '@/components/ui/headers/header-details';
 import ACDataTable from '@/components/tables/data-table';
+import DepartmentForm from '@/app/department/deptForm';
+import AccountForm from '@/app/accounts/accForm';
 
 const breadcrumbs = [
   {
@@ -22,9 +24,8 @@ const CreateAccountPage: NextPageWithLayout = () => {
   return (
     <ModClassicLayout breadcrumb={breadcrumbs}>
       <>
-      THIS IS CREATE PAGE
+          <AccountForm />
       </>
-      
     </ModClassicLayout>
   );
 };

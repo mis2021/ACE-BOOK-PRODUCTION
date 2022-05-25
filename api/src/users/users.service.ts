@@ -7,6 +7,7 @@ import {
   PasswordChangeResponse,
   RegisterInput,
   ResetPasswordInput,
+  UserRegResponse,
   VerifyForgetPasswordTokenInput,
 } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
@@ -21,7 +22,7 @@ import { GetUsersArgs, UserPaginator } from './dto/get-users.args';
 import { MakeOrRevokeAdminInput } from './dto/make-revoke-admin.input';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import Muser from '../../models/User';
+import MUser from '../../models/User';
 
 const users = plainToClass(User, usersJson);
 const options = {
@@ -34,47 +35,61 @@ const fuse = new Fuse(users, options);
 export class UsersService {
   private users: User[] = users;
 
-  async register(createUserInput: RegisterInput): Promise<AuthResponse> {
-    const user: User = {
-      ...users[0],
-      id: uuidv4(),
-      ...createUserInput,
-      created_at: new Date(),
-      updated_at: new Date(),
-    };
+  async register(cui: RegisterInput): Promise<UserRegResponse> {
+    // const user: User = {
+    //   ...users[0],
+    //   id: uuidv4(),
+    //   ...createUserInput,
+    //   created_at: new Date(),
+    //   updated_at: new Date(),
+    // };
 
-    this.users.push(user);
-    return {
-      token: 'jwt token',
-      permissions: ['super_admin', 'customer'],
+    // this.users.push(user);
+
+    const newUser = new MUser({
+      username: cui.username,
+      email: cui.email,
+      password: await bcrypt.hash(cui.password, 10),
+      firstName: cui.firstName,
+      middleName: cui.middleName,
+      lastName: cui.lastName,
+      position: cui.position,
+      isActive: cui.isActive,
+      isApprover: cui.isApprover,
+      contact: cui.contact,
+      departmentOnDuty: cui.departmentOnDuty,
+      department: cui.department
+    });
+    await newUser.save();
+
+    return{
+      _id : newUser._id,
+      username: newUser.username
     };
   }
 
   async login(loginInput: LoginInput): Promise<AuthResponse> {
-    const user = await Muser.findOne({ username: loginInput.username });
+    const user = await MUser.findOne({ username: loginInput.username });
     if (user && (await bcrypt.compare(loginInput.password, user.password))) {
       const token = jwt.sign(
         { user_id: user._id, username: loginInput.username },
-        "ACEMCACEBOOK11",
+        'ACEMCACEBOOK11',
         {
-          expiresIn: "2h",
-        }
+          expiresIn: '2h',
+        },
       );
-     
+
       return {
         token: token,
         permissions: ['super_admin', 'store_owner', 'customer'],
         // permissions: ['super_admin', 'store_owner', 'customer'],
       };
-    }
-    else{
+    } else {
       return {
         token: '',
         permissions: [''],
       };
-      
     }
-    
   }
 
   async changePassword(
