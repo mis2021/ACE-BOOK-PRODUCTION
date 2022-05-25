@@ -25,27 +25,27 @@ const AccBasicInfo = ({register , errors } : Props) => {
           <div className="grid  gap-3 md:grid-cols-2 lg:grid-cols-2">
             <div>
               <Input
-                label={'First Name'}
-                {...register('deptName')}
-                error={t(errors.deptName?.message!)}
+                label={'First Name *'}
+                {...register('firstName')}
+                error={t(errors.firstName?.message!)}
                 variant="outline"
                 className="mb-5"
               />
             </div>
             <div>
               <Input
-                label={'Middle Name'}
-                {...register('deptName')}
-                error={t(errors.deptName?.message!)}
+                label={'Middle Name '}
+                {...register('middleName')}
+                error={t(errors.middleName?.message!)}
                 variant="outline"
                 className="mb-5"
               />
             </div>
             <div>
               <Input
-                label={'Last Name'}
-                {...register('deptName')}
-                error={t(errors.deptName?.message!)}
+                label={'Last Name *'}
+                {...register('lastName')}
+                error={t(errors.lastName?.message!)}
                 variant="outline"
                 className="mb-5"
               />
@@ -53,8 +53,8 @@ const AccBasicInfo = ({register , errors } : Props) => {
             <div>
               <Input
                 label={'Suffix'}
-                {...register('deptName')}
-                error={t(errors.deptName?.message!)}
+                {...register('suffix')}
+                error={t(errors.suffix?.message!)}
                 variant="outline"
                 className="mb-5"
               />

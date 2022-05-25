@@ -24,7 +24,7 @@ import { getLayout } from '@/components/layouts/layout';
 //   useCreateTagMutation,
 //   useUpdateTagMutation,
 // } from "@graphql/tags.graphql";
-import { tagValidationSchema } from './formvalidations/tag-validation-schema';
+import { accValidationSchema } from './formvalidations/acc-validation-schema';
 // import { tagValidationSchema } from "./tag-validation-schema";
 import { Tag } from '__generated__/__types__';
 import { NextPageWithLayout } from '@/types';
@@ -35,11 +35,8 @@ import AccBasicInfo from './basicInfo';
 import AccEmpInfo from './employeeInfo';
 import BorderDashed from '@/components/ui/border';
 import AccCredentials from './credentials';
-
-type FormValues = {
-  deptName: string;
-  description: string;
-};
+import ContactInfo from './contactInfo';
+import { AccFormValues } from '@/types/accounts/accountTypes';
 
 const defaultValues = {
   deptName: '',
@@ -58,42 +55,47 @@ const AccountForm: NextPageWithLayout = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<AccFormValues>({
     //@ts-ignore
-    defaultValues: defaultValues,
+    // defaultValues: defaultValues,
 
-    resolver: yupResolver(tagValidationSchema),
+    resolver: yupResolver(accValidationSchema),
   });
   const [upsertDept] = useMutation(UPSERT_DEPARTMENT);
 
-  const onSubmit = async (values: FormValues) => {
-    const input = {
-      name: values.deptName,
-      description: values.description,
-    };
-    console.log('input', input);
+  const onSubmit = async (values: AccFormValues) => {
+    console.log('input', values);
 
-    if (confirm('Are you sure you want to add department?')) {
-      upsertDept({
-        variables: {
-          input: input,
-        },
-      })
-        .then((resp) => {
-          toast.success(t('Department successfully saved'));
-          console.log('resp', resp);
-        })
-        .catch((error) => {});
-    }
+    // if (confirm('Are you sure you want to add department?')) {
+    //   upsertDept({
+    //     variables: {
+    //       input: input,
+    //     },
+    //   })
+    //     .then((resp) => {
+    //       toast.success(t('Department successfully saved'));
+    //       console.log('resp', resp);
+    //     })
+    //     .catch((error) => {});
+    // }
   };
   const column = 'auto';
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-      
-        <BorderDashed><AccBasicInfo register={register} errors={errors} /></BorderDashed> 
-        <BorderDashed><AccEmpInfo register={register} errors={errors} /></BorderDashed>
-        <BorderDashed><AccCredentials register={register} errors={errors} /></BorderDashed>
+        <BorderDashed>
+          <AccBasicInfo register={register} errors={errors} />
+        </BorderDashed>
+        <BorderDashed>
+          <AccEmpInfo register={register} errors={errors} control={control}/>
+        </BorderDashed>
+        <BorderDashed>
+          <ContactInfo register={register} errors={errors} />
+        </BorderDashed>
+        <AccCredentials register={register} errors={errors} />
+        <div className="text-end mb-4">
+          <Button loading={false}>Save Details</Button>
+        </div>
       </form>
     </>
   );

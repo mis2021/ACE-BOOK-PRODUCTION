@@ -25,7 +25,6 @@ const DeptPage: NextPageWithLayout = () => {
   const limit = SHOPS_LIMIT;
 
   const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS);
-  console.log('alldepts', alldepts);
 
   const { shops, isLoading, isLoadingMore, hasMore, loadMore, error } =
     useShops({

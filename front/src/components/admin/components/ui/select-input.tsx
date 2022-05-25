@@ -1,4 +1,4 @@
-import Select from "@components/ui/select/select";
+import Select from "@admin/components/ui/select/select";
 import { Control, Controller } from "react-hook-form";
 
 interface SelectInputProps {
@@ -29,6 +29,7 @@ const SelectInput = ({
       {...rest}
       render={({ field }) => (
         <Select
+          
           {...field}
           getOptionLabel={getOptionLabel}
           getOptionValue={getOptionValue}
