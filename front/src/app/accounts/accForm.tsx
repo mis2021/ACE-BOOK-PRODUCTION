@@ -63,6 +63,7 @@ const AccountForm: NextPageWithLayout = () => {
   });
   const [upsertDept] = useMutation(UPSERT_DEPARTMENT);
 
+  console.log("control", control)
   const onSubmit = async (values: AccFormValues) => {
     console.log('input', values);
 
@@ -93,10 +94,15 @@ const AccountForm: NextPageWithLayout = () => {
           <ContactInfo register={register} errors={errors} />
         </BorderDashed>
         <AccCredentials register={register} errors={errors} />
-        <div className="text-end mb-4">
+        <div className="text-end mb-4 ">
+                  {/* <div className="text-end mb-4
+        px-4 h-12 flex items-center w-full rounded appearance-none transition duration-300 ease-in-out text-heading text-sm focus:outline-none focus:ring-0
+        
+        "> */}
           <Button loading={false}>Save Details</Button>
         </div>
       </form>
+    
     </>
   );
 };

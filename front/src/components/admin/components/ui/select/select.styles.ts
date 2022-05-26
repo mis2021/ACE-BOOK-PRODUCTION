@@ -14,6 +14,14 @@ export const selectStyles = {
       : state.isFocused
       ? "#F9FAFB"
       : "#ffffff",
+      
+  }),
+  input: (provided: any, state: any) => ({
+    ...provided,
+    input: {
+      outline: "none"
+    }
+    
   }),
   control: (_: any, state: any) => ({
     // ..._,
@@ -24,11 +32,11 @@ export const selectStyles = {
     borderRadius: 5,
     border: "1px solid #D1D5DB",
     borderColor: state.isFocused ? "rgb(var(--color-accent-500))" : "#D1D5DB",
-    // borderColor: state.isFocused ? "rgb(var(--color-accent-500))" : "#D1D5DB",
     boxShadow:
       state.menuIsOpen &&
       "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-      // boxShadow: "none"
+      
+      // border: '1px solid black',     boxShadow: 'none',     '&:hover': {         border: '1px solid black',     }
   }),
   indicatorSeparator: () => ({
     display: "none",
@@ -39,6 +47,7 @@ export const selectStyles = {
     "&:hover": {
       color: "#9CA3AF",
     },
+    // border: '1px solid black',     boxShadow: 'none',     '&:hover': {         border: '1px solid black',     }
   }),
   clearIndicator: (provided: any, state: any) => ({
     ...provided,
@@ -60,11 +69,14 @@ export const selectStyles = {
   valueContainer: (provided: any, _: any) => ({
     ...provided,
     paddingLeft: 16,
+    // border: "none !important",
+    // boxShadow: " none !important"
   }),
   singleValue: (provided: any, _: any) => ({
     ...provided,
     fontSize: "0.875rem",
     color: "#4B5563",
+    
   }),
   multiValue: (provided: any, _: any) => ({
     ...provided,
@@ -73,6 +85,7 @@ export const selectStyles = {
     overflow: "hidden",
     boxShadow:
       "0 0px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 2px 0 rgba(0, 0, 0, 0.06)",
+      
   }),
   multiValueLabel: (provided: any, _: any) => ({
     ...provided,

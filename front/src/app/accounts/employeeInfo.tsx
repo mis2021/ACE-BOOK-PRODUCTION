@@ -9,6 +9,7 @@ import Checkbox from '@admin/components/ui/checkbox/checkbox';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_DEPTS } from '@/graphql/queries/departments/departmentQueries';
 import SelectInput from '@admin/components/ui/select-input';
+// import SelectInput from '@admin/components/ui/select-input';
 import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 
@@ -91,24 +92,42 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
                   className="mb-5"
                 /> */}
                 <SelectInput
-                  name="type"
-                  
+                  name="department"
                   {...register('department')}
                   control={control}
                   getOptionLabel={(option: any) => option.name}
                   getOptionValue={(option: any) => option._id}
-                  options={_.get(alldepts, 'departments.data')? _.get(alldepts, 'departments.data') : []}
+                  options={
+                    _.get(alldepts, 'departments.data')
+                      ? _.get(alldepts, 'departments.data')
+                      : []
+                  }
                   isLoading={false}
+                  isMulti={true}
                 />
               </div>
             </div>
             <div>
-              <Input
+              {/* <Input
                 label={'Department on Duty'}
                 {...register('departmentOnDuty')}
                 error={t(errors.departmentOnDuty?.message!)}
                 variant="outline"
                 className="mb-5"
+              /> */}
+              <Label>{t('Department on Duty')}</Label>
+              <SelectInput
+                name="departmentOnDuty"
+                {...register('departmentOnDuty')}
+                control={control}
+                getOptionLabel={(option: any) => option.name}
+                getOptionValue={(option: any) => option._id}
+                options={
+                  _.get(alldepts, 'departments.data')
+                    ? _.get(alldepts, 'departments.data')
+                    : []
+                }
+                isLoading={false}
               />
             </div>
           </div>
