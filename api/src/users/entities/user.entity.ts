@@ -28,7 +28,7 @@ export class User extends CoreEntity {
 }
 
 
-@InputType('UserInputTypeAB', { isAbstract: true })
+@InputType('UserTypeAB', { isAbstract: true })
 @ObjectType()
 export class UserEntAB extends CoreEntityMg {
   // username: string;
@@ -49,8 +49,34 @@ export class UserEntAB extends CoreEntityMg {
   email?: string;
   password: string;
   token?: string;
-  departmentOnDuty?: DepartmentEnt;
-  department?: DepartmentEnt[];
+  departmentOnDuty?: DepartmentEnt ;
+  department?: DepartmentEnt[] ;
+  restrictionCode?: string[];
+}
+
+@InputType('UserInputTypeAB', { isAbstract: true })
+@ObjectType()
+export class UserEntABInput extends CoreEntityMg {
+  // username: string;
+  // email: string;
+  // password: string;
+  // role: string;
+  // token: string;
+
+  suffix: string;
+  username: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  position?: string;
+  isActive?: boolean;
+  isApprover?: boolean;
+  contact: string;
+  email?: string;
+  password: string;
+  token?: string;
+  departmentOnDuty?: string ;
+  department?: string[] ;
   restrictionCode?: string[];
 }
 
