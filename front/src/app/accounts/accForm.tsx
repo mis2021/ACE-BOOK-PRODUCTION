@@ -29,19 +29,19 @@ import { accValidationSchema } from './formvalidations/acc-validation-schema';
 import { Tag } from '__generated__/__types__';
 import { NextPageWithLayout } from '@/types';
 import { gql, useMutation } from '@apollo/client';
-import { UPSERT_DEPARTMENT } from '@graphql/operations/departments/departmentMutations';
+import { UPSERT_ACCOUNT } from '@graphql/operations/accounts/accountMutations';
 import cn from 'classnames';
 import AccBasicInfo from './basicInfo';
 import AccEmpInfo from './employeeInfo';
 import BorderDashed from '@/components/ui/border';
 import AccCredentials from './credentials';
 import ContactInfo from './contactInfo';
-import { AccFormValues } from '@/types/accounts/accountTypes';
-
-const defaultValues = {
-  deptName: '',
-  description: '',
-};
+import {
+  AccFormSubmission,
+  AccFormValues,
+} from '@/types/accounts/accountTypes';
+import { DepartmentGenType } from '@/types/departments/departmentTypes';
+import _ from 'lodash';
 
 type IProps = {
   initialValues?: null;
@@ -61,24 +61,37 @@ const AccountForm: NextPageWithLayout = () => {
 
     resolver: yupResolver(accValidationSchema),
   });
-  const [upsertDept] = useMutation(UPSERT_DEPARTMENT);
+  const [upsertAcc] = useMutation(UPSERT_ACCOUNT);
 
-  console.log("control", control)
-  const onSubmit = async (values: AccFormValues) => {
-    console.log('input', values);
+  const onSubmit = async (values: AccFormValues ) => {
+    let payload: AccFormSubmission | AccFormValues;
+    payload = _.cloneDeep(values);
 
-    // if (confirm('Are you sure you want to add department?')) {
-    //   upsertDept({
-    //     variables: {
-    //       input: input,
-    //     },
-    //   })
-    //     .then((resp) => {
-    //       toast.success(t('Department successfully saved'));
-    //       console.log('resp', resp);
-    //     })
-    //     .catch((error) => {});
-    // }
+    const orgDept = values?.department.map((item: any) => {
+      return item._id;
+    });
+
+    const deptOnDuty : any = values?.departmentOnDuty?._id;
+
+    payload.department = orgDept;
+    payload.departmentOnDuty = deptOnDuty;
+    delete payload.confPassword
+
+    console.log('input', payload);
+    if (confirm('Are you sure you want to save user?')) {
+      upsertAcc({
+        variables: {
+          input: payload,
+        },
+      })
+        .then((resp) => {
+          toast.success(t('Account successfully saved'));
+          console.log('resp', resp);
+        })
+        .catch((error) => {
+          toast.error(t('Account failed to save'));
+        });
+    }
   };
   const column = 'auto';
   return (
@@ -88,21 +101,16 @@ const AccountForm: NextPageWithLayout = () => {
           <AccBasicInfo register={register} errors={errors} />
         </BorderDashed>
         <BorderDashed>
-          <AccEmpInfo register={register} errors={errors} control={control}/>
+          <AccEmpInfo register={register} errors={errors} control={control} />
         </BorderDashed>
         <BorderDashed>
           <ContactInfo register={register} errors={errors} />
         </BorderDashed>
         <AccCredentials register={register} errors={errors} />
         <div className="text-end mb-4 ">
-                  {/* <div className="text-end mb-4
-        px-4 h-12 flex items-center w-full rounded appearance-none transition duration-300 ease-in-out text-heading text-sm focus:outline-none focus:ring-0
-        
-        "> */}
           <Button loading={false}>Save Details</Button>
         </div>
       </form>
-    
     </>
   );
 };

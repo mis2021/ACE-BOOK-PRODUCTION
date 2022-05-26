@@ -19,7 +19,7 @@ export class RegisterInput extends PickType(UserEntAB, [
 // export class RegisterInput extends PickType(User, [
   'email',
   'password',
-
+  'suffix',
   'username',
   'firstName',
   'middleName',

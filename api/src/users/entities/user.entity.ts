@@ -37,6 +37,7 @@ export class UserEntAB extends CoreEntityMg {
   // role: string;
   // token: string;
 
+  suffix: string;
   username: string;
   firstName: string;
   middleName: string;
@@ -48,8 +49,8 @@ export class UserEntAB extends CoreEntityMg {
   email?: string;
   password: string;
   token?: string;
-  departmentOnDuty?: string;
-  department?: string[];
+  departmentOnDuty?: DepartmentEnt;
+  department?: DepartmentEnt[];
   restrictionCode?: string[];
 }
 

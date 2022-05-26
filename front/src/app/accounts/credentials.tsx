@@ -54,8 +54,8 @@ const AccCredentials = ({ register, errors }: Props) => {
 
           <Input
             label={'Restrictions'}
-            {...register('restriction')}
-            error={t(errors.restriction?.message!)}
+            {...register('restrictionCode')}
+            error={t(errors.restrictionCode?.message!)}
             variant="outline"
             className="mb-5"
           />

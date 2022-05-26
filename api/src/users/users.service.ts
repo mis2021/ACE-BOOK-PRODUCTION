@@ -11,7 +11,7 @@ import {
   VerifyForgetPasswordTokenInput,
 } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
-import { User } from './entities/user.entity';
+import { User, UserEntAB } from './entities/user.entity';
 import { v4 as uuidv4 } from 'uuid';
 import { GetUserArgs } from './dto/get-user.args';
 import usersJson from './users.json';
@@ -23,6 +23,7 @@ import { MakeOrRevokeAdminInput } from './dto/make-revoke-admin.input';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import MUser from '../../models/User';
+import { PaginationArgs } from 'src/common/dto/pagination.args';
 
 const users = plainToClass(User, usersJson);
 const options = {
@@ -48,6 +49,7 @@ export class UsersService {
 
     const newUser = new MUser({
       username: cui.username,
+      suffix: cui.suffix,
       email: cui.email,
       password: await bcrypt.hash(cui.password, 10),
       firstName: cui.firstName,
@@ -164,5 +166,21 @@ export class UsersService {
 
   async subscribeToNewsletter(email: string) {
     return true;
+  }
+
+  // CUSTOM //
+  async findAll({ page, first }: PaginationArgs) {
+    const data: UserEntAB[] = await MUser.find({})
+    .populate('departmentOnDuty')
+    .populate('department');
+    return {
+      data: data,
+      paginatorInfo: paginate(
+        data.length,
+        page,
+        first,
+        data.length,
+      ),
+    };
   }
 }

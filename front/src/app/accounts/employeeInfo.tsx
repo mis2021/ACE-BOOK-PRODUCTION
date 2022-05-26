@@ -24,15 +24,17 @@ const initialState = {
 };
 
 const AccEmpInfo = ({ register, errors, control }: Props) => {
-  const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS);
-  console.log('alldepts-ACCOUNT', _.get(alldepts, 'departments.data'));
+  const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-first"}
+    );
   const { t } = useTranslation();
   const [state, setState] = useState(initialState);
 
   useEffect(() => {
     if (_.get(alldepts, 'departments.data')) {
       let clonedList = _.cloneDeep(_.get(alldepts, 'departments.data'));
-      console.log('clonedList', clonedList);
+  
 
       let departmentList = clonedList.map((item: any) => {
         item.label = (
@@ -131,7 +133,7 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
               />
             </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-6 pt-2">
             <div>
               <Checkbox
                 {...register('isActive')}

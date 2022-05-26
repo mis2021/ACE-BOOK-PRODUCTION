@@ -7,7 +7,7 @@ import {
 import { SortOrder } from 'src/common/dto/generic-conditions.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 import { PaginatorInfo } from 'src/common/dto/paginator-info.model';
-import { User } from '../entities/user.entity';
+import { User, UserEntAB } from '../entities/user.entity';
 
 @ObjectType()
 export class UserPaginator {
@@ -35,3 +35,9 @@ export enum QueryUsersOrderByColumn {
 registerEnumType(QueryUsersOrderByColumn, {
   name: 'QueryUsersOrderByColumn',
 });
+
+@ObjectType()
+export class AccountPaginator {
+  data: UserEntAB[];
+  paginatorInfo: PaginatorInfo;
+}

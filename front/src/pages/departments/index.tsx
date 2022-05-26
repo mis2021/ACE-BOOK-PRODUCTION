@@ -24,7 +24,10 @@ const DeptPage: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
   const limit = SHOPS_LIMIT;
 
-  const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS);
+  const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-first"
+  });
 
   const { shops, isLoading, isLoadingMore, hasMore, loadMore, error } =
     useShops({

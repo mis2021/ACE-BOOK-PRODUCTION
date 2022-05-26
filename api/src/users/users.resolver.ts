@@ -20,13 +20,14 @@ import {
 } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { GetUserArgs } from './dto/get-user.args';
-import { GetUsersArgs, UserPaginator } from './dto/get-users.args';
+import { AccountPaginator, GetUsersArgs, UserPaginator } from './dto/get-users.args';
 import { SuccessResponse } from 'src/common/dto/success-response.model';
 import { ProfileInput } from './dto/create-profile.input';
 import { Profile } from './entities/profile.entity';
 import { UpdateProfileArgs } from './dto/update-profile.args';
 import { MakeOrRevokeAdminInput } from './dto/make-revoke-admin.input';
 import bcrypt from 'bcryptjs';
+import { PaginationArgs } from 'src/common/dto/pagination.args';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -191,5 +192,12 @@ export class UsersResolver {
     @Args('email', { type: () => String }) email: string,
   ) {
     return this.usersService.subscribeToNewsletter(email);
+  }
+
+  // CUSTOM //
+
+  @Query(() => AccountPaginator, { name: 'accounts' })
+  getTags(@Args() getArgs: PaginationArgs) {
+    return this.usersService.findAll(getArgs);
   }
 }
