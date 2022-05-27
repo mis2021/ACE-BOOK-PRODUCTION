@@ -18,7 +18,7 @@ import usersJson from './users.json';
 import Fuse from 'fuse.js';
 import { paginate } from 'src/common/pagination/paginate';
 import { plainToClass } from 'class-transformer';
-import { GetUsersArgs, UserPaginator } from './dto/get-users.args';
+import { GetAccArgs, GetUsersArgs, UserPaginator } from './dto/get-users.args';
 import { MakeOrRevokeAdminInput } from './dto/make-revoke-admin.input';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
@@ -169,10 +169,13 @@ export class UsersService {
   }
 
   // CUSTOM //
-  async findAll({ page, first }: PaginationArgs) {
-    const data: UserEntAB[] = await MUser.find({})
+  async findAll({ page, first, id }: GetAccArgs) {
+    const data: UserEntAB[] = await MUser.find(id ? {_id: id } : {})
+    // const data: UserEntAB[] = await MUser.find({id: "628f3358a8f49813a48c7df3"})
     .populate('departmentOnDuty')
     .populate('department');
+
+    console.log("id", id)
     return {
       data: data,
       paginatorInfo: paginate(

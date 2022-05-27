@@ -37,17 +37,17 @@ export class UserEntAB extends CoreEntityMg {
   // role: string;
   // token: string;
 
-  suffix: string;
-  username: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  suffix?: string;
+  username?: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
   position?: string;
   isActive?: boolean;
   isApprover?: boolean;
-  contact: string;
+  contact?: string;
   email?: string;
-  password: string;
+  password?: string;
   token?: string;
   departmentOnDuty?: DepartmentEnt ;
   department?: DepartmentEnt[] ;

@@ -22,8 +22,9 @@ const HeaderDetails = ({title, buttonName, buttonRoute}: Props) => {
         <h1 className="text-xl font-semibold text-heading">{title}</h1>
       </div>
 
-      <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-x-4 md:space-y-0 xl:w-1/2">
-        {/* <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-y-0 xl:w-1/2 mx-6"> */}
+     
+      {/* <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-x-4 md:space-y-0 xl:w-1/2"> */}
+        <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-y-0 xl:w-1/2 mx-6">
         <Search onSearch={handleSearch} />
 
         <LinkButton

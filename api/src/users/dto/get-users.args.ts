@@ -21,6 +21,13 @@ export class GetUsersArgs extends PaginationArgs {
   text?: string;
 }
 
+@ArgsType()
+export class GetAccArgs extends PaginationArgs {
+  orderBy?: QueryUsersOrderByOrderByClause[];
+  text?: string;
+  id?: string;
+}
+
 @InputType()
 export class QueryUsersOrderByOrderByClause {
   column: QueryUsersOrderByColumn;

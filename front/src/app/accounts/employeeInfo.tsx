@@ -137,8 +137,9 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
             <div>
               <Checkbox
                 {...register('isActive')}
-                id="is_active"
-                label={t(' is Active')}
+                // id="is_active"
+                label={t('is Active')}
+                name={"isActive"}
                 // disabled={Boolean(false)}
                 // disabled={Boolean(is_external)}
                 className="mb-5"
@@ -147,11 +148,12 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
             <div>
               <Checkbox
                 {...register('isApprover')}
-                id="is_approver"
-                label={t(' is Approver')}
+                // id="is_approver"
+                label={t('is Approver')}
                 // disabled={Boolean(false)}
                 // disabled={Boolean(is_external)}
                 className="mb-5"
+                name={"isApprover"}
               />
             </div>
           </div>

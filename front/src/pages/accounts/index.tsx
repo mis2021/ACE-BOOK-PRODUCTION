@@ -12,8 +12,6 @@ import TitleWithSort from '@admin/components/ui/title-with-sort';
 import { useIsRTL } from '@/utils/locals';
 import ActionButtons from "@admin/components/common/action-buttons";
 import {
-  TagPaginator,
-  QueryTagsOrderByColumn,
   SortOrder,
 } from '__generated__/__types__';
 
@@ -87,7 +85,8 @@ const AccountsPage: NextPageWithLayout = () => {
       render: (id: string) => (
         <ActionButtons
           id={id}
-        //   editUrl={`${ROUTES.TAGS}/${id}/edit`}
+          editUrl={`/accounts/${id}`}
+          // editUrl={`${ROUTES.TAGS}/${id}/edit`}
           deleteModalView="DELETE_TAG"
         />
       ),

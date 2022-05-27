@@ -20,7 +20,7 @@ import {
 } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { GetUserArgs } from './dto/get-user.args';
-import { AccountPaginator, GetUsersArgs, UserPaginator } from './dto/get-users.args';
+import { AccountPaginator, GetAccArgs, GetUsersArgs, UserPaginator } from './dto/get-users.args';
 import { SuccessResponse } from 'src/common/dto/success-response.model';
 import { ProfileInput } from './dto/create-profile.input';
 import { Profile } from './entities/profile.entity';
@@ -197,7 +197,7 @@ export class UsersResolver {
   // CUSTOM //
 
   @Query(() => AccountPaginator, { name: 'accounts' })
-  getTags(@Args() getArgs: PaginationArgs) {
+  getTags(@Args() getArgs: GetAccArgs) {
     return this.usersService.findAll(getArgs);
   }
 }
