@@ -70,6 +70,25 @@ export class UsersService {
     };
   }
 
+  async updateMUser(cui: RegisterInput): Promise<UserRegResponse> {
+    let savedData;
+    // if (upsertInput._id) {
+    //   savedData = await Department.findOneAndUpdate(
+    //     { _id: upsertInput._id },
+    //     { $set: upsertInput },
+    //     { new: true },
+    //   );
+    // } else {
+    //   savedData = new Department({
+    //     name: upsertInput.name,
+    //     description: upsertInput.description,
+    //   });
+    //   await savedData.save();
+    // }
+
+    return savedData
+  }
+
   async login(loginInput: LoginInput): Promise<AuthResponse> {
     const user = await MUser.findOne({ username: loginInput.username });
     if (user && (await bcrypt.compare(loginInput.password, user.password))) {

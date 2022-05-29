@@ -45,9 +45,11 @@ import _ from 'lodash';
 
 type IProps = {
   initialValues?: null;
+  defaultValues?: any 
 };
 
-const AccountForm: NextPageWithLayout = () => {
+const AccountForm = ({defaultValues} : any) => {
+// const AccountForm: NextPageWithLayout = ({defaultValues} : any) => {
   const router = useRouter();
   const { t } = useTranslation();
   const {
@@ -57,10 +59,13 @@ const AccountForm: NextPageWithLayout = () => {
     formState: { errors },
   } = useForm<AccFormValues>({
     //@ts-ignore
-    // defaultValues: defaultValues,
+    defaultValues: defaultValues ?? {},
 
     resolver: yupResolver(accValidationSchema),
   });
+
+  console.log("defaultValues", defaultValues)
+
   const [upsertAcc] = useMutation(UPSERT_ACCOUNT);
 
   const onSubmit = async (values: AccFormValues ) => {
@@ -115,6 +120,6 @@ const AccountForm: NextPageWithLayout = () => {
   );
 };
 
-AccountForm.getLayout = getLayout;
+// AccountForm.getLayout = getLayout;
 
 export default AccountForm;
