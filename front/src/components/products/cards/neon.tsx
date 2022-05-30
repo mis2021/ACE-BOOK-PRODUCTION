@@ -40,7 +40,6 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
     return openModal('PRODUCT_DETAILS', product.slug);
   }
 
-  console.log("className", className)
   return (
     <article
       className={cn(
