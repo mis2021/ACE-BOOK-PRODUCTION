@@ -49,8 +49,6 @@ export default function Categories({
   if (error) return <ErrorMessage message={error.message} />;
   const Component = MAP_CATEGORY_TO_GROUP[layout];
 
-  console.log("variables", variables)
-  console.log("categories", categories)
   return (
     <Component
       notFound={!Boolean(categories.length)}

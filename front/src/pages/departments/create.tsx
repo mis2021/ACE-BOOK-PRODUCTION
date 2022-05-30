@@ -10,7 +10,7 @@ const breadcrumbs = [
   },
   {
     title: "Create",
-    route: "ds",
+    route: "/departments/create",
     isCurrent: true,
   }
 ]

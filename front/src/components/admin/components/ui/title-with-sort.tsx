@@ -1,6 +1,6 @@
 import cn from "classnames";
-import { TriangleArrowDown } from "@components/icons/triangle-arrow-down";
-import { TriangleArrowUp } from "@components/icons/triangle-arrow-up";
+import { TriangleArrowDown } from "@admin/components/icons/triangle-arrow-down";
+import { TriangleArrowUp } from "@admin/components/icons/triangle-arrow-up";
 
 type Props = {
   title: string | React.ReactNode;

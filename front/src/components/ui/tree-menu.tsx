@@ -37,24 +37,46 @@ const TreeMenuItem: React.FC<TreeMenuItemProps> = ({
     setOpen((prevValue) => !prevValue);
   }
 
+  // function onClick() {
+  //   const { pathname, query } = router;
+  //   const navigate = () =>
+  //     router.push(
+  //       {
+  //         pathname,
+  //         query: { ...query, category: slug },
+  //       },
+  //       undefined,
+  //       {
+  //         scroll: false,
+  //       }
+  //     );
+  //   if (Array.isArray(items) && !!items.length) {
+  //     toggleCollapse();
+  //     navigate();
+  //   } else {
+  //     navigate();
+  //     display && setDrawerState({ display: false, view: '' });
+  //   }
+  // }
+
   function onClick() {
-    const { pathname, query } = router;
-    const navigate = () =>
-      router.push(
-        {
-          pathname,
-          query: { ...query, category: slug },
-        },
-        undefined,
-        {
-          scroll: false,
-        }
-      );
+    // const { pathname, query } = router;
+    // const navigate = () =>
+    //   router.push(
+    //     {
+    //       pathname,
+    //       query: { ...query, category: slug },
+    //     },
+    //     undefined,
+    //     {
+    //       scroll: false,
+    //     }
+    //   );
     if (Array.isArray(items) && !!items.length) {
       toggleCollapse();
-      navigate();
+      // navigate();
     } else {
-      navigate();
+      // navigate();
       display && setDrawerState({ display: false, view: '' });
     }
   }

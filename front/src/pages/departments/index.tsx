@@ -14,17 +14,20 @@ export { getStaticProps } from '@/framework/shops-page.ssr';
 import { gql, useQuery } from '@apollo/client';
 import { GET_ALL_DEPTS } from '../../graphql/queries/departments/departmentQueries';
 import _ from 'lodash';
-import Card from '@/components/admin/components/common/card';
-import Search from '@/components/admin/components/common/search';
-import LinkButton from '@/components/admin/components/ui/link-button';
+import Card from '@admin/components/common/card';
+import Search from '@admin/components/common/search';
+import LinkButton from '@admin/components/ui/link-button';
 import ModClassicLayout from '@/components/layouts/mod-classic';
+import HeaderDetails from '@/components/ui/headers/header-details';
 
 const DeptPage: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
   const limit = SHOPS_LIMIT;
 
-  const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS);
-  console.log('alldepts', alldepts);
+  const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS, {
+    fetchPolicy: "cache-and-network",
+    nextFetchPolicy: "cache-first"
+  });
 
   const { shops, isLoading, isLoadingMore, hasMore, loadMore, error } =
     useShops({
@@ -46,69 +49,43 @@ const DeptPage: NextPageWithLayout = () => {
 
   return (
     <ModClassicLayout>
-      <div className="bg-gray min-h-screen  ">
-        <div className="mx-auto flex w-full max-w-none flex-col  pt-14">
-         
-          <Card className="mb-8 flex flex-col items-center xl:flex-row">
-            <div className="mb-4 md:w-2/4 xl:mb-0">
-              <h1 className="text-xl font-semibold text-heading">
-                Departments
-              </h1>
-            </div>
+      <>
+        <HeaderDetails title={'Departments'} buttonName={'+ New Department'} buttonRoute={"/departments/create"} />
 
-            <div className="ms-auto flex w-full flex-col items-center space-y-4 md:space-x-4 md:flex-row md:space-y-0 xl:w-1/2">
-            {/* <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-y-0 xl:w-1/2 mx-6"> */}
-              <Search onSearch={handleSearch} />
+        <Card className=" mb-8 flex  flex-col items-center xl:flex-row">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ">
+            {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"> */}
 
-              <LinkButton
-                href="/departments/create"
-                className="md:ms-6 mx-3 h-12 w-full md:w-auto"
-              >
-                <span className="block md:hidden xl:block">
-                  + New Department
-                </span>
-                <span className="hidden md:block xl:hidden">
-                  + New Department
-                </span>
-              </LinkButton>
-            </div>
-          </Card>
-
-          <Card className=" mb-8 flex  flex-col items-center xl:flex-row">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ">
-              {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"> */}
-
-              {isLoading && !shops.length ? (
-                <>
-                  {rangeMap(limit, (i) => (
-                    <CouponLoader key={i} uniqueKey={`shops-${i}`} />
-                  ))}
-                </>
-              ) : (
-                <>
-                  {_.get(alldepts, 'departments.data') ? (
-                    <>
-                      {' '}
-                      {_.get(alldepts, 'departments.data').map((d) => (
-                        <LabelDescCard data={d} key={d._id} />
-                      ))}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                </>
-              )}
-            </div>
-          </Card>
-          {hasMore && (
-            <div className="mt-8 flex items-center justify-center lg:mt-12">
-              <Button onClick={loadMore} loading={isLoadingMore}>
-                {t('text-load-more')}
-              </Button>
-            </div>
-          )}
-        </div>
-      </div>
+            {isLoading && !shops.length ? (
+              <>
+                {rangeMap(limit, (i) => (
+                  <CouponLoader key={i} uniqueKey={`shops-${i}`} />
+                ))}
+              </>
+            ) : (
+              <>
+                {_.get(alldepts, 'departments.data') ? (
+                  <>
+                    {' '}
+                    {_.get(alldepts, 'departments.data').map((d) => (
+                      <LabelDescCard data={d} key={d._id} />
+                    ))}
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
+            )}
+          </div>
+        </Card>
+        {hasMore && (
+          <div className="mt-8 flex items-center justify-center lg:mt-12">
+            <Button onClick={loadMore} loading={isLoadingMore}>
+              {t('text-load-more')}
+            </Button>
+          </div>
+        )}
+      </>
     </ModClassicLayout>
   );
 };

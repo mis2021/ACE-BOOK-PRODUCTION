@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useUploadMutation } from "@/graphql/admin/upload.graphql";
 import { CloseIcon } from "@/components/icons/close-icon";
-import Loader from "@/components/admin/components/ui/loader/loader";
+import Loader from "@admin/components/ui/loader/loader";
 import { useTranslation } from "next-i18next";
 import isObject from "lodash/isObject";
 import { Attachment } from "__generated__/__types__";

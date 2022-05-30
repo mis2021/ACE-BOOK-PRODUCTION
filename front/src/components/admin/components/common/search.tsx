@@ -1,4 +1,4 @@
-import { CloseIcon } from '@/components/admin/components/icons/close-icon';
+import { CloseIcon } from '@admin/components/icons/close-icon';
 import { SearchIcon } from '@/components/icons/search-icon';
 import cn from 'classnames';
 import { useEffect } from 'react';
