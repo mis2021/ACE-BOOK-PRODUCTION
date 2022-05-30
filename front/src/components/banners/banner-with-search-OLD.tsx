@@ -13,24 +13,8 @@ interface BannerProps {
   layout?: string;
 }
 
-const tempBanner = [{
-  "__typename": "Banner",
-  "id": "12",
-  "title": "Hospital Media Platform",
-  "description": "Get Updated on Hospital Concerns and Events",
-  "image": {
-      "__typename": "Attachment",
-      "id": "907",
-      "original": "https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/904/grocery.png",
-      "thumbnail": "https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/904/conversions/grocery-thumbnail.jpg"
-  }
-}]
-
 const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
   const [_, setDisplayHeaderSearch] = useAtom(displayHeaderSearchAtom);
-  console.log("banners", banners)
-  // temporary
-  banners = tempBanner
 
   const onWaypointPositionChange = ({
     currentPosition,
@@ -93,7 +77,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                       {banner?.description}
                     </p>
                     <div className="max-w-3xl w-full">
-                      {/* <Search label="search" /> */}
+                      <Search label="search" />
                     </div>
                     <Waypoint
                       onLeave={() => setDisplayHeaderSearch(true)}

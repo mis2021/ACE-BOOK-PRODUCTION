@@ -25,6 +25,8 @@ const Banner: React.FC<{ layout: string; variables: any }> = ({
   variables,
 }) => {
   const { type, error } = useType(variables.type);
+// replicate useType to generate dynamic banners or promotional silders
+
   if (error) return <ErrorMessage message={error.message} />;
   const Component = MAP_BANNER_TO_GROUP[layout];
   return (
