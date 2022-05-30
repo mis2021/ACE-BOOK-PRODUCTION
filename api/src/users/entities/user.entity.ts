@@ -62,7 +62,6 @@ export class UserEntABInput extends CoreEntityMg {
   // password: string;
   // role: string;
   // token: string;
-
   suffix: string;
   username: string;
   firstName: string;
@@ -73,7 +72,7 @@ export class UserEntABInput extends CoreEntityMg {
   isApprover?: boolean;
   contact: string;
   email?: string;
-  password: string;
+  password?: string;
   token?: string;
   departmentOnDuty?: string ;
   department?: string[] ;

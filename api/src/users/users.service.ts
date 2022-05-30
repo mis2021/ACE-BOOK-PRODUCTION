@@ -60,18 +60,30 @@ export class UsersService {
       isApprover: cui.isApprover,
       contact: cui.contact,
       departmentOnDuty: cui.departmentOnDuty,
-      department: cui.department
+      department: cui.department,
     });
     await newUser.save();
 
-    return{
-      _id : newUser._id,
-      username: newUser.username
+    return {
+      _id: newUser._id,
+      username: newUser.username,
     };
   }
 
   async updateMUser(cui: RegisterInput): Promise<UserRegResponse> {
     let savedData;
+
+    console.log(cui);
+    if (cui.password) {
+      cui.password = await bcrypt.hash(cui.password, 10)
+    }
+
+    savedData = await MUser.findOneAndUpdate(
+      { _id: cui._id },
+      { $set: cui },
+      { new: true },
+    );
+
     // if (upsertInput._id) {
     //   savedData = await Department.findOneAndUpdate(
     //     { _id: upsertInput._id },
@@ -86,7 +98,7 @@ export class UsersService {
     //   await savedData.save();
     // }
 
-    return savedData
+    return savedData;
   }
 
   async login(loginInput: LoginInput): Promise<AuthResponse> {
@@ -189,20 +201,15 @@ export class UsersService {
 
   // CUSTOM //
   async findAll({ page, first, id }: GetAccArgs) {
-    const data: UserEntAB[] = await MUser.find(id ? {_id: id } : {})
-    // const data: UserEntAB[] = await MUser.find({id: "628f3358a8f49813a48c7df3"})
-    .populate('departmentOnDuty')
-    .populate('department');
+    const data: UserEntAB[] = await MUser.find(id ? { _id: id } : {})
+      // const data: UserEntAB[] = await MUser.find({id: "628f3358a8f49813a48c7df3"})
+      .populate('departmentOnDuty')
+      .populate('department');
 
-    console.log("id", id)
+    console.log('id', id);
     return {
       data: data,
-      paginatorInfo: paginate(
-        data.length,
-        page,
-        first,
-        data.length,
-      ),
+      paginatorInfo: paginate(data.length, page, first, data.length),
     };
   }
 }

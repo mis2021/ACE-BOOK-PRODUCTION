@@ -35,9 +35,14 @@ export class UsersResolver {
 
   @Mutation(() => UserRegResponse)
   async register(
-    @Args('input') createUserInput: RegisterInput,
+    @Args('input') upsertInput: RegisterInput,
   ): Promise<UserRegResponse> {
-    return this.usersService.register(createUserInput);
+    if(upsertInput._id){
+      return this.usersService.updateMUser(upsertInput);
+    }else{
+      return this.usersService.register(upsertInput);
+    }
+   
   }
 
   @Mutation(() => AuthResponse)
@@ -143,9 +148,14 @@ export class UsersResolver {
     return this.usersService.getUser(getUserArgs);
   }
 
-  @Mutation(() => User)
-  updateUser(@Args('input') updateUserInput: UpdateUserInput) {
-    return this.usersService.updateUser(updateUserInput.id, updateUserInput);
+  @Mutation(() => UserRegResponse)
+  updateUser(@Args('input') updateUserInput: RegisterInput,
+  ): Promise<UserRegResponse> {
+  // updateUser(@Args('input') updateUserInput: UpdateUserInput) {
+    
+    
+    return this.usersService.updateMUser(updateUserInput);
+    // return this.usersService.updateUser(updateUserInput.id, updateUserInput);
   }
 
   @Mutation(() => User)

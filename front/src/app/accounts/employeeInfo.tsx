@@ -25,20 +25,19 @@ const initialState = {
 
 const AccEmpInfo = ({ register, errors, control }: Props) => {
   const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS, {
-    fetchPolicy: "cache-and-network",
-    nextFetchPolicy: "cache-first"}
-    );
+    fetchPolicy: 'cache-and-network',
+    nextFetchPolicy: 'cache-first',
+  });
   const { t } = useTranslation();
   const [state, setState] = useState(initialState);
 
   useEffect(() => {
     if (_.get(alldepts, 'departments.data')) {
       let clonedList = _.cloneDeep(_.get(alldepts, 'departments.data'));
-  
 
       let departmentList = clonedList.map((item: any) => {
         item.label = (
-          <div className="space-s-5 flex items-center">
+          <div className="flex items-center space-s-5">
             {/* <span className="flex w-5 h-5 items-center justify-center">
               {getIcon({
                 iconList: categoriesIcon,
@@ -64,7 +63,7 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
           details={
             "Add user's employment details and necessary information from here"
           }
-          className="sm:pe-4 md:pe-5 w-full px-0 pb-5 sm:w-4/12 sm:py-8 md:w-1/3 "
+          className="w-full px-0 pb-5 sm:w-4/12 sm:py-8 sm:pe-4 md:w-1/3 md:pe-5 "
         />
 
         <Card className="w-full sm:w-8/12 md:w-2/3">
@@ -85,7 +84,7 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
                 className="mb-5"
               /> */}
               <div className="mb-5">
-                <Label>{t('Origin Department')}</Label>
+                <Label>{t('Origin Department/s *')}</Label>
                 {/* <SelectInput
                   name="department"
                   control={control}
@@ -96,6 +95,7 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
                 <SelectInput
                   name="department"
                   {...register('department')}
+                  errors={t(errors.department?.message!)}
                   control={control}
                   getOptionLabel={(option: any) => option.name}
                   getOptionValue={(option: any) => option._id}
@@ -117,10 +117,11 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
                 variant="outline"
                 className="mb-5"
               /> */}
-              <Label>{t('Department on Duty')}</Label>
+              <Label>{t('Department on Duty *')}</Label>
               <SelectInput
                 name="departmentOnDuty"
                 {...register('departmentOnDuty')}
+                errors={t(errors.departmentOnDuty?.message!)}
                 control={control}
                 getOptionLabel={(option: any) => option.name}
                 getOptionValue={(option: any) => option._id}
@@ -131,15 +132,16 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
                 }
                 isLoading={false}
               />
+              
             </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-6 pt-2">
+          <div className="grid pt-2 md:grid-cols-2 lg:grid-cols-6">
             <div>
               <Checkbox
                 {...register('isActive')}
                 // id="is_active"
                 label={t('is Active')}
-                name={"isActive"}
+                name={'isActive'}
                 // disabled={Boolean(false)}
                 // disabled={Boolean(is_external)}
                 className="mb-5"
@@ -153,7 +155,7 @@ const AccEmpInfo = ({ register, errors, control }: Props) => {
                 // disabled={Boolean(false)}
                 // disabled={Boolean(is_external)}
                 className="mb-5"
-                name={"isApprover"}
+                name={'isApprover'}
               />
             </div>
           </div>

@@ -39,7 +39,6 @@ const EditAccount: NextPageWithLayout = (props: Props) => {
     }
   });
 
-  console.log("accData", _.get(accData, "accounts.data[0]"))
 
 
   return (

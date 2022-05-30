@@ -66,8 +66,6 @@ const DepartmentForm: NextPageWithLayout = () => {
       name: values.deptName,
       description: values.description,
     };
-    console.log('input', input);
-
     if (confirm('Are you sure you want to add department?')) {
       upsertDept({
         variables: {
@@ -76,7 +74,6 @@ const DepartmentForm: NextPageWithLayout = () => {
       })
         .then((resp) => {
           toast.success(t('Department successfully saved'));
-          console.log('resp', resp);
         })
         .catch((error) => {});
     }

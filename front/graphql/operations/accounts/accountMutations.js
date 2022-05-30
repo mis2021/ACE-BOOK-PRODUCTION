@@ -9,3 +9,12 @@ mutation Register($input: RegisterInput!) {
   }
 }
 `
+
+// export const UPDATE_ACCOUNT = gql`
+// mutation UpdateUser($input: RegisterInput!) {
+//   updateUser(input: $input) {
+//     _id
+//     username
+//   }
+// }
+// `

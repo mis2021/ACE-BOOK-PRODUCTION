@@ -8,9 +8,7 @@ type Props = {
 
 
 const BreadcrumbSolidBg  = ({ data = []} : Props) => {
-
-
-  console.log('data', data);
+  
   return (
     <div className="pt-3.5">
       <nav
@@ -19,7 +17,7 @@ const BreadcrumbSolidBg  = ({ data = []} : Props) => {
       >
         <ol className="inline-flex items-center space-x-1 md:space-x-3">
           {data.map((d, index) => (
-            <li className="inline-flex items-center">
+            <li className="inline-flex items-center" key={index}>
               <Link href={d.route}>
                 <a
                   href="#"

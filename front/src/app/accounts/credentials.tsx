@@ -32,7 +32,7 @@ const AccCredentials = ({ register, errors }: Props) => {
           <div className="grid  gap-3 md:grid-cols-2 lg:grid-cols-2">
             <div>
               <Input
-                label={'Password *'}
+                label={'Password'}
                 type="password"
                 {...register('password')}
                 error={t(errors.password?.message!)}

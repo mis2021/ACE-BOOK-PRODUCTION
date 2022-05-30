@@ -24,7 +24,7 @@ import { getLayout } from '@/components/layouts/layout';
 //   useCreateTagMutation,
 //   useUpdateTagMutation,
 // } from "@graphql/tags.graphql";
-import { accValidationSchema } from './formvalidations/acc-validation-schema';
+import { accValidationSchema, accValidationSchemaUpdate } from './formvalidations/acc-validation-schema';
 // import { tagValidationSchema } from "./tag-validation-schema";
 import { Tag } from '__generated__/__types__';
 import { NextPageWithLayout } from '@/types';
@@ -61,10 +61,10 @@ const AccountForm = ({defaultValues} : any) => {
     //@ts-ignore
     defaultValues: defaultValues ?? {},
 
-    resolver: yupResolver(accValidationSchema),
+    resolver: yupResolver(defaultValues ? accValidationSchemaUpdate  : accValidationSchema),
   });
 
-  console.log("defaultValues", defaultValues)
+ 
 
   const [upsertAcc] = useMutation(UPSERT_ACCOUNT);
 
@@ -80,9 +80,32 @@ const AccountForm = ({defaultValues} : any) => {
 
     payload.department = orgDept;
     payload.departmentOnDuty = deptOnDuty;
+
+    if(defaultValues?._id){
+      payload._id = defaultValues._id
+      delete payload.updated_at
+      delete payload.created_at
+      delete payload.__typename
+    }
+
+    if(payload.password){
+      payload.password = payload.password
+
+      if(!payload.confPassword){
+        return toast.error("Please confirm password")
+      }else{
+        if(payload.confPassword !== payload.password ){
+          return toast.error("Password does not match")
+        }
+      }
+    
+    }else{
+      delete payload.password
+    }
+
+
     delete payload.confPassword
 
-    console.log('input', payload);
     if (confirm('Are you sure you want to save user?')) {
       upsertAcc({
         variables: {
@@ -91,7 +114,7 @@ const AccountForm = ({defaultValues} : any) => {
       })
         .then((resp) => {
           toast.success(t('Account successfully saved'));
-          console.log('resp', resp);
+
         })
         .catch((error) => {
           toast.error(t('Account failed to save'));

@@ -17,6 +17,7 @@ registerEnumType(Permission, { name: 'Permission' });
 @InputType()
 export class RegisterInput extends PickType(UserEntABInput, [
 // export class RegisterInput extends PickType(User, [
+  '_id',
   'email',
   'password',
   'suffix',

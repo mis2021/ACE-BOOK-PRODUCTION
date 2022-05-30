@@ -1,34 +1,46 @@
-import { DepartmentGenType } from "../departments/departmentTypes";
+import { DepartmentGenType } from '../departments/departmentTypes';
+
+
+type defualtAccVals = {
+
+}
+
 
 export type AccFormValues = {
-    username: string;
-    firstName: string;
-    middleName: string;
-    suffix: string;
-    lastName: string;
-    position: string;
-    isActive: boolean;
-    isApprover: boolean;
-    contact: string;
-    email: string;
-    password: string;
-    confPassword: string |undefined;
-    departmentOnDuty: DepartmentGenType;
-    department: DepartmentGenType[];
-  };
+  _id?: string;
+  username: string;
+  firstName: string;
+  middleName: string;
+  suffix: string;
+  lastName: string;
+  position: string;
+  isActive: boolean;
+  isApprover: boolean;
+  contact: string;
+  email: string;
+  password?: string;
+  confPassword: string | undefined;
+  departmentOnDuty: DepartmentGenType;
+  department: DepartmentGenType[];
+  updated_at?: string;
+  created_at?: string;
+};
 
-  export type AccFormSubmission = {
-    username: string;
-    firstName: string;
-    middleName: string;
-    suffix: string;
-    lastName: string;
-    position: string;
-    isActive: boolean;
-    isApprover: boolean;
-    contact: string;
-    email: string;
-    password: string;
-    confPassword: string | undefined;
-    departmentOnDuty: string;
-  };
+export type AccFormSubmission = {
+  _id?: string;
+  username: string;
+  firstName: string;
+  middleName: string;
+  suffix: string;
+  lastName: string;
+  position: string;
+  isActive: boolean;
+  isApprover: boolean;
+  contact: string;
+  email: string;
+  password?: string;
+  confPassword: string | undefined;
+  departmentOnDuty: string;
+  updated_at?: string;
+  created_at?: string;
+};
