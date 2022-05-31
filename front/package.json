@@ -53,6 +53,7 @@
     "react-hook-form": "^7.27.0",
     "react-otp-input": "^2.4.0",
     "react-phone-input-2": "^2.15.0",
+    "react-pretty-numbers": "^3.0.0",
     "react-query": "^3.34.15",
     "react-scroll": "^1.8.4",
     "react-select": "^5.2.2",

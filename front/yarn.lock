@@ -6725,6 +6725,11 @@ react-phone-input-2@^2.15.0:
     lodash.startswith "^4.2.1"
     prop-types "^15.7.2"
 
+react-pretty-numbers@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-pretty-numbers/-/react-pretty-numbers-3.0.0.tgz#045e613350f3b48031305ad2f62f62a53fc05d8a"
+  integrity sha1-BF5hM1DztIAxMFrS9i9ipT/AXYo=
+
 react-query@^3.34.15:
   version "3.34.15"
   resolved "https://registry.yarnpkg.com/react-query/-/react-query-3.34.15.tgz#9e143b7d0aa39c515102a35120d5518ad91b10f6"
