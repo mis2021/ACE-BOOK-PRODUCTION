@@ -24,7 +24,7 @@ import { AuthorsModule } from './authors/authors.module';
 import { ManufacturersModule } from './manufacturers/manufacturers.module';
 import { MuserModule } from './acebook/musers/musers.modules';
 import { DepartmentModule } from './acebook/masterdata/department/department.modules';
-import { CustomTagModule } from './acebook/masterdata/customTags/customTag.modules';
+import { CustomTagModule } from './acebook/masterdata/customTag/customTag.modules';
 
 @Module({
   imports: [

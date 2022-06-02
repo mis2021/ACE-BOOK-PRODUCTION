@@ -13,17 +13,15 @@ enum Permission {
   STAFF = 'Staff',
   CUSTOMER = 'Customer',
 }
-// registerEnumType(Permission, { name: 'restriction' });
+registerEnumType(Permission, { name: 'restrictionct' });
 @InputType()
 export class UpsertCustomTagInput extends PickType(CustomTagEnt, [
   'name',
   'description',
   '_id'
-]){}
-// {permission: Permission = Permission.CUSTOMER;}
+]){permission: Permission = Permission.CUSTOMER;}
 
 @InputType()
 export class CustomTagId extends PickType(CustomTagEnt, [
   '_id'
-]){}
-// {permission: Permission = Permission.CUSTOMER;}
+]){permission: Permission = Permission.CUSTOMER;}

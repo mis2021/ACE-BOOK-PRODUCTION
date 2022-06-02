@@ -3,23 +3,23 @@ import { paginate } from 'src/common/pagination/paginate';
 import { CustomTagEnt } from './entities/customTag.entity';
 import moment from 'moment';
 // import  Department  from './entities/department.entity';
-import CustomTags from '@models/Masterdata/CustomTags';
+import CustomTag from '@models/Masterdata/CustomTags';
 
 import { CustomTagId, UpsertCustomTagInput } from './dto/customTag.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 
 @Injectable()
 export class CustomTagService {
-  async upsert(upsertInput: UpsertCustomTagInput): Promise<CustomTagEnt> {
+  async upsertcT(upsertInput: UpsertCustomTagInput): Promise<CustomTagEnt> {
     let savedData;
     if (upsertInput._id) {
-      savedData = await CustomTags.findOneAndUpdate(
+      savedData = await CustomTag.findOneAndUpdate(
         { _id: upsertInput._id },
         { $set: upsertInput },
         { new: true },
       );
     } else {
-      savedData = new CustomTags({
+      savedData = new CustomTag({
         name: upsertInput.name,
         description: upsertInput.description,
       });

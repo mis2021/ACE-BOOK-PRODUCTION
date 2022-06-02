@@ -10,11 +10,11 @@ export class CustomTagResolver {
   constructor(private readonly customTagService: CustomTagService) {}
 
   @Mutation(() => CustomTagEnt)
-  async upsertDepartment(
+  async upsertCustomTag(
     @Args('input') upsertInput: UpsertCustomTagInput,
   ): Promise<CustomTagEnt> {
 
-    return this.customTagService.upsert(upsertInput);
+    return this.customTagService.upsertcT(upsertInput);
   }
 
   // @Mutation(() => DepartmentEnt)
