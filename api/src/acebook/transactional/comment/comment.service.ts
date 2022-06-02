@@ -19,8 +19,8 @@ export class CommentService {
       );
     } else {
       savedData = new Comment({
-        name: upsertInput.name,
-        description: upsertInput.description,
+        message: upsertInput.message,
+        user: upsertInput.user,
       });
       await savedData.save();
     }

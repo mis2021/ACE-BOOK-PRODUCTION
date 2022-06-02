@@ -5,7 +5,7 @@ import {
   PickType,
   registerEnumType,
 } from '@nestjs/graphql';
-import { CommentEnt } from '../entities/comment.entity';
+import { ReactionIconDetailEnt } from '../entities/reactionIconDetail.entity';
 
 enum Permission {
   SUPER_ADMIN = 'Super admin',
@@ -13,15 +13,15 @@ enum Permission {
   STAFF = 'Staff',
   CUSTOMER = 'Customer',
 }
-registerEnumType(Permission, { name: 'restrictionComment' });
+registerEnumType(Permission, { name: 'restrictionRid' });
 @InputType()
-export class UpsertCommentInput extends PickType(CommentEnt, [
-  'message',
-  'user',
+export class UpsertReactionIconDetailInput extends PickType(ReactionIconDetailEnt, [
+  'name',
+  'path',
   '_id'
 ]){permission: Permission = Permission.CUSTOMER;}
 
 @InputType()
-export class CommentId extends PickType(CommentEnt, [
+export class ReactionIconDetailId extends PickType(ReactionIconDetailEnt, [
   '_id'
 ]){permission: Permission = Permission.CUSTOMER;}

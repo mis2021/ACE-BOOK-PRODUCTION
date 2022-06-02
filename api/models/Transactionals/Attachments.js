@@ -1,7 +1,4 @@
-const { model, Schema } = require("mongoose");
-const Reactions = require("../Documents/Reactions");
-const CustomTag = require("../Masterdata/CustomTags");
-
+const { model, Schema, mongoose } = require("mongoose");
 const attachmentsSchema = new Schema({
     path: { type: String },
     createdBy: {
@@ -14,12 +11,8 @@ const attachmentsSchema = new Schema({
     }],
     refId: { type: mongoose.Schema.Types.ObjectId },
     originCollection: { type: String },
-    reactions: [{
-        type:Reactions,
-    }],
-    customTags: [{
-        type:CustomTag,
-    }]
+    reactions: [{type:  mongoose.Schema.Types.Object, ref: 'Reaction'}],
+    customTags: [{type:  mongoose.Schema.Types.Object, ref: 'CustomTag'}]
 },
     { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );

@@ -27,7 +27,7 @@ export class User extends CoreEntity {
   permissions: Permissions[];
 }
 
-
+// OFFICIAL USER GRAPHQL TYPE ACE-BOOK
 @InputType('UserTypeAB', { isAbstract: true })
 @ObjectType()
 export class UserEntAB extends CoreEntityMg {

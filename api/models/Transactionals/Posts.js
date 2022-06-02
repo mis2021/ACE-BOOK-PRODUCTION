@@ -1,8 +1,4 @@
 const { model, Schema } = require("mongoose");
-const Reactions = require("../Documents/Reactions");
-const CustomTags = require("../Masterdata/CustomTags");
-const Attachments = require("./Attachments");
-const Comment = require("./Comments");
 
 const postSchema = new Schema({
     content: { type: String },
@@ -11,14 +7,8 @@ const postSchema = new Schema({
         ref: 'Attachment',
         default: null
     }],
-    comments: [{
-        type: Comment,
-        default: null
-    }],
-    reactions: [{
-        type:Reactions,
-        default: null
-    }],
+    comments: [{type:  mongoose.Schema.Types.Object, ref: 'Comment'}],
+    reactions:  [{type:  mongoose.Schema.Types.Object, ref: 'Reaction'}],
     isShared: { type: Boolean },
     sharedPostId:[ {
         type: mongoose.Schema.Types.ObjectId,

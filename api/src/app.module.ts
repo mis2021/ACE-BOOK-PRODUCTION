@@ -22,10 +22,11 @@ import { WalletsModule } from './wallets/wallets.module';
 import { RefundsModule } from './refunds/refunds.module';
 import { AuthorsModule } from './authors/authors.module';
 import { ManufacturersModule } from './manufacturers/manufacturers.module';
-import { MuserModule } from './acebook/musers/musers.modules';
+// import { MuserModule } from './acebook/musers/musers.modules';
 import { DepartmentModule } from './acebook/masterdata/department/department.modules';
 import { CustomTagModule } from './acebook/masterdata/customTag/customTag.modules';
 import { CommentModule } from './acebook/transactional/comment/comment.modules';
+import { AttachmentModule } from './acebook/transactional/attachment/attachment.modules';
 
 @Module({
   imports: [
@@ -55,10 +56,11 @@ import { CommentModule } from './acebook/transactional/comment/comment.modules';
     AuthorsModule,
     ManufacturersModule,
     
-    MuserModule,
+    // MuserModule,
     DepartmentModule,
     CustomTagModule,
-    CommentModule
+    CommentModule,
+    AttachmentModule
   ],
   controllers: [],
   providers: [],
