@@ -2,17 +2,14 @@ import React from 'react'
 import type { NextPageWithLayout } from '@/types';
 import { getLayout } from '@/components/layouts/layout';
 import ModIndexClassicLayout from '@/components/layouts/mod-index-classic';
-import PostIndex from '@/app/posts';
+import DashboardIndex from '@/app/dashboard';
 
 type Props = {}
 
 const IndexPage :  NextPageWithLayout = () => {
   return (
     <ModIndexClassicLayout>
-      <>
-      <PostIndex/>
-      <PostIndex/>
-      </>
+      <DashboardIndex />
     </ModIndexClassicLayout>
   )
 }

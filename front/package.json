@@ -29,6 +29,7 @@
     "dayjs": "^1.10.7",
     "deepmerge": "^4.2.2",
     "framer-motion": "6.2.3",
+    "html-react-parser": "^1.4.14",
     "jotai": "^1.6.0",
     "js-cookie": "^3.0.1",
     "little-state-machine": "^4.2.1",
