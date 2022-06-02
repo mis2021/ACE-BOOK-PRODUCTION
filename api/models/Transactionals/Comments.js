@@ -1,5 +1,5 @@
-const { model, Schema } = require("mongoose");
-const Reactions = require("../Documents/Reactions");
+const { model, Schema, mongoose } = require("mongoose");
+const Reaction = require("../Documents/Reactions");
 
 const commentSchema = new Schema({
     message: { type: String },
@@ -11,9 +11,7 @@ const commentSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
     }],
-    reactions: [{
-        type:Reactions,
-    }],
+    reactions: [{type:  mongoose.Schema.Types.Object, ref: 'Reaction'}],
 },
     { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );

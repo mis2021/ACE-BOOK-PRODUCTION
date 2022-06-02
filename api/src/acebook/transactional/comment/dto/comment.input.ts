@@ -5,7 +5,7 @@ import {
   PickType,
   registerEnumType,
 } from '@nestjs/graphql';
-import { CustomTagEnt } from '../entities/customTag.entity';
+import { CommentEnt } from '../entities/comment.entity';
 
 enum Permission {
   SUPER_ADMIN = 'Super admin',
@@ -13,15 +13,15 @@ enum Permission {
   STAFF = 'Staff',
   CUSTOMER = 'Customer',
 }
-registerEnumType(Permission, { name: 'restrictionct' });
+registerEnumType(Permission, { name: 'restrictionComment' });
 @InputType()
-export class UpsertCustomTagInput extends PickType(CustomTagEnt, [
+export class UpsertCommentInput extends PickType(CommentEnt, [
   'name',
   'description',
   '_id'
 ]){permission: Permission = Permission.CUSTOMER;}
 
 @InputType()
-export class CustomTagId extends PickType(CustomTagEnt, [
+export class CommentId extends PickType(CommentEnt, [
   '_id'
 ]){permission: Permission = Permission.CUSTOMER;}
