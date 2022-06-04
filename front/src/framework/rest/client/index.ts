@@ -45,7 +45,7 @@ import type {
   TagQueryOptions,
   Type,
   TypeQueryOptions,
-  UpdateUserInput,
+  // UpdateUserInput,
   User,
   VerifiedCheckoutData,
   VerifyCouponInputType,
@@ -176,8 +176,8 @@ class Client {
   };
   users = {
     me: () => HttpClient.get<User>(API_ENDPOINTS.USERS_ME),
-    update: (user: UpdateUserInput) =>
-      HttpClient.put<User>(`${API_ENDPOINTS.USERS}/${user.id}`, user),
+    // update: (user: UpdateUserInput) =>
+    //   HttpClient.put<User>(`${API_ENDPOINTS.USERS}/${user.id}`, user),
     login: (input: LoginUserInput) =>
       HttpClient.post<AuthResponse>(API_ENDPOINTS.USERS_LOGIN, input),
     socialLogin: (input: SocialLoginInputType) =>

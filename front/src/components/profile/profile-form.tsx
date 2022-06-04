@@ -7,31 +7,32 @@ import { useTranslation } from 'next-i18next';
 import pick from 'lodash/pick';
 import { Form } from '@/components/ui/forms/form';
 import { useUpdateUser } from '@/framework/user';
-import type { UpdateUserInput, User } from '@/types';
+// import type { UpdateUserInput, User } from '@/types';
 
 const ProfileForm = ({ user }: { user: User }) => {
   const { t } = useTranslation('common');
   const { mutate: updateProfile, isLoading } = useUpdateUser();
 
-  function onSubmit(values: UpdateUserInput) {
-    console.log(values, 'values');
-    if (!user) {
-      return false;
-    }
-    updateProfile({
-      id: user.id,
-      name: values.name,
-      profile: {
-        id: user?.profile?.id,
-        bio: values?.profile?.bio ?? '',
-        //@ts-ignore
-        avatar: values?.profile?.avatar?.[0],
-      },
-    });
-  }
+  // function onSubmit(values: UpdateUserInput) {
+  //   console.log(values, 'values');
+  //   if (!user) {
+  //     return false;
+  //   }
+  //   updateProfile({
+  //     id: user.id,
+  //     name: values.name,
+  //     profile: {
+  //       id: user?.profile?.id,
+  //       bio: values?.profile?.bio ?? '',
+  //       //@ts-ignore
+  //       avatar: values?.profile?.avatar?.[0],
+  //     },
+  //   });
+  // }
 
   return (
-    <Form<UpdateUserInput>
+    <>
+    {/* <Form<UpdateUserInput>
       onSubmit={onSubmit}
       useFormProps={{
         ...(user && {
@@ -77,7 +78,8 @@ const ProfileForm = ({ user }: { user: User }) => {
           </div>
         </>
       )}
-    </Form>
+    </Form> */}
+    </>
   );
 };
 
