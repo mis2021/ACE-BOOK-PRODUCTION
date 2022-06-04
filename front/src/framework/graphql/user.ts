@@ -35,7 +35,8 @@ import {
   VerifyForgetPasswordTokenInput,
   VerifyOtpInput,
 } from '__generated__/__types__';
-import type { RegisterUserInput, UpdateUserInput } from '@/types';
+import type { RegisterUserInput } from '@/types';
+// import type { RegisterUserInput, UpdateUserInput } from '@/types';
 import { useApolloClient } from '@apollo/client';
 import { useState } from 'react';
 import { getErrorMessage } from './utils/form-error';
@@ -80,47 +81,47 @@ export const useDeleteAddress = () => {
   return { mutate: deleteAddress, isLoading };
 };
 
-export const useUpdateUser = () => {
-  const { t } = useTranslation('common');
-  const { closeModal } = useModalAction();
-  const [updateProfile, { loading: isLoading }] = useUpdateCustomerMutation({
-    onCompleted: (data) => {
-      if (data?.updateUser?.id) {
-        toast.success(t('profile-update-successful'));
-        closeModal();
-      }
-    },
-    onError: (err) => {
-      toast.error(t('error-something-wrong'));
-    },
-  });
-  function update({ id, address, name, profile }: UpdateUserInput) {
-    updateProfile({
-      variables: {
-        //@ts-ignore
-        input: {
-          id,
-          name,
-          ...(profile && {
-            profile: {
-              upsert: {
-                id: profile?.id,
-                bio: profile.bio,
-                avatar: profile.avatar,
-              },
-            },
-          }),
-          ...(address && {
-            address: {
-              upsert: address,
-            },
-          }),
-        },
-      },
-    });
-  }
-  return { mutate: update, isLoading };
-};
+// export const useUpdateUser = () => {
+//   const { t } = useTranslation('common');
+//   const { closeModal } = useModalAction();
+//   const [updateProfile, { loading: isLoading }] = useUpdateCustomerMutation({
+//     onCompleted: (data) => {
+//       if (data?.updateUser?.id) {
+//         toast.success(t('profile-update-successful'));
+//         closeModal();
+//       }
+//     },
+//     onError: (err) => {
+//       toast.error(t('error-something-wrong'));
+//     },
+//   });
+//   function update({ id, address, name, profile }: UpdateUserInput) {
+//     updateProfile({
+//       variables: {
+//         //@ts-ignore
+//         input: {
+//           id,
+//           name,
+//           ...(profile && {
+//             profile: {
+//               upsert: {
+//                 id: profile?.id,
+//                 bio: profile.bio,
+//                 avatar: profile.avatar,
+//               },
+//             },
+//           }),
+//           ...(address && {
+//             address: {
+//               upsert: address,
+//             },
+//           }),
+//         },
+//       },
+//     });
+//   }
+//   return { mutate: update, isLoading };
+// };
 
 export const useContact = () => {
   const { t } = useTranslation('common');

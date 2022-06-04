@@ -9,6 +9,7 @@ import { Wallet } from 'src/wallets/entities/wallet.entity';
 import { Profile } from './profile.entity';
 
 @InputType('UserInputType', { isAbstract: true })
+// @InputType('UserInputType', { isAbstract: true })
 @ObjectType()
 export class User extends CoreEntity {
   name: string;
