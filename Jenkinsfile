@@ -10,16 +10,18 @@ pipeline {
             }
         }
 
-        stage('Build docker image') {
+        stage('Build and Run docker Backend') {
             steps {  
                 sh 'docker build ./api -t jacksemis101/ace-book-api'
-		   
+                sh 'docker run -d -p "4000:4000" jacksemis101/ace-book-api'
             }
         }
- 	 stage('Build run') {
+ 	  stage('Build and Run docker Frontend') {
             steps {  
-                sh 'docker run -d -p "4000:4000" jacksemis101/ace-book-api'
-		    
+
+		        sh 'docker build ./front -t jacksemis101/ace-book-front'
+		        sh 'docker run -d -p "3000:3000" jacksemis101/ace-book-front'
+
             }
         }
         stage('login to dockerhub') {
