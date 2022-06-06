@@ -1,3 +1,4 @@
+import { Address } from '@/addresses/entities/address.entity';
 import {
   InputType,
   ObjectType,
@@ -5,6 +6,7 @@ import {
   PickType,
   registerEnumType,
 } from '@nestjs/graphql';
+import { Profile } from '../entities/profile.entity';
 import { User, UserEntAB, UserEntABInput } from '../entities/user.entity';
 
 enum Permission {
@@ -15,7 +17,7 @@ enum Permission {
 }
 registerEnumType(Permission, { name: 'Permission' });
 @InputType()
-export class RegisterInput extends PickType(UserEntABInput, [
+export class RegisterInputMU extends PickType(UserEntABInput, [
 // export class RegisterInput extends PickType(User, [
   '_id',
   'email',
@@ -33,6 +35,17 @@ export class RegisterInput extends PickType(UserEntABInput, [
   'departmentOnDuty',
   'department',
   'restrictionCode',
+]) {
+  permission: Permission = Permission.CUSTOMER;
+}
+
+
+registerEnumType(Permission, { name: 'Permission' });
+@InputType()
+export class RegisterInput extends PickType(User, [
+  'name',
+  'email',
+  'password',
 ]) {
   permission: Permission = Permission.CUSTOMER;
 }
@@ -74,10 +87,23 @@ export class AuthResponse {
   permissions: string[];
 }
 
+// @ObjectType()
+// export class UserRegResponse {
+//   _id: string;
+//   id?: string;
+//   username: string;
+// }
+
 @ObjectType()
-export class UserRegResponse {
+export class UserRegResponseMU {
   _id: string;
+  id?: string;
+  name?: string;
+  email?: string;
   username: string;
+
+  profile?: Profile;
+  address?: Address[];
 }
 
 @ObjectType()

@@ -12,9 +12,10 @@ import {
   OtpResponse,
   PasswordChangeResponse,
   RegisterInput,
+  RegisterInputMU,
   ResetPasswordInput,
   SocialLoginInput,
-  UserRegResponse,
+  UserRegResponseMU,
   VerifyForgetPasswordTokenInput,
   VerifyOtpInput,
 } from './dto/create-user.input';
@@ -33,14 +34,36 @@ import { PaginationArgs } from 'src/common/dto/pagination.args';
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Mutation(() => UserRegResponse)
+  // @Mutation(() => UserRegResponse)
+  // async register(
+  //   @Args('input') upsertInput: RegisterInput,
+  // ): Promise<UserRegResponse> {
+  //   if(upsertInput._id){
+  //     return this.usersService.updateMUser(upsertInput);
+  //   }else{
+  //     return this.usersService.register(upsertInput);
+  //   }
+   
+  // }
+
+  @Mutation(() => AuthResponse)
   async register(
-    @Args('input') upsertInput: RegisterInput,
-  ): Promise<UserRegResponse> {
+    @Args('input') createUserInput: RegisterInput,
+  ): Promise<AuthResponse> {
+
+   
+    return this.usersService.register(createUserInput);
+  }
+
+
+  @Mutation(() => UserRegResponseMU)
+  async registerMU(
+    @Args('input') upsertInput: RegisterInputMU,
+  ): Promise<UserRegResponseMU> {
     if(upsertInput._id){
       return this.usersService.updateMUser(upsertInput);
     }else{
-      return this.usersService.register(upsertInput);
+      return this.usersService.registerMU(upsertInput);
     }
    
   }
@@ -148,9 +171,9 @@ export class UsersResolver {
     return this.usersService.getUser(getUserArgs);
   }
 
-  @Mutation(() => UserRegResponse)
-  updateUser(@Args('input') updateUserInput: RegisterInput,
-  ): Promise<UserRegResponse> {
+  @Mutation(() => UserRegResponseMU)
+  updateUser(@Args('input') updateUserInput: RegisterInputMU,
+  ): Promise<UserRegResponseMU> {
   // updateUser(@Args('input') updateUserInput: UpdateUserInput) {
     
     

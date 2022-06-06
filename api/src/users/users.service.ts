@@ -6,8 +6,9 @@ import {
   LoginInput,
   PasswordChangeResponse,
   RegisterInput,
+  RegisterInputMU,
   ResetPasswordInput,
-  UserRegResponse,
+  UserRegResponseMU,
   VerifyForgetPasswordTokenInput,
 } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
@@ -36,7 +37,24 @@ const fuse = new Fuse(users, options);
 export class UsersService {
   private users: User[] = users;
 
-  async register(cui: RegisterInput): Promise<UserRegResponse> {
+
+  async register(createUserInput: RegisterInput): Promise<AuthResponse> {
+    const user: User = {
+      ...users[0],
+      id: uuidv4(),
+      ...createUserInput,
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
+
+    this.users.push(user);
+    return {
+      token: 'jwt token',
+      permissions: ['super_admin', 'customer'],
+    };
+  }
+
+  async registerMU(cui: RegisterInputMU): Promise<UserRegResponseMU> {
     // const user: User = {
     //   ...users[0],
     //   id: uuidv4(),
@@ -70,7 +88,7 @@ export class UsersService {
     };
   }
 
-  async updateMUser(cui: RegisterInput): Promise<UserRegResponse> {
+  async updateMUser(cui: RegisterInputMU): Promise<UserRegResponseMU> {
     let savedData;
 
     console.log(cui);
