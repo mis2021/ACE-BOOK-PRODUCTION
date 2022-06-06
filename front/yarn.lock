@@ -6640,6 +6640,14 @@ rc-motion@^2.0.0, rc-motion@^2.3.4:
     classnames "^2.2.1"
     rc-util "^5.2.1"
 
+rc-pagination@^3.1.14:
+  version "3.1.16"
+  resolved "https://registry.yarnpkg.com/rc-pagination/-/rc-pagination-3.1.16.tgz#b0082108cf027eded18ed61d818d31897c343e81"
+  integrity sha512-GFcHXJ7XxeJDf9B+ndP4PRDt46maSSgYhiwofBMiIGKIlBhJ0wfu8DMCEvaWJJLpI2u4Gb6zF1dHpiqPFrosPg==
+  dependencies:
+    "@babel/runtime" "^7.10.1"
+    classnames "^2.2.1"
+
 rc-rate@^2.9.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/rc-rate/-/rc-rate-2.9.1.tgz#e43cb95c4eb90a2c1e0b16ec6614d8c43530a731"

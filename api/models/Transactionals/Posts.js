@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema, mongoose } = require("mongoose");
 
 const postSchema = new Schema({
     content: { type: String },
@@ -7,14 +7,14 @@ const postSchema = new Schema({
         ref: 'Attachment',
         default: null
     }],
-    comments: [{type:  mongoose.Schema.Types.Object, ref: 'Comment'}],
+    comments: [{type:  mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
     reactions:  [{type:  mongoose.Schema.Types.Object, ref: 'Reaction'}],
     isShared: { type: Boolean },
-    sharedPostId:[ {
+    sharedPost: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
         default: null
-    }],
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'MUser'
