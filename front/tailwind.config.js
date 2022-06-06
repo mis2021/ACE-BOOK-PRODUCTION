@@ -9,6 +9,11 @@ function withOpacity(variableName) {
 }
 
 module.exports = {
+  mode: 'jit',
+  purge: [
+    './public/**/*.html',
+    './src/**/*.{js,jsx,ts,tsx,vue}',
+  ],
   content: [
     './src/utils/**/*.{js,ts,jsx,tsx}',
     './src/pages/**/*.{js,ts,jsx,tsx}',
@@ -20,6 +25,7 @@ module.exports = {
     extend: {
       screens: {
         '3xl': '2100px',
+        'ms': '1080px',
       },
       zIndex: {
         '-1': '-1',

@@ -39,6 +39,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
   function handleProductQuickView() {
     return openModal('PRODUCT_DETAILS', product.slug);
   }
+
   return (
     <article
       className={cn(
