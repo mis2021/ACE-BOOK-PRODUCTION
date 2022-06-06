@@ -18,7 +18,7 @@ pipeline {
         }
  	 stage('Build run') {
             steps {  
-                sh 'docker run -p "4000:4000" jacksemis101/ace-book-api'
+                sh 'docker run -d -p "4000:4000" jacksemis101/ace-book-api'
 		    
             }
         }
