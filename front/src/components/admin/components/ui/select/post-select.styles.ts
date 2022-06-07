@@ -1,3 +1,5 @@
+import { isMobile } from "react-device-detect";
+
 export const postSelectStyles = {
   option: (provided: any, state: any) => ({
     ...provided,
@@ -20,23 +22,31 @@ export const postSelectStyles = {
     ...provided,
     input: {
       outline: "none"
+      
     }
     
   }),
   control: (_: any, state: any) => ({
     // ..._,
+    // position: "relative",
+    // top: "auto",
+    // transform: "none",
+    // position: "absolute",
     display: "flex",
     alignItems: "center",
-    width: '30%',
+    width: 'auto',
     minHeight: 8,
+    // backgroundColor: "rgb(148 163 184)",
     backgroundColor: "#ffffff",
+    color: "#ffffff",
     borderRadius: 50,
-    border: "1px solid #D1D5DB",
+    border: "none",
     // border: "1px solid #D1D5DB",
     borderColor: state.isFocused ? "rgb(var(--color-accent-500))" : "#D1D5DB",
-    boxShadow:
-      state.menuIsOpen &&
-      "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+    boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)", 
+    //  boxShadow:
+    //   state.menuIsOpen &&
+    //   "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
       
       
       // border: '1px solid black',     boxShadow: 'none',     '&:hover': {         border: '1px solid black',     }
@@ -65,7 +75,7 @@ export const postSelectStyles = {
   menu: (provided: any) => ({
     ...provided,
     borderRadius: 5,
-    width: "30%",
+    width: "auto",
     border: "1px solid #E5E7EB",
     boxShadow:
       "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
@@ -80,6 +90,7 @@ export const postSelectStyles = {
     ...provided,
     fontSize: "0.875rem",
     color: "#4B5563",
+    position: "absolute"
     
   }),
   multiValue: (provided: any, _: any) => ({

@@ -7,10 +7,20 @@ import SelectInput from "@admin/components/ui/select-input";
 import { postSelectStyles } from '@/components/admin/components/ui/select/post-select.styles';
 
 type Props = {
-    control: any
+    control: any;
+    register: any;
 }
 
-export const updatedIcons = tagIcons.map((item: any) => {
+const privacyMenu = [
+    { value: "Public", label: "Public" },
+    { value: "OwnDepartment", label: "Own Department" },
+    { value: "TaggedDepartment", label: "Tagged Department" },
+    { value: "OnlyMe", label: "Only Me" },
+    { value: "TaggedUsers", label: "Tagged Users" },
+]
+
+
+export const updatedIcons = privacyMenu.map((item: any) => {
     item.label = (
         <div className="flex space-s-5 items-center">
             <span className="flex w-5 h-5 items-center justify-center">
@@ -26,19 +36,26 @@ export const updatedIcons = tagIcons.map((item: any) => {
     return item;
 });
 
-const PostPrivacy = ({ control }: Props) => {
+const PostPrivacy = ({ control, register }: Props) => {
+
+    console.log("updatedIcons", updatedIcons[0])
     return (
         <div>
             <div className="mb-5">
                 {/* <Label>Privacy</Label> */}
-                <div className='form-select-sm'>
+                <div className='w-60'>
+                    {/* <div className='w-60'> */}
                     <SelectInput
-                        name="icon"
+                        {...register('privacy')}
+                        // name="icon"
                         customStyle={postSelectStyles}
                         control={control}
                         options={updatedIcons}
+                        getOptionValue={(option: any) => option.value}
                         isClearable={false}
                         isSearchable={false}
+                        // defaultvalue={updatedIcons[0]}
+
                     />
                 </div>
 
