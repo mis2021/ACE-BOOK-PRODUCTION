@@ -5,10 +5,12 @@ import { Control, Controller } from 'react-hook-form';
 interface SelectInputProps {
   control: Control<any>;
   rules?: any;
+  customStyle?: any;
   name: string;
   errors?: string;
   options: object[];
   [key: string]: unknown;
+  isSearchable: boolean;
 }
 
 const SelectInput = ({
@@ -22,6 +24,8 @@ const SelectInput = ({
   isMulti,
   isClearable,
   isLoading,
+  customStyle,
+  isSearchable,
   ...rest
 }: SelectInputProps) => {
   return (
@@ -34,12 +38,14 @@ const SelectInput = ({
         <>
           <Select
             {...field}
+            isSearchable={isSearchable}
             getOptionLabel={getOptionLabel}
             getOptionValue={getOptionValue}
             isMulti={isMulti}
             isClearable={isClearable}
             isLoading={isLoading}
             options={options}
+            customStyle={customStyle}
           />
           {errors && (
             <p className="my-2 text-xs text-red-500 text-start">

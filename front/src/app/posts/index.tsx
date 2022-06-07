@@ -14,7 +14,7 @@ const PostIndex = () => {
   return (
     <div className="pt-3">
       <PostLayout>
-        <PostedByDetails />
+        <PostedByDetails withTime={true} />
         <PostTextContent />
         <PostImageContent />
         <div className="border-b border-dashed border-gray-300 py-3"></div>

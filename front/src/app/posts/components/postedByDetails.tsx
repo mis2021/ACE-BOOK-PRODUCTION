@@ -1,8 +1,10 @@
 import React from 'react';
 import Avatar from '@/components/ui/avatar';
-type Props = {};
+type Props = {
+  withTime?: boolean;
+};
 
-const PostedByDetails = (props: Props) => {
+const PostedByDetails = ({ withTime }: Props) => {
   //
   return (
     <div>
@@ -20,11 +22,16 @@ const PostedByDetails = (props: Props) => {
             <span className="text-xl text-gray-400">|</span>
             <span className="text-xs text-body md:text-sm">MIS</span>
           </div>
-          <div className='absolute top-[2.6rem]'>
-            <span className="text-[10px] text-body">
-              Jan. 15, 2022 - 6:00 PM
-            </span>
-          </div>
+          {
+            withTime ? 
+            <div className='absolute top-[2.6rem]'>
+              <span className="text-[10px] text-body">
+                Jan. 15, 2022 - 6:00 PM
+              </span>
+            </div>
+            : <></>
+          }
+
         </div>
       </div>
     </div>
