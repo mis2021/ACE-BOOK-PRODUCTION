@@ -22,7 +22,7 @@ const Popup: React.FC<ProductPopupProps> = ({ productSlug }) => {
   if (isLoading || !product)
     return (
       <div className="relative flex items-center justify-center w-96 h-96 bg-light">
-        <Spinner text={t('common:text-loading')} />
+        <Spinner text={t('Loading')} />
       </div>
     );
 

@@ -12,7 +12,9 @@ type MODAL_VIEWS =
   | 'DELETE_ADDRESS'
   | 'PRODUCT_DETAILS'
   | 'REFUND_REQUEST'
-  | 'SHOP_INFO';
+  | 'SHOP_INFO'
+
+  | 'POST_FORM';
 
 interface State {
   view?: MODAL_VIEWS;

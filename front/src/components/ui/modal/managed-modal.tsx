@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import Modal from '@/components/ui/modal/modal';
 import { useModalAction, useModalState } from './modal.context';
+// import PostFormIndex from '@/app/posts/components/forms';
 const OtpLoginView = dynamic(() => import('@/components/auth/otp-login'));
 const Login = dynamic(() => import('@/components/auth/login-form'), {
   ssr: false,
@@ -32,6 +33,10 @@ const ProfileAddOrUpdateContact = dynamic(
 );
 const CreateRefundView = dynamic(
   () => import('@/components/refunds/refund-form')
+);
+
+const PostForm = dynamic(
+  () => import('@/app/posts/components/forms')
 );
 
 const ManagedModal = () => {
@@ -66,6 +71,15 @@ const ManagedModal = () => {
           className="!flex !h-screen !w-screen max-w-screen-sm flex-col"
         />
       )}
+
+      {/* ACEBOOK */}
+      {view === 'POST_FORM' && (
+        <>
+          <PostForm />
+        </>
+      )}
+
+
     </Modal>
   );
 };
