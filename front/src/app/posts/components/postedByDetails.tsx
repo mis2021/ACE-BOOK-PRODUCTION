@@ -22,7 +22,7 @@ const PostedByDetails = ({ withTime }: Props) => {
             <span className="text-xl text-gray-400">|</span>
             <span className="text-xs text-body md:text-sm">MIS</span>
           </div>
-          {
+          {/* {
             withTime ? 
             <div className='absolute top-[2.6rem]'>
               <span className="text-[10px] text-body">
@@ -30,7 +30,7 @@ const PostedByDetails = ({ withTime }: Props) => {
               </span>
             </div>
             : <></>
-          }
+          } */}
 
         </div>
       </div>

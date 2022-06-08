@@ -33,7 +33,7 @@ const postSchema = new Schema({
         ref: 'MUser',
         default: null
     }],
-    privacy: { type: String, enum: ['public', 'own_department', 'tagged_department', 'only_me', 'tagged_users']},
+    privacy: { type: String, enum: ['Public', 'OwnDepartment', 'TaggedDepartment', 'OnlyMe', 'TaggedUsers']},
     customTags: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CustomTag',

@@ -133,12 +133,12 @@ export default function LoginView() {
   const { t } = useTranslation('common');
   return (
     <div className="flex h-full min-h-screen w-screen flex-col justify-center bg-light py-6 px-5 sm:p-8 md:h-auto md:min-h-0 md:max-w-[480px] md:rounded-xl">
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-10">
         <Logo />
       </div>
-      <p className="mt-4 mb-8 text-center text-sm text-body sm:mt-5 sm:mb-10 md:text-base">
+      {/* <p className="mt-4 mb-8 text-center text-sm text-body sm:mt-5 sm:mb-10 md:text-base">
         {t('login-helper')}
-      </p>
+      </p> */}
       <LoginForm />
     </div>
   );

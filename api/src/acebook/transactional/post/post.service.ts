@@ -20,6 +20,7 @@ export class PostService {
     } else {
       savedData = new Post({
         content: upsertInput.content,
+        privacy: upsertInput.privacy,
       });
       await savedData.save();
     }

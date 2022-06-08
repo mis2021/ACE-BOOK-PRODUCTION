@@ -2,9 +2,11 @@ import React from 'react';
 import { loremTesting } from '@constants/testingVars';
 import ShowMoreText from 'react-show-more-text';
 
-type Props = {};
+type Props = {
+  content: any
+};
 
-const PostTextContent = (props: Props) => {
+const PostTextContent = ({content}: Props) => {
   return (
     <div className="pt-2">
       <ShowMoreText
@@ -18,7 +20,7 @@ const PostTextContent = (props: Props) => {
         // width={280}
         truncatedEndingComponent={'... '}
       >
-        {loremTesting}
+        {content}
       </ShowMoreText>
     </div>
   );
