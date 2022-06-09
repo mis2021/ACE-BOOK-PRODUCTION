@@ -51,7 +51,6 @@ const FeedHeader = (props: Props) => {
                 <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-y-0 ">
                     {/* <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-y-0 xl:w-1/2 mx-6"> */}
                     <Search placeholder={"Search Post"} onSearch={handleSearch} />
-
                     <LinkButton
                         href={'#'}
                         className="md:ms-6 mx-3 h-12 w-full md:w-auto  font-light"

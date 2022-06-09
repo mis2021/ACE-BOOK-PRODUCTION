@@ -85,6 +85,7 @@ export class ResetPasswordInput {
 export class AuthResponse {
   token: string;
   permissions: string[];
+  _id?: string;
 }
 
 // @ObjectType()

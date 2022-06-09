@@ -1,11 +1,14 @@
 import React from 'react';
 import Avatar from '@/components/ui/avatar';
+import _ from 'lodash';
 type Props = {
-  withTime?: boolean;
+  firstName?: any;
+  lastName?: any;
+  department?: any;
 };
 
-const PostedByDetails = ({ withTime }: Props) => {
-  //
+const PostedByDetails = ({firstName, lastName, department}: Props) => {
+ 
   return (
     <div>
       <div className="mb-2 flex items-center space-x-3">
@@ -16,11 +19,11 @@ const PostedByDetails = ({ withTime }: Props) => {
         />
         <div>
           <div>
-            <span className="text-sm font-semibold text-heading md:text-base">
-              Jacky Avenido
+            <span className="text-sm font-semibold text-heading md:text-base capitalize">
+             {firstName} {lastName}
             </span>
             <span className="text-xl text-gray-400">|</span>
-            <span className="text-xs text-body md:text-sm">MIS</span>
+            <span className="text-xs text-body md:text-sm">{department}</span>
           </div>
           {/* {
             withTime ? 

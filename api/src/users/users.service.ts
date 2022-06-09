@@ -133,6 +133,7 @@ export class UsersService {
       return {
         token: token,
         permissions: ['super_admin', 'store_owner', 'customer'],
+        _id:user._id
         // permissions: ['super_admin', 'store_owner', 'customer'],
       };
     } else {

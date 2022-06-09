@@ -44,7 +44,7 @@ const LoginForm = () => {
     onCompleted: (data) => {
       if (data.login?.token) {
         if (hasAccess(allowedRoles, data.login.permissions)) {
-          setAuthCredentials(data.login.token, data.login.permissions);
+          setAuthCredentials(data.login.token, data.login.permissions, data.login._id);
           router.push(ROUTES.HOME);
           return;
         }

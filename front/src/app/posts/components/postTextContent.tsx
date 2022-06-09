@@ -8,7 +8,7 @@ type Props = {
 
 const PostTextContent = ({content}: Props) => {
   return (
-    <div className="pt-2">
+    <div className="pt-2 pb-3 bg-slate-50 p-2 mt-4 rounded w-c">
       <ShowMoreText
         /* Default options */
         lines={8}

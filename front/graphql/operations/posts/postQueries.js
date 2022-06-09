@@ -10,6 +10,25 @@ query Data($first: Int, $page: Int) {
       updated_at
       content
       privacy
+      attachments {
+        _id
+        path
+      }
+      createdBy {
+        _id
+        firstName
+        lastName
+        departmentOnDuty {
+          _id
+          name
+        }
+      }
+    }
+    paginatorInfo {
+      currentPage
+      count
+      perPage
+      total
     }
   }
 }

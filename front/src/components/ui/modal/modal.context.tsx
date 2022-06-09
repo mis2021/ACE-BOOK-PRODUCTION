@@ -25,13 +25,19 @@ type Action =
   | { type: 'open'; view?: MODAL_VIEWS; payload?: any }
   | { type: 'close' };
 
-const initialState: State = {
+export const initialStateModal: State = {
   view: undefined,
   isOpen: false,
   data: null,
 };
 
-function modalReducer(state: State, action: Action): State {
+// const initialState: State = {
+//   view: undefined,
+//   isOpen: false,
+//   data: null,
+// };
+
+export function modalReducer(state: State, action: Action): State {
   switch (action.type) {
     case 'open':
       return {
@@ -52,7 +58,7 @@ function modalReducer(state: State, action: Action): State {
   }
 }
 
-const ModalStateContext = React.createContext<State>(initialState);
+const ModalStateContext = React.createContext<State>(initialStateModal);
 ModalStateContext.displayName = 'ModalStateContext';
 const ModalActionContext = React.createContext<
   React.Dispatch<Action> | undefined
@@ -60,7 +66,7 @@ const ModalActionContext = React.createContext<
 ModalActionContext.displayName = 'ModalActionContext';
 
 export const ModalProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = React.useReducer(modalReducer, initialState);
+  const [state, dispatch] = React.useReducer(modalReducer, initialStateModal);
   return (
     <ModalStateContext.Provider value={state}>
       <ModalActionContext.Provider value={dispatch}>

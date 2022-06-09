@@ -15,13 +15,14 @@ export const adminOwnerAndStaffOnly = [SUPER_ADMIN, STORE_OWNER, STAFF];
 export const adminOnly = [SUPER_ADMIN];
 export const ownerOnly = [STORE_OWNER];
 
-export function setAuthCredentials(token: string, permissions: any) {
-  Cookie.set(AUTH_CRED, JSON.stringify({ token, permissions }));
+export function setAuthCredentials(token: string, permissions: any, id: any ) {
+  Cookie.set(AUTH_CRED, JSON.stringify({ token, permissions, id }));
 }
 
 export function getAuthCredentials(context?: any): {
   token: string | null;
   permissions: string[] | null;
+  id: string | null;
 } {
   let authCred;
   if (context) {
@@ -32,7 +33,7 @@ export function getAuthCredentials(context?: any): {
   if (authCred) {
     return JSON.parse(authCred);
   }
-  return { token: null, permissions: null };
+  return { token: null, permissions: null, id: null };
 }
 
 export function parseSSRCookie(context: any) {

@@ -5,7 +5,7 @@ import {
   PickType,
   registerEnumType,
 } from '@nestjs/graphql';
-import { PostEnt } from '../entities/post.entity';
+import { PostEnt, PostInput } from '../entities/post.entity';
 
 enum Permission {
   SUPER_ADMIN = 'Super admin',
@@ -15,7 +15,7 @@ enum Permission {
 }
 registerEnumType(Permission, { name: 'restrictionpost' });
 @InputType()
-export class UpsertPostInput extends PickType(PostEnt, [
+export class UpsertPostInput extends PickType(PostInput, [
   'content',
   'attachments',
   'comments',

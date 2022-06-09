@@ -1,20 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PostIndex from '@/app/posts';
 import FeedHeader from './feedHeader';
 import { useQuery } from '@apollo/client';
 import { GET_POSTS } from '@graphql/operations/posts/postQueries';
 import _ from 'lodash';
 import { PostFormValues } from '@/types/posts/postTypes';
+import { useModalState } from '@/components/ui/modal/modal.context';
+// import { useModalState } from "@components/ui/modal/modal.context";
+import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
 type Props = {}
 
 const DashboardIndex = (props: Props) => {
+
+  const {
+    isOpen
+  } = useModalState();
+
+  const { token, permissions, id } = getAuthCredentials();
 
   const { data: allPosts, refetch } = useQuery(GET_POSTS, {
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
   });
 
-  console.log("allPosts", _.get(allPosts, "posts.data"))
+
+  useEffect(() => {
+    refetch()
+  }, [!isOpen])
+
+
+console.log("post data", _.get(allPosts, "posts.data"))
 
   return (
     <div>
@@ -23,8 +38,13 @@ const DashboardIndex = (props: Props) => {
       {
         _.get(allPosts, "posts.data") && <>
           {
-            _.get(allPosts, "posts.data").map((item: PostFormValues) => (
-              <PostIndex content={item.content} attachments={item.attachments} />
+            _.orderBy(_.get(allPosts, "posts.data"), ['created_at', 'updated_at'], ['desc', 'asc']).map((item: PostFormValues) => (
+              <PostIndex
+                content={item.content}
+                attachments={item.attachments}
+                created_at={item.created_at}
+                createdBy={item.createdBy}
+              />
             ))
           }
 

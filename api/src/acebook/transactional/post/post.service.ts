@@ -21,6 +21,7 @@ export class PostService {
       savedData = new Post({
         content: upsertInput.content,
         privacy: upsertInput.privacy,
+        createdBy: upsertInput.createdBy
       });
       await savedData.save();
     }
@@ -37,7 +38,11 @@ export class PostService {
   }
 
   async findAll({ page, first }: PaginationArgs) {
-    const post: PostEnt[] = await Post.find();
+    const post: PostEnt[] = await Post.find()
+    .populate({path: 'createdBy', populate:{ path: 'departmentOnDuty', model: 'Department'}});
+    // .populate('departmentOnDuty');
+
+
     return {
       data: post,
       paginatorInfo: paginate(

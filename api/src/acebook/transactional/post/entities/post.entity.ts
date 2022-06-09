@@ -7,18 +7,37 @@ import { UserEntAB } from '@/users/entities/user.entity';
 import { DepartmentEnt } from '@/acebook/masterdata/department/entities/department.entity';
 import { CustomTagEnt } from '@/acebook/masterdata/customTag/entities/customTag.entity';
 
-@InputType('PostInputType', { isAbstract: true })
+
+
 @ObjectType()
-export class PostEnt extends CoreEntityMg {
+export class PostEntCommon extends CoreEntityMg {
   content: string;
+  privacy?: string;
+}
+
+@ObjectType()
+export class PostEnt extends PostEntCommon{
   attachments?: AttachmentEnt[];
   comments?: CommentEnt[];
   reactions?: ReactionEnt[];
   sharedPost?: PostEnt[];
-  createdBy?: UserEntAB;
+  createdBy?: UserEntAB ;
   createdByDepartment?: DepartmentEnt;
   taggedDepartment?: DepartmentEnt[];
-  taggedUsers?: UserEntAB;
-  privacy?: string;
+  taggedUsers?: UserEntAB[];
   customTags?: CustomTagEnt;
+}
+
+@InputType('PostInputType', { isAbstract: true })
+@ObjectType()
+export class PostInput extends PostEntCommon{
+  attachments?: string[];
+  comments?: string[];
+  reactions?: string[];
+  sharedPost?: string;
+  createdBy?: string ;
+  createdByDepartment?: string;
+  taggedDepartment?: string[];
+  taggedUsers?: string[];
+  customTags?: string;
 }

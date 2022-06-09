@@ -11,6 +11,7 @@ import { UPSERT_POST } from '@graphql/operations/posts/postMutation';
 import { PostFormValues } from '@/types/posts/postTypes';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
+import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
 
 type Props = {}
 
@@ -33,7 +34,7 @@ const defaultValues = {
 
 
 const PostFormIndex = (props: Props) => {
-
+    const { token, permissions, id :userId} = getAuthCredentials();
     const [upsertPost] = useMutation(UPSERT_POST);
 
     const {
@@ -47,14 +48,14 @@ const PostFormIndex = (props: Props) => {
         // resolver: {},
     });
 
+    
 
     const onSubmit = async (values: PostFormValues) => {
-
-        console.log("values", values)
 
         let payload: PostFormValues;
         payload = _.cloneDeep(values)
         payload.privacy = _.get(payload, "privacy.value");
+        payload.createdBy = userId
 
         console.log("payload", payload)
 

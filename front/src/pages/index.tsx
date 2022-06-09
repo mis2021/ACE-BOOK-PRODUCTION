@@ -7,10 +7,10 @@ import { adminOnly } from '@/utils/auth-utils';
 
 type Props = {}
 
-const IndexPage :  NextPageWithLayout = () => {
+const IndexPage: NextPageWithLayout = () => {
   return (
     <ModIndexClassicLayout>
-      <DashboardIndex />
+        <DashboardIndex />
     </ModIndexClassicLayout>
   )
 }

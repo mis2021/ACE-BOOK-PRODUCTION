@@ -8,7 +8,7 @@ const ReactionIcons = (props: Props) => {
   return (
     <>
       {/* <div className="border-b border-dashed border-gray-300 pb-3"></div> */}
-      <div className="absolute bottom-2">
+      <div className="relative top-4 mb-3 ">
 
         {/* <div className="pt-5"> */}
         <div className="relative flex gap-4">
