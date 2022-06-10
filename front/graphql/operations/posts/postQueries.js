@@ -23,6 +23,10 @@ query Data($first: Int, $page: Int) {
           name
         }
       }
+      createdByDepartment{
+        _id
+        name
+      }
     }
     paginatorInfo {
       currentPage

@@ -20,7 +20,7 @@ export type AccFormValues = {
   email: string;
   password?: string;
   confPassword: string | undefined;
-  departmentOnDuty: DepartmentGenType;
+  departmentOnDuty?: DepartmentGenType;
   department: DepartmentGenType[];
   updated_at?: string;
   created_at?: string;

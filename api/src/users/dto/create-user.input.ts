@@ -86,6 +86,7 @@ export class AuthResponse {
   token: string;
   permissions: string[];
   _id?: string;
+  user?: UserEntAB
 }
 
 // @ObjectType()
@@ -97,14 +98,16 @@ export class AuthResponse {
 
 @ObjectType()
 export class UserRegResponseMU {
-  _id: string;
-  id?: string;
-  name?: string;
+  _id?: string;
   email?: string;
-  username: string;
+  username?: string;
+  user?:UserEntAB;
 
+  // Boilerpalte
   profile?: Profile;
   address?: Address[];
+  name?: string;
+  id?: string;
 }
 
 @ObjectType()

@@ -3,6 +3,17 @@ mutation Login($username: String!, $password: String!) {
     token
     permissions
     _id
+     user {
+      _id
+      firstName
+      middleName
+      lastName
+      position
+      departmentOnDuty {
+        name
+        _id
+      }
+    }
   }
 }
 

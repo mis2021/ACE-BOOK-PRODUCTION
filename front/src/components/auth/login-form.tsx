@@ -25,6 +25,7 @@ import {
 } from '@/utils/auth-utils';
 import Button from '@/components/ui/button';
 import { ROUTES } from '@/lib/routes';
+import _ from 'lodash';
 
 type FormValues = {
   username: string;
@@ -44,7 +45,7 @@ const LoginForm = () => {
     onCompleted: (data) => {
       if (data.login?.token) {
         if (hasAccess(allowedRoles, data.login.permissions)) {
-          setAuthCredentials(data.login.token, data.login.permissions, data.login._id);
+          setAuthCredentials(data.login.token, data.login.permissions, data.login._id, _.get(data,'login.user'));
           router.push(ROUTES.HOME);
           return;
         }

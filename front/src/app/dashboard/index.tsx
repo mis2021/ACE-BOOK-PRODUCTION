@@ -16,7 +16,7 @@ const DashboardIndex = (props: Props) => {
     isOpen
   } = useModalState();
 
-  const { token, permissions, id } = getAuthCredentials();
+  const { token, permissions, id, user } = getAuthCredentials();
 
   const { data: allPosts, refetch } = useQuery(GET_POSTS, {
     fetchPolicy: 'cache-and-network',
@@ -30,6 +30,7 @@ const DashboardIndex = (props: Props) => {
 
 
 console.log("post data", _.get(allPosts, "posts.data"))
+console.log("user", user)
 
   return (
     <div>
@@ -40,10 +41,11 @@ console.log("post data", _.get(allPosts, "posts.data"))
           {
             _.orderBy(_.get(allPosts, "posts.data"), ['created_at', 'updated_at'], ['desc', 'asc']).map((item: PostFormValues) => (
               <PostIndex
-                content={item.content}
-                attachments={item.attachments}
-                created_at={item.created_at}
-                createdBy={item.createdBy}
+                data={item}
+                // content={item.content}
+                // attachments={item.attachments}
+                // created_at={item.created_at}
+                // createdBy={item.createdBy}
               />
             ))
           }

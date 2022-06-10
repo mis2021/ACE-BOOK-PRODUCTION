@@ -21,7 +21,8 @@ export class PostService {
       savedData = new Post({
         content: upsertInput.content,
         privacy: upsertInput.privacy,
-        createdBy: upsertInput.createdBy
+        createdBy: upsertInput.createdBy,
+        createdByDepartment: upsertInput.createdByDepartment
       });
       await savedData.save();
     }
@@ -39,8 +40,8 @@ export class PostService {
 
   async findAll({ page, first }: PaginationArgs) {
     const post: PostEnt[] = await Post.find()
-    .populate({path: 'createdBy', populate:{ path: 'departmentOnDuty', model: 'Department'}});
-    // .populate('departmentOnDuty');
+    .populate({path: 'createdBy', populate:{ path: 'departmentOnDuty', model: 'Department'}})
+    .populate('createdByDepartment');
 
 
     return {

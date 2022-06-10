@@ -8,6 +8,7 @@ import {
   SUPER_ADMIN,
   TOKEN,
 } from "./constants";
+import { AccFormValues } from "@/types/accounts/accountTypes";
 
 export const allowedRoles = [SUPER_ADMIN, STORE_OWNER, STAFF];
 export const adminAndOwnerOnly = [SUPER_ADMIN, STORE_OWNER];
@@ -15,14 +16,15 @@ export const adminOwnerAndStaffOnly = [SUPER_ADMIN, STORE_OWNER, STAFF];
 export const adminOnly = [SUPER_ADMIN];
 export const ownerOnly = [STORE_OWNER];
 
-export function setAuthCredentials(token: string, permissions: any, id: any ) {
-  Cookie.set(AUTH_CRED, JSON.stringify({ token, permissions, id }));
+export function setAuthCredentials(token: string, permissions: any, id: any, user?: AccFormValues | null) {
+  Cookie.set(AUTH_CRED, JSON.stringify({ token, permissions, id, user }));
 }
 
 export function getAuthCredentials(context?: any): {
   token: string | null;
   permissions: string[] | null;
   id: string | null;
+  user?: AccFormValues | null;
 } {
   let authCred;
   if (context) {
@@ -33,7 +35,7 @@ export function getAuthCredentials(context?: any): {
   if (authCred) {
     return JSON.parse(authCred);
   }
-  return { token: null, permissions: null, id: null };
+  return { token: null, permissions: null, id: null, user: null };
 }
 
 export function parseSSRCookie(context: any) {

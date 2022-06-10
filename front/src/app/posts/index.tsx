@@ -10,23 +10,24 @@ import PostTime from './components/postTime';
 import { PostFormValues } from '@/types/posts/postTypes';
 import _ from 'lodash'
 
-type Props = PostFormValues;
+type Props = {data:PostFormValues};
 
-const PostIndex = ({ content, attachments, created_at, createdBy}: Props) => {
+const PostIndex = ({data} : Props) => {
+// const PostIndex = ({ content, attachments, created_at, createdBy, createdByDepartment}: Props) => {
 
 
   return (
     <div className="pt-3">
       <PostLayout>
 
-        <PostedByDetails firstName={_.get(createdBy,'firstName')}  lastName={_.get(createdBy,'lastName')} department={_.get(createdBy,'departmentOnDuty.name')} />
+        <PostedByDetails firstName={_.get(data,'createdBy.firstName')}  lastName={_.get(data,'createdBy.lastName')} department={_.get(data,'createdByDepartment.name')} />
         <div className='absolute top-[2.6rem] left-[4.2rem]'>
-          <PostTime created_at={created_at}/>
+          <PostTime created_at={_.get(data,'created_at')}/>
         </div>
 
-        <PostTextContent content={content} />
+        <PostTextContent content={_.get(data,'content')} />
         {
-         attachments && attachments?.length >= 1 && <PostImageContent />
+         _.get(data,'attachments') && _.get(data,'attachments').length >= 1 && <PostImageContent />
         }
         
        
