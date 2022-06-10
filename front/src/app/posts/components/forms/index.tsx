@@ -4,33 +4,20 @@ import Button from '@admin/components/ui/button';
 import PostedByDetails from '../postedByDetails';
 import PostPrivacy from './postPrivacy';
 import { useForm } from 'react-hook-form';
-import * as categoriesIcon from "@admin/components/icons/category";
-import { getIcon } from "@utils/get-icon";
+
 import { useMutation } from '@apollo/client';
 import { UPSERT_POST } from '@graphql/operations/posts/postMutation';
 import { PostFormValues } from '@/types/posts/postTypes';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
 import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { postValidationSchema } from './formvalidations/post-validation-schema';
+import PostDepartmentTag from './postDepartmentTag';
+import { defaultValuesPost } from './defaulValuesPost';
 
 type Props = {}
 
-const defaultValues = {
-    privacy: {
-        value: "Public", label: (
-            <div className="flex space-s-5 items-center">
-                <span className="flex w-5 h-5 items-center justify-center">
-                    {getIcon({
-                        iconList: categoriesIcon,
-                        iconName: "Public",
-                        className: "max-h-full max-w-full",
-                    })}
-                </span>
-                <span>Public</span>
-            </div>
-        )
-    }
-}
 
 
 const PostFormIndex = (props: Props) => {
@@ -44,8 +31,8 @@ const PostFormIndex = (props: Props) => {
         formState: { errors },
     } = useForm<PostFormValues>({
         //@ts-ignore
-        defaultValues: defaultValues,
-        // resolver: {},
+        defaultValues: defaultValuesPost,
+        resolver: yupResolver(postValidationSchema),
     });
 
     
@@ -58,7 +45,6 @@ const PostFormIndex = (props: Props) => {
         payload.createdBy = userId
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
 
-        console.log("payload", payload)
 
         if (confirm('Comfirm post')) {
             upsertPost({
@@ -67,9 +53,7 @@ const PostFormIndex = (props: Props) => {
                 },
             })
                 .then((resp) => {
-                    console.log("post repsonse", resp)
                     toast.success("Post Created");
-
                 })
                 .catch((error) => {
                     console.log("post error", error)
@@ -93,6 +77,7 @@ const PostFormIndex = (props: Props) => {
 
                         <TextContent register={register} />
                         <PostPrivacy control={control} register={register} />
+                        <PostDepartmentTag control={control} register={register} />
                         <div className='h-screen'></div>
 
                     </div>

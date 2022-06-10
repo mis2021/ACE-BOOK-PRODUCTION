@@ -65,7 +65,7 @@ export class UsersService {
 
     // this.users.push(user);
 
-    const newUser = new MUser({
+    let newUser = new MUser({
       username: cui.username,
       suffix: cui.suffix,
       email: cui.email,
@@ -81,17 +81,19 @@ export class UsersService {
       department: cui.department,
     });
     await newUser.save();
+   newUser = await  newUser.populate('departmentOnDuty');
 
     return {
       _id: newUser._id,
       username: newUser.username,
+      user: newUser,
     };
   }
 
   async updateMUser(cui: RegisterInputMU): Promise<UserRegResponseMU> {
     let savedData;
 
-    console.log(cui);
+    // console.log(cui);
     if (cui.password) {
       cui.password = await bcrypt.hash(cui.password, 10)
     }

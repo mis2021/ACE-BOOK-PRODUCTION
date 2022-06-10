@@ -12,7 +12,7 @@ const Input = (props: any)  => (
 export type Ref = any;
 
 export const Select = React.forwardRef<Ref, Props>((props, ref) => (
-  <ReactSelect ref={ref} styles={props.customStyle? props.customStyle : selectStyles} {...props}   components={{ Input }}  />
+  <ReactSelect ref={ref} placeholder={props.placeholder} styles={props.customStyle? props.customStyle : selectStyles} {...props}   components={{ Input }}  />
   // <ReactSelect ref={ref} styles={selectStyles} {...props}  />
 ));
 export default Select;

@@ -1,6 +1,6 @@
 import { isMobile } from "react-device-detect";
 
-export const postSelectStyles = {
+export const postSelectStylesTags = {
   option: (provided: any, state: any) => ({
     ...provided,
     fontSize: "0.875rem",
@@ -43,7 +43,7 @@ export const postSelectStyles = {
     border: "none",
     // border: "1px solid #D1D5DB",
     borderColor: state.isFocused ? "rgb(var(--color-accent-500))" : "#D1D5DB",
-    boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)", 
+    // boxShadow:"0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)", 
     //  boxShadow:
     //   state.menuIsOpen &&
     //   "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
@@ -56,10 +56,16 @@ export const postSelectStyles = {
   }),
   dropdownIndicator: (provided: any, state: any) => ({
     ...provided,
-    color: state.isFocused ? "#9CA3AF" : "#cccccc",
+    // color: "#ffffff"
+     color: state.isFocused ? "#ffffff" : "#ffffff",
     "&:hover": {
-      color: "#9CA3AF",
-    },
+      color: "#ffffff",
+    }, 
+    
+    //  color: state.isFocused ? "#9CA3AF" : "#cccccc",
+    // "&:hover": {
+    //   color: "#9CA3AF",
+    // },
     // border: '1px solid black',     boxShadow: 'none',     '&:hover': {         border: '1px solid black',     }
   }),
   clearIndicator: (provided: any, state: any) => ({

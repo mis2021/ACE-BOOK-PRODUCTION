@@ -119,7 +119,7 @@ const AccountForm = ({ defaultValues }: any) => {
         },
       })
         .then((resp) => {
-          if(defaultValues._id === cookieUserId){
+          if(defaultValues?._id && defaultValues._id === cookieUserId){
             setAuthCredentials(cookieToken, cookiePermissions, cookieUserId, _.get(resp,'data.registerMU.user'));
             toast.success(t('Session Updated'));
           }
@@ -128,6 +128,7 @@ const AccountForm = ({ defaultValues }: any) => {
 
         })
         .catch((error) => {
+          console.log("error", error)
           toast.error(t('Account failed to save'));
         });
     }

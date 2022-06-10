@@ -4,7 +4,7 @@ import { tagIcons } from '@/components/admin/components/tag/tag-icons';
 import { getIcon } from "@utils/get-icon";
 import Label from "@admin/components/ui/label";
 import SelectInput from "@admin/components/ui/select-input";
-import { postSelectStyles } from '@/components/admin/components/ui/select/post-select-privacy.styles';
+import { postSelectStylesTags } from '@/components/admin/components/ui/select/post-select-tags.styles';
 
 type Props = {
     control: any;
@@ -36,24 +36,26 @@ export const updatedIcons = privacyMenu.map((item: any) => {
     return item;
 });
 
-const PostPrivacy = ({ control, register }: Props) => {
+const PostDepartmentTag = ({ control, register }: Props) => {
 
   
     return (
         <div>
             <div className="mb-5">
                 {/* <Label>Privacy</Label> */}
-                <div className='w-60'>
+                <div className='w-full'>
                     {/* <div className='w-60'> */}
                     <SelectInput
-                        {...register('privacy')}
+                        {...register('taggedDepartments')}
                         // name="icon"
-                        customStyle={postSelectStyles}
+                        customStyle={postSelectStylesTags}
                         control={control}
                         options={updatedIcons}
                         getOptionValue={(option: any) => option.value}
                         isClearable={false}
-                        isSearchable={false}
+                        placeholder="@ Mention Departments"
+                        isMulti={true}
+                        // isSearchable={false}
                         // defaultvalue={updatedIcons[0]}
 
                     />
@@ -64,4 +66,4 @@ const PostPrivacy = ({ control, register }: Props) => {
     )
 }
 
-export default PostPrivacy
+export default PostDepartmentTag

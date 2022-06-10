@@ -10,27 +10,34 @@ import PostTime from './components/postTime';
 import { PostFormValues } from '@/types/posts/postTypes';
 import _ from 'lodash'
 
-type Props = {data:PostFormValues};
+import PostPrivacyView from './components/postPrivacyView';
 
-const PostIndex = ({data} : Props) => {
-// const PostIndex = ({ content, attachments, created_at, createdBy, createdByDepartment}: Props) => {
+type Props = { data: PostFormValues };
+
+const PostIndex = ({ data }: Props) => {
+  // const PostIndex = ({ content, attachments, created_at, createdBy, createdByDepartment}: Props) => {
 
 
   return (
     <div className="pt-3">
       <PostLayout>
 
-        <PostedByDetails firstName={_.get(data,'createdBy.firstName')}  lastName={_.get(data,'createdBy.lastName')} department={_.get(data,'createdByDepartment.name')} />
-        <div className='absolute top-[2.6rem] left-[4.2rem]'>
-          <PostTime created_at={_.get(data,'created_at')}/>
+        <PostedByDetails firstName={_.get(data, 'createdBy.firstName')} lastName={_.get(data, 'createdBy.lastName')} department={_.get(data, 'createdByDepartment.name')} />
+        <div className='absolute top-[2.8rem] left-[4.2rem]'>
+          <div className='flex gap-2'>
+            <PostTime created_at={_.get(data, 'created_at')} />
+            <PostPrivacyView privacy={data.privacy} />
+          </div>
+
+
         </div>
 
-        <PostTextContent content={_.get(data,'content')} />
+        <PostTextContent content={_.get(data, 'content')} />
         {
-         _.get(data,'attachments') && _.get(data,'attachments').length >= 1 && <PostImageContent />
+          _.get(data, 'attachments') && _.get(data, 'attachments').length >= 1 && <PostImageContent />
         }
-        
-       
+
+
         {/* <div className="border-b border-dashed border-gray-300 py-3"></div> */}
         {/* <ReactionIcons /> */}
       </PostLayout>

@@ -11,6 +11,7 @@ interface SelectInputProps {
   options: object[];
   [key: string]: unknown;
   isSearchable: boolean;
+  placeholder: string;
 }
 
 const SelectInput = ({
@@ -26,6 +27,7 @@ const SelectInput = ({
   isLoading,
   customStyle,
   isSearchable,
+  placeholder,
   ...rest
 }: SelectInputProps) => {
   return (
@@ -46,6 +48,7 @@ const SelectInput = ({
             isLoading={isLoading}
             options={options}
             customStyle={customStyle}
+            placeholder={placeholder}
           />
           {errors && (
             <p className="my-2 text-xs text-red-500 text-start">
