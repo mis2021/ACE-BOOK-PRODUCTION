@@ -23,7 +23,7 @@ export class UpsertPostInput extends PickType(PostInput, [
   'sharedPost',
   'createdBy',
   'createdByDepartment',
-  'taggedDepartment',
+  'taggedDepartments',
   'taggedUsers',
   'privacy',
   'customTags',

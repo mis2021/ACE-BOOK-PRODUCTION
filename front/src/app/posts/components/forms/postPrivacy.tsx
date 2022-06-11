@@ -14,7 +14,7 @@ type Props = {
 const privacyMenu = [
     { value: "Public", label: "Public" },
     { value: "OwnDepartment", label: "Own Department" },
-    { value: "TaggedDepartment", label: "Tagged Department" },
+    { value: "TaggedDepartments", label: "Tagged Department" },
     { value: "OnlyMe", label: "Only Me" },
     { value: "TaggedUsers", label: "Tagged Users" },
 ]

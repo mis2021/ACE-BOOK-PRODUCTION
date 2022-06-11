@@ -49,6 +49,7 @@ const SelectInput = ({
             options={options}
             customStyle={customStyle}
             placeholder={placeholder}
+            persistMultiPlaceholder={false}
           />
           {errors && (
             <p className="my-2 text-xs text-red-500 text-start">

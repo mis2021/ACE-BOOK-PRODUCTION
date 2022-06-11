@@ -23,17 +23,17 @@ const postSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Department'
     },
-    taggedDepartment: {
+    taggedDepartments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Department',
         default: null
-    },
+    }],
     taggedUsers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'MUser',
         default: null
     }],
-    privacy: { type: String, enum: ['Public', 'OwnDepartment', 'TaggedDepartment', 'OnlyMe', 'TaggedUsers']},
+    privacy: { type: String, enum: ['Public', 'OwnDepartment', 'TaggedDepartments', 'OnlyMe', 'TaggedUsers']},
     customTags: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CustomTag',

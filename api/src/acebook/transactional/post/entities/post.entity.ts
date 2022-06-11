@@ -23,7 +23,7 @@ export class PostEnt extends PostEntCommon{
   sharedPost?: PostEnt[];
   createdBy?: UserEntAB ;
   createdByDepartment?: DepartmentEnt;
-  taggedDepartment?: DepartmentEnt[];
+  taggedDepartments?: DepartmentEnt[];
   taggedUsers?: UserEntAB[];
   customTags?: CustomTagEnt;
 }
@@ -37,7 +37,7 @@ export class PostInput extends PostEntCommon{
   sharedPost?: string;
   createdBy?: string ;
   createdByDepartment?: string;
-  taggedDepartment?: string[];
+  taggedDepartments?: string[];
   taggedUsers?: string[];
   customTags?: string;
 }

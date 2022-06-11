@@ -46,11 +46,7 @@ import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
 import {
   setAuthCredentials,
 } from '@/utils/auth-utils';
-
-type IProps = {
-  initialValues?: null;
-  defaultValues?: any
-};
+import { extractObjectId } from '@/services/extractions';
 
 const AccountForm = ({ defaultValues }: any) => {
   const { token:cookieToken, permissions: cookiePermissions, id: cookieUserId, user: cookieUser } = getAuthCredentials();
@@ -78,13 +74,9 @@ const AccountForm = ({ defaultValues }: any) => {
     let payload: AccFormSubmission | AccFormValues;
     payload = _.cloneDeep(values);
 
-    const orgDept = values?.department.map((item: any) => {
-      return item._id;
-    });
-
     const deptOnDuty: any = values?.departmentOnDuty?._id;
 
-    payload.department = orgDept;
+    payload.department = extractObjectId(values?.department);
     payload.departmentOnDuty = deptOnDuty;
 
     if (defaultValues?._id) {

@@ -130,6 +130,7 @@ export const postSelectStylesTags = {
     ...provided,
     fontSize: "0.875rem",
     color: "rgba(107, 114, 128, 0.7)",
+    position: 'absolute',
   }),
   noOptionsMessage: (provided: any, _: any) => ({
     ...provided,

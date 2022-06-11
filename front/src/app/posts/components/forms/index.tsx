@@ -15,13 +15,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { postValidationSchema } from './formvalidations/post-validation-schema';
 import PostDepartmentTag from './postDepartmentTag';
 import { defaultValuesPost } from './defaulValuesPost';
+import { extractObjectId } from '@/services/extractions';
 
 type Props = {}
 
 
 
+
+
 const PostFormIndex = (props: Props) => {
-    const { token, permissions, id :userId, user} = getAuthCredentials();
+    const { id: userId, user } = getAuthCredentials();
     const [upsertPost] = useMutation(UPSERT_POST);
 
     const {
@@ -35,7 +38,6 @@ const PostFormIndex = (props: Props) => {
         resolver: yupResolver(postValidationSchema),
     });
 
-    
 
     const onSubmit = async (values: PostFormValues) => {
 
@@ -44,7 +46,9 @@ const PostFormIndex = (props: Props) => {
         payload.privacy = _.get(payload, "privacy.value");
         payload.createdBy = userId
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
+        payload.taggedDepartments = extractObjectId(values?.taggedDepartments)
 
+        console.log("payload", payload)
 
         if (confirm('Comfirm post')) {
             upsertPost({
@@ -71,7 +75,7 @@ const PostFormIndex = (props: Props) => {
                     <div className="p-5 pt-15 md:pb-10 lg:p-14 xl:p-8">
 
                         <div className="mb-4 mt-5 grid grid-flow-col  gap-4">
-                            <div className="row-span-3 "> <PostedByDetails  firstName={_.get(user,'firstName')} lastName={_.get(user,'lastName')} department={_.get(user,'departmentOnDuty.name')}/></div>
+                            <div className="row-span-3 "> <PostedByDetails firstName={_.get(user, 'firstName')} lastName={_.get(user, 'lastName')} department={_.get(user, 'departmentOnDuty.name')} /></div>
                             <div className="row-span-3 place-self-end"><Button loading={false}>Post</Button></div>
                         </div>
 

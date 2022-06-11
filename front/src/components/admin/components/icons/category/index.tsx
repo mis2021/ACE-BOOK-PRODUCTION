@@ -44,7 +44,7 @@ export { Table } from "./table";
 export { OnlyMe } from "./acebook/only-me";
 export { OwnDepartment } from "./acebook/own-department";
 export { Public } from "./acebook/public";
-export { TaggedDepartment } from "./acebook/tagged-department";
+export { TaggedDepartments } from "./acebook/tagged-department";
 export { TaggedUsers } from "./acebook/tagged-users";
 
 

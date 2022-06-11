@@ -18,12 +18,14 @@ export class PostService {
       //   { new: true },
       // );
     } else {
-      savedData = new Post({
-        content: upsertInput.content,
-        privacy: upsertInput.privacy,
-        createdBy: upsertInput.createdBy,
-        createdByDepartment: upsertInput.createdByDepartment
-      });
+      savedData = new Post(upsertInput);
+      // savedData = new Post({
+      //   content: upsertInput.content,
+      //   privacy: upsertInput.privacy,
+      //   createdBy: upsertInput.createdBy,
+      //   createdByDepartment: upsertInput.createdByDepartment,
+      //   taggedDepartments: upsertInput.taggedDepartments
+      // });
       await savedData.save();
     }
 

@@ -8,6 +8,6 @@ export type PostFormValues = {
   created_at: string | null;
   createdBy?:any | null
   createdByDepartment?: string | null;
-  taggedDepartment?: string[] | null;
+  taggedDepartments?: string[] | null;
   
 };
