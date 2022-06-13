@@ -15,6 +15,7 @@ const FeedHeader = (props: Props) => {
 
     function handleProductQuickView() {
         return openModal('POST_FORM', "FDS");
+        // return openModal('POST_FORM', "FDS");
     }
 
 

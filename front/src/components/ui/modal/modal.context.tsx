@@ -14,7 +14,8 @@ type MODAL_VIEWS =
   | 'REFUND_REQUEST'
   | 'SHOP_INFO'
 
-  | 'POST_FORM';
+  | 'POST_FORM'
+  | 'TAG_MODAL';
 
 interface State {
   view?: MODAL_VIEWS;

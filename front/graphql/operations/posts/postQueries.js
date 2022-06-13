@@ -27,6 +27,10 @@ query Data($first: Int, $page: Int) {
         _id
         name
       }
+      taggedDepartments {
+        _id
+        name
+      }
     }
     paginatorInfo {
       currentPage

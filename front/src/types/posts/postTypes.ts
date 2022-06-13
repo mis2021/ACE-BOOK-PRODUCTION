@@ -9,5 +9,5 @@ export type PostFormValues = {
   createdBy?:any | null
   createdByDepartment?: string | null;
   taggedDepartments?: string[] | null;
-  
+  tags?: object[] | null;
 };
