@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 import { PostService } from './post.service';
 import { PostId, UpsertPostInput } from './dto/post.input';
-import { PostPaginator} from './dto/post.args';
+import { PostPaginator, PostPaginatorArg} from './dto/post.args';
 import { PostEnt } from './entities/post.entity';
 
 @Resolver(() => PostEnt)
@@ -25,8 +25,9 @@ export class PostResolver {
     return this.postService.delete(deleteInput);
   }
 
+  // @Query(() => PostPaginator, { name: 'posts' })
   @Query(() => PostPaginator, { name: 'posts' })
-  getTags(@Args() getArgs: PaginationArgs) {
+  getTags(@Args() getArgs: PostPaginatorArg) {
     return this.postService.findAll(getArgs);
   }
 

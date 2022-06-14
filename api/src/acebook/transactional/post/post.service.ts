@@ -6,6 +6,7 @@ import moment from 'moment';
 import Post from '@models/Transactionals/Posts';
 import {   PostId, UpsertPostInput } from './dto/post.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
+import { PostPaginatorArg } from './dto/post.args';
 
 @Injectable()
 export class PostService {
@@ -40,8 +41,10 @@ export class PostService {
     return removedData;
   }
 
-  async findAll({ page, first }: PaginationArgs) {
-    const post: PostEnt[] = await Post.find()
+  async findAll({ page, first, departmentId }: PostPaginatorArg) {
+  // async findAll({ page, first }: PaginationArgs) {
+    // "628bb071bb4d714edda24939"
+    const post: PostEnt[] = await Post.find(departmentId ? {taggedDepartments: departmentId} : {})
     .populate({path: 'createdBy', populate:{ path: 'departmentOnDuty', model: 'Department'}})
     .populate('createdByDepartment')
     .populate('taggedDepartments');

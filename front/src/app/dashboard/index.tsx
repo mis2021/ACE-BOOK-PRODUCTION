@@ -7,12 +7,15 @@ import _ from 'lodash';
 import { PostFormValues } from '@/types/posts/postTypes';
 import { useModalState } from '@/components/ui/modal/modal.context';
 // import { useModalState } from "@components/ui/modal/modal.context";
-import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
+
 import PostTagIcon from '@/components/tags/tagIcon';
-type Props = {}
+import { addPostTagLayout } from '@/services/posts';
+type Props = {
+  departmentId?: string;
+}
 
 type StateType = {
-  posts: any[]
+  posts: any[];
 }
 
 const initialState = {
@@ -27,9 +30,12 @@ const DashboardIndex = (props: Props) => {
     isOpen
   } = useModalState();
 
-  const { token, permissions, id, user } = getAuthCredentials();
+  
 
   const { data: allPosts, refetch } = useQuery(GET_POSTS, {
+    variables:{
+        departmentId: props.departmentId
+    },
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
   });
@@ -37,35 +43,8 @@ const DashboardIndex = (props: Props) => {
   const assignPost = () => {
 
     let allPostsTemp = _.cloneDeep(_.orderBy(_.get(allPosts, "posts.data"), ['created_at', 'updated_at'], ['desc', 'asc']))
-
-    allPostsTemp = allPostsTemp.map((item) => {
-      let tags = [];
-      let tagsRaw = [];
-
-      if (item.taggedDepartments) {
-        let name: string;
-        if (item.taggedDepartments.length > 1) {
-          name = item.taggedDepartments[0].name + ' and other ' + (item.taggedDepartments.length - 1) + ((item.taggedDepartments.length - 1) > 1 ? ' Departments': ' Department');
-        }else{
-          name = item.taggedDepartments[0].name;
-        }
-
-        tagsRaw = item.taggedDepartments.map((i:any)=>{
-          return i.name
-        })
-
-
-        tags.push({
-          content: <PostTagIcon identifier={item.taggedDepartments.length} name={name} />,
-          contentRaw: tagsRaw
-        })
-      }
-
-      item.tags = tags
-
-      return item;
-
-    })
+    
+    allPostsTemp = addPostTagLayout(allPostsTemp)
 
     setState((p) => ({ ...p, posts: allPostsTemp }))
   }
@@ -80,16 +59,6 @@ const DashboardIndex = (props: Props) => {
     assignPost()
   }, [!isOpen])
 
-
-
-
-
-
-
-  // console.log("post data", _.get(allPosts, "posts.data"))
-  // console.log("user", user)
-  console.log("state", state.posts)
-
   return (
     <div>
       <FeedHeader />
@@ -101,15 +70,6 @@ const DashboardIndex = (props: Props) => {
               <PostIndex
                 data={item}
                 tags={item.tags}
-
-              // tags={[{
-              //   count: item.taggedDepartments && item.taggedDepartments.length,
-              //   content: <PostTagIcon identifier={item.taggedDepartments && item.taggedDepartments.length} name='Departments' />
-              // }]}
-              // content={item.content}
-              // attachments={item.attachments}
-              // created_at={item.created_at}
-              // createdBy={item.createdBy}
               />
             ))
           }

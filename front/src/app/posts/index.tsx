@@ -56,17 +56,11 @@ const PostIndex = ({ data, tags }: Props) => {
           <div className='flex gap-2'>
             {tags.map((item: any) => (
 
-              <span onClick={e=>handleProductQuickView(item.contentRaw)}  >{item.content}</span>
+              <span onClick={e=>handleProductQuickView(item.contentRaw)} className='cursor-pointer'  >{item.content}</span>
 
             ))}
           </div>
         }
-
-
-
-
-
-
 
 
         {/* <PostTagIcon identifier='20' name='Departments'/> */}
