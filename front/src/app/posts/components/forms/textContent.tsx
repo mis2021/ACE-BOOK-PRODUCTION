@@ -15,6 +15,7 @@ const TextContent = ({ register }: Props) => {
         // error={"Error"}
         placeholder="Tell us your concerns"
         variant="outline"
+        inputClassName='rounded-md'
         className="col-span-2"
       />
     </div>

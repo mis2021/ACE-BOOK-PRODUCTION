@@ -16,6 +16,9 @@ import { postValidationSchema } from './formvalidations/post-validation-schema';
 import PostDepartmentTag from './postDepartmentTag';
 import { defaultValuesPost } from './defaulValuesPost';
 import { extractObjectId } from '@/services/extractions';
+import Uploader from '@/components/admin/components/common/uploader';
+import FileInput from '@/components/admin/components/ui/file-input';
+import NextUpload from '@/components/upload/nextUpload';
 
 type Props = {}
 
@@ -48,7 +51,7 @@ const PostFormIndex = (props: Props) => {
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
         payload.taggedDepartments = extractObjectId(values?.taggedDepartments)
 
-        console.log("payload", payload)
+       
 
         if (confirm('Comfirm post')) {
             upsertPost({
@@ -82,7 +85,15 @@ const PostFormIndex = (props: Props) => {
                         <TextContent register={register} />
                         <PostPrivacy control={control} register={register} />
                         <PostDepartmentTag control={control} register={register} />
-                        <div className='h-screen'></div>
+                        <NextUpload register={register} />
+                        {/* <Uploader
+                            // {...rest}
+                            multiple={true}
+                            acceptFile={true}
+                            helperText={"Upload documents here..."}
+                        /> */}
+                         {/* <FileInput name="postUpload" control={control} multiple={true} helperText="Upload files here..." /> */}
+                        {/* <div className='h-screen'></div> */}
 
                     </div>
                     {/* </div> */}

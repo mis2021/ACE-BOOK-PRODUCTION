@@ -8,6 +8,21 @@ import {   PostId, UpsertPostInput } from './dto/post.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 import { PostPaginatorArg } from './dto/post.args';
 
+const objectFilters = (args: PostPaginatorArg)=>{
+
+  if(args.departmentId && args.type == 'tags'){
+    return {taggedDepartments: args.departmentId}
+  }
+
+  if(args.departmentId && args.type == 'posts'){
+    return {createdByDepartment: args.departmentId}
+  }
+
+  return {}
+  
+}
+
+
 @Injectable()
 export class PostService {
   async upsert(upsertInput: UpsertPostInput): Promise<PostEnt> {
@@ -41,10 +56,13 @@ export class PostService {
     return removedData;
   }
 
-  async findAll({ page, first, departmentId }: PostPaginatorArg) {
+ 
+  async findAll({ page, first, departmentId,type }: PostPaginatorArg) {
   // async findAll({ page, first }: PaginationArgs) {
-    // "628bb071bb4d714edda24939"
-    const post: PostEnt[] = await Post.find(departmentId ? {taggedDepartments: departmentId} : {})
+    // const post: PostEnt[] = await Post.find(departmentId ? {taggedDepartments: departmentId} : {})
+    let filters = objectFilters({departmentId, type} as PostPaginatorArg);
+
+    const post: PostEnt[] = await Post.find(filters)
     .populate({path: 'createdBy', populate:{ path: 'departmentOnDuty', model: 'Department'}})
     .populate('createdByDepartment')
     .populate('taggedDepartments');

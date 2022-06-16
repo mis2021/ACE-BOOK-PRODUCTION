@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import PostIndex from '@/app/posts';
-import FeedHeader from './feedHeader';
 import { useQuery } from '@apollo/client';
 import { GET_POSTS } from '@graphql/operations/posts/postQueries';
 import _ from 'lodash';
@@ -10,6 +9,9 @@ import { useModalState } from '@/components/ui/modal/modal.context';
 
 import PostTagIcon from '@/components/tags/tagIcon';
 import { addPostTagLayout } from '@/services/posts';
+import FeedHeader from '../common/feed/header';
+import FeedPosts from '../common/feed/feedPosts';
+import FeedPostLayout from '../common/feed/feedLayout';
 type Props = {
   departmentId?: string;
 }
@@ -30,11 +32,12 @@ const DashboardIndex = (props: Props) => {
     isOpen
   } = useModalState();
 
-  
 
-  const { data: allPosts, refetch } = useQuery(GET_POSTS, {
-    variables:{
-        departmentId: props.departmentId
+
+  const { data: allPosts, refetch, loading: postLoading } = useQuery(GET_POSTS, {
+    variables: {
+      departmentId: null,
+      type: null
     },
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
@@ -43,7 +46,7 @@ const DashboardIndex = (props: Props) => {
   const assignPost = () => {
 
     let allPostsTemp = _.cloneDeep(_.orderBy(_.get(allPosts, "posts.data"), ['created_at', 'updated_at'], ['desc', 'asc']))
-    
+
     allPostsTemp = addPostTagLayout(allPostsTemp)
 
     setState((p) => ({ ...p, posts: allPostsTemp }))
@@ -55,28 +58,19 @@ const DashboardIndex = (props: Props) => {
 
   useEffect(() => {
 
-    refetch()
+    refetch( {
+      departmentId: null,
+      type: null
+    })
     assignPost()
   }, [!isOpen])
-
+console.log("isOpen", isOpen)
   return (
     <div>
-      <FeedHeader />
-
-      {
-        _.get(allPosts, "posts.data") && <>
-          {
-            state.posts.map((item: PostFormValues) => (
-              <PostIndex
-                data={item}
-                tags={item.tags}
-              />
-            ))
-          }
-
-        </>
-      }
-
+      <FeedPostLayout>
+        <FeedHeader />
+        <FeedPosts posts={state.posts} loading={postLoading} />
+      </FeedPostLayout>
     </div>
   )
 }

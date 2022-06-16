@@ -1,9 +1,9 @@
-import { UploadIcon } from "@components/icons/upload-icon";
+import { UploadIcon } from "@/components/icons/upload-icon";
 import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useUploadMutation } from "@graphql/upload.graphql";
-import { CloseIcon } from "@components/icons/close-icon";
-import Loader from "@components/ui/loader/loader";
+import { CloseIcon } from "@/components/icons/close-icon";
+import Loader from "@/components/admin/components/ui/loader/loader";
 import { useTranslation } from "next-i18next";
 import isObject from "lodash/isObject";
 import { Attachment } from "__generated__/__types__";
@@ -32,6 +32,7 @@ export default function Uploader({
     ...(!acceptFile ? { accept: "image/*" } : {}),
     multiple,
     onDrop: async (acceptedFiles) => {
+      console.log("value", value)
       if (acceptedFiles.length) {
         const { data } = await upload({
           variables: {

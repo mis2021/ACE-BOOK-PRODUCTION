@@ -10,7 +10,7 @@ import { CommentEnt } from '../../comment/entities/comment.entity';
 export class AttachmentEnt extends CoreEntityMg {
   path: string;
   createdBy?: UserEntAB;
-  comments?: CommentEnt[];
+  comments?: string[];
   refId?:string;
   originCollection?: string;
   reactions?: ReactionEnt[];

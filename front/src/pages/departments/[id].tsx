@@ -1,11 +1,9 @@
 import React from 'react'
 import { getLayout } from '@/components/layouts/layout';
-import ModClassicLayout from '@/components/layouts/mod-classic';
-import DashboardIndex from '@/app/dashboard';
-import Feedlayout from '@/components/layouts/feed-layout';
 import ModIndexClassicLayout from '@/components/layouts/mod-index-classic';
-import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
+import { getAuthCredentials } from "@utils/auth-utils";
 import _ from 'lodash'
+import DepartmentFeedIndex from '@/app/department/feed';
 
 type Props = {}
 
@@ -17,9 +15,7 @@ const SpecificDepartment = (props: Props) => {
         <div>
             <ModIndexClassicLayout>
                 <>
-                    {/* <Feedlayout> */}
-                    <DashboardIndex departmentId={_.get(user, "departmentOnDuty._id")} />
-                    {/* </Feedlayout> */}
+                    <DepartmentFeedIndex  departmentId={_.get(user, "departmentOnDuty._id")} />
                 </>
             </ModIndexClassicLayout>
         </div>

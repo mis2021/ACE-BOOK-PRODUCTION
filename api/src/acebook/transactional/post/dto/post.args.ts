@@ -14,6 +14,7 @@ export class PostPaginator {
 @ArgsType()
 export class PostPaginatorArg extends PaginationArgs {
   departmentId?: string;
+  type?: string;
 }
 
 

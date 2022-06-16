@@ -11,6 +11,15 @@ export class CommentPaginator {
   paginatorInfo: PaginatorInfo;
 }
 
+export class CommentResponse {
+  status: string
+}
+
+@ArgsType()
+export class CommentPaginatorArg extends PaginationArgs {
+  postId?: string;
+}
+
 
 
 // @ArgsType()

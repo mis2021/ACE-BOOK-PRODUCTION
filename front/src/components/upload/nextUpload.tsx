@@ -1,11 +1,16 @@
 import type { NextPage } from 'next'
 import React from "react";
 import { UploadIcon } from "@/components/icons/upload-icon";
+import { Control, Controller } from 'react-hook-form';
 
-const Home: NextPage = () => {
+type Props = {
+    register: any;
+}
+
+const NextUpload = ({register} : Props) => {
 
     const [isLoading, setIsLoading] = React.useState(false);
-    const inputFileRef = React.useRef<HTMLInputElement | null>(null);
+    const inputFileRef = React.useRef<HTMLInputElement | null>(register("postAt"));
 
     const handleOnClick = async (e: React.MouseEvent<HTMLInputElement>) => {
 
@@ -47,22 +52,24 @@ const Home: NextPage = () => {
     };
 
     return (
-        <form>
-            <div className="border-dashed border-2 border-border-base h-36 rounded flex flex-col justify-center items-center cursor-pointer focus:border-accent-400 focus:outline-none">
+        // <form>
+            <div className="border-dashed border-2 relative border-border-base h-36 rounded flex flex-col justify-center items-center cursor-pointer focus:border-accent-400 focus:outline-none">
 
                 <UploadIcon className="text-muted-light" />
                 <p className="text-body text-sm mt-4 text-center">
                 <span className="font-semibold text-gray-500">Upload Files here...</span>
-                    <input type="file" name="myfile" className='h-36 top-0 opacity-0 left-0 absolute w-full border-8' ref={inputFileRef} multiple />
+                
+                    <input  type="file" name="postAtt" className='h-36 top-0 left-0 absolute w-full opacity-0  border-8' ref={inputFileRef} multiple />
+                    {/* <input {...register('postAttachment')} type="file" name="myfile" className='h-36 top-0 left-0 absolute w-full opacity-0  border-8' ref={inputFileRef} multiple /> */}
                     {/* <input type="file" name="myfile" className='opacity-0' ref={inputFileRef} multiple /> */}
                 </p>
             </div>
-            <div>
-                <input type="submit" value="Upload" disabled={isLoading} onClick={handleOnClick} />
-                {isLoading && ` Wait, please...`}
-            </div>
-        </form>
+        //     <div>
+        //         <input type="submit" value="Upload" disabled={isLoading} onClick={handleOnClick} />
+        //         {isLoading && ` Wait, please...`}
+        //     </div> 
+        // </form>
     )
 }
 
-export default Home
+export default NextUpload

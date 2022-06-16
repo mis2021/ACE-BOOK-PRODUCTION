@@ -41,3 +41,7 @@ sw.js
 
 # IDE
 .idea/
+
+
+#Storage
+uploads
