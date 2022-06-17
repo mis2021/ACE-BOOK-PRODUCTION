@@ -1,4 +1,5 @@
-import React, {useContext} from 'react'
+import CommentProvider from '@/reducers/comments/commentProvider'
+import React, { useContext } from 'react'
 import CommentForm from './commentForm'
 import CommentList from './commentList'
 
@@ -9,8 +10,10 @@ const GenComments = (props: Props) => {
         <div className='item-center w-full  px-2 pt-3'>
             <hr />
             <div className='pt-2'>
-                <CommentForm/>
-                <CommentList/>
+                <CommentProvider>
+                    <CommentForm />
+                    <CommentList />
+                </CommentProvider>
             </div>
         </div>
     )

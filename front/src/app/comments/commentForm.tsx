@@ -12,9 +12,16 @@ import { UPSERT_COMMENT } from '@graphql/operations/comments/commentMutations';
 import { PostContext } from '../posts';
 import _ from 'lodash';
 import { getAuthCredentials } from "@utils/auth-utils";
+import { toast } from 'react-toastify';
+import Spinner from '@/components/ui/loaders/spinner/spinner';
+import Loader from '@/components/ui/loaders/loader';
+import SmallLoader from '@/components/ui/loaders/smallLoader';
+import { CommentContext } from '@/reducers/comments/commentContext';
+
 type Props = {}
 
 const CommentForm = (props: Props) => {
+    const [state, dispatch] = React.useContext(CommentContext)
     const postContext = useContext(PostContext);
     const { id: userId, user } = getAuthCredentials();
     const {
@@ -22,12 +29,13 @@ const CommentForm = (props: Props) => {
         handleSubmit,
         control,
         formState: { errors },
+        reset
     } = useForm<CommentType>({
         //@ts-ignore
         // defaultValues: defaultValuesPost,
         resolver: yupResolver(commentValidationSchema),
     });
-    const [upsertDept] = useMutation(UPSERT_COMMENT);
+    const [upsertDept, {loading: commentLoading}] = useMutation(UPSERT_COMMENT);
 
 
 
@@ -47,6 +55,10 @@ const CommentForm = (props: Props) => {
         })
             .then((resp) => {
                 console.log("resp", resp)
+                toast.success("Comment posted")
+                dispatch({ type: "refetch", modalData: true })
+                reset()
+                // reset({ message: "bill" })
             })
             .catch((error) => { });
     };
@@ -62,8 +74,12 @@ const CommentForm = (props: Props) => {
                     />
                 </div>
                 <div className='absolute pt-[0.97rem] right-3'>
-                    <SendIcon className="text-gray-500 transition-colors hover:text-accent cursor-pointer" onClick={handleSubmit(onSubmit)} />
+                    {
+                        commentLoading ? <SmallLoader/> :  <SendIcon className="text-gray-500 transition-colors hover:text-accent cursor-pointer" onClick={handleSubmit(onSubmit)} />
+                    }
+                   
                 </div>
+
                 <div className=''>
                     <TextArea
                         // label={'Department Name'}

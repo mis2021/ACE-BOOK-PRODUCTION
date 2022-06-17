@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import CommentSpec from './comment'
 import { useQuery } from '@apollo/client';
 
@@ -6,11 +6,12 @@ import { GET_POST_COMMENTS } from '@graphql/operations/comments/commentQueries';
 import { PostContext } from '@/app/posts';
 import _ from 'lodash';
 import { CommentType } from '@/types/posts/commentTypes';
+import { CommentContext } from '@/reducers/comments/commentContext';
 
 type Props = {}
 
 const CommentList = (props: Props) => {
-
+    const [state, dispatch] = React.useContext(CommentContext)
     const postContext = useContext(PostContext);
 
     const { data: postComments, refetch, loading: commentLoading } = useQuery(GET_POST_COMMENTS, {
@@ -23,8 +24,10 @@ const CommentList = (props: Props) => {
         nextFetchPolicy: 'cache-first',
     });
 
-    console.log("postComments", postComments)
-
+    useEffect(() => {
+      refetch()
+    }, [!state.active])
+    
     return (
         <div className='px-5'>
             {
