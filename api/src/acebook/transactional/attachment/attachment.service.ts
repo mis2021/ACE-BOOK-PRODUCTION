@@ -4,8 +4,9 @@ import { AttachmentEnt } from './entities/attachment.entity';
 import moment from 'moment';
 // import  Attachment  from './entities/attachment.entity';
 import Attachment from '@models/Transactionals/Attachments';
-import {   AttachmentId, UpsertAttachmentInput } from './dto/attachment.input';
+import { AttachmentId, UpsertAttachmentInput } from './dto/attachment.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
+import { MultiAttachmentArgs } from './dto/attachment.args';
 
 @Injectable()
 export class AttachmentService {
@@ -49,4 +50,18 @@ export class AttachmentService {
       ),
     };
   }
+}
+
+export const saveMultiAttachments = ({attachments, user}: MultiAttachmentArgs) => {
+  let allAttachments = []
+  attachments.map(async (item) => {
+    let resultAtt = new Attachment({
+      path: item,
+      createdBy: user,
+    });
+    allAttachments.push(resultAtt._id)
+    await resultAtt.save();
+  })
+
+  return allAttachments;
 }

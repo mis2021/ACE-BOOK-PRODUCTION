@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TextContent from './textContent'
 import Button from '@admin/components/ui/button';
 import PostedByDetails from '../postedByDetails';
@@ -19,6 +19,8 @@ import { extractObjectId } from '@/services/extractions';
 import Uploader from '@/components/admin/components/common/uploader';
 import FileInput from '@/components/admin/components/ui/file-input';
 import NextUpload from '@/components/upload/nextUpload';
+import { uploadAttachment } from '@/services/uploading';
+import AttachmentUpload from '@/components/upload';
 
 type Props = {}
 
@@ -31,41 +33,78 @@ const PostFormIndex = (props: Props) => {
     const [upsertPost] = useMutation(UPSERT_POST);
 
     const {
-        register,
-        handleSubmit,
-        control,
-        formState: { errors },
+        register, handleSubmit, control, getValues, watch, setValue, reset,
+        formState: { isDirty, errors },
     } = useForm<PostFormValues>({
         //@ts-ignore
         defaultValues: defaultValuesPost,
         resolver: yupResolver(postValidationSchema),
     });
 
+    useEffect(() => {
+        reset()
+    }, [])
+
+
+    const executeMutation = (payload: any) => {
+        upsertPost({
+            variables: {
+                input: payload,
+            },
+        })
+            .then((resp) => {
+                toast.success("Post Created");
+            })
+            .catch((error) => {
+                console.log("post error", error)
+                toast.error("Failed to create post");
+            });
+    }
 
     const onSubmit = async (values: PostFormValues) => {
 
+        let attachments: any = null
+
+        if (values.attachments && values?.attachments?.length > 0) {
+            attachments = values.attachments
+            let attchArray = []
+            for (let i = 0; i < values?.attachments?.length; i++) {
+                attchArray.push(attachments[i].name)
+            }
+            attachments = attchArray
+        }
+
+
         let payload: PostFormValues;
         payload = _.cloneDeep(values)
+        delete payload.tempAttachments
+        payload.attachments = attachments
         payload.privacy = _.get(payload, "privacy.value");
         payload.createdBy = userId
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
         payload.taggedDepartments = extractObjectId(values?.taggedDepartments)
 
-       
+        console.log("payload", payload)
 
         if (confirm('Comfirm post')) {
-            upsertPost({
-                variables: {
-                    input: payload,
-                },
-            })
-                .then((resp) => {
-                    toast.success("Post Created");
-                })
-                .catch((error) => {
-                    console.log("post error", error)
-                    toast.error("Failed to create post");
-                });
+            let uploadResult: any
+
+            if (values?.attachments && values?.attachments?.length > 0) {
+                uploadResult = uploadAttachment(values.attachments)
+                console.log("result sat", (await uploadResult).status)
+            }
+
+
+            if (values.attachments && values?.attachments?.length > 0) {
+                if ((await uploadResult).status == "ok") {
+                    executeMutation(payload)
+                } else {
+                    toast.error("Failed to upload attachments");
+                }
+            } else {
+                executeMutation(payload)
+            }
+
         }
 
     }
@@ -85,15 +124,20 @@ const PostFormIndex = (props: Props) => {
                         <TextContent register={register} />
                         <PostPrivacy control={control} register={register} />
                         <PostDepartmentTag control={control} register={register} />
-                        <NextUpload register={register} />
+
+
+
+                        {/* <NextUpload register={register} getValues={getValues} watch={watch} setValue={setValue} /> */}
                         {/* <Uploader
                             // {...rest}
                             multiple={true}
                             acceptFile={true}
                             helperText={"Upload documents here..."}
                         /> */}
-                         {/* <FileInput name="postUpload" control={control} multiple={true} helperText="Upload files here..." /> */}
-                        {/* <div className='h-screen'></div> */}
+                        {/* <FileInput name="postUpload" control={control} multiple={true} helperText="Upload files here..." /> */}
+                        <hr />
+                        <AttachmentUpload />
+                        <div className='h-screen'></div>
 
                     </div>
                     {/* </div> */}

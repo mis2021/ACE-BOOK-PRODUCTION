@@ -10,4 +10,5 @@ export type PostFormValues = {
   createdByDepartment?: string | null;
   taggedDepartments?: string[] | null;
   tags?: object[] | null;
+  tempAttachments?: any
 };

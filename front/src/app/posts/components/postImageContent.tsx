@@ -42,7 +42,7 @@ const offerSliderBreakpoints = {
 
 const PostImageContent = (props: Props) => {
   return (
-    <div className=" object-center pt-6">
+    <div className=" object-center pt-2 pb-2">
       <Swiper
         id="offer"
         breakpoints={offerSliderBreakpoints}

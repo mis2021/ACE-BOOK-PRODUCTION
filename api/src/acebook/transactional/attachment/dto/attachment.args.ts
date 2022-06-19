@@ -13,6 +13,13 @@ export class AttachmentPaginator {
 
 
 
+@ArgsType()
+export class MultiAttachmentArgs {
+  attachments?: string[];
+  user?: string;
+}
+
+
 // @ArgsType()
 // export class GetMusersArgs extends PaginationArgs {
 //   username?: string;

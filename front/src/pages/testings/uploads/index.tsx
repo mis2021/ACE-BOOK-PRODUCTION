@@ -27,6 +27,7 @@ const Home: NextPage = () => {
         })
 
         /* Send request to our api route */
+        console.log("formData", inputFileRef.current.files)
         const response = await fetch('/api/upload', {
             method: 'POST',
             body: formData

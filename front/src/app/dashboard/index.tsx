@@ -64,7 +64,7 @@ const DashboardIndex = (props: Props) => {
     })
     assignPost()
   }, [!isOpen])
-console.log("isOpen", isOpen)
+
   return (
     <div>
       <FeedPostLayout>
