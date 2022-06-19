@@ -65,10 +65,21 @@ const PostFormIndex = (props: Props) => {
 
         let attachments: any = null
 
-        if (values.attachments && values?.attachments?.length > 0) {
-            attachments = values.attachments
+        // ====GENERAL ATTACHMENT====
+        // if (values.attachments && values?.attachments?.length > 0) {
+        //     attachments = values.attachments
+        //     let attchArray = []
+        //     for (let i = 0; i < values?.attachments?.length; i++) {
+        //         attchArray.push(attachments[i].name)
+        //     }
+        //     attachments = attchArray
+        // }
+
+        // ====IMAGE ATTACHMENT====
+        if (values.attachments_image && values?.attachments_image?.length > 0) {
+            attachments = values.attachments_image
             let attchArray = []
-            for (let i = 0; i < values?.attachments?.length; i++) {
+            for (let i = 0; i < values?.attachments_image?.length; i++) {
                 attchArray.push(attachments[i].name)
             }
             attachments = attchArray
@@ -78,6 +89,8 @@ const PostFormIndex = (props: Props) => {
         let payload: PostFormValues;
         payload = _.cloneDeep(values)
         delete payload.tempAttachments
+        delete payload.attachments_image
+        delete payload.tempAttachments_image
         payload.attachments = attachments
         payload.privacy = _.get(payload, "privacy.value");
         payload.createdBy = userId
@@ -136,7 +149,7 @@ const PostFormIndex = (props: Props) => {
                         /> */}
                         {/* <FileInput name="postUpload" control={control} multiple={true} helperText="Upload files here..." /> */}
                         <hr />
-                        <AttachmentUpload />
+                        <AttachmentUpload register={register} watch={watch} getValues={getValues} setValue={setValue} />
                         <div className='h-screen'></div>
 
                     </div>

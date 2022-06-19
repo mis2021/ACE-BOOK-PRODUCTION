@@ -1,21 +1,46 @@
-import React from 'react'
+import { ImageIcon } from '@/components/icons/image-icon'
+import React, {useState, useEffect} from 'react'
+import PreviewIndex from '../previews';
 
-type Props = {}
+type Props = {
+  register: any;
+  getValues?: any;
+  watch?: any;
+  setValue?: any;
+}
 
-const ImageUpload = (props: Props) => {
+const initialPreview: string[] = []
 
+const ImageUpload = ({ register, getValues, setValue, watch }: Props) => {
 
+  const [previewImage, setPreviewImage] = useState(initialPreview)
 
-    const handleChange = (e: any)=>{
-        console.log("file", e)
+  useEffect(() => {
+    register('attachments_image', { required: false });
+    setPreviewImage([])
+  }, [])
+
+  useEffect(() => {
+    let tempAtt = getValues("tempAttachments_image")
+    if (tempAtt && tempAtt.length > 0) {
+
+      let newAttachment = previewImage
+      newAttachment.push(tempAtt[0])
+
+      setValue("attachments_image", newAttachment)
+      setPreviewImage(newAttachment)
 
     }
+  }, [watch("tempAttachments_image")])
+
   return (
-    <div>
-         <input 
-        type="file" 
-        name="image" 
-        onChange={e=>handleChange(e.target.value)}/>
+    <div className='relative'>
+
+      <input type="file"  className='h-auto top-0 left-0 absolute w-full opacity-0  border-8' {...register('tempAttachments_image')} />
+      <ImageIcon />
+
+
+     
     </div>
   )
 }

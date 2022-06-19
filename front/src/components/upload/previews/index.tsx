@@ -8,7 +8,8 @@ type Props = {
 const PreviewIndex = ({ attachments }: Props) => {
 
     return (
-        <div>
+        <div className='flex'>
+
             {
                attachments && attachments.map((item: any) => (
                     <ImagePreview attachment={item} />

@@ -6,9 +6,13 @@ export type PostFormValues = {
   privacy?: string;
   attachments?: object[] | [] | undefined;
   created_at: string | null;
-  createdBy?:any | null
+  createdBy?: any | null
   createdByDepartment?: string | null;
   taggedDepartments?: string[] | null;
   tags?: object[] | null;
+
   tempAttachments?: any
+  attachments_image?: any;
+  tempAttachments_image?: any;
+
 };
