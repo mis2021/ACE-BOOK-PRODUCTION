@@ -21,6 +21,7 @@ import FileInput from '@/components/admin/components/ui/file-input';
 import NextUpload from '@/components/upload/nextUpload';
 import { uploadAttachment } from '@/services/uploading';
 import AttachmentUpload from '@/components/upload';
+import PreviewIndex from '@/components/upload/previews';
 
 type Props = {}
 
@@ -150,6 +151,8 @@ const PostFormIndex = (props: Props) => {
                         {/* <FileInput name="postUpload" control={control} multiple={true} helperText="Upload files here..." /> */}
                         <hr />
                         <AttachmentUpload register={register} watch={watch} getValues={getValues} setValue={setValue} />
+
+                        {/* <PreviewIndex attachments={watch("attachments_image")} /> */}
                         <div className='h-screen'></div>
 
                     </div>

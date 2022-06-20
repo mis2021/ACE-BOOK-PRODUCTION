@@ -1,7 +1,6 @@
 import React from 'react'
 import { FileIcon } from '../icons/file-icon'
 import { FilmIcon } from '../icons/film-icon'
-import { ImageIcon } from '../icons/image-icon'
 import ImageUpload from './image'
 import PreviewIndex from './previews'
 
@@ -18,22 +17,38 @@ const UploadIconContainer = ({ children }: any) => (
     </div>
 )
 
-const AttachmentUpload = ({ register, getValues, watch, setValue }: Props) => {
-    return (
-        <div className='pt-2 flex'>
-            <UploadIconContainer>
-                <ImageUpload register={register} watch={watch} getValues={getValues} setValue={setValue} />
-                {/* <ImageIcon /> */}
-            </UploadIconContainer>
-            <UploadIconContainer>
-                <FilmIcon />
-            </UploadIconContainer>
-            <UploadIconContainer>
-                <FileIcon />
-            </UploadIconContainer>
 
-            <PreviewIndex attachments={watch("attachments_image")} />
-        </div>
+
+const AttachmentUpload = ({ register, getValues, watch, setValue }: Props) => {
+
+    const removeAttachment = (data: any) => {
+      let imagesAttch = getValues("attachments_image");
+      console.log("array", imagesAttch)
+        imagesAttch = imagesAttch.filter((item : any)=>{
+            return item.name !== data
+        })
+       
+        console.log("NEW array", imagesAttch)
+        console.log("data remove", data)
+        setValue("attachments_image", imagesAttch)
+    }
+
+    return (
+        <>
+            <div className='pt-2 flex'>
+                <UploadIconContainer>
+                    <ImageUpload register={register} watch={watch} getValues={getValues} setValue={setValue} />
+                </UploadIconContainer>
+                <UploadIconContainer>
+                    <FilmIcon />
+                </UploadIconContainer>
+                <UploadIconContainer>
+                    <FileIcon />
+                </UploadIconContainer>
+            </div>
+            {/* ======================================================== */}
+            <PreviewIndex attachments={watch("attachments_image")} triggerRemove={removeAttachment} />
+        </>
     )
 }
 
