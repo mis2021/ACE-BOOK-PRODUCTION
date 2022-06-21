@@ -24,8 +24,8 @@ const PostDepartmentTag = ({ control, register }: Props) => {
 
     return (
         <div>
-            <div className="mb-5">
-                <div className='w-full'>
+            <div className="mb-5 ">
+                <div className='w-full '>
                     <SelectInput
                         {...register('taggedDepartments')}
                         customStyle={postSelectStylesTags}

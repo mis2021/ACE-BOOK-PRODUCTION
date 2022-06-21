@@ -85,6 +85,7 @@ export const postSelectStyles = {
     border: "1px solid #E5E7EB",
     boxShadow:
       "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      zIndex: 40
   }),
   valueContainer: (provided: any, _: any) => ({
     ...provided,

@@ -29,7 +29,7 @@ const CommentList = (props: Props) => {
     }, [!state.active])
     
     return (
-        <div className='px-5'>
+        <div className='px-1 md:px-5'>
             {
             _.get(postComments, 'comments.data')  && _.get(postComments, 'comments.data').length >= 1 && _.get(postComments, 'comments.data').map((item : CommentType) => (
                     <CommentSpec data={item} />

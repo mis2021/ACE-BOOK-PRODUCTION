@@ -42,7 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         /* Create directory for uploads */
         // const targetPath = '\\172.16.12.30\mis\JACKY\storage\acebook';
         // const targetPath = "C:\Users\ACEMCB\Documents\storage\acebook";
-        const targetPath = path.join(process.cwd(), `/uploads/`);
+        const targetPath = path.join(process.cwd(), `/public/uploads/`);
         try {
             await fs.access(targetPath);
         } catch (e) {

@@ -100,6 +100,9 @@ const PostFormIndex = (props: Props) => {
 
         console.log("payload", payload)
 
+        // temporary assignment of values.attachments to values.attahcments_image
+        values.attachments = values.attachments_image
+
         if (confirm('Comfirm post')) {
             let uploadResult: any
 

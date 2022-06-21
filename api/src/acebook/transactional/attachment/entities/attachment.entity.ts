@@ -9,6 +9,7 @@ import { CommentEnt } from '../../comment/entities/comment.entity';
 @ObjectType()
 export class AttachmentEnt extends CoreEntityMg {
   path: string;
+  type?: string;
   createdBy?: UserEntAB;
   comments?: string[];
   refId?:string;

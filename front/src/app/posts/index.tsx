@@ -32,7 +32,7 @@ const PostIndex = ({ data, tags }: Props) => {
           </div>
           <PostTextContent content={_.get(data, 'content')} />
           {
-            _.get(data, 'attachments') && _.get(data, 'attachments').length >= 1 && <PostImageContent />
+            _.get(data, 'attachments') && _.get(data, 'attachments').length >= 1 && <PostImageContent attachments={_.get(data, 'attachments')} />
           }
           <PostTagContainer tags={tags} />
           <GenComments />
