@@ -25,10 +25,6 @@ import PreviewIndex from '@/components/upload/previews';
 
 type Props = {}
 
-
-
-
-
 const PostFormIndex = (props: Props) => {
     const { id: userId, user } = getAuthCredentials();
     const [upsertPost] = useMutation(UPSERT_POST);
@@ -81,7 +77,10 @@ const PostFormIndex = (props: Props) => {
             attachments = values.attachments_image
             let attchArray = []
             for (let i = 0; i < values?.attachments_image?.length; i++) {
-                attchArray.push(attachments[i].name)
+                attchArray.push({
+                   path: attachments[i].name,
+                   type: 'image'
+                })
             }
             attachments = attchArray
         }
@@ -98,22 +97,28 @@ const PostFormIndex = (props: Props) => {
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
         payload.taggedDepartments = extractObjectId(values?.taggedDepartments)
 
-        console.log("payload", payload)
-
         // temporary assignment of values.attachments to values.attahcments_image
         values.attachments = values.attachments_image
 
         if (confirm('Comfirm post')) {
             let uploadResult: any
+            let uploadCheck: boolean = false
+            // let uploadResult: any
 
-            if (values?.attachments && values?.attachments?.length > 0) {
-                uploadResult = uploadAttachment(values.attachments)
-                console.log("result sat", (await uploadResult).status)
+            // ====IMAGE ATTACHMENT====
+            if (values?.attachments_image && values?.attachments_image?.length > 0) {
+                uploadResult = uploadAttachment(values.attachments_image, 'image');
+                uploadCheck = (await uploadResult).status == "ok" ? true : false
+                // console.log("result sat", (await uploadResult).status)
             }
 
 
-            if (values.attachments && values?.attachments?.length > 0) {
-                if ((await uploadResult).status == "ok") {
+            if (
+
+                values.attachments_image && values?.attachments_image?.length > 0
+                
+                ) {
+                if (uploadCheck) {
                     executeMutation(payload)
                 } else {
                     toast.error("Failed to upload attachments");
@@ -142,20 +147,8 @@ const PostFormIndex = (props: Props) => {
                         <PostPrivacy control={control} register={register} />
                         <PostDepartmentTag control={control} register={register} />
 
-
-
-                        {/* <NextUpload register={register} getValues={getValues} watch={watch} setValue={setValue} /> */}
-                        {/* <Uploader
-                            // {...rest}
-                            multiple={true}
-                            acceptFile={true}
-                            helperText={"Upload documents here..."}
-                        /> */}
-                        {/* <FileInput name="postUpload" control={control} multiple={true} helperText="Upload files here..." /> */}
                         <hr />
                         <AttachmentUpload register={register} watch={watch} getValues={getValues} setValue={setValue} />
-
-                        {/* <PreviewIndex attachments={watch("attachments_image")} /> */}
                         <div className='h-screen'></div>
 
                     </div>

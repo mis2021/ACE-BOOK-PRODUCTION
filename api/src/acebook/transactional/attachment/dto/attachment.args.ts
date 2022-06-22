@@ -3,7 +3,7 @@ import { ArgsType, ObjectType } from '@nestjs/graphql';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 
 import { PaginatorInfo } from 'src/common/dto/paginator-info.model';
-import { AttachmentEnt } from '../entities/attachment.entity';
+import { AttachmentEnt, AttachmentInptObj } from '../entities/attachment.entity';
 
 @ObjectType()
 export class AttachmentPaginator {
@@ -15,7 +15,7 @@ export class AttachmentPaginator {
 
 @ArgsType()
 export class MultiAttachmentArgs {
-  attachments?: string[];
+  attachments?: AttachmentInptObj[];
   user?: string;
 }
 

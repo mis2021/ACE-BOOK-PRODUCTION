@@ -54,9 +54,10 @@ export class AttachmentService {
 
 export const saveMultiAttachments = ({attachments, user}: MultiAttachmentArgs) => {
   let allAttachments = []
-  attachments.map(async (item) => {
+  attachments.map(async (i,item) => {
     let resultAtt = new Attachment({
-      path: item,
+      path: i.path,
+      type: i.type,
       createdBy: user,
     });
     allAttachments.push(resultAtt._id)

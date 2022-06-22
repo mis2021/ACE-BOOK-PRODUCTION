@@ -45,10 +45,10 @@ export class PostService {
 
       let allAttachments = []
       if (upsertInput.attachments) {
-        allAttachments = saveMultiAttachments({ 
+        allAttachments = saveMultiAttachments({
           attachments: upsertInput.attachments,
-           user: upsertInput.createdBy 
-          })
+          user: upsertInput.createdBy
+        })
       }
 
       savedData = new Post({

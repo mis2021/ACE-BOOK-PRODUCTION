@@ -27,9 +27,7 @@ const AttachmentUpload = ({ register, getValues, watch, setValue }: Props) => {
         imagesAttch = imagesAttch.filter((item : any)=>{
             return item.name !== data
         })
-       
-        console.log("NEW array", imagesAttch)
-        console.log("data remove", data)
+        
         setValue("attachments_image", imagesAttch)
     }
 

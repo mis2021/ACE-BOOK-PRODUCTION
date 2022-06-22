@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { CoreEntity, CoreEntityMg } from 'src/common/entities/core.entity';
-import {AttachmentEnt} from '@acebook/transactional/attachment/entities/attachment.entity';
+import {AttachmentEnt, AttachmentInptObj} from '@acebook/transactional/attachment/entities/attachment.entity';
 import { CommentEnt } from '@acebook/transactional/comment/entities/comment.entity';
 import { ReactionEnt } from '@acebook/referenceType/reaction.entity';
 import { UserEntAB } from '@/users/entities/user.entity';
@@ -31,7 +31,7 @@ export class PostEnt extends PostEntCommon{
 @InputType('PostInputType', { isAbstract: true })
 @ObjectType()
 export class PostInput extends PostEntCommon{
-  attachments?: string[];
+  attachments?: AttachmentInptObj[];
   comments?: string[];
   reactions?: string[];
   sharedPost?: string;

@@ -58,9 +58,13 @@ const PostImageContent = ({ attachments }: Props) => {
           <div className='bg-slate-200 h-full'>
             {attachments.map((i: any, index: number) => (
               <SwiperSlide key={index}>
-                <div className=''>
 
-                  {/* <Image
+                <div className='flex  justify-center  content-center'>
+                  <div className='max-w-sm  max-h-[30rem]  rounded-lg object-cover object-center  aspect-auto'>
+                  {/* <div className='max-w-sm  max-h-[27rem] px-4 rounded-lg object-cover object-center  aspect-auto'> */}
+                    {/* <div className='max-h-96 rounded-lg object-cover object-center  aspect-auto'> */}
+
+                    {/* <Image
                     key={index}
                     className="w-full h-auto rounded-lg object-cover object-center"
                     // className="block h-full w-full rounded-lg object-cover object-center "
@@ -69,15 +73,18 @@ const PostImageContent = ({ attachments }: Props) => {
                     alt={'sample'}
                     layout="responsive"
                   /> */}
-                  <img
-                    key={index}
-                    className="w-full h-auto rounded-lg object-cover object-center"
-                    src={UPLOAD_LINK(i.path)}
-                    // src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
-                    alt="new"
-                  />
+                    <img
+                      key={index}
+                      className=" rounded-lg object-cover object-center "
+                      // className="w-full h-auto rounded-lg object-cover object-center"
+                      src={UPLOAD_LINK('images/' + i.path)}
+                      // src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
+                      alt="new"
+                    />
 
+                  </div>
                 </div>
+
               </SwiperSlide>
             ))}
           </div>

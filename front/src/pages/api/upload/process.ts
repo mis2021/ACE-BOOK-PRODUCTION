@@ -12,12 +12,7 @@ export const config = {
 
 type ProcessedFiles = Array<[string, File]>;
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    // const body = JSON.parse(req.body)
-   
-    console.log("path query",req.query)
-    // console.log("path001", req.path)
-
+const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUpload: string) => {
     let status = 200,
         resultBody = { status: 'ok', message: 'Files were uploaded successfully' };
 
@@ -50,7 +45,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         /* Create directory for uploads */
         // const targetPath = '\\172.16.12.30\mis\JACKY\storage\acebook';
         // const targetPath = "C:\Users\ACEMCB\Documents\storage\acebook";
-        const targetPath = path.join(process.cwd(), `/public/uploads/`);
+        const targetPath = path.join(process.cwd(), pathUpload);
         try {
             await fs.access(targetPath);
         } catch (e) {
@@ -67,4 +62,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(status).json(resultBody);
 }
 
-export default handler;
+export default UploadProcess;

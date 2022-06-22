@@ -17,3 +17,11 @@ export class AttachmentEnt extends CoreEntityMg {
   reactions?: ReactionEnt[];
   customTags?: CustomTagEnt[];
 }
+
+@InputType('AttachmentInputObjType', { isAbstract: true })
+@ObjectType()
+export class AttachmentInptObj {
+  type?: string;
+  path?: string;
+}
+

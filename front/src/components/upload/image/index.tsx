@@ -47,7 +47,7 @@ const ImageUpload = ({ register, getValues, setValue, watch }: Props) => {
   return (
     <div className='relative'>
 
-      <input type="file" className='h-auto top-0 left-0 absolute w-full opacity-0  border-8 cursor-pointer' {...register('tempAttachments_image')} />
+      <input type="file" className='h-auto top-0 left-0 absolute w-full opacity-0  border-8 cursor-pointer' accept="image/*" {...register('tempAttachments_image')} />
       <ImageIcon />
 
 
