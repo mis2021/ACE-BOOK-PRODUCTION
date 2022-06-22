@@ -12,13 +12,14 @@ import PostPrivacyView from './components/postPrivacyView';
 import PostTagIcon from '@/components/tags/tagIcon';
 import GenComments from '../comments';
 import PostTagContainer from './components/postTagContainer';
+import PostFileContent from './components/postFileContent';
 
 type Props = { data: PostFormValues, tags: any };
 export const PostContext = React.createContext({})
 
 const PostIndex = ({ data, tags }: Props) => {
   // const PostIndex = ({ content, attachments, created_at, createdBy, createdByDepartment}: Props) => {
-  const postValue: PostFormValues =  data
+  const postValue: PostFormValues = data
   return (
     <div className="pt-3 ">
       <PostContext.Provider value={postValue} >
@@ -32,8 +33,13 @@ const PostIndex = ({ data, tags }: Props) => {
           </div>
           <PostTextContent content={_.get(data, 'content')} />
           {
-            _.get(data, 'attachments') && _.get(data, 'attachments').length >= 1 && <PostImageContent attachments={_.get(data, 'attachments')} />
+            _.get(data, 'attachments') && _.get(data, 'attachments').length >= 1 &&
+            <>
+              <PostImageContent attachments={_.get(data, 'attachments')} />
+            </>
           }
+          {/* <PostFileContent/> */}
+          
           <PostTagContainer tags={tags} />
           <GenComments />
 

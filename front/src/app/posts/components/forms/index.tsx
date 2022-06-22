@@ -60,8 +60,8 @@ const PostFormIndex = (props: Props) => {
 
     const onSubmit = async (values: PostFormValues) => {
 
-        let attachments: any = null
-
+        let attachments: any = []
+        console.log("values", values)
         // ====GENERAL ATTACHMENT====
         // if (values.attachments && values?.attachments?.length > 0) {
         //     attachments = values.attachments
@@ -74,15 +74,28 @@ const PostFormIndex = (props: Props) => {
 
         // ====IMAGE ATTACHMENT====
         if (values.attachments_image && values?.attachments_image?.length > 0) {
-            attachments = values.attachments_image
-            let attchArray = []
+            let attachmentsImage = values.attachments_image
+            // let attchArray = []
             for (let i = 0; i < values?.attachments_image?.length; i++) {
-                attchArray.push({
-                   path: attachments[i].name,
-                   type: 'image'
+                attachments.push({
+                    path: attachmentsImage[i].name,
+                    type: 'image'
                 })
             }
-            attachments = attchArray
+            // attachments = attchArray
+        }
+
+        // ====FILE ATTACHMENT====
+        if (values.attachments_file && values?.attachments_file?.length > 0) {
+            let attachmentsFile = values.attachments_file
+            // let attchArray = []
+            for (let i = 0; i < values?.attachments_file?.length; i++) {
+                attachments.push({
+                    path: attachmentsFile[i].name,
+                    type: 'file'
+                })
+            }
+            // attachments = attchArray
         }
 
 
@@ -91,14 +104,18 @@ const PostFormIndex = (props: Props) => {
         delete payload.tempAttachments
         delete payload.attachments_image
         delete payload.tempAttachments_image
+        delete payload.attachments_file
+        delete payload.tempAttachments_file
         payload.attachments = attachments
         payload.privacy = _.get(payload, "privacy.value");
         payload.createdBy = userId
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
         payload.taggedDepartments = extractObjectId(values?.taggedDepartments)
 
+        console.log("payload", payload)
+
         // temporary assignment of values.attachments to values.attahcments_image
-        values.attachments = values.attachments_image
+        // values.attachments = values.attachments_image
 
         if (confirm('Comfirm post')) {
             let uploadResult: any
@@ -112,12 +129,21 @@ const PostFormIndex = (props: Props) => {
                 // console.log("result sat", (await uploadResult).status)
             }
 
+            // ====FILE ATTACHMENT====
+            if (values?.attachments_file && values?.attachments_file?.length > 0) {
+                uploadResult = uploadAttachment(values.attachments_file, 'file');
+                uploadCheck = (await uploadResult).status == "ok" ? true : false
+                // console.log("result sat", (await uploadResult).status)
+            }
+
+
 
             if (
 
-                values.attachments_image && values?.attachments_image?.length > 0
-                
-                ) {
+                (values.attachments_image && values?.attachments_image?.length > 0) ||
+                (values.attachments_file && values?.attachments_file?.length > 0)
+
+            ) {
                 if (uploadCheck) {
                     executeMutation(payload)
                 } else {

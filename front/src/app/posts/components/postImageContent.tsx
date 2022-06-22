@@ -60,7 +60,7 @@ const PostImageContent = ({ attachments }: Props) => {
               <SwiperSlide key={index}>
 
                 <div className='flex  justify-center  content-center'>
-                  <div className='max-w-sm  max-h-[30rem]  rounded-lg object-cover object-center  aspect-auto'>
+                  <div className='max-w-sm  max-h-[30rem]   rounded-lg object-cover object-center  aspect-auto'>
                   {/* <div className='max-w-sm  max-h-[27rem] px-4 rounded-lg object-cover object-center  aspect-auto'> */}
                     {/* <div className='max-h-96 rounded-lg object-cover object-center  aspect-auto'> */}
 

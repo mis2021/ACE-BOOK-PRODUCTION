@@ -25,7 +25,7 @@ const ImagePreview = ({ attachment, triggerRemove }: Props) => {
         }
     }, [attachment])
 
-    console.log("image", image)
+   
 
     return (
         // <div className='bg-slate-200 w-20 h-20 rounded px-4'>

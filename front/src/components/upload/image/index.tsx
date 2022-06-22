@@ -22,7 +22,6 @@ const ImageUpload = ({ register, getValues, setValue, watch }: Props) => {
 
   useEffect(() => {
     let att = watch("attachments_image")
-    console.log("attachments_image noow", att)
     if (att) {
       setPreviewImage(att)
     }

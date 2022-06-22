@@ -14,5 +14,7 @@ export type PostFormValues = {
   tempAttachments?: any
   attachments_image?: any;
   tempAttachments_image?: any;
+  attachments_file?: any;
+  tempAttachments_file?: any;
 
 };
