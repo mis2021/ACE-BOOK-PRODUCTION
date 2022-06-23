@@ -4,24 +4,19 @@ import Button from '@admin/components/ui/button';
 import PostedByDetails from '../postedByDetails';
 import PostPrivacy from './postPrivacy';
 import { useForm } from 'react-hook-form';
-
 import { useMutation } from '@apollo/client';
 import { UPSERT_POST } from '@graphql/operations/posts/postMutation';
 import { PostFormValues } from '@/types/posts/postTypes';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
-import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
+import { getAuthCredentials } from "@utils/auth-utils";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { postValidationSchema } from './formvalidations/post-validation-schema';
 import PostDepartmentTag from './postDepartmentTag';
 import { defaultValuesPost } from './defaulValuesPost';
 import { extractObjectId } from '@/services/extractions';
-import Uploader from '@/components/admin/components/common/uploader';
-import FileInput from '@/components/admin/components/ui/file-input';
-import NextUpload from '@/components/upload/nextUpload';
 import { uploadAttachment } from '@/services/uploading';
 import AttachmentUpload from '@/components/upload';
-import PreviewIndex from '@/components/upload/previews';
 
 type Props = {}
 
@@ -51,6 +46,7 @@ const PostFormIndex = (props: Props) => {
         })
             .then((resp) => {
                 toast.success("Post Created");
+                reset()
             })
             .catch((error) => {
                 console.log("post error", error)
@@ -61,41 +57,27 @@ const PostFormIndex = (props: Props) => {
     const onSubmit = async (values: PostFormValues) => {
 
         let attachments: any = []
-        console.log("values", values)
-        // ====GENERAL ATTACHMENT====
-        // if (values.attachments && values?.attachments?.length > 0) {
-        //     attachments = values.attachments
-        //     let attchArray = []
-        //     for (let i = 0; i < values?.attachments?.length; i++) {
-        //         attchArray.push(attachments[i].name)
-        //     }
-        //     attachments = attchArray
-        // }
-
+       
         // ====IMAGE ATTACHMENT====
         if (values.attachments_image && values?.attachments_image?.length > 0) {
             let attachmentsImage = values.attachments_image
-            // let attchArray = []
             for (let i = 0; i < values?.attachments_image?.length; i++) {
                 attachments.push({
                     path: attachmentsImage[i].name,
                     type: 'image'
                 })
             }
-            // attachments = attchArray
         }
 
         // ====FILE ATTACHMENT====
         if (values.attachments_file && values?.attachments_file?.length > 0) {
             let attachmentsFile = values.attachments_file
-            // let attchArray = []
             for (let i = 0; i < values?.attachments_file?.length; i++) {
                 attachments.push({
                     path: attachmentsFile[i].name,
                     type: 'file'
                 })
             }
-            // attachments = attchArray
         }
 
 
@@ -112,8 +94,6 @@ const PostFormIndex = (props: Props) => {
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
         payload.taggedDepartments = extractObjectId(values?.taggedDepartments)
 
-        console.log("payload", payload)
-
         // temporary assignment of values.attachments to values.attahcments_image
         // values.attachments = values.attachments_image
 
@@ -126,23 +106,17 @@ const PostFormIndex = (props: Props) => {
             if (values?.attachments_image && values?.attachments_image?.length > 0) {
                 uploadResult = uploadAttachment(values.attachments_image, 'image');
                 uploadCheck = (await uploadResult).status == "ok" ? true : false
-                // console.log("result sat", (await uploadResult).status)
             }
 
             // ====FILE ATTACHMENT====
             if (values?.attachments_file && values?.attachments_file?.length > 0) {
                 uploadResult = uploadAttachment(values.attachments_file, 'file');
                 uploadCheck = (await uploadResult).status == "ok" ? true : false
-                // console.log("result sat", (await uploadResult).status)
             }
 
-
-
             if (
-
                 (values.attachments_image && values?.attachments_image?.length > 0) ||
                 (values.attachments_file && values?.attachments_file?.length > 0)
-
             ) {
                 if (uploadCheck) {
                     executeMutation(payload)

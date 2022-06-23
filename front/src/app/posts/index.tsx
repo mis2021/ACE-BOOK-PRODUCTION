@@ -13,6 +13,7 @@ import PostTagIcon from '@/components/tags/tagIcon';
 import GenComments from '../comments';
 import PostTagContainer from './components/postTagContainer';
 import PostFileContent from './components/postFileContent';
+import PostAttachments from './components/attachments';
 
 type Props = { data: PostFormValues, tags: any };
 export const PostContext = React.createContext({})
@@ -32,13 +33,8 @@ const PostIndex = ({ data, tags }: Props) => {
             </div>
           </div>
           <PostTextContent content={_.get(data, 'content')} />
-          {
-            _.get(data, 'attachments') && _.get(data, 'attachments').length >= 1 &&
-            <>
-              <PostImageContent attachments={_.get(data, 'attachments')} />
-            </>
-          }
-          {/* <PostFileContent/> */}
+         
+          <PostAttachments attachments={_.get(data, 'attachments')}/>
           
           <PostTagContainer tags={tags} />
           <GenComments />

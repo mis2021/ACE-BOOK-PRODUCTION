@@ -16,5 +16,6 @@ export const defaultValuesPost = {
                 <span>Public</span>
             </div>
         )
-    }
+    },
+    taggedDepartments: null
 }

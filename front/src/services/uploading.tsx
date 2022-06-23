@@ -6,7 +6,7 @@ export const uploadAttachment = async (attachments : any, type: string) => {
     })
     formData.append('path', `upload/${type}`);
     /* Send request to our api route */
-    const response = await fetch('/api/upload/image', {
+    const response = await fetch(`/api/upload/${type}`, {
     // const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData

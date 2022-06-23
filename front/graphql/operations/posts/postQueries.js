@@ -13,6 +13,7 @@ query Data($first: Int, $page: Int, $departmentId: String, $type: String) {
       attachments {
         _id
         path
+        type
       }
       createdBy {
         _id
