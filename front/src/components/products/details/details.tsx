@@ -99,6 +99,7 @@ const Details: React.FC<Props> = ({
   return (
     <article className="rounded-lg bg-light">
       <div className="flex flex-col border-b md:flex-row border-border-200 border-opacity-70">
+      {/* <div className="flex flex-col border-b md:flex-row border-border-200 border-opacity-70"> */}
         <div className="p-6 pt-10 md:w-1/2 lg:p-14 xl:p-16">
           <div className="flex items-center justify-between mb-8 lg:mb-10">
             {backBtn && <BackButton />}

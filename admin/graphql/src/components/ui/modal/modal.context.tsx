@@ -73,6 +73,7 @@ ModalActionContext.displayName = "ModalActionContext";
 
 export const ModalProvider: React.FC = ({ children }) => {
   const [state, dispatch] = React.useReducer(modalReducer, initialState);
+  console.log("ModalProvider", state.isOpen)
   return (
     <ModalStateContext.Provider value={state}>
       <ModalActionContext.Provider value={dispatch}>

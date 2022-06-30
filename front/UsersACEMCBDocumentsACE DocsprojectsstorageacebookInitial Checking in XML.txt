@@ -1,0 +1,147 @@
+//   .......... "fileName": "SUELLO, MANSUETO S..xml"
+{
+    "parentKey": "eCLAIMS > eTRANSMITTAL > CLAIM > CF1 > @pPatientPIN",
+    "key": "@pPatientPIN",
+    "value": "",
+    "passed": false,
+    "appliedRules": [
+      {
+        "rule": "Required",
+        "violation": "Data is Required",
+        "violated": true
+      },
+      {
+        "rule": "Length",
+        "violation": "",
+        "violated": false
+      },
+      {
+        "rule": "Data Integer Type",
+        "violation": "Data not in Integer Type",
+        "violated": true
+      }
+    ]
+  },
+  {
+    "parentKey": "eCLAIMS > eTRANSMITTAL > CLAIM > ALLCASERATE > CASERATE > @pCaseRateCode",
+    "key": "@pCaseRateCode",
+    "value": "",
+    "passed": false,
+    "appliedRules": [
+      {
+        "rule": "Required",
+        "violation": "Data is Required",
+        "violated": true
+      },
+      {
+        "rule": "Length",
+        "violation": "",
+        "violated": false
+      }
+    ]
+  },
+  {
+    "parentKey": "eCLAIMS > eTRANSMITTAL > CLAIM > ALLCASERATE > CASERATE > @pICDCode",
+    "key": "@pICDCode",
+    "value": "",
+    "passed": false,
+    "appliedRules": [
+      {
+        "rule": "Required",
+        "violation": "Data is Required",
+        "violated": true
+      },
+      {
+        "rule": "Length",
+        "violation": "",
+        "violated": false
+      }
+    ]
+  }
+
+//   .......... "fileName": "ANGALOT, RICHARD.xml"
+
+{
+    "parentKey": "eCLAIMS > eTRANSMITTAL > CLAIM > CF1 > @pPatientIs",
+    "key": "@pPatientIs",
+    "value": "NS",
+    "passed": false,
+    "appliedRules": [
+      {
+        "rule": "Required",
+        "violation": "",
+        "violated": false
+      },
+      {
+        "rule": "Length",
+        "violation": "Data exceeds PHIC max length size",
+        "violated": true
+      },
+      {
+        "rule": "Data Values Match",
+        "violation": "Data does not match PHIC required values",
+        "violated": true
+      }
+    ]
+  }
+
+
+  //   ..........  "fileName": "TOROY, VENUS MARICHELLE A.xml"
+  {
+    "parentKey": "eCLAIMS > eTRANSMITTAL > CLAIM > CF1 > @pPatientIs",
+    "key": "@pPatientIs",
+    "value": "G",
+    "passed": false,
+    "appliedRules": [
+      {
+        "rule": "Required",
+        "violation": "",
+        "violated": false
+      },
+      {
+        "rule": "Length",
+        "violation": "",
+        "violated": false
+      },
+      {
+        "rule": "Data Values Match",
+        "violation": "Data does not match PHIC required values",
+        "violated": true
+      }
+    ]
+  }, {
+    "parentKey": "eCLAIMS > eTRANSMITTAL > CLAIM > ALLCASERATE > CASERATE > @pCaseRateCode",
+    "key": "@pCaseRateCode",
+    "value": "",
+    "passed": false,
+    "appliedRules": [
+      {
+        "rule": "Required",
+        "violation": "Data is Required",
+        "violated": true
+      },
+      {
+        "rule": "Length",
+        "violation": "",
+        "violated": false
+      }
+    ]
+  },
+  {
+    "parentKey": "eCLAIMS > eTRANSMITTAL > CLAIM > ALLCASERATE > CASERATE > @pICDCode",
+    "key": "@pICDCode",
+    "value": "",
+    "passed": false,
+    "appliedRules": [
+      {
+        "rule": "Required",
+        "violation": "Data is Required",
+        "violated": true
+      },
+      {
+        "rule": "Length",
+        "violation": "",
+        "violated": false
+      }
+    ]
+  }

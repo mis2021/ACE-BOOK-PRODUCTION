@@ -21,6 +21,7 @@ type SearchProps = {
   variant?: 'normal' | 'solid' | 'outline';
   inputClassName?: string;
   onSearch: (data: SearchValue) => void;
+  placeholder: string;
 };
 
 type SearchValue = {
@@ -99,7 +100,7 @@ const Search: React.FC<SearchProps> = ({
         id="search"
         {...register('searchText')}
         className={rootClassName}
-        placeholder={'Search'}
+        placeholder={placeholder ? placeholder : 'Search'}
         // placeholder={t("form:input-placeholder-search")}
         aria-label="Search"
         autoComplete="off"

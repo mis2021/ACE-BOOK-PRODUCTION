@@ -9,12 +9,17 @@ import { avatarPlaceholder } from '@/lib/placeholders';
 import { UserOutlinedIcon } from '@/components/icons/user-outlined';
 import { useLogout, useUser } from '@/framework/user';
 import { ROUTES } from '@/lib/routes';
+import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
+import _ from 'lodash';
 
 const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
   const { mutate: logout } = useLogout();
   const { me } = useUser();
   const router = useRouter();
   const { t } = useTranslation('common');
+  const { user: cookieUser } = getAuthCredentials();
+ 
+
 
   function handleClick(path: string) {
     router.push(path);
@@ -64,7 +69,14 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
               <span>{me?.wallet?.available_points ?? 0}</span>
             </li>
           </Menu.Item>
-          {siteSettings.authorizedLinks.map(({ href, label }) => (
+          {/* <Menu.Item>
+            <li className="flex w-full items-center justify-between bg-accent-500 px-6 py-4 text-xs font-semibold capitalize text-light focus:outline-none ltr:text-left rtl:text-right">
+              <span>Points</span> */}
+          {/* <span>{t('text-points')}</span> */}
+          {/* <span>{me?.wallet?.available_points ?? 0}</span>
+            </li>
+          </Menu.Item> */}
+          {/* {siteSettings.authorizedLinks.map(({ href, label }) => (
             <Menu.Item key={`${href}${label}`}>
               {({ active }) => (
                 <li>
@@ -80,7 +92,25 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
                 </li>
               )}
             </Menu.Item>
-          ))}
+          ))} */}
+          {/* {siteSettings.authorizedLinks.map(({ href, label }) => ( */}
+          <Menu.Item >
+            {/* {({ active }) => ( */}
+            <li>
+              <button
+                onClick={() => handleClick(`/departments/${_.get(cookieUser, 'departmentOnDuty._id')}`)}
+                className={cn(
+                  'block w-full py-2.5 px-6 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent focus:outline-none ltr:text-left rtl:text-right',
+                  'text-heading'
+                  // active ? 'text-accent' : 'text-heading'
+                )}
+              >
+                My Department
+              </button>
+            </li>
+            {/* )} */}
+          </Menu.Item>
+          {/* ))} */}
           <Menu.Item>
             <li>
               <button

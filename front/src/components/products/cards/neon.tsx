@@ -37,6 +37,7 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
   const { openModal } = useModalAction();
 
   function handleProductQuickView() {
+    console.log("product.slug", product.slug)
     return openModal('PRODUCT_DETAILS', product.slug);
   }
 

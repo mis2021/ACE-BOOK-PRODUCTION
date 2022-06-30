@@ -25,9 +25,9 @@ function ModIndexClassicLayout({ children}: Props) {
         layout="classic"
         variables={variables}
       /> */}
-      <PromotionSliders
+      {/* <PromotionSliders
         variables={variables}
-      />
+      /> */}
       {/* <FilterBar variables={variables} /> */}
       <Element
         name="grid"

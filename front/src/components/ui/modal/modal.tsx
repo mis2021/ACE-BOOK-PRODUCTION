@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useRef } from 'react';
 import { useTranslation } from 'next-i18next';
 
-export default function Modal({ open, onClose, children }: any) {
+export default function Modal({ open, onClose, removeClose, children }: any) {
   const cancelButtonRef = useRef(null);
   const { t } = useTranslation('common');
 
@@ -47,7 +47,7 @@ export default function Modal({ open, onClose, children }: any) {
             leaveTo="opacity-0 scale-95"
           >
             <div className="inline-block min-w-content max-w-full ltr:text-left rtl:text-right align-middle transition-all relative">
-              <button
+          {   removeClose ? <></>: <button
                 onClick={onClose}
                 aria-label="Close panel"
                 ref={cancelButtonRef}
@@ -55,7 +55,7 @@ export default function Modal({ open, onClose, children }: any) {
               >
                 <span className="sr-only">{t('text-close')}</span>
                 <CloseIcon className="w-4 h-4" />
-              </button>
+              </button>}
               {children}
             </div>
           </Transition.Child>

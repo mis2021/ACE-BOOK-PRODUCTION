@@ -2,16 +2,36 @@ import { ReactionEnt } from '@/acebook/referenceType/reaction.entity';
 import { UserEntAB } from '@/users/entities/user.entity';
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { CoreEntity, CoreEntityMg } from 'src/common/entities/core.entity';
+import { PostEnt } from '../../post/entities/post.entity';
 
-@InputType('commentInputType', { isAbstract: true })
 @ObjectType()
-export class CommentEnt extends CoreEntityMg {
+export class CommentEntCommon extends CoreEntityMg {
   message: string;
-  user: UserEntAB;
+}
+
+@ObjectType()
+export class CommentEnt extends CommentEntCommon {
+// export class CommentEnt extends CommentEntCommon {
+  message: string;
+  user?: UserEntAB;
   comments?: CommentEnt[];
-  reactions?: ReactionEnt[]
+  reactions?: ReactionEnt[];
+  post?: PostEnt;
   // name: string;
   // description: string;
 }
+
+@InputType('commentInputType', { isAbstract: true })
+@ObjectType()
+export class CommentInputEnt extends CommentEntCommon {
+  user?: string;
+  comments?: string[];
+  reactions?: string[];
+  post?: string;
+  // name: string;
+  // description: string;
+}
+
+
 
 // NO reation icon details yet

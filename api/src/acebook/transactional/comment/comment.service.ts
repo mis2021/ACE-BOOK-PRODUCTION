@@ -6,6 +6,7 @@ import moment from 'moment';
 import Comment from '@models/Transactionals/Comments';
 import {   CommentId, UpsertCommentInput } from './dto/comment.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
+import { CommentPaginatorArg, CommentResponse } from './dto/comment.args';
 
 @Injectable()
 export class CommentService {
@@ -21,11 +22,13 @@ export class CommentService {
       savedData = new Comment({
         message: upsertInput.message,
         user: upsertInput.user,
+        post: upsertInput.post,
+        comments: upsertInput.comments
       });
       await savedData.save();
     }
 
-    return savedData;
+    return savedData
   }
 
   async delete(upsertInput: CommentId): Promise<CommentEnt> {
@@ -36,8 +39,8 @@ export class CommentService {
     return removedData;
   }
 
-  async findAll({ page, first }: PaginationArgs) {
-    const comment: CommentEnt[] = await Comment.find();
+  async findAll({ page, first, postId }: CommentPaginatorArg) {
+    const comment: CommentEnt[] = await Comment.find({post: postId}).populate('user');
     return {
       data: comment,
       paginatorInfo: paginate(

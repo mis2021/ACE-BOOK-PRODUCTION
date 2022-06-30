@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 import { CommentService } from './comment.service';
 import { CommentId, UpsertCommentInput } from './dto/comment.input';
-import { CommentPaginator} from './dto/comment.args';
+import { CommentPaginator, CommentPaginatorArg, CommentResponse} from './dto/comment.args';
 import { CommentEnt } from './entities/comment.entity';
 
 @Resolver(() => CommentEnt)
@@ -26,7 +26,7 @@ export class CommentResolver {
   }
 
   @Query(() => CommentPaginator, { name: 'comments' })
-  getTags(@Args() getArgs: PaginationArgs) {
+  getTags(@Args() getArgs: CommentPaginatorArg) {
     return this.commentService.findAll(getArgs);
   }
 

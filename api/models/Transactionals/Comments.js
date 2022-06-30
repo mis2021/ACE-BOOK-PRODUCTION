@@ -12,6 +12,10 @@ const commentSchema = new Schema({
         ref: 'Comment'
     }],
     reactions: [{type:  mongoose.Schema.Types.Object, ref: 'Reaction'}],
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }
 },
     { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );

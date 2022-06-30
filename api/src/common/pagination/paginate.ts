@@ -3,6 +3,7 @@ import { PaginatorInfo } from '../dto/paginator-info.model';
 export function paginate(
   totalItems: number,
   currentPage = 1,
+  // currentPage = 1,
   pageSize = 10,
   count = 0,
   // maxPages = 10,
@@ -53,7 +54,8 @@ export function paginate(
   // return object with all pager properties required by the view
   return {
     total: totalItems,
-    currentPage: currentPage,
+    currentPage,
+    // currentPage: currentPage,
     count,
     // totalPages: totalPages,
     // startPage: startPage,

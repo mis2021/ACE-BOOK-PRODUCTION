@@ -10,7 +10,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 const Checkbox = React.forwardRef<HTMLInputElement, Props>(
   ({ className, label, name, error, ...rest }, ref) => {
 
-    console.log("classname checkbox", className)
+  
     return (
       <div className={className}>
         <div className="flex items-center">

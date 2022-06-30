@@ -15,6 +15,14 @@ import { CartProvider } from '@/store/quick-cart/cart.context';
 import SocialLogin from '@/components/auth/social-login';
 import { NextPageWithLayout } from '@/types';
 import QueryProvider from '@/framework/client/query-provider';
+import TimeAgo from 'javascript-time-ago'
+
+import en from 'javascript-time-ago/locale/en.json'
+import ru from 'javascript-time-ago/locale/ru.json'
+import PostProvider from '@/reducers/posts/postProvider';
+
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(ru)
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -26,7 +34,7 @@ function CustomApp({
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
   const authenticationRequired = Component.authenticationRequired ?? false;
-  const authProps = (Component as any).authenticate ;
+  const authProps = (Component as any).authenticate;
   // const authProps = (Component as any).authenticate;
   return (
     <SessionProvider session={session}>
@@ -34,20 +42,22 @@ function CustomApp({
         <SearchProvider>
           <ModalProvider>
             <CartProvider>
-              <>
-                <DefaultSeo />
-                {authProps ? (
-                  <PrivateRoute authProps={authProps}>
-                    {getLayout(<Component {...pageProps} />)}
-                  </PrivateRoute>
-                ) : (
-                  getLayout(<Component {...pageProps} />)
-                )}
-                <ManagedModal />
-                <ManagedDrawer />
-                <ToastContainer autoClose={2000} theme="colored" />
-                <SocialLogin />
-              </>
+              <PostProvider>
+                <>
+                  <DefaultSeo />
+                  {authProps ? (
+                    <PrivateRoute authProps={authProps}>
+                      {getLayout(<Component {...pageProps} />)}
+                    </PrivateRoute>
+                  ) : (
+                    getLayout(<Component {...pageProps} />)
+                  )}
+                  <ManagedModal />
+                  <ManagedDrawer />
+                  <ToastContainer autoClose={2000} theme="colored" />
+                  <SocialLogin />
+                </>
+              </PostProvider>
             </CartProvider>
           </ModalProvider>
         </SearchProvider>
