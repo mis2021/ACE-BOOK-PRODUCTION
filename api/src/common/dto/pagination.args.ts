@@ -6,4 +6,6 @@ export class PaginationArgs {
   first?: number = 15;
   @Field(() => Int)
   page?: number = 1;
+  @Field(() => Int)
+  skip?: number = 0;
 }

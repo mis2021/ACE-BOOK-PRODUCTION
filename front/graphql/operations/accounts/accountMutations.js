@@ -4,6 +4,17 @@ import {gql, useMutation} from '@apollo/client';
 export const UPSERT_ACCOUNT = gql`
 mutation RegisterMU($input: RegisterInputMU!) {
   registerMU(input: $input) {
+    user {
+      _id
+      firstName
+      middleName
+      lastName
+      position
+      departmentOnDuty {
+        name
+        _id
+      }
+    }
     _id
     username
   }

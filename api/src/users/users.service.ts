@@ -65,7 +65,7 @@ export class UsersService {
 
     // this.users.push(user);
 
-    const newUser = new MUser({
+    let newUser = new MUser({
       username: cui.username,
       suffix: cui.suffix,
       email: cui.email,
@@ -81,17 +81,19 @@ export class UsersService {
       department: cui.department,
     });
     await newUser.save();
+   newUser = await  newUser.populate('departmentOnDuty');
 
     return {
       _id: newUser._id,
       username: newUser.username,
+      user: newUser,
     };
   }
 
   async updateMUser(cui: RegisterInputMU): Promise<UserRegResponseMU> {
     let savedData;
 
-    console.log(cui);
+    // console.log(cui);
     if (cui.password) {
       cui.password = await bcrypt.hash(cui.password, 10)
     }
@@ -100,7 +102,7 @@ export class UsersService {
       { _id: cui._id },
       { $set: cui },
       { new: true },
-    );
+    ).populate('departmentOnDuty');
 
     // if (upsertInput._id) {
     //   savedData = await Department.findOneAndUpdate(
@@ -116,11 +118,15 @@ export class UsersService {
     //   await savedData.save();
     // }
 
-    return savedData;
+    return {
+     user: savedData,
+     _id: savedData._id,
+     username: savedData.username
+    };
   }
 
   async login(loginInput: LoginInput): Promise<AuthResponse> {
-    const user = await MUser.findOne({ username: loginInput.username });
+    const user = await MUser.findOne({ username: loginInput.username }).populate('departmentOnDuty');
     if (user && (await bcrypt.compare(loginInput.password, user.password))) {
       const token = jwt.sign(
         { user_id: user._id, username: loginInput.username },
@@ -133,6 +139,8 @@ export class UsersService {
       return {
         token: token,
         permissions: ['super_admin', 'store_owner', 'customer'],
+        _id:user._id,
+        user: user
         // permissions: ['super_admin', 'store_owner', 'customer'],
       };
     } else {

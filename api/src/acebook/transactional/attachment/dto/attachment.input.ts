@@ -17,6 +17,7 @@ registerEnumType(Permission, { name: 'restrictionAtt' });
 @InputType()
 export class UpsertAttachmentInput extends PickType(AttachmentEnt, [
   'path',
+  'type',
   'createdBy',
   'comments',
   'refId',

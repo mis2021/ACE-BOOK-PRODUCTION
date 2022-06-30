@@ -1,9 +1,14 @@
 import React from 'react';
 import Avatar from '@/components/ui/avatar';
-type Props = {};
+import _ from 'lodash';
+type Props = {
+  firstName?: any;
+  lastName?: any;
+  department?: any;
+};
 
-const PostedByDetails = (props: Props) => {
-  //
+const PostedByDetails = ({firstName, lastName, department}: Props) => {
+ 
   return (
     <div>
       <div className="mb-2 flex items-center space-x-3">
@@ -14,17 +19,22 @@ const PostedByDetails = (props: Props) => {
         />
         <div>
           <div>
-            <span className="text-sm font-semibold text-heading md:text-base">
-              Jacky Avenido
+            <span className="text-sm font-semibold text-heading md:text-base capitalize">
+             {firstName} {lastName}
             </span>
             <span className="text-xl text-gray-400">|</span>
-            <span className="text-xs text-body md:text-sm">MIS</span>
+            <span className="text-xs text-body md:text-sm">{department}</span>
           </div>
-          <div className='absolute top-[2.6rem]'>
-            <span className="text-[10px] text-body">
-              Jan. 15, 2022 - 6:00 PM
-            </span>
-          </div>
+          {/* {
+            withTime ? 
+            <div className='absolute top-[2.6rem]'>
+              <span className="text-[10px] text-body">
+                Jan. 15, 2022 - 6:00 PM
+              </span>
+            </div>
+            : <></>
+          } */}
+
         </div>
       </div>
     </div>

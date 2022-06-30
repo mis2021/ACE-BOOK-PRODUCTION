@@ -9,10 +9,19 @@ import { CommentEnt } from '../../comment/entities/comment.entity';
 @ObjectType()
 export class AttachmentEnt extends CoreEntityMg {
   path: string;
+  type?: string;
   createdBy?: UserEntAB;
-  comments?: CommentEnt[];
+  comments?: string[];
   refId?:string;
   originCollection?: string;
   reactions?: ReactionEnt[];
   customTags?: CustomTagEnt[];
 }
+
+@InputType('AttachmentInputObjType', { isAbstract: true })
+@ObjectType()
+export class AttachmentInptObj {
+  type?: string;
+  path?: string;
+}
+

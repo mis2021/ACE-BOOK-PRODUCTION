@@ -26,6 +26,7 @@ module.exports = {
       screens: {
         '3xl': '2100px',
         'ms': '1080px',
+        'tabMd': '800px',
       },
       zIndex: {
         '-1': '-1',

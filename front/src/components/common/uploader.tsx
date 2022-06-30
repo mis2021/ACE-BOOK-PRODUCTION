@@ -27,11 +27,16 @@ export default function Uploader({
 }: any) {
   const { t } = useTranslation();
   const [files, setFiles] = useState<Attachment[]>(getPreviewImage(value));
+  // const [files, setFiles] = useState<Attachment[]>(getPreviewImage(value));
+
+    console.log("files", files)
+
   const [upload, { loading }] = useUploadMutation();
   const { getRootProps, getInputProps } = useDropzone({
     ...(!acceptFile ? { accept: "image/*" } : {}),
     multiple,
     onDrop: async (acceptedFiles) => {
+      console.log("value", acceptedFiles)
       if (acceptedFiles.length) {
         const { data } = await upload({
           variables: {

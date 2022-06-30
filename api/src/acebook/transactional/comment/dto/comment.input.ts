@@ -5,7 +5,7 @@ import {
   PickType,
   registerEnumType,
 } from '@nestjs/graphql';
-import { CommentEnt } from '../entities/comment.entity';
+import { CommentEnt, CommentInputEnt } from '../entities/comment.entity';
 
 enum Permission {
   SUPER_ADMIN = 'Super admin',
@@ -15,10 +15,12 @@ enum Permission {
 }
 registerEnumType(Permission, { name: 'restrictionComment' });
 @InputType()
-export class UpsertCommentInput extends PickType(CommentEnt, [
+export class UpsertCommentInput extends PickType(CommentInputEnt, [
   'message',
   'user',
-  '_id'
+  'comments',
+  '_id',
+  'post'
 ]){permission: Permission = Permission.CUSTOMER;}
 
 @InputType()

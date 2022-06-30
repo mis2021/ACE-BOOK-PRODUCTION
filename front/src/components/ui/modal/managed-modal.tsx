@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic';
 import Modal from '@/components/ui/modal/modal';
 import { useModalAction, useModalState } from './modal.context';
+import TagModal from '@/components/tags/tagModal';
+// import PostFormIndex from '@/app/posts/components/forms';
 const OtpLoginView = dynamic(() => import('@/components/auth/otp-login'));
 const Login = dynamic(() => import('@/components/auth/login-form'), {
   ssr: false,
@@ -34,12 +36,20 @@ const CreateRefundView = dynamic(
   () => import('@/components/refunds/refund-form')
 );
 
+const PostForm = dynamic(
+  () => import('@/app/posts/components/forms')
+);
+
+const TagModal = dynamic(
+  () => import('@/components/tags/tagModal')
+);
+
 const ManagedModal = () => {
   const { isOpen, view, data } = useModalState();
   const { closeModal } = useModalAction();
 
   return (
-    <Modal open={isOpen} onClose={closeModal}>
+    <Modal open={isOpen} onClose={closeModal} removeClose={data?.removeClose}>
       {view === 'LOGIN_VIEW' && <Login />}
       {view === 'REGISTER' && <Register />}
       {view === 'FORGOT_VIEW' && <ForgotPassword />}
@@ -66,6 +76,21 @@ const ManagedModal = () => {
           className="!flex !h-screen !w-screen max-w-screen-sm flex-col"
         />
       )}
+
+      {/* ACEBOOK */}
+      {view === 'POST_FORM' && (
+        <>
+          <PostForm />
+        </>
+      )}
+
+      {view === 'TAG_MODAL' && (
+        <>
+          <TagModal data={data?.contents} />
+        </>
+      )}
+
+
     </Modal>
   );
 };

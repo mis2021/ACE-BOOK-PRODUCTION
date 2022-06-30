@@ -27,6 +27,7 @@ import { DepartmentModule } from './acebook/masterdata/department/department.mod
 import { CustomTagModule } from './acebook/masterdata/customTag/customTag.modules';
 import { CommentModule } from './acebook/transactional/comment/comment.modules';
 import { AttachmentModule } from './acebook/transactional/attachment/attachment.modules';
+import { PostModule } from './acebook/transactional/post/post.modules';
 
 @Module({
   imports: [
@@ -60,7 +61,8 @@ import { AttachmentModule } from './acebook/transactional/attachment/attachment.
     DepartmentModule,
     CustomTagModule,
     CommentModule,
-    AttachmentModule
+    AttachmentModule,
+    PostModule
   ],
   controllers: [],
   providers: [],
