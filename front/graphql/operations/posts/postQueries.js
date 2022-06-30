@@ -2,8 +2,8 @@ import {gql, useQuery} from '@apollo/client';
 
 
 export const GET_POSTS = gql`
-query Data($first: Int, $page: Int, $departmentId: String, $type: String) {
-  posts(first: $first, page: $page, departmentId: $departmentId, type: $type) {
+query Data($first: Int, $page: Int, $departmentId: String, $type: String, $skip: Int) {
+  posts(first: $first, page: $page, departmentId: $departmentId, type: $type, skip: $skip) {
     data {
       _id
       created_at
@@ -37,7 +37,6 @@ query Data($first: Int, $page: Int, $departmentId: String, $type: String) {
       currentPage
       count
       perPage
-      total
     }
   }
 }

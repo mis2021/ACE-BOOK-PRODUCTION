@@ -17,10 +17,13 @@ import { defaultValuesPost } from './defaulValuesPost';
 import { extractObjectId } from '@/services/extractions';
 import { uploadAttachment } from '@/services/uploading';
 import AttachmentUpload from '@/components/upload';
+import { PostContextRd } from '@/reducers/posts/postContextRd';
+import { initialStatePostRedc } from '@/reducers/posts/postReducer';
 
 type Props = {}
 
 const PostFormIndex = (props: Props) => {
+    const [statePostRd, dispatchPostRd] = React.useContext<any>(PostContextRd)
     const { id: userId, user } = getAuthCredentials();
     const [upsertPost] = useMutation(UPSERT_POST);
 
@@ -47,6 +50,7 @@ const PostFormIndex = (props: Props) => {
             .then((resp) => {
                 toast.success("Post Created");
                 reset()
+                dispatchPostRd({ type: "refetch", modalData: true })
             })
             .catch((error) => {
                 console.log("post error", error)

@@ -74,26 +74,45 @@ export class PostService {
   }
 
 
-  async findAll({ page, first, departmentId, type }: PostPaginatorArg) {
+  async findAll({ page, first, departmentId, type, skip }: PostPaginatorArg) {
     // async findAll({ page, first }: PaginationArgs) {
     // const post: PostEnt[] = await Post.find(departmentId ? {taggedDepartments: departmentId} : {})
     let filters = objectFilters({ departmentId, type } as PostPaginatorArg);
 
+    const counter = await Post.countDocuments(filters);
+    let limit = 3;
+
     const post: PostEnt[] = await Post.find(filters)
+      .sort({created_at: 'desc'})
+      .limit(limit)
+      .skip(skip)
       .populate({ path: 'createdBy', populate: { path: 'departmentOnDuty', model: 'Department' } })
       .populate('createdByDepartment')
       .populate('taggedDepartments')
       .populate('attachments');
 
-
+      let curPage = skip / limit; 
+console.log("curPage", curPage)
     return {
       data: post,
-      paginatorInfo: paginate(
-        post.length,
-        page,
-        first,
-        post.length,
-      ),
+      paginatorInfo:{
+        count: counter,
+        currentPage : curPage,
+        perPage: limit
+      }
+      
+      // paginate(
+      //   post.length,
+      //   curPage,
+      //   limit,
+      //   counter,
+      // ),
+      //  paginatorInfo: paginate(
+      //   post.length,
+      //   page,
+      //   first,
+      //   post.length,
+      // ),
     };
   }
 }
