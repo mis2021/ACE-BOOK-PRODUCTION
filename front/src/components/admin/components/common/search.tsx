@@ -78,7 +78,6 @@ const Search: React.FC<SearchProps> = ({
     onSearch({ searchText: '' });
   }
 
-  console.log('classname', className);
   return (
     <form
       noValidate

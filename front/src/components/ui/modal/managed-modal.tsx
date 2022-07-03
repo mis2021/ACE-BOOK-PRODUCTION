@@ -80,7 +80,7 @@ const ManagedModal = () => {
       {/* ACEBOOK */}
       {view === 'POST_FORM' && (
         <>
-          <PostForm />
+          <PostForm defaults={data}/>
         </>
       )}
 

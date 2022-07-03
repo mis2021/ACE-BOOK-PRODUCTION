@@ -14,6 +14,7 @@ import FeedPosts from '../common/feed/feedPosts';
 import FeedPostLayout from '../common/feed/feedLayout';
 import Spinner from '@/components/ui/loaders/spinner/spinner';
 import { PostContextRd } from '@/reducers/posts/postContextRd';
+import { getAuthCredentials } from '@/utils/auth-utils';
 
 type Props = {
   departmentId?: string;
@@ -32,17 +33,22 @@ const initialState = {
 const DashboardIndex = (props: Props) => {
   const [statePostRd, dispatchPostRd] = React.useContext<any>(PostContextRd)
   const [state, setState] = useState<StateType>(initialState)
+  const { user } = getAuthCredentials(); 
+
+  let queryVar = {
+    departmentId: _.get(user, "departmentOnDuty._id"),
+    type: null,
+    user: _.get(user, "_id"),
+    privacy: true,
+    skip: 0,
+  }
 
   const {
     isOpen
   } = useModalState();
 
   const { data: allPosts, refetch, loading: postLoading } = useQuery(GET_POSTS, {
-    variables: {
-      departmentId: null,
-      type: null,
-      skip: 0,
-    },
+    variables: queryVar,
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
   });
@@ -58,11 +64,7 @@ const DashboardIndex = (props: Props) => {
   }, [allPosts])
 
   useEffect(() => {
-    refetch({
-      departmentId: null,
-      type: null,
-      skip: 0
-    })
+    refetch(queryVar)
     assignPost()
 
     // setTimeout(() => {
@@ -89,7 +91,14 @@ const DashboardIndex = (props: Props) => {
 
 
             : */}
-            <FeedPosts posts={state.posts} loading={postLoading} refetch={refetch} countAll={_.get(allPosts, "posts.paginatorInfo.count")} currentPage={_.get(allPosts, "posts.paginatorInfo.currentPage")} />
+            <FeedPosts 
+            posts={state.posts} 
+            loading={postLoading} 
+            refetch={refetch} 
+            countAll={_.get(allPosts, "posts.paginatorInfo.count")} 
+            currentPage={_.get(allPosts, "posts.paginatorInfo.currentPage")}
+            refetchQuery={queryVar}
+            />
         {/* } */}
       </FeedPostLayout>
     </div>

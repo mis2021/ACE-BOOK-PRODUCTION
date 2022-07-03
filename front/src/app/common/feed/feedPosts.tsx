@@ -16,6 +16,9 @@ type Props = {
   countAll: number;
   hasNewPost?: boolean;
   currentPage?: number;
+  type?: string;
+  departmenId?: string;
+  refetchQuery: object;
 }
 
 type StateType = {
@@ -34,9 +37,9 @@ const initialState = {
 
 }
 
-const FeedPosts = ({ loading, posts, countAll, refetch, currentPage }: Props) => {
+const FeedPosts = ({ loading, posts, countAll, refetch, currentPage, departmenId, type, refetchQuery }: Props) => {
 
-  console.log("currentPage", currentPage)
+  
 
   const [state, setState] = useState<StateType>(initialState)
   const {
@@ -55,11 +58,12 @@ const FeedPosts = ({ loading, posts, countAll, refetch, currentPage }: Props) =>
 
   const fetchMore = () => {
     setTimeout(() => {
-      refetch({
-        departmentId: null,
-        type: null,
-        skip: state.skip
-      })
+      if(refetchQuery){
+        refetch(refetchQuery)
+      }else{
+        refetch()
+      }
+      
       setState((p) => ({ ...p, skip: state.skip + postPerView, hasMore: state.posts.length >= countAll ? false : true }))
     }, 1500);
   }

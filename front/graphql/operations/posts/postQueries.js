@@ -2,8 +2,8 @@ import {gql, useQuery} from '@apollo/client';
 
 
 export const GET_POSTS = gql`
-query Data($first: Int, $page: Int, $departmentId: String, $type: String, $skip: Int) {
-  posts(first: $first, page: $page, departmentId: $departmentId, type: $type, skip: $skip) {
+query Data($first: Int, $page: Int, $departmentId: String, $type: String, $skip: Int, $privacy: Boolean, $user: String) {
+  posts(first: $first, page: $page, departmentId: $departmentId, type: $type, skip: $skip, privacy: $privacy, user: $user) {
     data {
       _id
       created_at

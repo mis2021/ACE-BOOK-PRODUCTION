@@ -11,11 +11,32 @@ type Props = {
     register: any;
 }
 
+export const PrivacyLabeler = (data: string) => {
+    switch (data) {
+        case "Public":
+            return "Public"
+            break;
+        case "OwnDepartment":
+            return "Own Department"
+            break;
+        case "TaggedDepartments":
+            return "Tagged Departments"
+            break;
+        case "TaggedUsers":
+            return "Tagged Users"
+            break;
+        default:
+            return ''
+            break;
+
+    }
+}
+
 const privacyMenu = [
     { value: "Public", label: "Public" },
     { value: "OwnDepartment", label: "Own Department" },
     { value: "TaggedDepartments", label: "Tagged Department" },
-    { value: "OnlyMe", label: "Only Me" },
+    // { value: "OnlyMe", label: "Only Me" },
     { value: "TaggedUsers", label: "Tagged Users" },
 ]
 
@@ -38,7 +59,7 @@ export const updatedIcons = privacyMenu.map((item: any) => {
 
 const PostPrivacy = ({ control, register }: Props) => {
 
-  
+
     return (
         <div>
             <div className="mb-5">
@@ -54,7 +75,7 @@ const PostPrivacy = ({ control, register }: Props) => {
                         getOptionValue={(option: any) => option.value}
                         isClearable={false}
                         isSearchable={false}
-                        // defaultvalue={updatedIcons[0]}
+                    // defaultvalue={updatedIcons[0]}
 
                     />
                 </div>
