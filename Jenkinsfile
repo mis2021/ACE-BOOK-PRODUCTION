@@ -25,7 +25,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push intjborj/ace-book-api:latest'
+                sh 'docker push acemcbmis/ace-book-system:latest'
             }
         }
 }
