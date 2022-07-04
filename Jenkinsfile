@@ -6,7 +6,7 @@ pipeline {
     stages { 
         stage('SCM Checkout') {
             steps{
-            git 'https://github.com/intjborj/ACEBOOK.git'
+            git 'https://github.com/mis2021/ACE-BOOK-PRODUCTION.git'
             }
         }
 
