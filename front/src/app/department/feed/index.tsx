@@ -9,6 +9,7 @@ import FeedPosts from '@/app/common/feed/feedPosts';
 import FeedPostLayout from '@/app/common/feed/feedLayout';
 import PostFilters from '@/app/common/feed/filters/filters';
 import Spinner from '@/components/ui/loaders/spinner/spinner';
+import { getAuthCredentials } from '@/utils/auth-utils';
 type Props = {
     departmentId?: string;
 }
@@ -24,7 +25,7 @@ const initialState = {
 }
 
 const DepartmentFeedIndex = (props: Props) => {
-
+    const { token, permissions, id, user } = getAuthCredentials();
     const [state, setState] = useState<StateType>(initialState)
 
     const { isOpen } = useModalState();
@@ -75,7 +76,17 @@ const DepartmentFeedIndex = (props: Props) => {
             <FeedPostLayout>
                 <FeedHeader />
                 <PostFilters clicked={filterBtnClicked} />
-                <FeedPosts posts={state.posts} loading={postLoading} />
+                <FeedPosts 
+                 posts={state.posts}
+                 loading={postLoading} 
+                 refetch={refetch} 
+                 countAll={_.get(allPosts, "posts.paginatorInfo.count")} 
+                 currentPage={_.get(allPosts, "posts.paginatorInfo.currentPage")}
+                 departmenId={props.departmentId}
+                 type={state.type}
+                 />
+       
+                {/* <FeedPosts posts={state.posts} loading={postLoading} /> */}
             </FeedPostLayout>
         </div>
     )

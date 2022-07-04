@@ -6,7 +6,7 @@ import PostPrivacy from './postPrivacy';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { UPSERT_POST } from '@graphql/operations/posts/postMutation';
-import { PostFormValues } from '@/types/posts/postTypes';
+import { PostFormDefaultType, PostFormValues, PostViewDefaultType } from '@/types/posts/postTypes';
 import _ from 'lodash';
 import { toast } from 'react-toastify';
 import { getAuthCredentials } from "@utils/auth-utils";
@@ -20,9 +20,14 @@ import AttachmentUpload from '@/components/upload';
 import { PostContextRd } from '@/reducers/posts/postContextRd';
 import { initialStatePostRedc } from '@/reducers/posts/postReducer';
 
-type Props = {}
 
-const PostFormIndex = (props: Props) => {
+
+type Props = {
+    defaults?: PostViewDefaultType;
+}
+
+const PostFormIndex = ({ defaults }: Props) => {
+
     const [statePostRd, dispatchPostRd] = React.useContext<any>(PostContextRd)
     const { id: userId, user } = getAuthCredentials();
     const [upsertPost] = useMutation(UPSERT_POST);
@@ -32,7 +37,7 @@ const PostFormIndex = (props: Props) => {
         formState: { isDirty, errors },
     } = useForm<PostFormValues>({
         //@ts-ignore
-        defaultValues: defaultValuesPost,
+        defaultValues: defaults ? defaults.postData : defaultValuesPost,
         resolver: yupResolver(postValidationSchema),
     });
 
@@ -49,7 +54,10 @@ const PostFormIndex = (props: Props) => {
         })
             .then((resp) => {
                 toast.success("Post Created");
-                reset()
+                if(!defaults?.postData?._id){
+                    reset()
+                }
+                
                 dispatchPostRd({ type: "refetch", modalData: true })
             })
             .catch((error) => {
@@ -59,17 +67,18 @@ const PostFormIndex = (props: Props) => {
     }
 
     const onSubmit = async (values: PostFormValues) => {
-
         let attachments: any = []
-       
+
         // ====IMAGE ATTACHMENT====
         if (values.attachments_image && values?.attachments_image?.length > 0) {
             let attachmentsImage = values.attachments_image
             for (let i = 0; i < values?.attachments_image?.length; i++) {
-                attachments.push({
-                    path: attachmentsImage[i].name,
-                    type: 'image'
-                })
+                if (attachmentsImage[i].name) {
+                    attachments.push({
+                        path: attachmentsImage[i].name,
+                        type: 'image'
+                    })
+                }
             }
         }
 
@@ -77,34 +86,30 @@ const PostFormIndex = (props: Props) => {
         if (values.attachments_file && values?.attachments_file?.length > 0) {
             let attachmentsFile = values.attachments_file
             for (let i = 0; i < values?.attachments_file?.length; i++) {
-                attachments.push({
-                    path: attachmentsFile[i].name,
-                    type: 'file'
-                })
+                if (attachmentsFile[i].name) {
+                    attachments.push({
+                        path: attachmentsFile[i].name,
+                        type: 'file'
+                    })
+                }
             }
         }
 
 
-        let payload: PostFormValues;
-        payload = _.cloneDeep(values)
-        delete payload.tempAttachments
-        delete payload.attachments_image
-        delete payload.tempAttachments_image
-        delete payload.attachments_file
-        delete payload.tempAttachments_file
+        let payload: PostFormValues = {};
+        let payloadTemp = _.cloneDeep(values)
+
+        payload._id = defaults?.postData?._id
+        payload.content = _.get(payloadTemp, "content")
         payload.attachments = attachments
-        payload.privacy = _.get(payload, "privacy.value");
+        payload.privacy = _.get(payloadTemp, "privacy.value");
         payload.createdBy = userId
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
         payload.taggedDepartments = extractObjectId(values?.taggedDepartments)
 
-        // temporary assignment of values.attachments to values.attahcments_image
-        // values.attachments = values.attachments_image
-
         if (confirm('Comfirm post')) {
             let uploadResult: any
             let uploadCheck: boolean = false
-            // let uploadResult: any
 
             // ====IMAGE ATTACHMENT====
             if (values?.attachments_image && values?.attachments_image?.length > 0) {
@@ -118,6 +123,7 @@ const PostFormIndex = (props: Props) => {
                 uploadCheck = (await uploadResult).status == "ok" ? true : false
             }
 
+            console.log("payload", payload)
             if (
                 (values.attachments_image && values?.attachments_image?.length > 0) ||
                 (values.attachments_file && values?.attachments_file?.length > 0)
@@ -143,7 +149,13 @@ const PostFormIndex = (props: Props) => {
                     <div className="p-5 pt-15 md:pb-10 lg:p-14 xl:p-8">
 
                         <div className="mb-4 mt-5 grid grid-flow-col  gap-4">
-                            <div className="row-span-3 "> <PostedByDetails firstName={_.get(user, 'firstName')} lastName={_.get(user, 'lastName')} department={_.get(user, 'departmentOnDuty.name')} /></div>
+                            <div className="row-span-3 ">
+                                <PostedByDetails
+                                    firstName={defaults ? defaults?.postedBy?.firstName : _.get(user, 'firstName')}
+                                    lastName={defaults ? defaults?.postedBy?.lastName : _.get(user, 'lastName')}
+                                    department={defaults ? defaults?.postedBy?.department : _.get(user, 'departmentOnDuty.name')}
+                                />
+                            </div>
                             <div className="row-span-3 place-self-end"><Button loading={false}>Post</Button></div>
                         </div>
 
