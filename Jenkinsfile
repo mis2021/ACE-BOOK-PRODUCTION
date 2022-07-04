@@ -4,11 +4,7 @@ pipeline {
     DOCKERHUB_CREDENTIALS = credentials('docker-hub')
     }
     stages { 
-        stage('SCM Checkout') {
-            steps{
-            git 'https://github.com/mis2021/ACE-BOOK-PRODUCTION.git'
-            }
-        }
+       
 
         stage('Build and Run docker Backend') {
             steps {  
