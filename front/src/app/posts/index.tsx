@@ -35,6 +35,9 @@ const PostIndex = ({ data, tags }: Props) => {
       case "edit":
         openModal('POST_FORM', await postDefaultFormService(data));
         break;
+      case "ticket":
+       window.open('/tickets/form/post', '_self')
+        break;
       default:
         break;
     }
