@@ -5,28 +5,37 @@ import ModIndexClassicLayout from '@/components/layouts/mod-index-classic';
 import DashboardIndex from '@/app/dashboard';
 import { adminOnly } from '@/utils/auth-utils';
 import PromotionSliders from '@/components/promotions/promotions';
+import TicketForm from '@/app/tickets/form';
+import ModClassicLayout from '@/components/layouts/mod-classic';
 
-type Props = {}
+const breadcrumbs = [
+  {
+    title: 'Tickets',
+    route: '/tickets',
+    isHome: true,
+  },
+  {
+    title: 'Create',
+    route: '/tickets/form',
+    isCurrent: true,
+  },
+];
 
-const variables = {
-  type: 'grocery',
-}
-const TicketForm: NextPageWithLayout = () => {
+const CreateTicketForm: NextPageWithLayout = () => {
   return (
     <>
-      <ModIndexClassicLayout>
-        {/* <DashboardIndex /> */}
+      <ModClassicLayout breadcrumb={breadcrumbs}>
         <>
-        tickets form
+          <TicketForm />
         </>
-      </ModIndexClassicLayout>
+      </ModClassicLayout>
     </>
   )
 }
-TicketForm.getLayout = getLayout;
+CreateTicketForm.getLayout = getLayout;
 
-TicketForm.authenticate = {
+CreateTicketForm.authenticate = {
   permissions: adminOnly,
 };
 
-export default TicketForm
+export default CreateTicketForm
