@@ -6,18 +6,18 @@ services:
       - "4000:4000"
     volumes:
       - api:/usr/src/app/acebook/api
-  
+
   app-front:
     build: ./front
     ports:
       - "3000:3000"
     volumes:
       - front:/usr/src/app/acebook/front
-    
+
+
       
 volumes:
   api:
   front:
-
 
   
