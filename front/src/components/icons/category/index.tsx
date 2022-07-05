@@ -41,3 +41,4 @@ export { Tools } from "./tools";
 export { Table } from "./table";
 export {Template} from "./template"
 export {Accounts} from "./accounts"
+export {Tickets} from "./ticket"

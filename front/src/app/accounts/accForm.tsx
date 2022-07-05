@@ -49,7 +49,7 @@ import {
 import { extractObjectId } from '@/services/extractions';
 
 const AccountForm = ({ defaultValues }: any) => {
-  const { token:cookieToken, permissions: cookiePermissions, id: cookieUserId, user: cookieUser } = getAuthCredentials();
+  const { token: cookieToken, permissions: cookiePermissions, id: cookieUserId, user: cookieUser } = getAuthCredentials();
 
   // const AccountForm: NextPageWithLayout = ({defaultValues} : any) => {
   const router = useRouter();
@@ -111,8 +111,8 @@ const AccountForm = ({ defaultValues }: any) => {
         },
       })
         .then((resp) => {
-          if(defaultValues?._id && defaultValues._id === cookieUserId){
-            setAuthCredentials(cookieToken, cookiePermissions, cookieUserId, _.get(resp,'data.registerMU.user'));
+          if (defaultValues?._id && defaultValues._id === cookieUserId) {
+            setAuthCredentials(cookieToken, cookiePermissions, cookieUserId, _.get(resp, 'data.registerMU.user'));
             toast.success(t('Session Updated'));
           }
 
@@ -129,15 +129,12 @@ const AccountForm = ({ defaultValues }: any) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <BorderDashed>
-          <AccBasicInfo register={register} errors={errors} />
-        </BorderDashed>
-        <BorderDashed>
-          <AccEmpInfo register={register} errors={errors} control={control} />
-        </BorderDashed>
-        <BorderDashed>
-          <ContactInfo register={register} errors={errors} />
-        </BorderDashed>
+        <AccBasicInfo register={register} errors={errors} />
+        <BorderDashed />
+        <AccEmpInfo register={register} errors={errors} control={control} />
+        <BorderDashed />
+        <ContactInfo register={register} errors={errors} />
+        <BorderDashed />
         <AccCredentials register={register} errors={errors} />
         <div className="text-end mb-4 ">
           <Button loading={false}>Save Details</Button>
