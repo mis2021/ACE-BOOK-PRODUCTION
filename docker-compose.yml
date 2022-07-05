@@ -9,6 +9,14 @@ services:
   
   app-front:
     build: ./front
+    environment:
+    - FRAMEWORK_PROVIDER='graphql'
+    - NEXT_PUBLIC_GRAPHQL_API_ENDPOINT='http://172.16.20.176:4000/graphql'
+    - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+    - NEXT_PUBLIC_ADMIN_URL=
+    - SECRET=ACEBOOK123!!
+    - GOOGLE_CLIENT_ID=
+    - GOOGLE_CLIENT_SECRET=
     ports:
       - "3000:3000"
     volumes:
