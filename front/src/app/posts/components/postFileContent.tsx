@@ -11,7 +11,9 @@ const PostFileContent = ({attachments}: Props) => {
     <div>
       {
         attachments && attachments.map((item: any)=>(
-          <a href={UPLOAD_LINK('files/'+item?.path)} download> <FilePreview attachment={{name: item?.path}}/></a> 
+          <a href={UPLOAD_LINK('files',item?.path)} download> <FilePreview attachment={{name: item?.path}}/></a> 
+          // <a href={UPLOAD_LINK('files\\'+item?.path)} download> <FilePreview attachment={{name: item?.path}}/></a> 
+          // <a href={UPLOAD_LINK('files/'+item?.path)} download> <FilePreview attachment={{name: item?.path}}/></a> 
         ))
       }
    
