@@ -15,6 +15,7 @@ const PostUpdate = ({ data }: Props) => {
 
     const initializeDefaults = async () => {
         let defpost = await postDefaultFormService(data);
+        
         setTimeout(() => {
             setDefaults(defpost)
         }, 500);

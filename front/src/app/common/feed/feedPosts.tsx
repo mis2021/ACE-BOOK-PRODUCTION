@@ -76,7 +76,7 @@ const FeedPosts = ({ loading, posts, countAll, refetch, currentPage, departmenId
         skip: state.posts.length >= countAll ? 0 : nSkip,
         hasMore: currentPage == 0 ? true : (state.posts.length >= countAll ? false : true)
       }))
-    }, 1500);
+    }, 1000);
   }
 
   // console.log("fetching", {
