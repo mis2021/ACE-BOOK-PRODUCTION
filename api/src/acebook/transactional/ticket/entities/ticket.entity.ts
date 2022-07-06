@@ -5,27 +5,68 @@ import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { CoreEntity, CoreEntityMg } from 'src/common/entities/core.entity';
 import { AttachmentEnt } from '../../attachment/entities/attachment.entity';
 import { CommentEnt } from '../../comment/entities/comment.entity';
-import { PostEnt } from '../../post/entities/post.entity';
+
+@ObjectType()
+export class TicketEntCommon extends CoreEntityMg {
+
+  code?: string;
+  description?: string;
+  type?: string;
+  dateNeeded?: string;
+  dateRequested?: string;
+  subject?: string;
+  status?: string;
+  location?: string;
+
+
+}
+
+@ObjectType()
+export class TicketEnt extends TicketEntCommon {
+  comments: CommentEnt[];
+  reactions: string[];
+  works: string[];
+  approvers: ApproverEnt[];
+  createdBy?: UserEntAB;
+  requestedBy?: UserEntAB;
+  serviceDepartment?: DepartmentEnt;
+  requestingDepartment?: DepartmentEnt;
+}
 
 @InputType('TicketInputType', { isAbstract: true })
 @ObjectType()
-export class TicketEnt extends CoreEntityMg {
-  code: string;
-  description: string;
-  type: string;
-  dateNeeded: string;
-  dateRequested: string;
-  subject: string;
-  status: string;
-  location: string;
-  createdBy: UserEntAB;
-  requestedBy: UserEntAB;
-  serviceDepartment:DepartmentEnt;
-  requestingDepartment:DepartmentEnt;
-  comments: CommentEnt[];
-  reactions: string[];
-  postOrigin: PostEnt;
-  works: string[];
-  approvers: ApproverEnt[];
-  attachments: AttachmentEnt[];
+export class TicketInput extends TicketEntCommon {
+  comments?: string;
+  reactions?: string;
+  works?: string;
+  approvers?: string;
+  postOrigin?: string;
+  attachments?: string;
+  createdBy?: string;
+  requestedBy?: string;
+  serviceDepartment?: string;
+  requestingDepartment?: string;
 }
+
+// @InputType('TicketInputType', { isAbstract: true })
+// @ObjectType()
+// export class TicketEnt extends CoreEntityMg {
+//   code: string;
+//   description: string;
+//   type: string;
+//   dateNeeded: string;
+//   dateRequested: string;
+//   subject: string;
+//   status: string;
+//   location: string;
+//   createdBy: UserEntAB;
+//   requestedBy: UserEntAB;
+//   serviceDepartment: DepartmentEnt;
+//   requestingDepartment: DepartmentEnt;
+//   comments: CommentEnt[];
+//   reactions: string[];
+//   postOrigin: PostEnt;
+//   works: string[];
+//   approvers: ApproverEnt[];
+//   attachments: AttachmentEnt[];
+// }

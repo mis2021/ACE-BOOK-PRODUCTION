@@ -33,8 +33,7 @@ const PostTicketForm: NextPageWithLayout = () => {
     <>
       <ModClassicLayout breadcrumb={breadcrumbs}>
         <>
-       {/* <PostTicketForm/> */}
-       <TicketForm/>
+          <TicketForm />
         </>
       </ModClassicLayout>
     </>
