@@ -12,6 +12,7 @@ const variables = {
   type: 'grocery',
 }
 const IndexPage: NextPageWithLayout = () => {
+  console.log("env Environment", process.env.NODE_ENV)
   return (
     <>
       <PromotionSliders

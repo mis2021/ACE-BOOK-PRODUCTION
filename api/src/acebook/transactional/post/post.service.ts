@@ -40,7 +40,6 @@ const objectFilters = (args: PostPaginatorArg) => {
 
     }
 
-    console.log("samp", samp)
 
     return samp
   }

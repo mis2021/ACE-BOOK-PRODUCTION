@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import Modal from '@/components/ui/modal/modal';
 import { useModalAction, useModalState } from './modal.context';
 import TagModal from '@/components/tags/tagModal';
+import { postDefaultFormService } from '@/app/posts/components/services/postDefaultFormServices';
 // import PostFormIndex from '@/app/posts/components/forms';
 const OtpLoginView = dynamic(() => import('@/components/auth/otp-login'));
 const Login = dynamic(() => import('@/components/auth/login-form'), {
@@ -36,18 +37,20 @@ const CreateRefundView = dynamic(
   () => import('@/components/refunds/refund-form')
 );
 
+const PostFormUpdate = dynamic(
+  () => import('@/app/posts/components/forms/postUpdate')
+);
 const PostForm = dynamic(
-  () => import('@/app/posts/components/forms')
+  () => import('@/app/posts/components/forms/postForm')
 );
 
 const TagModal = dynamic(
   () => import('@/components/tags/tagModal')
 );
 
-const ManagedModal = () => {
+const ManagedModal =  () => {
   const { isOpen, view, data } = useModalState();
   const { closeModal } = useModalAction();
-
   return (
     <Modal open={isOpen} onClose={closeModal} removeClose={data?.removeClose}>
       {view === 'LOGIN_VIEW' && <Login />}
@@ -79,9 +82,7 @@ const ManagedModal = () => {
 
       {/* ACEBOOK */}
       {view === 'POST_FORM' && (
-        <>
-          <PostForm defaults={data}/>
-        </>
+        <>{data? <PostFormUpdate data={data}/> : <PostForm data={null}/>  }</>
       )}
 
       {view === 'TAG_MODAL' && (

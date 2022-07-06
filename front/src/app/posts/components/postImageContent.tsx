@@ -77,7 +77,9 @@ const PostImageContent = ({ attachments }: Props) => {
                       key={index}
                       className=" rounded-lg object-cover object-center "
                       // className="w-full h-auto rounded-lg object-cover object-center"
-                      src={UPLOAD_LINK('images/' + i.path)}
+                      // src={'https://data-flair.training/blogs/wp-content/uploads/sites/2/2020/07/image-5Images-folder-one-level-up-the-current-web-page%E2%80%99s-folder.png'}
+                      src={UPLOAD_LINK('images',i.path)}
+                      // src={UPLOAD_LINK('images/' + i.path)}
                       // src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
                       alt="new"
                     />

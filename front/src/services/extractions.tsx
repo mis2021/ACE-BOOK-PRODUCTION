@@ -36,7 +36,8 @@ export const extractFileBlob = async (attachments: any, type: string) => {
 
     const test = async () => {
 
-        const map1 = await Promise.all(attachments.map(async (item: any) => await fetch(UPLOAD_DOMAIN + UPLOAD_LINK(`${type}/` + item.path)).then(async r => {
+        const map1 = await Promise.all(attachments.map(async (item: any) => await fetch( UPLOAD_LINK(type,item.path)).then(async r => {
+        // const map1 = await Promise.all(attachments.map(async (item: any) => await fetch(UPLOAD_DOMAIN + UPLOAD_LINK(`${type}/` + item.path)).then(async r => {
             let blobdata = await r.blob()
             let file = new File([blobdata], r.url.substring(r.url.lastIndexOf('/') + 1))
             return file

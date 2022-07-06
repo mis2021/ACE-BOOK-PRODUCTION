@@ -1,6 +1,6 @@
 FROM node:16.13.0-alpine
 WORKDIR /usr/src/app/acebook/front
-COPY __generated__ ./
+# COPY __generated__ ./
 # COPY package*.json ./
 COPY . .
 

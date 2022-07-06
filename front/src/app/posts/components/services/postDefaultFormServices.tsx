@@ -13,8 +13,8 @@ type Props = {
 
 export const postDefaultFormService = async (data: any) => {
 
-  let imageAttch = extractAttch(_.get(data, "attachments"), "image")
-  let fileAttch = extractAttch(_.get(data, "attachments"), "file")
+  let imageAttch =extractAttch(_.get(data, "attachments"), "image") 
+  let fileAttch = extractAttch(_.get(data, "attachments"), "file") 
 
   let blobImage = extractFileBlob(imageAttch, "images")
   let blobFile = extractFileBlob(fileAttch, "files")

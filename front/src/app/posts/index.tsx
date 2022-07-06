@@ -20,30 +20,31 @@ import { useModalAction } from '@/components/ui/modal/modal.context';
 import { SelectContainerIcon } from '@/components/ui/select/select-container-icon';
 import { PrivacyLabeler } from './components/forms/postPrivacy';
 import { postDefaultFormService } from './components/services/postDefaultFormServices';
+import { getAuthCredentials } from '@/utils/auth-utils';
 
-type Props = { data: PostFormValues, tags: any };
+type Props = { data: PostFormValues, tags: any, index: number };
+
 export const PostContext = React.createContext({})
-
-const PostIndex = ({ data, tags }: Props) => {
+const { token } = getAuthCredentials();
+const PostIndex = ({ data, tags, index }: Props) => {
   const postValue: PostFormValues = data
   const { openModal } = useModalAction();
-
   const optionClicked = async (clicked: any) => {
-    
-  //  console.log("postDefaultFormService(data)", postDefaultFormService(data))
+
+    //  console.log("postDefaultFormService(data)", postDefaultFormService(data))
     switch (clicked) {
-      case "edit":
-        openModal('POST_FORM', await postDefaultFormService(data));
-        break;
+      case "edit": {
+        openModal('POST_FORM', data);
+      } break;
       case "ticket":
-       window.open('/tickets/form/post', '_self')
+        window.open('/tickets/form/post', '_self')
         break;
       default:
         break;
     }
   }
   return (
-    <div className="pt-3 ">
+    <div className="pt-3 " key={'post' + index}>
       <PostContext.Provider value={postValue} >
         <PostLayout>
           <div className='flex w-full'>
@@ -57,7 +58,7 @@ const PostIndex = ({ data, tags }: Props) => {
               </div>
             </div>
             <div className='absolute right-3'>
-              <PostOptions clicked={optionClicked} />
+              <PostOptions index={index} clicked={optionClicked} postUserId={_.get(data, "createdBy._id")} />
             </div>
           </div>
           <PostTextContent content={_.get(data, 'content')} />
