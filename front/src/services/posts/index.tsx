@@ -1,7 +1,8 @@
 import PostTagIcon from '@/components/tags/tagIcon';
 
 export const addPostTagLayout = (data: any) => {
-   let allPostsTemp = data.map((item :any) => {
+    console.log("tag data", data)
+    let allPostsTemp = data.map((item: any) => {
         let tags = [];
         let tagsRaw = [];
 
@@ -9,7 +10,7 @@ export const addPostTagLayout = (data: any) => {
             let name: string;
             if (item.taggedDepartments.length > 1) {
                 name = item.taggedDepartments[0].name + ' and other ' + (item.taggedDepartments.length - 1) + ((item.taggedDepartments.length - 1) > 1 ? ' Departments' : ' Department');
-            } else {
+            } else if (item.taggedDepartments.length == 1) {
                 name = item.taggedDepartments[0].name;
             }
 
@@ -18,10 +19,12 @@ export const addPostTagLayout = (data: any) => {
             })
 
 
-            tags.push({
-                content: <PostTagIcon identifier={item.taggedDepartments.length} name={name} />,
-                contentRaw: tagsRaw
-            })
+           
+                tags.push({
+                    content: <PostTagIcon identifier={item.taggedDepartments.length} name={name} />,
+                    contentRaw: tagsRaw
+                })
+           
         }
 
         item.tags = tags
