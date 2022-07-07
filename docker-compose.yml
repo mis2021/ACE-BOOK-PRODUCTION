@@ -13,6 +13,8 @@ services:
       - "3000:3000"
     volumes:
       - front:/usr/src/app/acebook/front
+    profiles: ["frontend"]
+
 
 
       
