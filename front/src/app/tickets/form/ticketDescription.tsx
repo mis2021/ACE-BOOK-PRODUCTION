@@ -5,13 +5,17 @@ import Description from '@admin/components/ui/description';
 import { getLayout } from '@/components/layouts/layout';
 import { useTranslation } from 'next-i18next';
 import TextArea from '@/components/ui/forms/text-area';
+import SelectInput from '@admin/components/ui/select-input';
+import Label from '@admin/components/ui/label';
+import { TICKET_TYPE } from '@/constants/options';
 
 type Props = {
     register?: any;
     errors?: any;
+    control?: any;
 };
 
-const TicketDescription = ({ register, errors }: Props) => {
+const TicketDescription = ({ register, errors, control }: Props) => {
     return (
         <div className="my-5 flex flex-wrap sm:my-8">
             <Description
@@ -71,13 +75,26 @@ const TicketDescription = ({ register, errors }: Props) => {
                 </div>
                 <div className="grid  gap-3 md:grid-cols-1 lg:grid-cols-1">
                     <div>
-                        <Input
+                        {/* <Input
                             label={'Ticket Type *'}
-                            {...register('type')}
+                            {...register('createdBy')}
                             error={errors.subject?.message!}
                             variant="outline"
                             className="mb-5"
-                        />
+                        /> */}
+                        <div className="mb-5">
+                            <Label>{'Ticket Type *'}</Label>
+                            <SelectInput
+                                {...register('type')}
+                                errors={errors.type?.message!}
+                                control={control}
+                                getOptionLabel={(option: any) => option.name}
+                                // getOptionLabel={(option: any) => {option.firstName+", "+option.lastName}}
+                                getOptionValue={(option: any) => option.code}
+                                options={TICKET_TYPE}
+                                isLoading={false}
+                            />
+                        </div>
                     </div>
                 </div>
 

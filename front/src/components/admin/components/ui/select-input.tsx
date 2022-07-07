@@ -12,6 +12,7 @@ interface SelectInputProps {
   [key: string]: unknown;
   isSearchable: boolean;
   placeholder: string;
+  onInputChange?: any;
 }
 
 const SelectInput = ({
@@ -28,6 +29,7 @@ const SelectInput = ({
   customStyle,
   isSearchable,
   placeholder,
+  onInputChange,
   ...rest
 }: SelectInputProps) => {
   return (
@@ -39,6 +41,7 @@ const SelectInput = ({
       render={({ field }) => (
         <>
           <Select
+          onInputChange={onInputChange}
             {...field}
             isSearchable={isSearchable}
             getOptionLabel={getOptionLabel}

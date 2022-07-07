@@ -6,4 +6,15 @@ export type TicketFormValues = {
     suffix: string;
     lastName: string;
     position: string;
+    createdBy: string;
+    requestedBy: string;
+    serviceDepartment: string;
+    requestingDepartment: string;
+    type: string;
+    
   };
+
+export type TicketVarType = {
+    name: string;
+    code: string;
+}

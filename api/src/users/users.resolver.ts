@@ -32,7 +32,7 @@ import { PaginationArgs } from 'src/common/dto/pagination.args';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   // @Mutation(() => UserRegResponse)
   // async register(
@@ -43,7 +43,7 @@ export class UsersResolver {
   //   }else{
   //     return this.usersService.register(upsertInput);
   //   }
-   
+
   // }
 
   @Mutation(() => AuthResponse)
@@ -51,7 +51,7 @@ export class UsersResolver {
     @Args('input') createUserInput: RegisterInput,
   ): Promise<AuthResponse> {
 
-   
+
     return this.usersService.register(createUserInput);
   }
 
@@ -60,12 +60,12 @@ export class UsersResolver {
   async registerMU(
     @Args('input') upsertInput: RegisterInputMU,
   ): Promise<UserRegResponseMU> {
-    if(upsertInput._id){
+    if (upsertInput._id) {
       return this.usersService.updateMUser(upsertInput);
-    }else{
+    } else {
       return this.usersService.registerMU(upsertInput);
     }
-   
+
   }
 
   @Mutation(() => AuthResponse)
@@ -174,9 +174,9 @@ export class UsersResolver {
   @Mutation(() => UserRegResponseMU)
   updateUser(@Args('input') updateUserInput: RegisterInputMU,
   ): Promise<UserRegResponseMU> {
-  // updateUser(@Args('input') updateUserInput: UpdateUserInput) {
-    
-    
+    // updateUser(@Args('input') updateUserInput: UpdateUserInput) {
+
+
     return this.usersService.updateMUser(updateUserInput);
     // return this.usersService.updateUser(updateUserInput.id, updateUserInput);
   }
@@ -233,4 +233,11 @@ export class UsersResolver {
   getTags(@Args() getArgs: GetAccArgs) {
     return this.usersService.findAll(getArgs);
   }
+
+  @Query(() => AccountPaginator, { name: 'search_accounts' })
+  searchAcc(@Args() getArgs: GetAccArgs) {
+    return this.usersService.searchUser(getArgs);
+  }
+
+
 }
