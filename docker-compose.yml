@@ -23,7 +23,7 @@ volumes:
     driver: local
     driver_opts:
       type: cifs
-      o: username=mis,password=p@$$word@@c3mc,vers=2.0
+      o: username=mis,password=p@$$$word@@c3mc,vers=2.0
       device: "//172.16.12.30/misbackup/"
 
   
