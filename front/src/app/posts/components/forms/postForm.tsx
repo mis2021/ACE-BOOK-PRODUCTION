@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextContent from './textContent'
 import Button from '@admin/components/ui/button';
 import PostedByDetails from '../postedByDetails';
@@ -19,15 +19,17 @@ import { uploadAttachment } from '@/services/uploading';
 import AttachmentUpload from '@/components/upload';
 import { PostContextRd } from '@/reducers/posts/postContextRd';
 import { initialStatePostRedc } from '@/reducers/posts/postReducer';
+import { postDefaultFormService } from '../services/postDefaultFormServices';
 
 
 
 type Props = {
-    defaults?: PostViewDefaultType;
+    data?: PostViewDefaultType | null;
 }
 
-const PostFormIndex = ({ defaults }: Props) => {
+const PostForm = ({ data: defaults }: Props) => {
 
+   
     const [statePostRd, dispatchPostRd] = React.useContext<any>(PostContextRd)
     const { id: userId, user } = getAuthCredentials();
     const [upsertPost] = useMutation(UPSERT_POST);
@@ -45,7 +47,6 @@ const PostFormIndex = ({ defaults }: Props) => {
         reset()
     }, [])
 
-
     const executeMutation = (payload: any) => {
         upsertPost({
             variables: {
@@ -54,10 +55,10 @@ const PostFormIndex = ({ defaults }: Props) => {
         })
             .then((resp) => {
                 toast.success("Post Created");
-                if(!defaults?.postData?._id){
+                if (!defaults?.postData?._id) {
                     reset()
                 }
-                
+
                 dispatchPostRd({ type: "refetch", modalData: true })
             })
             .catch((error) => {
@@ -107,6 +108,8 @@ const PostFormIndex = ({ defaults }: Props) => {
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
         payload.taggedDepartments = extractObjectId(values?.taggedDepartments)
 
+        console.log("paylads", payload)
+
         if (confirm('Comfirm post')) {
             let uploadResult: any
             let uploadCheck: boolean = false
@@ -140,6 +143,7 @@ const PostFormIndex = ({ defaults }: Props) => {
         }
 
     }
+
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -157,6 +161,7 @@ const PostFormIndex = ({ defaults }: Props) => {
                                 />
                             </div>
                             <div className="row-span-3 place-self-end"><Button loading={false}>Post</Button></div>
+                            
                         </div>
 
                         <TextContent register={register} />
@@ -175,4 +180,4 @@ const PostFormIndex = ({ defaults }: Props) => {
     )
 }
 
-export default PostFormIndex
+export default PostForm

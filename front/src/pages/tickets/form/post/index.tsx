@@ -11,24 +11,21 @@ type Props = {}
 const variables = {
   type: 'grocery',
 }
-const IndexPage: NextPageWithLayout = () => {
-  console.log("env Environment", process.env.NODE_ENV)
+const PostTicketForm: NextPageWithLayout = () => {
   return (
     <>
-      <PromotionSliders
-        variables={variables}
-      />
-
       <ModIndexClassicLayout>
-        <DashboardIndex />
+        <>
+        PostTicketForm
+        </>
       </ModIndexClassicLayout>
     </>
   )
 }
-IndexPage.getLayout = getLayout;
+PostTicketForm.getLayout = getLayout;
 
-IndexPage.authenticate = {
+PostTicketForm.authenticate = {
   permissions: adminOnly,
 };
 
-export default IndexPage
+export default PostTicketForm

@@ -19,7 +19,8 @@ type UploadResult ={
 type ProcessedFiles = Array<[string, File]>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    UploadProcess(req, res, '/public/uploads/files/')
+    UploadProcess(req, res, 'files')
+    // UploadProcess(req, res, '/public/uploads/files/')
     // return  res.status(result?.status).json(result?.resultBody);
 }
 

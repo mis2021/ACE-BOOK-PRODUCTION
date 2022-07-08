@@ -28,6 +28,7 @@ import { CustomTagModule } from './acebook/masterdata/customTag/customTag.module
 import { CommentModule } from './acebook/transactional/comment/comment.modules';
 import { AttachmentModule } from './acebook/transactional/attachment/attachment.modules';
 import { PostModule } from './acebook/transactional/post/post.modules';
+import { TicketModule } from './acebook/transactional/ticket/ticket.modules';
 
 @Module({
   imports: [
@@ -62,7 +63,8 @@ import { PostModule } from './acebook/transactional/post/post.modules';
     CustomTagModule,
     CommentModule,
     AttachmentModule,
-    PostModule
+    PostModule,
+    TicketModule
   ],
   controllers: [],
   providers: [],
