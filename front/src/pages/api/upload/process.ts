@@ -68,9 +68,8 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
         /* Move uploaded files to directory */
         for (const file of files) {
             const tempPath = file[1].filepath;
-            await mv(tempPath, targetPath + "file[1].originalFilename",  {mkdirp: true});
             // await mv(tempPath, targetPath + file[1].originalFilename,  {mkdirp: true});
-            // await fs.rename(tempPath, targetPath + file[1].originalFilename);
+            await fs.rename(tempPath, targetPath + file[1].originalFilename);
         }
     }
     console.log("resultBody", resultBody)
