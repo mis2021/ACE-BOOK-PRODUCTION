@@ -16,7 +16,7 @@ services:
       - "3000:3000"
     volumes:
       - front:/usr/src/app/acebook/front
-      - //172.16.12.30/misbackup/:/usr/src/app/acebook/uploads
+      - /mnt/nas:/usr/src/app/uploads
 
 volumes:
   api:
