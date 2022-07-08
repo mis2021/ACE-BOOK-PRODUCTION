@@ -12,14 +12,14 @@ pipeline {
 
         stage('Build and Run docker Backend') {
             steps {  
-	  sh 'docker-compose app-api up -d'
+	  sh 'docker-compose up -d app-api'
 
             }
         }
 
          stage('Build and Run docker Frontend') {
                     steps {
-        	  sh 'docker-compose app-front up -d'
+        	  sh 'docker-compose up -d app-front'
 
                     }
                 }
