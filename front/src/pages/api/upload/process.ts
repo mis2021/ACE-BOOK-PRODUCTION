@@ -52,7 +52,7 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
         const targetPath = process.env.NODE_ENV == "production" ?  `/public/uploads/${pathUpload}` : path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
         // const targetPath = process.env.NODE_ENV == "production" ?  `\\\\172.16.12.30\\misbackup\\acebook\\public\\uploads\\${pathUpload}` : path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
         // const targetPath = "\\\\172.16.12.30\\mis\\JACKY\\storage\\acebook\\files\\";
-
+    console.log("targetPath", targetPath)
         // const targetPath = "http://172.16.12.30:5000/misbackup/acebook/public/uploads";
         // const targetPath = "C:\Users\ACEMCB\Documents\storage\acebook";
         
@@ -72,7 +72,7 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
             // await fs.rename(tempPath, targetPath + file[1].originalFilename);
         }
     }
-
+    console.log("resultBody", resultBody)
     res.status(status).json(resultBody);
 }
 
