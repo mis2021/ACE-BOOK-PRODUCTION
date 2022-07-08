@@ -59,11 +59,11 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
         // const targetPath = path.join(process.cwd(), pathUpload);
         // const targetPath = path.join(process.cwd(), pathUpload);
          
-        // try {
-        //     await fs.access(targetPath);
-        // } catch (e) {
-        //     await fs.mkdir(targetPath, {recursive:true});
-        // }
+        try {
+            await fs.access(targetPath);
+        } catch (e) {
+            await fs.mkdir(targetPath, {recursive:true});
+        }
 
         /* Move uploaded files to directory */
         for (const file of files) {
