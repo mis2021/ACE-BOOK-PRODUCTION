@@ -17,6 +17,7 @@ export class PostPaginatorArg extends PaginationArgs {
   type?: string;
   privacy?: boolean;
   user?: string;
+  _id?: string;
 
 }
 

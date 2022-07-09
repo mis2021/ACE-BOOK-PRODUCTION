@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {
     name: string;
-    identifier: string | null | undefined
+    identifier?: string | null | undefined
 }
 
 const PostTagIcon = (props: Props) => {

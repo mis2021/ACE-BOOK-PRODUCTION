@@ -6,7 +6,7 @@ export const ticketValidationSchema = yup.object().shape({
   dateNeeded: yup.string().required('Required field'),
   dateRequested: yup.string().required('Required field'),
   subject: yup.string().required('Required field'),
-  location: yup.string().required('Required field'),
+  // location: yup.string().required('Required field'),
   createdBy:yup.object().required('Required field'),
   requestedBy: yup.object().required('Required field'),
   serviceDepartment: yup.object().required('Required field'),

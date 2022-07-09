@@ -251,6 +251,8 @@ export class UsersService {
             { firstName: new RegExp('\\b' + name + '\\b', 'i') },
             { middleName: new RegExp('\\b' + name + '\\b', 'i') },
             { lastName: new RegExp('\\b' + name + '\\b', 'i') },
+            { username: new RegExp('\\b' + name + '\\b', 'i') },
+            { email: new RegExp('\\b' + name + '\\b', 'i') },
           ]
         }
       )

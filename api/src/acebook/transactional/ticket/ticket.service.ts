@@ -6,6 +6,7 @@ import moment from 'moment';
 import Ticket from '@models/Transactionals/Tickets';
 import {   TicketId, UpsertTicketInput } from './dto/ticket.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
+import Post from '@models/Transactionals/Posts';
 
 @Injectable()
 export class TicketService {
@@ -18,11 +19,21 @@ export class TicketService {
         { new: true },
       );
     } else {
-      savedData = new Ticket({
-        subject: upsertInput.subject,
-        description: upsertInput.description,
-      });
+      savedData  = new Ticket(upsertInput);
+      //  savedData = new Ticket({
+      //   subject: upsertInput.subject,
+      //   description: upsertInput.description,
+      // });
       await savedData.save();
+
+
+      if(upsertInput.postOrigin){
+       await Post.findOneAndUpdate(
+          { _id: upsertInput.postOrigin },
+          { $set: {ticket: savedData._id} },
+          { new: true },
+        )
+      }
     }
 
     return savedData;
@@ -37,7 +48,7 @@ export class TicketService {
   }
 
   async findAll({ page, first }: PaginationArgs) {
-    const ticket: TicketEnt[] = await Ticket.find();
+    const ticket: TicketEnt[] = await Ticket.find().populate('requestingDepartment');
     return {
       data: ticket,
       paginatorInfo: paginate(

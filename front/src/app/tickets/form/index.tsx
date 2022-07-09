@@ -14,16 +14,20 @@ import moment from 'moment';
 import { getAuthCredentials } from '@/utils/auth-utils';
 import { extractObjectId } from '@/services/extractions';
 import _ from 'lodash';
-type Props = {}
+type Props = {
+  postDefault?: any;
+}
 
 
 
-const TicketForm = (props: Props) => {
+const TicketForm = ({ postDefault }: Props) => {
   const { user } = getAuthCredentials();
-  
+
   const defaultVals = {
     dateRequested: moment().format('YYYY-MM-DD'),
-    createdBy: user
+    createdBy: user,
+    requestedBy: user,
+    requestingDepartment: _.get(user, "departmentOnDuty")
   }
 
   const {
@@ -32,10 +36,11 @@ const TicketForm = (props: Props) => {
     control,
     formState: { errors },
     watch,
-    reset
+    reset,
+    setValue
   } = useForm<TicketFormValues>({
     //@ts-ignore
-    defaultValues: defaultVals,
+    defaultValues: postDefault ?? defaultVals,
     resolver: yupResolver(ticketValidationSchema),
   });
 
@@ -43,14 +48,17 @@ const TicketForm = (props: Props) => {
   const [upsertAcc] = useMutation(UPSERT_TICKET);
 
   const onSubmit = async (values: TicketFormValues) => {
- 
-    
-    values.createdBy = _.get(values.createdBy, "_id") 
-    values.requestedBy = _.get(values.requestedBy, "_id") 
+
+
+    values.createdBy = _.get(values.createdBy, "_id")
+    values.requestedBy = _.get(values.requestedBy, "_id")
     values.serviceDepartment = _.get(values.serviceDepartment, "_id")
     values.requestingDepartment = _.get(values.requestingDepartment, "_id")
     values.type = _.get(values.type, "code")
-    console.log("valss", values)
+    values.status = "pending"
+    values.postOrigin = postDefault ? _.get(postDefault, "postOrigin") : null
+
+
     if (confirm('Are you sure you want to save ticket?')) {
       upsertAcc({
         variables: {
@@ -69,13 +77,20 @@ const TicketForm = (props: Props) => {
     }
   }
 
- 
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TicketDescription register={register} errors={errors} control={control} />
         <BorderDashed />
-        <TicketAutorization register={register} errors={errors} control={control} createdByOpt={[user]} watch={watch}/>
+        <TicketAutorization
+          register={register}
+          errors={errors}
+          control={control}
+          createdByOpt={[user]}
+          watch={watch} 
+          setValue={setValue}
+          />
         <div className="text-end mb-4 ">
           <Button loading={false}>Save Details</Button>
         </div>

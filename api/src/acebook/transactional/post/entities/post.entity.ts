@@ -6,6 +6,7 @@ import { ReactionEnt } from '@acebook/referenceType/reaction.entity';
 import { UserEntAB } from '@/users/entities/user.entity';
 import { DepartmentEnt } from '@/acebook/masterdata/department/entities/department.entity';
 import { CustomTagEnt } from '@/acebook/masterdata/customTag/entities/customTag.entity';
+import { TicketEnt } from '../../ticket/entities/ticket.entity';
 
 
 
@@ -26,6 +27,7 @@ export class PostEnt extends PostEntCommon{
   taggedDepartments?: DepartmentEnt[];
   taggedUsers?: UserEntAB[];
   customTags?: CustomTagEnt;
+  ticket?: TicketEnt;
 }
 
 @InputType('PostInputType', { isAbstract: true })

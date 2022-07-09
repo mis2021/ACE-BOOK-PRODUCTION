@@ -1,10 +1,10 @@
 import { ROUTES } from '@/lib/routes';
 export const siteSettings = {
-  name: 'PickBazar',
+  name: 'AceBook',
   description: '',
   logo: {
     url: '/logo.svg',
-    alt: 'PickBazar',
+    alt: 'AceBook',
     href: '/grocery',
     width: 128,
     height: 40,

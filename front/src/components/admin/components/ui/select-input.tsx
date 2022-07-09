@@ -13,6 +13,7 @@ interface SelectInputProps {
   isSearchable: boolean;
   placeholder: string;
   onInputChange?: any;
+  onSelectChange?: any;
 }
 
 const SelectInput = ({
@@ -30,8 +31,17 @@ const SelectInput = ({
   isSearchable,
   placeholder,
   onInputChange,
+  onSelectChange,
   ...rest
 }: SelectInputProps) => {
+
+var otherFields : any= {}
+
+if(onSelectChange){
+  otherFields.onChange = onSelectChange
+}
+
+
   return (
     <Controller
       control={control}
@@ -41,8 +51,9 @@ const SelectInput = ({
       render={({ field }) => (
         <>
           <Select
-          onInputChange={onInputChange}
             {...field}
+            {...otherFields}
+            onInputChange={onInputChange}
             isSearchable={isSearchable}
             getOptionLabel={getOptionLabel}
             getOptionValue={getOptionValue}

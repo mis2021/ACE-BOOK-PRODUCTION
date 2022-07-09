@@ -18,9 +18,10 @@ type Props = {
     control?: any;
     createdByOpt?: any
     watch?: any
+    setValue?: any
 };
 
-const TicketAutorization = ({ register, errors, control, createdByOpt, watch }: Props) => {
+const TicketAutorization = ({ register, errors, control, createdByOpt, watch, setValue }: Props) => {
 
     const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS, {
         fetchPolicy: 'cache-and-network',
@@ -38,7 +39,7 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch }: 
     console.log("searchedUser", searchedUser)
 
 
-    const getUserChange = (data: any) => {
+    const getUserInputChange = (data: any) => {
         console.log("serach time", data)
         
         if (data != null || data != undefined || data != " ") {
@@ -48,6 +49,17 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch }: 
                 })
             }, 500);
         }
+    }
+
+    const getUserChange = (data: any) => {
+        console.log("userchange-new", data)
+        setValue("requestedBy", data)
+        if(confirm("Do you also want to change the requesting department base on requestor's department?")){
+           
+            setValue("requestingDepartment", _.get(data, "departmentOnDuty"))
+        }
+        
+        
     }
     console.log("watch dep", watch("serviceDepartment"))
     return (
@@ -62,7 +74,7 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch }: 
                 <div className="grid  gap-3 md:grid-cols-2 lg:grid-cols-2">
                     <div>
                         <div className="mb-5">
-                            <Label>{'Created By'}</Label>
+                            <Label>{'Created By *'}</Label>
                             <SelectInput
                                 name="createdBy"
                                 {...register('createdBy')}
@@ -78,7 +90,7 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch }: 
                     </div>
                     <div>
                         <div className='mb-5'>
-                            <Label>{'Requested By'}</Label>
+                            <Label>{'Requested By *'}</Label>
                             <SelectInput
                                 name="requestedBy"
                                 {...register('requestedBy')}
@@ -88,15 +100,17 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch }: 
                                 // getOptionLabel={(option: any) => {option.firstName+", "+option.lastName}}
                                 getOptionValue={(option: any) => option._id}
                                 options={_.get(searchedUser, "search_accounts.data")}
-                                onInputChange={getUserChange}
+                                onInputChange={getUserInputChange}
                                 isLoading={false}
+                                onChange={getUserChange}
+                                onSelectChange={getUserChange}
                             />
                         </div>
                     </div>
                 </div>
                 <div className="grid  gap-3 md:grid-cols-2 lg:grid-cols-2 mb-5">
                     <div >
-                        <Label>{'Service Department'}</Label>
+                        <Label>{'Service Department *'}</Label>
                         <SelectInput
                             name="serviceDepartment"
                             {...register('serviceDepartment')}
@@ -114,7 +128,7 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch }: 
                         />
                     </div>
                     <div>
-                        <Label>{'Requesting Department'}</Label>
+                        <Label>{'Requesting Department *'}</Label>
                         <SelectInput
                             name="requestingDepartment"
                             {...register('requestingDepartment')}
@@ -135,7 +149,7 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch }: 
                 <div className="grid  gap-3 md:grid-cols-1 lg:grid-cols-1">
                     <div>
                         <Input
-                            label={'Service Location *'}
+                            label={'Service Location'}
                             {...register('location')}
                             error={errors.location?.message!}
                             variant="outline"

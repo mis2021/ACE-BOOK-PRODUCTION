@@ -1,7 +1,7 @@
 import PostTagIcon from '@/components/tags/tagIcon';
 
 export const addPostTagLayout = (data: any) => {
-    console.log("tag data", data)
+    
     let allPostsTemp = data.map((item: any) => {
         let tags = [];
         let tagsRaw = [];
