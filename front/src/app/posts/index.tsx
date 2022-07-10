@@ -61,9 +61,15 @@ const PostIndex = ({ data, tags, index }: Props) => {
             </div>
             <div className='absolute right-3 flex'>
 
-            { _.get(data, 'ticket') && <PostTicket ticket={_.get(data, 'ticket')} />}
+              {_.get(data, 'ticket') && <PostTicket ticket={_.get(data, 'ticket')} />}
 
-              <PostOptions index={index} clicked={optionClicked} postUserId={_.get(data, "createdBy._id")} />
+              <PostOptions
+                index={index}
+                clicked={optionClicked}
+                postUserId={_.get(data, "createdBy._id")}
+                postId={_.get(data, "_id")}
+                ticketId={_.get(data, "ticket._id")}
+              />
             </div>
           </div>
           <PostTextContent content={_.get(data, 'content')} />

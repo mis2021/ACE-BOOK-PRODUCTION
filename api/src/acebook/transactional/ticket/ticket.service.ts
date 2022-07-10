@@ -7,6 +7,14 @@ import Ticket from '@models/Transactionals/Tickets';
 import {   TicketId, UpsertTicketInput } from './dto/ticket.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 import Post from '@models/Transactionals/Posts';
+import { TicketPaginatorArg } from './dto/ticket.args';
+
+const objectFilters = (args: TicketPaginatorArg) => {
+  if (args._id ) {
+    return { _id: args._id }
+  }
+  return {}
+}
 
 @Injectable()
 export class TicketService {
@@ -47,16 +55,23 @@ export class TicketService {
     return removedData;
   }
 
-  async findAll({ page, first }: PaginationArgs) {
-    const ticket: TicketEnt[] = await Ticket.find().populate('requestingDepartment');
+  async findEnt(payload:  TicketPaginatorArg) {
+    let filters = objectFilters(payload as TicketPaginatorArg);
+    const ticket: TicketEnt[] = await Ticket.find(filters)
+    .populate('requestingDepartment')
+    .populate('serviceDepartment')
+    .populate('createdBy')
+    .populate('requestedBy')
+    ;
     return {
       data: ticket,
       paginatorInfo: paginate(
         ticket.length,
-        page,
-        first,
+        payload.page,
+        payload.first,
         ticket.length,
       ),
     };
   }
+  
 }

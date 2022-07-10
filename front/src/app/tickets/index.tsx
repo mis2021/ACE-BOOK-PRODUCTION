@@ -13,7 +13,7 @@ import { useQuery } from '@apollo/client';
 import { GET_ALL_TICKETS } from '@graphql/operations/tickets/ticketQueries';
 import _ from 'lodash';
 import { TicketFormValues, TicketVarType } from '@/types/tickets/ticketType';
-import { ticketTypeIdentifier } from '@/constants/options';
+import { ticketStatusIdentifier, ticketTypeIdentifier } from '@/constants/options';
 
 type Props = {}
 
@@ -101,14 +101,15 @@ const TicketIndex = (props: Props) => {
       const structuredTicket = _.get(allTickets, 'tickets.data').map((item: any) => {
         let dataload : TicketFormValues = _.cloneDeep(item);
         dataload.requestingDepartment = _.get(item, "requestingDepartment.name")
-        dataload.type = ticketTypeIdentifier(dataload.type)
+        dataload.type = ticketTypeIdentifier( _.get(item, "type"), "name") 
+        dataload.status = ticketStatusIdentifier( _.get(item, "status"), "name") 
 
         return dataload
       });
       setState((p) => ({ ...p, ticketData: structuredTicket }));
     }
   }, [allTickets]);
-  console.log("requestingDepartment",state.ticketData)
+  console.log("allTickets",allTickets)
   return (
     <div>
       <HeaderDetails

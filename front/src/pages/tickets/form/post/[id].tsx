@@ -22,10 +22,6 @@ type StateType = {
   loading?: boolean;
 }
 
-const variables = {
-  type: 'grocery',
-}
-
 const breadcrumbs = [
   {
     title: 'Posts',
@@ -34,7 +30,7 @@ const breadcrumbs = [
   },
   {
     title: 'Create Ticket',
-    route: '/tickets/form',
+    route: '',
     isCurrent: true,
   },
 ];
@@ -49,8 +45,6 @@ const PostTicketForm: NextPageWithLayout = () => {
     loading: true
   })
 
-  console.log("id", id)
-
   let queryVar = {
     _id: id,
     skip: 0,
@@ -62,10 +56,9 @@ const PostTicketForm: NextPageWithLayout = () => {
     nextFetchPolicy: 'cache-first',
   });
 
-  console.log("allPosts", allPosts)
+
 
   useEffect(() => {
-
 
     if (allPosts) {
       let postDefault = {

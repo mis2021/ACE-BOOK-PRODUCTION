@@ -12,7 +12,7 @@ export type TicketFormValues = {
     requestedBy?: string;
     serviceDepartment?: string;
     requestingDepartment?: string;
-    type?: string;
+    type?: string | undefined;
     status?: string;
     postOrigin?: string;
     
@@ -21,4 +21,6 @@ export type TicketFormValues = {
 export type TicketVarType = {
     name: string;
     code: string;
+    color?: string;
+    textColor?: string;
 }

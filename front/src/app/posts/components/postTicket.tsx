@@ -9,7 +9,7 @@ type Props = {
 const PostTicket = ({ticket}: Props) => {
   return (
     <div>
-        <PostTagIcon name={ticketStatusIdentifier(ticket?.status)} />
+        <PostTagIcon name={ticketStatusIdentifier(ticket?.status, "name")} bgColor={ticketStatusIdentifier(ticket?.status, "color")} textColor={ticketStatusIdentifier(ticket?.status, "textColor")} />
     </div>
   )
 }
