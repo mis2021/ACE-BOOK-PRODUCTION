@@ -1,5 +1,7 @@
 FROM node:16.13.0-alpine
 WORKDIR /usr/src/app/acebook/front
+RUN mkdir -p /usr/src/app/acebook/front/images
+RUN mkdir -p /usr/src/app/acebook/front/files
 
 ARG USER=default
 RUN adduser -D $USER
