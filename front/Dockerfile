@@ -10,8 +10,8 @@ RUN yarn build:gql
 #RUN chown -R $USER:$USER /usr/src/app/acebook/front
 RUN mkdir -p /usr/src/app/acebook/front/images
 RUN mkdir -p /usr/src/app/acebook/front/files
-RUN chmod 777 /usr/src/app/acebook/front/uploads/images;
-RUN chmod 777 /usr/src/app/acebook/front/uploads/files;
+RUN chmod 777 /usr/src/app/acebook/front/;
+RUN chmod 777 /usr/src/app/acebook/front/;
 EXPOSE 3000
 
 
