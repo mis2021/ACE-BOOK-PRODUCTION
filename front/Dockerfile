@@ -12,6 +12,10 @@ RUN yarn build:gql
 RUN chmod 777 /usr/src/app/acebook/front
 RUN chmod 777 /usr/src/app/acebook/front
 
+WORKDIR /usr/src/app/acebook/front/public/uploads2
+RUN chmod 777 /usr/src/app/acebook/front/public/uploads2
+
+
 EXPOSE 3000
 
 
