@@ -44,5 +44,5 @@ sw.js
 
 
 #Storage
-#uploads
-#public/uploads
+uploads
+public/uploads
