@@ -10,8 +10,8 @@ COPY . .
 RUN yarn
 RUN yarn build:gql
 #RUN chown -R $USER:$USER /usr/src/app/acebook/front
-RUN chmod 777 /usr/src/app/acebook/front/;
-RUN chmod 777 /usr/src/app/acebook/front/;
+RUN chmod 777 /usr/src/app/acebook/front/public/uploads/images;
+RUN chmod 777 /usr/src/app/acebook/front/public/uploads/files;
 EXPOSE 3000
 
 
