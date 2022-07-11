@@ -49,7 +49,7 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
     if (files?.length) {
 
         /* Create directory for uploads */
-        const targetPath = path.join(process.cwd(), `/public/upload/${pathUpload}/` ) ;
+        const targetPath = path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
         // const targetPath = path.join(process.cwd(), `/public/uploads2/${pathUpload}/` ) ;
 
 
