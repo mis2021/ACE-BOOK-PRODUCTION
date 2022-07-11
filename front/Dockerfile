@@ -1,14 +1,19 @@
 FROM node:16.13.0-alpine
 WORKDIR /usr/src/app/acebook/front
-# COPY __generated__ ./
-# COPY package*.json ./
+
+ARG USER=default
+
 COPY . .
 
 RUN yarn
 RUN yarn build:gql
 EXPOSE 3000
-# RUN yarn build:gql
-# RUN yarn start
+
+RUN adduser -D $USER
 
 CMD ["yarn", "start"]
-# CMD ["yarn", "build", "start:prod"]
+
+#Chown Static Files
+RUN chown -R $USER:$USER /usr/src/app/acebook/front
+RUN find /usr/src/app/acebook/front -type d -exec chmod 755 {} \;
+RUN find /usr/src/app/acebook/front -type f -exec chmod 644 {} \;
