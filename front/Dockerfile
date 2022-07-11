@@ -1,8 +1,6 @@
 FROM node:16.13.0-alpine
 WORKDIR /usr/src/app/acebook/front
 
-ARG USER=default
-RUN adduser -D $USER
 COPY . .
 
 RUN yarn
@@ -16,8 +14,6 @@ WORKDIR /usr/src/app/acebook/front/public/uploads/files
 RUN chmod 777 /usr/src/app/acebook/front/public/uploads/images
 RUN chmod 777 /usr/src/app/acebook/front/public/uploads/files
 
-RUN chown -R $USER:$USER /usr/src/app/acebook/front/public/uploads/images
-RUN chown -R $USER:$USER /usr/src/app/acebook/front/public/uploads/files
 
 EXPOSE 3000
 
