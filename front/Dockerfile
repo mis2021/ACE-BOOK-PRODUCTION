@@ -16,6 +16,7 @@ WORKDIR /usr/src/app/acebook/front/public/uploads2/files
 RUN chmod 777 /usr/src/app/acebook/front/public/uploads2/images
 RUN chmod 777 /usr/src/app/acebook/front/public/uploads2/files
 
+RUN chown -R $USER:$USER /usr/src/app/acebook/front/public/uploads2/images
 
 EXPOSE 3000
 

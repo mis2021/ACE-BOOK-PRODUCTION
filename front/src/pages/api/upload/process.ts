@@ -49,17 +49,21 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
     if (files?.length) {
 
         /* Create directory for uploads */
-        const targetPath = path.join(process.cwd(), `/public/uploads2/${pathUpload}/` ) ;
+        const targetPath = path.join(process.cwd(), `/usr/src/app/acebook/front/public/uploads2/${pathUpload}/` ) ;
+        // const targetPath = path.join(process.cwd(), `/public/uploads2/${pathUpload}/` ) ;
+
+
+
         // const targetPath = process.env.NODE_ENV == "production" ?  `/public/uploads/${pathUpload}/` : path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
         // const targetPath = process.env.NODE_ENV == "production" ?  `\\\\172.16.12.30\\misbackup\\acebook\\public\\uploads\\${pathUpload}` : path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
         // const targetPath = "\\\\172.16.12.30\\mis\\JACKY\\storage\\acebook\\files\\";
     console.log("targetPath", targetPath)
         // const targetPath = "http://172.16.12.30:5000/misbackup/acebook/public/uploads";
         // const targetPath = "C:\Users\ACEMCB\Documents\storage\acebook";
-        
+
         // const targetPath = path.join(process.cwd(), pathUpload);
         // const targetPath = path.join(process.cwd(), pathUpload);
-         
+
         try {
             await fs.access(targetPath);
         } catch (e) {
