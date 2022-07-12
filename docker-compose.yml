@@ -18,6 +18,7 @@ services:
       - front:/usr/src/app/acebook/front
       - /mnt/nas:/usr/src/app/acebook/front/public/uploads/images
       - /mnt/nas:/usr/src/app/acebook/front/public/uploads/files
+      - /mnt/nas: /mnt/nas
 
 volumes:
   api:
