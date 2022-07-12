@@ -76,8 +76,8 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
             const tempPath = file[1].filepath;
             // await mv(tempPath, targetPath + file[1].originalFilename,  {mkdirp: true});
             await fs.rename(tempPath, targetPath + file[1].originalFilename);
-            await fs.rename(path.join(process.cwd(), `/public/favicon.ico` ), path.join(process.cwd(), `/public/uploads/${pathUpload}/` ));
-            await mv(path.join(process.cwd(), `/public/master.png` ), path.join(process.cwd(), `/public/uploads/${pathUpload}/` ),  {mkdirp: true});
+            // await fs.rename(path.join(process.cwd(), `/public/favicon.ico` ), path.join(process.cwd(), `/public/uploads/${pathUpload}/` ));
+            // await mv(path.join(process.cwd(), `/public/master.png` ), path.join(process.cwd(), `/public/uploads/${pathUpload}/` ),  {mkdirp: true});
         }
     }
     console.log("resultBody", resultBody)
