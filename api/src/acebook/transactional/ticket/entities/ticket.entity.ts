@@ -5,6 +5,7 @@ import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { CoreEntity, CoreEntityMg } from 'src/common/entities/core.entity';
 import { AttachmentEnt } from '../../attachment/entities/attachment.entity';
 import { CommentEnt } from '../../comment/entities/comment.entity';
+import { PostEnt } from '../../post/entities/post.entity';
 
 @ObjectType()
 export class TicketEntCommon extends CoreEntityMg {
@@ -31,6 +32,7 @@ export class TicketEnt extends TicketEntCommon {
   requestedBy?: UserEntAB;
   serviceDepartment?: DepartmentEnt;
   requestingDepartment?: DepartmentEnt;
+  postOrigin?: PostEnt;
 }
 
 @InputType('TicketInputType', { isAbstract: true })

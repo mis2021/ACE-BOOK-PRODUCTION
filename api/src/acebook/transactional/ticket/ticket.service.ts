@@ -62,6 +62,7 @@ export class TicketService {
     .populate('serviceDepartment')
     .populate('createdBy')
     .populate('requestedBy')
+    .populate('postOrigin')
     ;
     return {
       data: ticket,

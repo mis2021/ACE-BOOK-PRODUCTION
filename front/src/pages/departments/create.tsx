@@ -1,7 +1,7 @@
 import { getLayout } from '@/components/layouts/layout';
 import ModClassicLayout from '@/components/layouts/mod-classic';
 import DepartmentForm from '@/app/department/deptForm';
-
+import { adminOnly } from '@/utils/auth-utils';
 const breadcrumbs = [
   {
     title: "Departments",
@@ -26,4 +26,7 @@ function CreateDeptPage() {
 }
 
 CreateDeptPage.getLayout = getLayout;
+CreateDeptPage.authenticate = {
+  permissions: adminOnly,
+};
 export default CreateDeptPage;

@@ -15,6 +15,8 @@ export type TicketFormValues = {
     type?: string | undefined;
     status?: string;
     postOrigin?: string;
+    __typename? :string;
+
     
   };
 
@@ -23,4 +25,5 @@ export type TicketVarType = {
     code: string;
     color?: string;
     textColor?: string;
+    class?: string;
 }

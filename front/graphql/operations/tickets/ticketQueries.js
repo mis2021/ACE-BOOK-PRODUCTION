@@ -25,13 +25,15 @@ query Data($id: String) {
   tickets(_id: $id) {
     data {
       _id
-      created_at
       type
       description
       subject
       status
       code
       location
+      postOrigin{
+        _id
+      }
       requestingDepartment {
         name
         _id

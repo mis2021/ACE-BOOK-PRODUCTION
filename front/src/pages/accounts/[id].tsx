@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 import { GET_DETAILED_ACC } from '@graphql/operations/accounts/accountQueries';
 import _ from 'lodash';
 import Spinner from '@/components/ui/loaders/spinner/spinner';
-
+import { adminOnly } from '@/utils/auth-utils';
 
 type Props = {};
 
@@ -53,5 +53,8 @@ const EditAccount: NextPageWithLayout = (props: Props) => {
   );
 };
 EditAccount.getLayout = getLayout;
+EditAccount.authenticate = {
+  permissions: adminOnly,
+};
 
 export default EditAccount;

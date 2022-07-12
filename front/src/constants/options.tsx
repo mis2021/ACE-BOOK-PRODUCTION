@@ -8,13 +8,13 @@ export const TICKET_TYPE: TicketVarType[] = [
 ]
 
 export const TICKET_STATUS: TicketVarType[] = [
-    { name: "Draft", code: "draft", color: "#eeeeee", textColor: "#bcbcbc" },
-    { name: "Returned", code: "returned", color: "#f1c232", textColor: "#7f6000" },
-    { name: "Pending", code: "pending", color: "#b6d7a8", textColor: "#6aa84f" },
-    { name: "Approved", code: "approved", color: "#38761d", textColor: "#ffffff" },
-    { name: "Disapproved", code: "disapproved", color: "#cc0000", textColor: "#ffffff" },
-    { name: "Working", code: "working", color: "#cd5400", textColor: "#ffffff" },
-    { name: "Completed", code: "completed", color: "#effffe", textColor: "#9fc5e8" },
+    { name: "Draft", code: "draft", color: "#eeeeee", textColor: "#bcbcbc", class: "bg-[#eeeeee] text-[#bcbcbc]" },
+    { name: "Returned", code: "returned", color: "#f1c232", textColor: "#7f6000", class: "bg-[#f1c232] text-[#7f6000]" },
+    { name: "Pending", code: "pending", color: "#b6d7a8", textColor: "#6aa84f", class: "bg-[#b6d7a8] text-[#6aa84f]" },
+    { name: "Approved", code: "approved", color: "#38761d", textColor: "#ffffff", class: "bg-[#38761d] text-[#ffffff]" },
+    { name: "Disapproved", code: "disapproved", color: "#cc0000", textColor: "#ffffff", class: "bg-[#cc0000] text-[#ffffff]" },
+    { name: "Working", code: "working", color: "#cd5400", textColor: "#ffffff", class: "bg-[#cd5400] text-[#ffffff]" },
+    { name: "Completed", code: "completed", color: "#effffe", textColor: "#9fc5e8", class: "bg-[#effffe] text-[#9fc5e8]" },
 ]
 
 
@@ -56,6 +56,9 @@ export const ticketStatusIdentifier = (code: string, type: string) => {
             break;
         case "object":
             return ticket[0]
+            break;
+        case "class":
+            return ticket[0].class
             break;
         default:
             break;

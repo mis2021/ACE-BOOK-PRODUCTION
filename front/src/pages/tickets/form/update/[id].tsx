@@ -13,7 +13,7 @@ import { GET_ALL_TICKETS, GET_SPEC_TICKET } from '@graphql/operations/tickets/ti
 import Spinner from '@/components/ui/loaders/spinner/spinner';
 import _ from 'lodash';
 import { TicketFormValues } from '@/types/tickets/ticketType';
-import { ticketTypeIdentifier } from '@/constants/options';
+import { ticketStatusIdentifier, ticketTypeIdentifier } from '@/constants/options';
 
 
 type StateType = {
@@ -58,7 +58,8 @@ console.log("dataTickets", dataTickets)
     if (dataTickets) {
       let cloneData  = _.cloneDeep(_.get(dataTickets,"tickets.data[0]"))
       cloneData.type = ticketTypeIdentifier(_.get(dataTickets,"tickets.data[0].type"), "object")
-    
+      cloneData.postOrigin =  _.cloneDeep(_.get(dataTickets,"tickets.data[0].postOrigin._id"))
+      cloneData.status = ticketStatusIdentifier(_.get(dataTickets,"tickets.data[0].status"), "object")
       // let postDefault = {
       //   requestedBy: _.get(allPosts, "posts.data[0].createdBy"),
       //   createdBy: user ,

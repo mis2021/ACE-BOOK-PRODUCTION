@@ -14,6 +14,7 @@ import moment from 'moment';
 import { getAuthCredentials } from '@/utils/auth-utils';
 import { extractObjectId } from '@/services/extractions';
 import _ from 'lodash';
+import TicketDetails from './ticketDetails';
 type Props = {
   postDefault?: any;
 }
@@ -50,15 +51,20 @@ const TicketForm = ({ postDefault }: Props) => {
   const onSubmit = async (values: TicketFormValues) => {
 
 
+    values._id = _.get(postDefault, "_id")
     values.createdBy = _.get(values.createdBy, "_id")
     values.requestedBy = _.get(values.requestedBy, "_id")
     values.serviceDepartment = _.get(values.serviceDepartment, "_id")
     values.requestingDepartment = _.get(values.requestingDepartment, "_id")
     values.type = _.get(values.type, "code")
-    values.status = "pending"
-    values.postOrigin = postDefault ? _.get(postDefault, "postOrigin") : null
+    values.status =_.get(values.status, "code")
+    values.postOrigin =  _.get(postDefault, "postOrigin") ? _.get(postDefault, "postOrigin") : null
 
-
+    if(values.__typename){
+      delete values.__typename
+    }
+   
+    console.log("payload", values)
     if (confirm('Are you sure you want to save ticket?')) {
       upsertAcc({
         variables: {
@@ -81,6 +87,7 @@ const TicketForm = ({ postDefault }: Props) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <TicketDetails register={register} errors={errors} control={control} />
         <TicketDescription register={register} errors={errors} control={control} />
         <BorderDashed />
         <TicketAutorization
