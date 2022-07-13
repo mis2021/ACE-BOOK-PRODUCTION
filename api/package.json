@@ -35,6 +35,7 @@
     "graphql-tools": "^8.2.0",
     "graphql-upload": "^12.0.0",
     "jsonwebtoken": "^8.5.1",
+    "migrate-mongo": "^9.0.0",
     "moment": "^2.29.3",
     "mongoose": "^6.3.2",
     "reflect-metadata": "^0.1.13",
