@@ -18,11 +18,11 @@ export const TICKET_STATUS: TicketVarType[] = [
 ]
 
 
-export const ticketTypeIdentifier = (code: string, type: string) => {
+export const ticketTypeIdentifier = (code: string, type: string)  => {
     let ticket = TICKET_TYPE.filter((item: TicketVarType) => {
         return item.code === code
     })
-    console.log("ticket type", ticket)
+    
     switch (type) {
         case "name":
             return ticket[0].name

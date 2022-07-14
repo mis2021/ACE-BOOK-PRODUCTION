@@ -50,7 +50,7 @@ const Header = ({ layout }: { layout: string }) => {
           <Logo className="mx-auto lg:mx-0" />
 
           <div className="hidden ltr:ml-10 rtl:mr-10 ltr:mr-auto rtl:ml-auto xl:block">
-            <GroupsDropdownMenu />
+            {/* <GroupsDropdownMenu /> */}
           </div>
         </div>
         {isHomePage ? (

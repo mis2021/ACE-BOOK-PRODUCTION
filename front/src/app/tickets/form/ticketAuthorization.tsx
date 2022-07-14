@@ -36,11 +36,11 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch, se
         nextFetchPolicy: 'cache-first',
     });
 
-    console.log("searchedUser", searchedUser)
+  
 
 
     const getUserInputChange = (data: any) => {
-        console.log("serach time", data)
+      
         
         if (data != null || data != undefined || data != " ") {
             setTimeout(function () {
@@ -52,14 +52,12 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch, se
     }
 
     const getUserChange = (data: any) => {
-        console.log("userchange-new", data)
+       
         setValue("requestedBy", data)
         if(confirm("Do you also want to change the requesting department base on requestor's department?")){
            
             setValue("requestingDepartment", _.get(data, "departmentOnDuty"))
         }
-        
-        
     }
     console.log("watch dep", watch("serviceDepartment"))
     return (

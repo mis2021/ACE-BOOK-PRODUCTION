@@ -3,4 +3,5 @@ export type breadcrumbType = {
     route?: String,
     isHome?: Boolean,
     isCurrent?: Boolean
+    hidden?: Boolean
 }

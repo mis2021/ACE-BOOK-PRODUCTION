@@ -27,3 +27,7 @@ export type TicketVarType = {
     textColor?: string;
     class?: string;
 }
+
+export type TicketTypeForm = {
+    approver: string[];
+}

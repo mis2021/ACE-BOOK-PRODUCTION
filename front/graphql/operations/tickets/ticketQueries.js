@@ -61,3 +61,17 @@ query Data($id: String) {
 }
 `
 
+
+
+export const GET_TICKET_TYPE = gql`
+query Data {
+  ticketTypes {
+    data {
+      _id
+      name
+      code
+    }
+  }
+}
+`
+
