@@ -8,35 +8,70 @@ import CardRight from '@/components/ui/cards/cardRight';
 import { ticketTypeIdentifier } from '@/constants/options';
 import Button from '@admin/components/ui/button';
 import { extractObjectId } from '@/services/extractions';
+import { useMutation, useQuery } from '@apollo/client';
+import { UPSERT_TICKET_TYPE } from '@graphql/operations/tickets/ticketMutation';
+import { toast } from 'react-toastify';
+import _ from 'lodash';
+import { GET_TICKET_TYPE_SPEC } from '@graphql/operations/tickets/ticketQueries';
 
 type Props = {
   code?: string;
+  defaults?: string;
 }
 type StateType = {
   name?: string;
 }
 
-const TicketTypeForm = ({ code }: Props) => {
+const TicketTypeFormComp = ({ code, defaults }: Props) => {
   const [state, setState] = useState({ name: '' })
+
+ 
 
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-    setValue
+    setValue,
+    reset
   } = useForm<TicketTypeForm>({
     //@ts-ignore
-    defaultValues: {},
+    defaultValues: defaults?? {},
 
     // resolver: ,
   });
 
+  const [upsertCol] = useMutation(UPSERT_TICKET_TYPE);
+
+  
+
+
   const onSubmit = async (values: TicketTypeForm) => {
+    console.log("old values", values)
+    // values.code = code
+    values.approvers = extractObjectId(values.approvers)
+    // console.log("values", values)
 
+    if (confirm('Are you sure you want to save ticket type?')) {
+      upsertCol({
+        variables: {
+          input: values,
+        },
+      })
+        .then((resp) => {
+          console.log("resp", resp)
+          if (_.get(resp, "data.upsertTicketType._id")) {
+            toast.success('Ticket type successfully saved');
+        
+          } else {
+            toast.error('Ticket type failed to save');
+          }
+        })
+        .catch((error) => {
 
-    values.approver = extractObjectId(values.approver)
-    console.log("values", values)
+          toast.error('Ticket type failed to save');
+        });
+    }
   }
 
   useEffect(() => {
@@ -45,6 +80,8 @@ const TicketTypeForm = ({ code }: Props) => {
       setState((p) => ({ ...p, name: typeName }))
     }
   }, [code])
+
+
 
 
 
@@ -68,4 +105,4 @@ const TicketTypeForm = ({ code }: Props) => {
   )
 }
 
-export default TicketTypeForm
+export default TicketTypeFormComp

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import TicketDescription from './ticketDescription'
 import { useForm } from 'react-hook-form';
 import { TicketFormValues } from '@/types/tickets/ticketType';
@@ -12,7 +12,7 @@ import { UPSERT_TICKET } from '@graphql/operations/tickets/ticketMutation';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import { getAuthCredentials } from '@/utils/auth-utils';
-import { extractObjectId } from '@/services/extractions';
+import { extractObjectId, restructApprover } from '@/services/extractions';
 import _ from 'lodash';
 import TicketDetails from './ticketDetails';
 type Props = {
@@ -38,7 +38,8 @@ const TicketForm = ({ postDefault }: Props) => {
     formState: { errors },
     watch,
     reset,
-    setValue
+    setValue,
+    getValues
   } = useForm<TicketFormValues>({
     //@ts-ignore
     defaultValues: postDefault ?? defaultVals,
@@ -48,8 +49,7 @@ const TicketForm = ({ postDefault }: Props) => {
 
   const [upsertAcc] = useMutation(UPSERT_TICKET);
 
-  const onSubmit = async (values: TicketFormValues) => {
-
+  const onSubmit = async (values: TicketFormValues, type:string) => {
 
     values._id = _.get(postDefault, "_id")
     values.createdBy = _.get(values.createdBy, "_id")
@@ -57,8 +57,9 @@ const TicketForm = ({ postDefault }: Props) => {
     values.serviceDepartment = _.get(values.serviceDepartment, "_id")
     values.requestingDepartment = _.get(values.requestingDepartment, "_id")
     values.type = _.get(values.type, "code")
-    values.status =_.get(values.status, "code")
+    values.status = type
     values.postOrigin =  _.get(postDefault, "postOrigin") ? _.get(postDefault, "postOrigin") : null
+    values.approvers =  restructApprover(values.approvers)
 
     if(values.__typename){
       delete values.__typename
@@ -72,9 +73,9 @@ const TicketForm = ({ postDefault }: Props) => {
         },
       })
         .then((resp) => {
-          console.log("resp", resp)
+        
           toast.success('Ticket successfully saved');
-          reset()
+          // reset()
         })
         .catch((error) => {
 
@@ -83,11 +84,17 @@ const TicketForm = ({ postDefault }: Props) => {
     }
   }
 
+  useEffect(() => {
+   register("approvers")
+  }, [postDefault])
+  
+
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TicketDetails register={register} errors={errors} control={control} />
+      <form >
+      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+        {/* <TicketDetails register={register} errors={errors} control={control} /> */}
         <TicketDescription register={register} errors={errors} control={control} />
         <BorderDashed />
         <TicketAutorization
@@ -97,9 +104,12 @@ const TicketForm = ({ postDefault }: Props) => {
           createdByOpt={[user]}
           watch={watch} 
           setValue={setValue}
+          getValues={getValues}
+          update={_.get(postDefault, "_id") ? true : false}
           />
-        <div className="text-end mb-4 ">
-          <Button loading={false}>Save Details</Button>
+        <div className="text-end mb-4  ">
+          <Button onClick={handleSubmit(e => onSubmit(e,"draft" ))} className='mr-3' loading={false}>Save As Draft</Button>
+          <Button onClick={handleSubmit(e => onSubmit(e,"final" ))} loading={false}>Submit Final</Button>
         </div>
       </form>
     </div>

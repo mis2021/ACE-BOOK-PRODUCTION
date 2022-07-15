@@ -109,7 +109,7 @@ const TicketIndex = (props: Props) => {
       setState((p) => ({ ...p, ticketData: structuredTicket }));
     }
   }, [allTickets]);
-  console.log("allTickets",allTickets)
+ 
   return (
     <div>
       <HeaderDetails

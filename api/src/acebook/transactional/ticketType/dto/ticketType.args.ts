@@ -12,6 +12,10 @@ export class TicketTypePaginator {
 }
 
 
+@ArgsType()
+export class TicketTypePaginatorArg extends PaginationArgs {
+  code?: string;
+}
 
 // @ArgsType()
 // export class GetMusersArgs extends PaginationArgs {

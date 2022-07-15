@@ -5,7 +5,7 @@ import {
   PickType,
   registerEnumType,
 } from '@nestjs/graphql';
-import { TicketTypeEnt } from '../entities/ticketType.entity';
+import { TicketTypeEnt, TicketTypeEntInput } from '../entities/ticketType.entity';
 
 enum Permission {
   SUPER_ADMIN = 'Super admin',
@@ -15,9 +15,10 @@ enum Permission {
 }
 registerEnumType(Permission, { name: 'restrictiontt' });
 @InputType()
-export class UpsertTicketTypeInput extends PickType(TicketTypeEnt, [
+export class UpsertTicketTypeInput extends PickType(TicketTypeEntInput, [
   'name',
   'code',
+  'approvers',
   '_id'
 ]){permission: Permission = Permission.CUSTOMER;}
 

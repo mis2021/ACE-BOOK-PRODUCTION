@@ -51,15 +51,35 @@ const UpdateTicket: NextPageWithLayout = () => {
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
   });
+
+
+  const restructureApprUsr = (data:any)=>{
+
+    let result = null 
+
+    if(data){
+        result = data.map((item : any)=>{
+          return item.user
+        })
+    }
+
+    return result
+
+  }
   
-console.log("dataTickets", dataTickets)
+
   useEffect(() => {
 
     if (dataTickets) {
+    
       let cloneData  = _.cloneDeep(_.get(dataTickets,"tickets.data[0]"))
       cloneData.type = ticketTypeIdentifier(_.get(dataTickets,"tickets.data[0].type"), "object")
       cloneData.postOrigin =  _.cloneDeep(_.get(dataTickets,"tickets.data[0].postOrigin._id"))
       cloneData.status = ticketStatusIdentifier(_.get(dataTickets,"tickets.data[0].status"), "object")
+      cloneData.approvers = restructureApprUsr(_.get(dataTickets,"tickets.data[0].approvers"))
+
+        console.log("cloneData", cloneData)
+
       // let postDefault = {
       //   requestedBy: _.get(allPosts, "posts.data[0].createdBy"),
       //   createdBy: user ,
@@ -78,8 +98,7 @@ console.log("dataTickets", dataTickets)
 
   }, [dataTickets])
 
-console.log("cloneData", state.ticketDef)
-console.log("cloneData Org", _.get(dataTickets,"tickets.data[0]"))
+
 
   return (
     <>

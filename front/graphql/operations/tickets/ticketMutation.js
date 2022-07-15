@@ -11,4 +11,12 @@ mutation UpsertTicket($input: UpsertTicketInput!) {
 }
 `
 
+export const UPSERT_TICKET_TYPE = gql`
+mutation UpsertTicketType($input: UpsertTicketTypeInput!) {
+  upsertTicketType(input: $input) {
+    _id
+  }
+}
+`
+
 

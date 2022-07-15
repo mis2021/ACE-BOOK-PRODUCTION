@@ -9,8 +9,6 @@ type Props = {
 }
 
 const PostTagIcon = (props: Props) => {
-// const col = props.bgColor
-// console.log("col", col)
 const col = '#b6d7a8'
     return (
         <div>

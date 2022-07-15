@@ -1,5 +1,5 @@
 import { DepartmentEnt } from '@/acebook/masterdata/department/entities/department.entity';
-import { ApproverEnt } from '@/acebook/referenceType/approver.entity';
+import { ApproverEnt, ApproverEntInput } from '@/acebook/referenceType/approver.entity';
 import { UserEntAB } from '@/users/entities/user.entity';
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { CoreEntity, CoreEntityMg } from 'src/common/entities/core.entity';
@@ -41,7 +41,7 @@ export class TicketInput extends TicketEntCommon {
   comments?: string;
   reactions?: string;
   works?: string;
-  approvers?: string;
+  approvers?: ApproverEntInput[];
   postOrigin?: string;
   attachments?: string;
   createdBy?: string;

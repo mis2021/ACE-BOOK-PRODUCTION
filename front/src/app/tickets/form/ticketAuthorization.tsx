@@ -9,19 +9,32 @@ import SelectInput from '@admin/components/ui/select-input';
 import Label from '@admin/components/ui/label';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_DEPTS } from '@/graphql/queries/departments/departmentQueries';
-import _ from 'lodash';
+import _, { update } from 'lodash';
 import { SEARCH_ACCS } from '@graphql/operations/accounts/accountQueries';
+import { GET_TICKET_TYPE_SPEC } from '@graphql/operations/tickets/ticketQueries';
+import React, { useEffect, useState } from 'react'
+import PostTagIcon from '@/components/tags/tagIcon';
 
 type Props = {
     register?: any;
     errors?: any;
     control?: any;
-    createdByOpt?: any
-    watch?: any
-    setValue?: any
+    createdByOpt?: any;
+    watch?: any;
+    setValue?: any;
+    getValues?: any;
+
+
+    update?: boolean;
 };
 
-const TicketAutorization = ({ register, errors, control, createdByOpt, watch, setValue }: Props) => {
+type StateType = {
+    approverList?: object[];
+}
+
+const TicketAutorization = ({ register, errors, control, createdByOpt, watch, setValue, getValues , update}: Props) => {
+
+    const [state, setState] = useState<StateType>({ approverList: [] })
 
     const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS, {
         fetchPolicy: 'cache-and-network',
@@ -36,12 +49,7 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch, se
         nextFetchPolicy: 'cache-first',
     });
 
-  
-
-
     const getUserInputChange = (data: any) => {
-      
-        
         if (data != null || data != undefined || data != " ") {
             setTimeout(function () {
                 refectUsSearch({
@@ -52,14 +60,47 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch, se
     }
 
     const getUserChange = (data: any) => {
-       
         setValue("requestedBy", data)
-        if(confirm("Do you also want to change the requesting department base on requestor's department?")){
-           
+        if (confirm("Do you also want to change the requesting department base on requestor's department?")) {
+
             setValue("requestingDepartment", _.get(data, "departmentOnDuty"))
         }
     }
-    console.log("watch dep", watch("serviceDepartment"))
+
+
+    const { data: dataTicketType, refetch: refetchTicketType, loading } = useQuery(GET_TICKET_TYPE_SPEC, {
+        variables: {
+            code: "123456"
+        },
+        fetchPolicy: 'cache-and-network',
+        nextFetchPolicy: 'cache-first',
+    });
+
+
+    useEffect(() => {
+        if (dataTicketType && _.get(dataTicketType, "ticketTypes.data").length > 0 ) {
+            setValue("approvers", _.get(dataTicketType, "ticketTypes.data[0].approvers"))
+            setState((p) => ({ ...p, approverList: _.get(dataTicketType, "ticketTypes.data[0].approvers") }))
+        }
+        // else{
+        //     setState((p) => ({ ...p, approverList: watch("approvers") }))
+        // }
+    }, [dataTicketType])
+// Set initial approver(no yet solved)
+
+    useEffect(() => {
+        if (getValues("type") ) {
+            let typevals = getValues("type")
+            console.log("typevals", typevals)
+            refetchTicketType({
+                code: typevals.code
+            })
+        }
+
+    }, [watch("type")])
+
+
+
     return (
         <div className="my-5 flex flex-wrap sm:my-8">
             <Description
@@ -154,6 +195,22 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch, se
                             className="mb-5"
                         />
                     </div>
+                </div>
+
+                <div className=''>
+                    {state.approverList && state.approverList?.length > 0 ?
+                        <>
+                            <span className='font-bold pb-3'>Assignatories</span>
+                            <div>
+                                {state.approverList?.map((item: any) => (
+
+                                    <div className='pb-2'> <PostTagIcon name={`${item?.firstName}, ${item?.lastName}`}/> </div>
+
+                                ))}
+                            </div>
+                        </>
+                        : <></>
+                    }
                 </div>
 
             </Card>

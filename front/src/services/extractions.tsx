@@ -1,5 +1,7 @@
 import { UPLOAD_DOMAIN, UPLOAD_LINK } from "@/constants/uploads";
+import { ApproverType } from "@/types/tickets/ticketType";
 import _ from "lodash";
+import moment from "moment";
 
 type AttchDataType = {
     size?: number;
@@ -51,6 +53,20 @@ export const extractFileBlob = async (attachments: any, type: string) => {
         return data
     })
     return await blobImage;
+}
+
+export const restructApprover = (data: any) =>{
+
+    let result= null
+
+    if(data){
+        result   = data.map((item: any)=>{
+            return {user : item._id, status: "pending", updatedAt: moment(new Date()).format("YYYY-MM-DD") }
+        })
+    }
+
+    return result
+
 }
 
 

@@ -13,12 +13,14 @@ export type TicketFormValues = {
     serviceDepartment?: string;
     requestingDepartment?: string;
     type?: string | undefined;
+    approvers?: object[];
     status?: string;
     postOrigin?: string;
-    __typename? :string;
+    __typename?: string;
 
-    
-  };
+
+
+};
 
 export type TicketVarType = {
     name: string;
@@ -29,5 +31,16 @@ export type TicketVarType = {
 }
 
 export type TicketTypeForm = {
-    approver: string[];
+    code?: string;
+    approvers?: string[];
+}
+export type TicketTypeFormDef = {
+    code?: string | undefined;
+    approvers?: object[];
+}
+
+export type ApproverType = {
+    status?: string,
+    updatedAt?: string,
+    user?: string
 }

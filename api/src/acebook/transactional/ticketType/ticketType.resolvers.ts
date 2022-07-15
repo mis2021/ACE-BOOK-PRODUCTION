@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 import { TicketTypeService } from './ticketType.service';
 import { TicketTypeId, UpsertTicketTypeInput } from './dto/ticketType.input';
-import { TicketTypePaginator} from './dto/ticketType.args';
+import { TicketTypePaginator, TicketTypePaginatorArg} from './dto/ticketType.args';
 import { TicketTypeEnt } from './entities/ticketType.entity';
 
 @Resolver(() => TicketTypeEnt)
@@ -26,7 +26,7 @@ export class TicketTypeResolver {
   }
 
   @Query(() => TicketTypePaginator, { name: 'ticketTypes' })
-  getTags(@Args() getArgs: PaginationArgs) {
+  getTags(@Args() getArgs: TicketTypePaginatorArg) {
     return this.ticketTypeService.findAll(getArgs);
   }
 

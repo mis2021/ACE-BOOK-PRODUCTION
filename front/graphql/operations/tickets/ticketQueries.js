@@ -56,6 +56,16 @@ query Data($id: String) {
         _id
         name
       }
+      approvers {
+        status
+        updatedAt
+        user {
+          _id
+          firstName
+          middleName
+          lastName
+        }
+      }
     }
   }
 }
@@ -70,6 +80,23 @@ query Data {
       _id
       name
       code
+    }
+  }
+}
+`
+
+export const GET_TICKET_TYPE_SPEC = gql`
+query Data($code: String) {
+  ticketTypes(code: $code) {
+    data {
+      name
+      code
+      approvers {
+        firstName
+        middleName
+        lastName
+        _id
+      }
     }
   }
 }
