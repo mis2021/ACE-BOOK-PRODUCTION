@@ -64,6 +64,10 @@ query Data($id: String) {
           firstName
           middleName
           lastName
+          departmentOnDuty {
+            name
+            _id
+          }
         }
       }
     }
@@ -96,6 +100,10 @@ query Data($code: String) {
         middleName
         lastName
         _id
+        departmentOnDuty {
+          name
+          _id
+        }
       }
     }
   }

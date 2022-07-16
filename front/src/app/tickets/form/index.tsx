@@ -5,7 +5,7 @@ import { TicketFormValues } from '@/types/tickets/ticketType';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ticketValidationSchema } from './formvalidations/ticket-validation-schema';
 import BorderDashed from '@/components/ui/border';
-import TicketAutorization from './ticketAuthorization';
+import TicketAutorization from './authorization/ticketAuthorization';
 import Button from '@admin/components/ui/button';
 import { useMutation } from '@apollo/client';
 import { UPSERT_TICKET } from '@graphql/operations/tickets/ticketMutation';
@@ -61,9 +61,8 @@ const TicketForm = ({ postDefault }: Props) => {
     values.postOrigin =  _.get(postDefault, "postOrigin") ? _.get(postDefault, "postOrigin") : null
     values.approvers =  restructApprover(values.approvers)
 
-    if(values.__typename){
-      delete values.__typename
-    }
+    delete values.__typename
+    delete values.approvers_temp
    
     console.log("payload", values)
     if (confirm('Are you sure you want to save ticket?')) {
@@ -86,6 +85,7 @@ const TicketForm = ({ postDefault }: Props) => {
 
   useEffect(() => {
    register("approvers")
+   register("approvers_temp")
   }, [postDefault])
   
 
@@ -109,7 +109,7 @@ const TicketForm = ({ postDefault }: Props) => {
           />
         <div className="text-end mb-4  ">
           <Button onClick={handleSubmit(e => onSubmit(e,"draft" ))} className='mr-3' loading={false}>Save As Draft</Button>
-          <Button onClick={handleSubmit(e => onSubmit(e,"final" ))} loading={false}>Submit Final</Button>
+          <Button onClick={handleSubmit(e => onSubmit(e,"pending" ))} loading={false}>Submit Final</Button>
         </div>
       </form>
     </div>

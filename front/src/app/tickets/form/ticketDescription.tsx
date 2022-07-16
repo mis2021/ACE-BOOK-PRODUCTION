@@ -67,7 +67,7 @@ const TicketDescription = ({ register, errors, control }: Props) => {
                             error={errors.dateNeeded?.message!}
                             variant="outline"
                             className="mb-5"
-                            type='date'
+                            type='datetime-local'
                         />
                     </div>
 

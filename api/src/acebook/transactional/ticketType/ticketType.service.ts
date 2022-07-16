@@ -52,7 +52,9 @@ export class TicketTypeService {
 
   async findAll(payload: TicketTypePaginatorArg) {
     let filters = objectFilters(payload as TicketTypePaginatorArg);
-    const ticketType: TicketTypeEnt[] = await TicketType.find(filters).populate("approvers");
+    const ticketType: TicketTypeEnt[] = await TicketType.find(filters)
+    .populate({path:"approvers", populate: {path:"departmentOnDuty", model:"Department"}})
+    ;
     return {
       data: ticketType,
       paginatorInfo: paginate(

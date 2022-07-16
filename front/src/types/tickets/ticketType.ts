@@ -16,6 +16,7 @@ export type TicketFormValues = {
     approvers?: object[];
     status?: string;
     postOrigin?: string;
+    approvers_temp?: string;
     __typename?: string;
 
 

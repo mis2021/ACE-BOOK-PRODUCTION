@@ -63,7 +63,7 @@ export class TicketService {
     .populate('createdBy')
     .populate('requestedBy')
     .populate('postOrigin')
-    .populate({ path: 'approvers.user', model: 'MUser' })
+    .populate({ path: 'approvers.user', model: 'MUser', populate:{path: 'departmentOnDuty', model: 'Department'} })
     ;
     return {
       data: ticket,

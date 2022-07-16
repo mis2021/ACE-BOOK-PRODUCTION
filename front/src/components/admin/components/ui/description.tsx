@@ -12,7 +12,7 @@ const Description: React.FC<Props> = ({
   ...props
 }) => {
   return (
-    <div className={className} {...props}>
+    <div className={`${className} pl-3`} {...props}>
       {title && (
         <h4 className="text-base font-semibold text-body-dark mb-2">{title}</h4>
       )}

@@ -24,8 +24,8 @@ type StateType = {
 
 const breadcrumbs = [
   {
-    title: 'Post',
-    route: '/',
+    title: 'Tickets',
+    route: '/tickets',
     isHome: true,
   },
   {
@@ -76,9 +76,7 @@ const UpdateTicket: NextPageWithLayout = () => {
       cloneData.type = ticketTypeIdentifier(_.get(dataTickets,"tickets.data[0].type"), "object")
       cloneData.postOrigin =  _.cloneDeep(_.get(dataTickets,"tickets.data[0].postOrigin._id"))
       cloneData.status = ticketStatusIdentifier(_.get(dataTickets,"tickets.data[0].status"), "object")
-      cloneData.approvers = restructureApprUsr(_.get(dataTickets,"tickets.data[0].approvers"))
-
-        console.log("cloneData", cloneData)
+      cloneData.approvers_temp = restructureApprUsr(_.get(dataTickets,"tickets.data[0].approvers"))
 
       // let postDefault = {
       //   requestedBy: _.get(allPosts, "posts.data[0].createdBy"),

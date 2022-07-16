@@ -78,21 +78,22 @@ const TicketIndex = (props: Props) => {
       align: 'left',
       ellipsis: true,
     },
-    // {
-    //   title: "Actions",
-    //   dataIndex: 'id',
-    //   key: 'actions',
-    //   align: 'center',
-    //   width: 90,
-    //   render: (id: string) => (
-    //     <ActionButtons
-    //       id={id}
-    //       // editUrl={`/accounts/${id}`}
-    //       // editUrl={`${ROUTES.TAGS}/${id}/edit`}
-    //       deleteModalView="DELETE_TAG"
-    //     />
-    //   ),
-    // },
+    {
+      title: "Actions",
+      dataIndex: '_id',
+      key: 'actions',
+      align: 'center',
+      width: 90,
+      render: (id: string) => (
+        <ActionButtons
+          id={id}
+          editUrl={`/tickets/form/update/${id}`}
+          detailsUrl={`/tickets/view/${id}`}
+          // editUrl={`${ROUTES.TAGS}/${id}/edit`}
+          // deleteModalView="DELETE_TAG"
+        />
+      ),
+    },
   ];
 
 

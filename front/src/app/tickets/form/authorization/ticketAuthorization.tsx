@@ -14,6 +14,10 @@ import { SEARCH_ACCS } from '@graphql/operations/accounts/accountQueries';
 import { GET_TICKET_TYPE_SPEC } from '@graphql/operations/tickets/ticketQueries';
 import React, { useEffect, useState } from 'react'
 import PostTagIcon from '@/components/tags/tagIcon';
+import Assignatories from './assignatories';
+import Spinner from '@/components/ui/loaders/spinner/spinner';
+import Loader from '@/components/ui/loaders/loader';
+import SmallLoader from '@/components/ui/loaders/smallLoader';
 
 type Props = {
     register?: any;
@@ -30,11 +34,19 @@ type Props = {
 
 type StateType = {
     approverList?: object[];
+    approverListTemp?: object[];
+    loaded?: boolean;
+    loadingAssig?: boolean;
 }
 
-const TicketAutorization = ({ register, errors, control, createdByOpt, watch, setValue, getValues , update}: Props) => {
+const TicketAutorization = ({ register, errors, control, createdByOpt, watch, setValue, getValues, update }: Props) => {
 
-    const [state, setState] = useState<StateType>({ approverList: [] })
+    const [state, setState] = useState<StateType>({
+        approverList: [],
+        approverListTemp: [],
+        loaded: getValues("approvers_temp") ? false : true,
+        loadingAssig: false
+    })
 
     const { data: alldepts, refetch } = useQuery(GET_ALL_DEPTS, {
         fetchPolicy: 'cache-and-network',
@@ -78,7 +90,7 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch, se
 
 
     useEffect(() => {
-        if (dataTicketType && _.get(dataTicketType, "ticketTypes.data").length > 0 ) {
+        if (dataTicketType && _.get(dataTicketType, "ticketTypes.data").length > 0 && state.loaded) {
             setValue("approvers", _.get(dataTicketType, "ticketTypes.data[0].approvers"))
             setState((p) => ({ ...p, approverList: _.get(dataTicketType, "ticketTypes.data[0].approvers") }))
         }
@@ -86,18 +98,32 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch, se
         //     setState((p) => ({ ...p, approverList: watch("approvers") }))
         // }
     }, [dataTicketType])
-// Set initial approver(no yet solved)
+    // Set initial approver(no yet solved)
 
     useEffect(() => {
-        if (getValues("type") ) {
+        if (getValues("type") && state.loaded) {
             let typevals = getValues("type")
-            console.log("typevals", typevals)
+
             refetchTicketType({
                 code: typevals.code
             })
         }
-
     }, [watch("type")])
+
+    useEffect(() => {
+
+        if (getValues("approvers_temp")) {
+            setState((p) => ({ ...p, loadingAssig: true }))
+            setTimeout(() => {
+                setValue("approvers", getValues("approvers_temp"))
+                setState((p) => ({ ...p, approverList: getValues("approvers_temp"), loaded: true, loadingAssig: false }))
+            }, 1500);
+        }
+
+    }, [])
+
+console.log("approvers", watch("approvers"))
+
 
 
 
@@ -198,18 +224,23 @@ const TicketAutorization = ({ register, errors, control, createdByOpt, watch, se
                 </div>
 
                 <div className=''>
-                    {state.approverList && state.approverList?.length > 0 ?
-                        <>
-                            <span className='font-bold pb-3'>Assignatories</span>
-                            <div>
-                                {state.approverList?.map((item: any) => (
+                    {
+                        state.loadingAssig ?
+                            <>
+                                <div className='flex'>
+                                    <SmallLoader />
+                                    <span  className='pl-3'>Loading assignatories ...</span>
+                                </div>
+                            </>
 
-                                    <div className='pb-2'> <PostTagIcon name={`${item?.firstName}, ${item?.lastName}`}/> </div>
-
-                                ))}
-                            </div>
-                        </>
-                        : <></>
+                            :
+                            <>
+                                {
+                                    state.approverList && state.approverList?.length > 0 ?
+                                        <><Assignatories data={state.approverList} /></> : <></>
+                                    // <><Assignatories data={state.approverList} /></>: <></>
+                                }
+                            </>
                     }
                 </div>
 
