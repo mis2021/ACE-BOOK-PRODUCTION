@@ -22,6 +22,7 @@ const PostOptions = ({ clicked, index, postUserId, postId, ticketId }: Props) =>
                     {_.get(user, '_id') === postUserId ? <span onClick={e => clicked("edit")} className="text-gray-700 block px-4 py-1 text-sm w-full cursor-pointer" role="menuitem">Edit</span> : <></>}
                     {(postId && ticketId == null)  && <Link href={`/tickets/form/post/${postId}`}> <span className="text-gray-700 block px-4 py-1 text-sm w-full cursor-pointer" role="menuitem" >Create Ticket</span></Link>}
                     {ticketId && <Link href={`/tickets/form/update/${ticketId}`}> <span className="text-gray-700 block px-4 py-1 text-sm w-full cursor-pointer" role="menuitem" >Update Ticket</span></Link>}
+                    {ticketId && <Link href={`/tickets/view/${ticketId}`}> <span className="text-gray-700 block px-4 py-1 text-sm w-full cursor-pointer" role="menuitem" >View Ticket</span></Link>}
                     {/* <Link> <span onClick={e => clicked("ticket")} className="text-gray-700 block px-4 py-1 text-sm w-full cursor-pointer" role="menuitem" >Create Ticket</span></Link> */}
                 </>
             </DotDropdown>

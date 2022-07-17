@@ -14,6 +14,7 @@ import PostTagIcon from '@/components/tags/tagIcon';
 import PostTime from '@/app/posts/components/postTime';
 import ReactTimeAgo from 'react-time-ago';
 import InputLabelCont from '@/components/ui/labels/InputLabel';
+import ViewAssigs from './viewAssigs';
 
 
 type Props = {
@@ -24,11 +25,12 @@ type Props = {
 const ViewTicketApp = ({ data }: Props) => {
 
 
+    console.log("data", data)
 
 
 
     return (
-        <div className='flex justify-center pt-3'>
+        <div className='flex justify-center pt-3 mb-10'>
             <Card className="w-full sm:w-8/12 md:w-2/3">
                 <div className='flex flex-wrap relative '>
                     <div className='relative md:absolute right-0'>
@@ -59,16 +61,20 @@ const ViewTicketApp = ({ data }: Props) => {
                     <PostTagIcon name={(_.get(data, "tickets.data[0].status") ? ticketStatusIdentifier(_.get(data, "tickets.data[0].status"), 'name') : '') as string} bgClass={(_.get(data, "tickets.data[0].status") ? ticketStatusIdentifier(_.get(data, "tickets.data[0].status"), 'class') : '') as string} />
                 </div>
                 <div className='pt-3'>
-                    <span className=' font-bold '>  {_.get(data, "tickets.data[0].subject")} </span>
+                <h5 className="text-2xl font-normal leading-normal mt-0  text-stone-800">  {_.get(data, "tickets.data[0].subject")} </h5>
                 </div>
                 <div className='pt-1 pb-3' >
-                    <span className='  '>  {_.get(data, "tickets.data[0].description")} </span>
+                    <p className="text-base font-light leading-relaxed mt-0 mb-0 text-zinc-800">
+                        {_.get(data, "tickets.data[0].description")}  kk
+                    </p>
                 </div>
-                <hr />
+               
                 <div className='pt-1 relative'>
-                        <InputLabelCont label='Service Department' value={_.get(data, "tickets.data[0].serviceDepartment.name")} />
-                        <InputLabelCont label='Service Location' value={_.get(data, "tickets.data[0].location")} />
-                    
+                    <InputLabelCont label='Service Department' value={_.get(data, "tickets.data[0].serviceDepartment.name")} />
+                    <InputLabelCont label='Service Location' value={_.get(data, "tickets.data[0].location")} />
+                </div>
+                <div>
+                    <ViewAssigs data={_.get(data, "tickets.data[0].approvers")} />
                 </div>
 
 
