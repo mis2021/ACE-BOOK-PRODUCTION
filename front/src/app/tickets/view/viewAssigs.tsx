@@ -10,8 +10,7 @@ type Props = {
 }
 
 const ViewAssigs = ({ data }: Props) => {
-    console.log("Approvers", data)
-
+    
 
 
     return (
@@ -24,9 +23,9 @@ const ViewAssigs = ({ data }: Props) => {
                     data.map((item: any) => (
                         <div className='flex py-1'>
                             <div className='pt-1'>
-                                <div className={`w-4 h-4 ${item?.status == "disapprove" ? 'bg-red-600' :
+                                <div className={`w-4 h-4 ${item?.status == "disapproved" ? 'bg-red-600' :
                                     (
-                                        item?.status == "pending" ? "bg-orange-600" :
+                                        item?.status == "pending" ? "bg-slate-100" :
                                             (item?.status == "approved" ? "bg-green-600" : "")
                                     )
 
@@ -39,8 +38,6 @@ const ViewAssigs = ({ data }: Props) => {
 
                     ))
                 }
-
-
             </div>
 
         </div>
