@@ -37,7 +37,7 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
             //
         });
     }).catch(e => {
-        console.log(e);
+      
         status = 500;
         resultBody = {
             status: 'fail', message: 'Upload error'

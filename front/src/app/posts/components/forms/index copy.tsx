@@ -81,7 +81,7 @@ const PostFormIndex = ({ data }: Props) => {
                 dispatchPostRd({ type: "refetch", modalData: true })
             })
             .catch((error) => {
-                console.log("post error", error)
+               
                 toast.error("Failed to create post");
             });
     }

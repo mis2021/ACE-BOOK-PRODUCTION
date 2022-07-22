@@ -29,7 +29,7 @@ export const PostContext = React.createContext({})
 const { token } = getAuthCredentials();
 const PostIndex = ({ data, tags, index }: Props) => {
   const postValue: PostFormValues = data
-  console.log("postValue", postValue)
+ 
   const { openModal } = useModalAction();
   const optionClicked = async (clicked: any) => {
 

@@ -73,7 +73,7 @@ const DepartmentFeedIndex = (props: Props) => {
     }, [!isOpen])
 
     const filterBtnClicked = (data: any) => {
-        console.log("filterBtnClicked", data)
+      
         setState((p) => ({ ...p, type: data }))
 
         setTimeout(() => {

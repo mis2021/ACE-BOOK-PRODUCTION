@@ -40,7 +40,7 @@ const ViewTicket: NextPageWithLayout = () => {
     refetch()
   }, [!statePostRd.active])
 
-  console.log("dataTickets", dataTickets)
+ 
   return (
     <>
       <ModClassicLayout breadcrumb={breadcrumbs}>

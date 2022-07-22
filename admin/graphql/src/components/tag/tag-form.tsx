@@ -37,7 +37,7 @@ function SelectTypes({
   const { data: types, loading } = useTypesQuery({
     fetchPolicy: "network-only",
   });
-  console.log("types", types)
+
   return (
     <div className="mb-5">
       <Label>{t("form:input-label-types")}</Label>
@@ -90,8 +90,6 @@ type IProps = {
   initialValues?: Tag | null;
 };
 export default function CreateOrUpdateTagForm({ initialValues }: IProps) {
-
-  console.log("tagIcons", tagIcons)
 
   const router = useRouter();
   const { t } = useTranslation();

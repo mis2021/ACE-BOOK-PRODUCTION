@@ -47,7 +47,7 @@ const TicketTypeFormComp = ({ code, defaults }: Props) => {
 
 
   const onSubmit = async (values: TicketTypeForm) => {
-    console.log("old values", values)
+   
     // values.code = code
     values.approvers = extractObjectId(values.approvers)
     // console.log("values", values)
@@ -59,7 +59,7 @@ const TicketTypeFormComp = ({ code, defaults }: Props) => {
         },
       })
         .then((resp) => {
-          console.log("resp", resp)
+      
           if (_.get(resp, "data.upsertTicketType._id")) {
             toast.success('Ticket type successfully saved');
         

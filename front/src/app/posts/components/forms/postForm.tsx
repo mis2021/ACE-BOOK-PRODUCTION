@@ -62,7 +62,7 @@ const PostForm = ({ data: defaults }: Props) => {
                 dispatchPostRd({ type: "refetch", modalData: true })
             })
             .catch((error) => {
-                console.log("post error", error)
+              
                 toast.error("Failed to create post");
             });
     }
@@ -108,7 +108,7 @@ const PostForm = ({ data: defaults }: Props) => {
         payload.createdByDepartment = _.get(user, 'departmentOnDuty._id')
         payload.taggedDepartments = values?.taggedDepartments?.length == 0 ? null : extractObjectId(values?.taggedDepartments)
 
-        console.log("paylads", payload)
+       
 
         if (confirm('Comfirm post')) {
             let uploadResult: any

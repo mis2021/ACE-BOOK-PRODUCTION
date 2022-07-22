@@ -98,6 +98,22 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
             {/* {({ active }) => ( */}
             <li>
               <button
+                onClick={() => handleClick(`/profile`)}
+                className={cn(
+                  'block w-full py-2.5 px-6 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent focus:outline-none ltr:text-left rtl:text-right',
+                  'text-heading'
+                  // active ? 'text-accent' : 'text-heading'
+                )}
+              >
+                Profile
+              </button>
+            </li>
+            {/* )} */}
+          </Menu.Item>
+           <Menu.Item >
+            {/* {({ active }) => ( */}
+            <li>
+              <button
                 onClick={() => handleClick(`/departments/${_.get(cookieUser, 'departmentOnDuty._id')}`)}
                 className={cn(
                   'block w-full py-2.5 px-6 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent focus:outline-none ltr:text-left rtl:text-right',

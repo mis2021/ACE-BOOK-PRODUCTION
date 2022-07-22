@@ -47,14 +47,14 @@ const CommentForm = (props: Props) => {
             user: userId
         }
 
-        console.log("payload", payload)
+     
         upsertDept({
             variables: {
                 input: payload,
             },
         })
             .then((resp) => {
-                console.log("resp", resp)
+             
                 toast.success("Comment posted")
                 dispatch({ type: "refetch", modalData: true })
                 reset()

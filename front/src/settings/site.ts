@@ -33,13 +33,17 @@ export const siteSettings = {
   //   { href: ROUTES.ORDERS, label: 'auth-menu-my-orders' },
   //   { href: ROUTES.CHECKOUT, label: 'auth-menu-checkout' },
   // ],
+  // authorizedLinksMobile: [
+  //   { href: ROUTES.PROFILE, label: 'auth-menu-profile' },
+  //   { href: ROUTES.ORDERS, label: 'auth-menu-my-orders' },
+  //   { href: ROUTES.REFUNDS, label: 'text-my-refunds' },
+  //   { href: ROUTES.CHECKOUT, label: 'auth-menu-checkout' },
+  //   { href: ROUTES.CHANGE_PASSWORD, label: 'profile-sidebar-password' },
+  //   { href: ROUTES.LOGOUT, label: 'auth-menu-logout' },
+  // ],
   authorizedLinksMobile: [
-    { href: ROUTES.PROFILE, label: 'auth-menu-profile' },
-    { href: ROUTES.ORDERS, label: 'auth-menu-my-orders' },
-    { href: ROUTES.REFUNDS, label: 'text-my-refunds' },
-    { href: ROUTES.CHECKOUT, label: 'auth-menu-checkout' },
-    { href: ROUTES.CHANGE_PASSWORD, label: 'profile-sidebar-password' },
-    { href: ROUTES.LOGOUT, label: 'auth-menu-logout' },
+    { href: ROUTES.PROFILE, label: 'Profile' },
+    { href: ROUTES.LOGOUT, label: 'Logout' },
   ],
   dashboardSidebarMenu: [
     {

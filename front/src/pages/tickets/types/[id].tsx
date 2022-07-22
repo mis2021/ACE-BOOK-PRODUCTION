@@ -61,13 +61,11 @@ const TicketTypes: NextPageWithLayout = () => {
 
     useEffect(() => {
         if (dataTicketType) {
-            console.log("dataTicketType", dataTicketType)
+          
             let data = _.cloneDeep(_.get(dataTicketType, "ticketTypes.data[0]"))
             let payload: TicketTypeFormDef = {};
             payload.approvers = data?.approvers
             payload.code = id as string
-            
-            console.log("payload", payload)
 
             setState((p) => ({ ...p, formDefault: payload }))
             setTimeout(() => {

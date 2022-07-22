@@ -9,7 +9,7 @@ const PostFilters = (props: Props) => {
   const [type, setType] = useState<any>({type : null})
 
   const clickedButton = (type: string)=>{
-      console.log("type", type)
+      
       setType(type)
       props.clicked(type)
   }
