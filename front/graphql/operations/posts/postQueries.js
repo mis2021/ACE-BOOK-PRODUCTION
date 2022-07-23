@@ -19,6 +19,7 @@ query Data($first: Int, $page: Int, $departmentId: String, $type: String, $skip:
         _id
         firstName
         lastName
+        profilePicture
         departmentOnDuty {
           _id
           name

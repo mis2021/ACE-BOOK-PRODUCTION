@@ -4,13 +4,10 @@ import Card from '@/components/common/card';
 import Description from '@admin/components/ui/description';
 import { getLayout } from '@/components/layouts/layout';
 import { useTranslation } from 'next-i18next';
+import AttachmentUpload from '@/components/upload';
+import { PropForm } from '@/types/forms/propHookForm';
 
-type Props = {
-    register?: any;
-    errors?: any;
-  };
-
-const ProfileUpload = ({register , errors } : Props) => {
+const ProfileUpload = ({register,...props} : PropForm) => {
     const { t } = useTranslation();
   return (
     <>
@@ -24,13 +21,20 @@ const ProfileUpload = ({register , errors } : Props) => {
         <Card className="w-full sm:w-8/12 md:w-2/3">
           <div className="grid  gap-3 md:grid-cols-1 lg:grid-cols-1">
             <div>
-              <Input
+              {/* <Input
                 label={'Upload *'}
                 {...register('firstName')}
                 error={t(errors.firstName?.message!)}
                 variant="outline"
                 className="mb-5"
-              />
+              /> */}
+                 <AttachmentUpload
+                  register={register} 
+                  watch={props.watch} 
+                  getValues={props.getValues} 
+                  setValue={props.setValue}
+                  
+                  />
             </div>
           </div>
 

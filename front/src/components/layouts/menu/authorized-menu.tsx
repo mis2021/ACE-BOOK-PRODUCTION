@@ -9,8 +9,8 @@ import { avatarPlaceholder } from '@/lib/placeholders';
 import { UserOutlinedIcon } from '@/components/icons/user-outlined';
 import { useLogout, useUser } from '@/framework/user';
 import { ROUTES } from '@/lib/routes';
-import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
 import _ from 'lodash';
+import { getAuthCredentials, hasAccess } from "@utils/auth-utils";
 
 const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
   const { mutate: logout } = useLogout();
@@ -36,10 +36,13 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
           <UserOutlinedIcon className="h-5 w-5" />
         ) : (
           <Avatar
-            src={me?.profile?.avatar?.thumbnail ?? avatarPlaceholder}
+            src={  _.get(cookieUser, 'profilePicture') ? `/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={me?.profile?.avatar?.thumbnail ?? avatarPlaceholder}
             title="user name"
             className="h-10 w-10"
           />
+
+
         )}
         <span className="sr-only">{t('user-avatar')}</span>
       </Menu.Button>

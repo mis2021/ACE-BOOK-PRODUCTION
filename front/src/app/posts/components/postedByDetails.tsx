@@ -5,15 +5,16 @@ type Props = {
   firstName?: any;
   lastName?: any;
   department?: any;
+  profilePicture?: any;
 };
 
-const PostedByDetails = ({firstName, lastName, department}: Props) => {
+const PostedByDetails = ({firstName, lastName, department, profilePicture}: Props) => {
  
   return (
     <div>
       <div className="mb-2 flex items-center space-x-3">
         <Avatar
-          src={'/_next/static/media/avatar.c9441dc8.svg'}
+          src={profilePicture ?`/uploads/profiles/${profilePicture}` : '/_next/static/media/avatar.c9441dc8.svg'}
           title="user name"
           className="h-10 w-10"
         />

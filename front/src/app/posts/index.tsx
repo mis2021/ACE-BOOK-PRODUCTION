@@ -51,7 +51,7 @@ const PostIndex = ({ data, tags, index }: Props) => {
         <PostLayout>
           <div className='flex w-full'>
             <div className=''>
-              <PostedByDetails firstName={_.get(data, 'createdBy.firstName')} lastName={_.get(data, 'createdBy.lastName')} department={_.get(data, 'createdByDepartment.name')} />
+              <PostedByDetails firstName={_.get(data, 'createdBy.firstName')} lastName={_.get(data, 'createdBy.lastName')} department={_.get(data, 'createdByDepartment.name')} profilePicture={_.get(data, 'createdBy.profilePicture')} />
               <div className='absolute top-[2.8rem] left-[4.2rem]'>
                 <div className='flex gap-2'>
                   <PostTime created_at={_.get(data, 'created_at')} />

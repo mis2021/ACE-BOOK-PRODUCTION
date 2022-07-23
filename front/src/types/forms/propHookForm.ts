@@ -5,4 +5,5 @@ export type PropForm = {
     createdByOpt?: any
     watch?: any
     setValue?: any
+    getValues?:any
 };

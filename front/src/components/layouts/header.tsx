@@ -36,7 +36,7 @@ const Header = ({ layout }: { layout: string }) => {
     !displayHeaderSearch && isHomePage && layout !== 'modern';
 
 
-  console.log("user",user)
+  
 
   return (
     <header

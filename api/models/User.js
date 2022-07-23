@@ -12,6 +12,7 @@ const userSchema = new Schema({
   contact: { type: String  },
   email: { type: String, unique: true, default: null },
   password: { type: String },
+  profilePicture: { type: String, default: null },
   // role: {type : String , default: null},
   token: { type: String , default: null },
   departmentOnDuty:{

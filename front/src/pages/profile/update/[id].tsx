@@ -9,6 +9,8 @@ import TicketIndex from '@/app/tickets';
 import DashboardLayout from '@/layouts/_dashboard';
 import ProfileApp from '@/app/profile';
 import ProfileForm from '@/app/profile/form';
+import { useRouter } from 'next/router';
+
 
 type Props = {}
 
@@ -16,11 +18,14 @@ const variables = {
   type: 'grocery',
 }
 const ProfileUpdate: NextPageWithLayout = () => {
+  const { query } = useRouter();
+  const { searchType, id, ...restQuery } = query;
+
   return (
     <>
       <ModClassicLayout>
         <>
-        <ProfileForm/>
+          <ProfileForm id={id as string} />
         </>
       </ModClassicLayout>
     </>
