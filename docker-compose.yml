@@ -2,27 +2,21 @@ version: "3"
 services:
   app-api:
     build: ./api
+    user: root
     ports:
       - "4000:4000"
     volumes:
       - api:/usr/src/app/acebook/api
-  
+
   app-front:
     build: ./front
-    environment:
-    - FRAMEWORK_PROVIDER='graphql'
-    - NEXT_PUBLIC_GRAPHQL_API_ENDPOINT='http://172.16.20.176:4000/graphql'
-    - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
-    - NEXT_PUBLIC_ADMIN_URL=
-    - SECRET=ACEBOOK123!!
-    - GOOGLE_CLIENT_ID=
-    - GOOGLE_CLIENT_SECRET=
+    user: root
+    privileged: true
     ports:
       - "3000:3000"
     volumes:
       - front:/usr/src/app/acebook/front
       - /mnt/nas:/usr/src/app/acebook/front/public/uploads
-      
 volumes:
   api:
   front:

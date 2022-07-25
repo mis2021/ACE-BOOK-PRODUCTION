@@ -15,4 +15,4 @@ RUN find /var/www/sitename/public/uploads -type d -exec chmod 755 {} \;
 # RUN yarn start
 
 CMD ["yarn", "start"]
-# CMD ["yarn", "build", "start:prod"]
+
