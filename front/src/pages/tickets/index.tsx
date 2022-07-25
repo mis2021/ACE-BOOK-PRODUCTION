@@ -5,23 +5,24 @@ import ModIndexClassicLayout from '@/components/layouts/mod-index-classic';
 import { adminOnly } from '@/utils/auth-utils';
 import HeaderDetails from '@/components/ui/headers/header-details';
 import ModClassicLayout from '@/components/layouts/mod-classic';
+import TicketIndex from '@/app/tickets';
+
 
 type Props = {}
+
+
 
 const variables = {
   type: 'grocery',
 }
 const Tickets: NextPageWithLayout = () => {
+
+  
   return (
     <>
       <ModClassicLayout>
-        {/* <DashboardIndex /> */}
         <>
-          <HeaderDetails
-            title={'Tickets'}
-            buttonName={'+ Create Ticket'}
-            buttonRoute={'/tickets/form'}
-          />
+          <TicketIndex />
         </>
       </ModClassicLayout>
     </>

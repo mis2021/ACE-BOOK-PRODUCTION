@@ -51,7 +51,7 @@ const ACDataTable = ({columns, data}: any) => {
         <Table
           //@ts-ignore
           columns={columns}
-          emptyText={t('table:empty-table-data')}
+          emptyText={"Nothing to display"}
           //@ts-ignore
           data={data}
           rowKey="id"

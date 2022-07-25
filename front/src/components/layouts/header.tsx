@@ -9,7 +9,9 @@ import dynamic from 'next/dynamic';
 import { authorizationAtom } from '@/store/authorization-atom';
 import { useIsHomePage } from '@/lib/use-is-homepage';
 import { useEffect } from 'react';
+import { getAuthCredentials, hasAccess } from "@utils/auth-utils";
 import GroupsDropdownMenu from './menu/groups-menu';
+import _ from 'lodash';
 const Search = dynamic(() => import('@/components/ui/search/search'));
 const AuthorizedMenu = dynamic(() => import('./menu/authorized-menu'), {
   ssr: false,
@@ -17,6 +19,7 @@ const AuthorizedMenu = dynamic(() => import('./menu/authorized-menu'), {
 const JoinButton = dynamic(() => import('./menu/join-button'), { ssr: false });
 
 const Header = ({ layout }: { layout: string }) => {
+  const { user } = getAuthCredentials();
   const { t } = useTranslation('common');
   const [displayHeaderSearch, setDisplayHeaderSearch] = useAtom(
     displayHeaderSearchAtom
@@ -31,6 +34,10 @@ const Header = ({ layout }: { layout: string }) => {
   }, [isHomePage, setDisplayHeaderSearch]);
   const isFlattenHeader =
     !displayHeaderSearch && isHomePage && layout !== 'modern';
+
+
+  
+
   return (
     <header
       className={cn('site-header-with-search h-14 md:h-16 lg:h-22', {
@@ -50,7 +57,7 @@ const Header = ({ layout }: { layout: string }) => {
           <Logo className="mx-auto lg:mx-0" />
 
           <div className="hidden ltr:ml-10 rtl:mr-10 ltr:mr-auto rtl:ml-auto xl:block">
-            <GroupsDropdownMenu />
+            {/* <GroupsDropdownMenu /> */}
           </div>
         </div>
         {isHomePage ? (
@@ -79,6 +86,9 @@ const Header = ({ layout }: { layout: string }) => {
             >
               {t('text-become-seller')}
             </a> */}
+           {user && <div>
+             {_.get(user, "firstName")}  {_.get(user, "lastName")} | <b> {_.get(user, "departmentOnDuty.name")}</b>
+            </div>}
             <AuthorizedMenu />
             {/* <li>{isAuthorize ? <AuthorizedMenu /> : <JoinButton />}</li> */}
           </div>

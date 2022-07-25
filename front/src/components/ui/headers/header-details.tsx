@@ -27,13 +27,13 @@ const HeaderDetails = ({title, buttonName, buttonRoute}: Props) => {
         <div className="ms-auto flex w-full flex-col items-center space-y-4 md:flex-row md:space-y-0 xl:w-1/2 mx-6">
         <Search onSearch={handleSearch} />
 
-        <LinkButton
+       {buttonName ? <LinkButton
           href={buttonRoute ? buttonRoute : '/'}
           className="md:ms-6 mx-3 h-12 w-full md:w-auto"
         >
           <span className="block md:hidden xl:block">{buttonName}</span>
           <span className="hidden md:block xl:hidden">{buttonName}</span>
-        </LinkButton>
+        </LinkButton> : <></>}
       </div>
     </Card>
   );

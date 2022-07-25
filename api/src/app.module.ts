@@ -29,6 +29,7 @@ import { CommentModule } from './acebook/transactional/comment/comment.modules';
 import { AttachmentModule } from './acebook/transactional/attachment/attachment.modules';
 import { PostModule } from './acebook/transactional/post/post.modules';
 import { TicketModule } from './acebook/transactional/ticket/ticket.modules';
+import { TicketTypeModule } from './acebook/transactional/ticketType/ticketType.modules';
 
 @Module({
   imports: [
@@ -64,7 +65,8 @@ import { TicketModule } from './acebook/transactional/ticket/ticket.modules';
     CommentModule,
     AttachmentModule,
     PostModule,
-    TicketModule
+    TicketModule,
+    TicketTypeModule
   ],
   controllers: [],
   providers: [],

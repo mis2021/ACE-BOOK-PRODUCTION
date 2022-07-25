@@ -35,6 +35,7 @@ export class RegisterInputMU extends PickType(UserEntABInput, [
   'departmentOnDuty',
   'department',
   'restrictionCode',
+  'profilePicture'
 ]) {
   permission: Permission = Permission.CUSTOMER;
 }

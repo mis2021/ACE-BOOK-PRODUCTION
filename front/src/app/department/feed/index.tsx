@@ -30,14 +30,28 @@ const DepartmentFeedIndex = (props: Props) => {
 
     const { isOpen } = useModalState();
 
+    let queryVar = {
+        departmentId: props.departmentId,
+        type: state.type,
+        user: null,
+        privacy: false,
+        skip: 0,
+    }
+
     const { data: allPosts, refetch, loading: postLoading } = useQuery(GET_POSTS, {
-        variables: {
-            departmentId: props.departmentId,
-            type: state.type
-        },
+        variables: queryVar,
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first',
     });
+
+    // const { data: allPosts, refetch, loading: postLoading } = useQuery(GET_POSTS, {
+    //     variables: {
+    //         departmentId: props.departmentId,
+    //         type: state.type
+    //     },
+    //     fetchPolicy: 'cache-and-network',
+    //     nextFetchPolicy: 'cache-first',
+    // });
 
     const assignPost = () => {
 
@@ -59,7 +73,7 @@ const DepartmentFeedIndex = (props: Props) => {
     }, [!isOpen])
 
     const filterBtnClicked = (data: any) => {
-        console.log("filterBtnClicked", data)
+      
         setState((p) => ({ ...p, type: data }))
 
         setTimeout(() => {
@@ -68,7 +82,7 @@ const DepartmentFeedIndex = (props: Props) => {
 
     }
 
-   
+
 
 
     return (
@@ -76,16 +90,27 @@ const DepartmentFeedIndex = (props: Props) => {
             <FeedPostLayout>
                 <FeedHeader />
                 <PostFilters clicked={filterBtnClicked} />
-                <FeedPosts 
-                 posts={state.posts}
-                 loading={postLoading} 
-                 refetch={refetch} 
-                 countAll={_.get(allPosts, "posts.paginatorInfo.count")} 
-                 currentPage={_.get(allPosts, "posts.paginatorInfo.currentPage")}
-                 departmenId={props.departmentId}
-                 type={state.type}
-                 />
-       
+                {/* <FeedPosts
+                    posts={state.posts}
+                    loading={postLoading}
+                    refetch={refetch}
+                    countAll={_.get(allPosts, "posts.paginatorInfo.count")}
+                    currentPage={_.get(allPosts, "posts.paginatorInfo.currentPage")}
+                    departmenId={props.departmentId}
+                    type={state.type}
+                /> */}
+
+                <FeedPosts
+                    posts={state.posts}
+                    loading={postLoading}
+                    refetch={refetch}
+                    countAll={_.get(allPosts, "posts.paginatorInfo.count")}
+                    currentPage={_.get(allPosts, "posts.paginatorInfo.currentPage")}
+                    refetchQuery={queryVar}
+                    departmenId={props.departmentId}
+                    type={state.type}
+                />
+
                 {/* <FeedPosts posts={state.posts} loading={postLoading} /> */}
             </FeedPostLayout>
         </div>

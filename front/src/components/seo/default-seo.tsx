@@ -1,3 +1,4 @@
+import { PROJECT_NAME } from '@/constants/projectFixEnv';
 import { useSettings } from '@/framework/settings';
 import { DefaultSeo as NextDefaultSeo } from 'next-seo';
 
@@ -33,7 +34,7 @@ const DefaultSeo = () => {
       titleTemplate={`${
         settings?.seo?.metaTitle || settings?.siteTitle || 'E-Commerce'
       } | %s`}
-      defaultTitle="PickBazar"
+      defaultTitle={PROJECT_NAME}
       description={settings?.seo?.metaDescription || settings?.siteSubtitle}
       canonical={settings?.seo?.canonicalUrl}
       openGraph={{

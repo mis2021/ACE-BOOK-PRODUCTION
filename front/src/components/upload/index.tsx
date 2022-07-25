@@ -10,6 +10,7 @@ type Props = {
     getValues?: any;
     watch?: any;
     setValue?: any;
+
 }
 
 const UploadIconContainer = ({ children }: any) => (

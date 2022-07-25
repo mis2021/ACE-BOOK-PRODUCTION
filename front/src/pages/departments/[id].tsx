@@ -4,7 +4,7 @@ import ModIndexClassicLayout from '@/components/layouts/mod-index-classic';
 import { getAuthCredentials } from "@utils/auth-utils";
 import _ from 'lodash'
 import DepartmentFeedIndex from '@/app/department/feed';
-
+import { adminOnly } from '@/utils/auth-utils';
 type Props = {}
 
 const SpecificDepartment = (props: Props) => {
@@ -22,4 +22,7 @@ const SpecificDepartment = (props: Props) => {
     )
 }
 SpecificDepartment.getLayout = getLayout;
+SpecificDepartment.authenticate = {
+  permissions: adminOnly,
+};
 export default SpecificDepartment

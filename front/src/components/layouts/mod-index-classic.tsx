@@ -44,7 +44,8 @@ function ModIndexClassicLayout({ children}: Props) {
         />
 
         <div className="w-full">
-          <div className="bg-gray mx-6 md:mx-14 ">
+          <div className="bg-gray mx-1 md:mx-14 ">
+          {/* <div className="bg-gray mx-6 md:mx-14 "> */}
 
             <div className="bg-gray min-h-screen  ">
               <div className="mx-auto flex  md:w-7/12 max-w-none flex-col  pt-3 object-center">

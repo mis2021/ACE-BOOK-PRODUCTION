@@ -11,6 +11,11 @@ export const postReducer = (state : any, action:any ) => {
     }
   }
 
-  export const initialStatePostRedc = {
+  export const initialStatePostRedc : any = {
     active: false,
+  }
+
+
+  export type PostReducerStateType ={
+    active?: Boolean;
   }
