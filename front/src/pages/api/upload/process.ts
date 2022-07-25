@@ -50,7 +50,7 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
 
         /* Create directory for uploads */
         const targetPath = path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
-       
+        
         try {
             await fs.access(targetPath);
         } catch (e) {
@@ -60,10 +60,12 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
         /* Move uploaded files to directory */
         for (const file of files) {
             const tempPath = file[1].filepath;
+
             await fs.copyFile(tempPath, targetPath + file[1].originalFilename);
+
         }
     }
-
+    console.log("resultBody", resultBody)
     res.status(status).json(resultBody);
 }
 
