@@ -7,17 +7,35 @@ type Props = {}
 
 const Configs = (props: Props) => {
     return (
-        <div className='flex md:w-full justify-center'>
+        <>
+            {/* <div className='flex justify-center'>
+             <div className='w-3/6'>
+                <div className=''> */}
 
-            <Link href={'/tickets/types'}>
-                    <Card className='w-full md:w-3/6 cursor-pointer flex'>
-                     <Tickets/>  
-                     <span className='pl-5'> Ticket Settings </span>
-                    </Card>
-            </Link>
+            {/* <div className='w-full'> */}
+            <div className='flex justify-center'>
+                <div className='w-3/6'>
+                    <Link href={'/tickets/types'}>
+                        <Card className='w-full md:w-full cursor-pointer flex mb-2'>
+                            <Tickets />
+                            <span className='pl-5'> Ticket Settings </span>
+                        </Card>
+                    </Link>
 
 
-        </div>
+                    <Link href={'/feedback/categories'}>
+                        <Card className='w-full md:w-full cursor-pointer flex'>
+                            <Tickets />
+                            <span className='pl-5'> Feedback Question Settings </span>
+                        </Card>
+                    </Link>
+                </div>
+            </div>
+
+            {/* </div>
+             </div>
+         </div> */}
+        </>
     )
 }
 
