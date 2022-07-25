@@ -65,7 +65,7 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
 
         }
     }
-    console.log("resultBody", resultBody)
+   
     res.status(status).json(resultBody);
 }
 
