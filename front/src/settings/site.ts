@@ -3,9 +3,9 @@ export const siteSettings = {
   name: 'AceBook',
   description: '',
   logo: {
-    url: '/logo.svg',
+    url: '/logo-title.png',
     alt: 'AceBook',
-    href: '/grocery',
+    href: '/',
     width: 128,
     height: 40,
   },

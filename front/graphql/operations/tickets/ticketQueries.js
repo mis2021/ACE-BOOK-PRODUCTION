@@ -1,8 +1,8 @@
 import {gql, useQuery} from '@apollo/client';
 
 export const GET_ALL_TICKETS = gql`
-query Data($id: String) {
-  tickets(_id: $id) {
+query Data($id: String, $type: String, $userId: String, $departmentId: String) {
+  tickets(_id: $id,type: $type,userId: $userId,departmentId: $departmentId) {
     data {
       _id
       created_at
@@ -49,6 +49,7 @@ query Data($id: String) {
         firstName
         middleName
         lastName
+        profilePicture
       }
       dateRequested
       dateNeeded

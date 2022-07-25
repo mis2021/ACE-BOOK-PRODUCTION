@@ -37,7 +37,7 @@ type StateType = {
 
 const ViewTicketApp = ({ data }: Props) => {
     const { user } = getAuthCredentials();
-    console.log("data", data)
+   
 
     const [state, setState] = useState<StateType>({ isApprover: false, pending: true })
     const [upsertAcc] = useMutation(UPSERT_TICKET);
@@ -132,7 +132,7 @@ const ViewTicketApp = ({ data }: Props) => {
                     <div className='pt-3 md:pt-0 w-full'>
 
                         <div className='relative'>
-                            <PostedByDetails firstName={_.get(data, "tickets.data[0].requestedBy.firstName")} lastName={_.get(data, "tickets.data[0].requestedBy.lastName")} department={_.get(data, "tickets.data[0].requestingDepartment.name")} />
+                            <PostedByDetails firstName={_.get(data, "tickets.data[0].requestedBy.firstName")} lastName={_.get(data, "tickets.data[0].requestedBy.lastName")} department={_.get(data, "tickets.data[0].requestingDepartment.name")} profilePicture={_.get(data, "tickets.data[0].requestedBy.profilePicture")}/>
                             <div className='absolute   top-[2.3rem] left-[3rem]'>
                                 <div className='relative flex'>
                                     <div className="text-[12px] text-body">

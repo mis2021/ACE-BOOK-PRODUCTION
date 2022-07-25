@@ -14,6 +14,9 @@ export class TicketPaginator {
 @ArgsType()
 export class TicketPaginatorArg extends PaginationArgs {
   _id?: string;
+  type?: string;
+  userId?: string;
+  departmentId?: string;
 }
 
 // @ArgsType()

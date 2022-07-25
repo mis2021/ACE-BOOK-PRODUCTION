@@ -49,8 +49,20 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
     if (files?.length) {
 
         /* Create directory for uploads */
-        const targetPath = path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
-       
+        // const targetPath = `\\\\172.16.12.30\\misbackup\\acebook\\public\\uploads\\${pathUpload}\\`;
+        const targetPath = process.env.NODE_ENV == "production" ?  `\\\\172.16.12.30\\misbackup\\acebook\\public\\uploads\\${pathUpload}` : path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
+      
+      
+      
+      
+        // const targetPath = "\\\\172.16.12.30\\mis\\JACKY\\storage\\acebook\\files\\";
+
+        // const targetPath = "http://172.16.12.30:5000/misbackup/acebook/public/uploads";
+        // const targetPath = "C:\Users\ACEMCB\Documents\storage\acebook";
+        
+        // const targetPath = path.join(process.cwd(), pathUpload);
+        // const targetPath = path.join(process.cwd(), pathUpload);
+         
         try {
             await fs.access(targetPath);
         } catch (e) {
@@ -60,7 +72,10 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
         /* Move uploaded files to directory */
         for (const file of files) {
             const tempPath = file[1].filepath;
+
             await fs.copyFile(tempPath, targetPath + file[1].originalFilename);
+            // await mv(tempPath, targetPath + file[1].originalFilename,  {mkdirp: true});
+            // await fs.rename(tempPath, targetPath + file[1].originalFilename);
         }
     }
 
