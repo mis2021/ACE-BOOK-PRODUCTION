@@ -5,9 +5,9 @@ services:
     user: root
     ports:
       - "4000:4000"
+    restart: always
     volumes:
       - api:/usr/src/app/acebook/api
-    restart: always
 
   app-front:
     build: ./front
@@ -15,10 +15,10 @@ services:
     privileged: true
     ports:
       - "3000:3000"
+    restart: always
     volumes:
       - front:/usr/src/app/acebook/front
       - /mnt/nas:/usr/src/app/acebook/front/public/uploads
-    restart: always
 
 volumes:
   api:
