@@ -44,7 +44,7 @@ const FeedbackCategoryApp = (props: Props) => {
       render: (id: string) => (
         <ActionButtons
           id={id}
-          editUrl={`/accounts/${id}`}
+          editUrl={`/feedback/categories/form/${id}`}
           // editUrl={`${ROUTES.TAGS}/${id}/edit`}
           deleteModalView="DELETE_TAG"
         />

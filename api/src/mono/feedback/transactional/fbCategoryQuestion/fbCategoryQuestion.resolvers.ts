@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
 import { FbCategoryQuestionService } from './fbCategoryQuestion.service';
 import { FbCategoryQuestionId, UpsertFbCategoryQuestionInput } from './dto/fbCategoryQuestion.input';
-import { FbCategoryQuestionPaginator} from './dto/fbCategoryQuestion.args';
+import { FbCategoryQuestionPaginator, FCQPaginatorArg} from './dto/fbCategoryQuestion.args';
 import { FbCategoryQuestionEnt } from './entities/fbCategoryQuestion.entity';
 
 @Resolver(() => FbCategoryQuestionEnt)
@@ -26,7 +26,7 @@ export class FbCategoryQuestionResolver {
   }
 
   @Query(() => FbCategoryQuestionPaginator, { name: 'fbCategoryQuestions' })
-  getTags(@Args() getArgs: PaginationArgs) {
+  getTags(@Args() getArgs: FCQPaginatorArg) {
     return this.fbCategoryQuestionService.findAll(getArgs);
   }
 

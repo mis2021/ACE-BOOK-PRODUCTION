@@ -3,11 +3,25 @@ import { FbQuestionEnt } from '@/mono/feedback/masterdata/fbQuestion/entities/fb
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { CoreEntity, CoreEntityMg } from 'src/common/entities/core.entity';
 
+@InputType('QuestionInputType', { isAbstract: true })
+@ObjectType()
+export class QuestionInpt {
+  question: string;
+  _id?: string | null;
+}
+
+@InputType('CategInputType', { isAbstract: true })
+@ObjectType()
+export class CategInpt {
+  description: string;
+  name: string;
+}
+
 @InputType('FbCategoryQuestionInputType', { isAbstract: true })
 @ObjectType()
 export class FbCategoryQuestionInput extends CoreEntityMg {
-  category: string;
-  questions: string[];
+  category: FbCategoryEnt;
+  questions: QuestionInpt[];
 }
 
 @InputType('FbCategoryQuestionInputType', { isAbstract: true })
@@ -16,3 +30,7 @@ export class FbCategoryQuestionEnt extends CoreEntityMg {
   category: FbCategoryEnt;
   questions: FbQuestionEnt[];
 }
+
+
+
+

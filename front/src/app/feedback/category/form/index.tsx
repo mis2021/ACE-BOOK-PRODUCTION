@@ -6,20 +6,23 @@ import Button from '@admin/components/ui/button';
 import Card from '@/components/common/card';
 import Description from '@admin/components/ui/description';
 import { useMutation } from '@apollo/client';
-import { UPSERT_FBCATEGORY } from '@graphql/operations/feedbacks/feedbackMutations';
+import { UPSERT_FBCATEGORY, UPSERT_FBQUESCATEGORY } from '@graphql/operations/feedbacks/feedbackMutations';
 import { toast } from 'react-toastify';
+import FormQuestion from './formQuestion';
 
 type Props = {}
 
 const FbCategoryForm = (props: Props) => {
 
-    const [upsertCat] = useMutation(UPSERT_FBCATEGORY);
+    const [upsertCat] = useMutation(UPSERT_FBQUESCATEGORY);
 
     const {
         register,
         handleSubmit,
         control,
         formState: { errors },
+        getValues,
+        setValue
     } = useForm<FBCatFormValues>({
         defaultValues: {},
         // defaultValues: defaultValues ?? {},
@@ -28,11 +31,22 @@ const FbCategoryForm = (props: Props) => {
     });
 
     const onSubmit = (data: any) => {
-        console.log("data", data)
-        if (confirm("Are you sure you watn to save details?")) {
+        let payload = {
+            category: {
+                name: data.name,
+                description: data.description,
+            },
+            questions: data.submQuestions
+        }
+
+       
+
+        if (confirm("Are you sure you want to save details?")) {
+
+
             upsertCat({
                 variables: {
-                    input: data,
+                    input: payload,
                 },
             })
                 .then((resp) => {
@@ -79,6 +93,9 @@ const FbCategoryForm = (props: Props) => {
                     </Card>
 
                 </div>
+
+                <FormQuestion control={control} register={register} getValues={getValues} setValue={setValue} />
+
                 <div className="text-end mb-4 ">
                     <Button loading={false}>Save Details</Button>
                 </div>

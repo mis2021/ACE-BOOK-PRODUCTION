@@ -8,3 +8,11 @@ mutation UpsertFbCategory($input: UpsertFbCategoryInput!) {
   }
 }
 `
+
+export const UPSERT_FBQUESCATEGORY = gql`
+mutation UpsertFbCategoryQuestion($input: UpsertFbCategoryQuestionInput!) {
+  upsertFbCategoryQuestion(input: $input) {
+    _id
+  }
+}
+`

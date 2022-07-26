@@ -12,6 +12,13 @@ export class FbCategoryQuestionPaginator {
 }
 
 
+@ArgsType()
+export class FCQPaginatorArg extends PaginationArgs {
+  _id?: string;
+  categoryId?: string;
+}
+
+
 
 // @ArgsType()
 // export class GetMusersArgs extends PaginationArgs {
