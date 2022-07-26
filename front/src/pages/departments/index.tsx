@@ -19,7 +19,7 @@ import Search from '@admin/components/common/search';
 import LinkButton from '@admin/components/ui/link-button';
 import ModClassicLayout from '@/components/layouts/mod-classic';
 import HeaderDetails from '@/components/ui/headers/header-details';
-
+import { adminOnly } from '@/utils/auth-utils';
 const DeptPage: NextPageWithLayout = () => {
   const { t } = useTranslation('common');
   const limit = SHOPS_LIMIT;
@@ -90,5 +90,8 @@ const DeptPage: NextPageWithLayout = () => {
   );
 };
 DeptPage.getLayout = getLayout;
+DeptPage.authenticate = {
+  permissions: adminOnly,
+};
 
 export default DeptPage;

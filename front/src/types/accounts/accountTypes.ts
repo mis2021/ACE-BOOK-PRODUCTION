@@ -24,23 +24,27 @@ export type AccFormValues = {
   department: DepartmentGenType[];
   updated_at?: string;
   created_at?: string;
+  profilePicture?: string;
 };
 
 export type AccFormSubmission = {
   _id?: string;
-  username: string;
-  firstName: string;
-  middleName: string;
-  suffix: string;
-  lastName: string;
-  position: string;
-  isActive: boolean;
-  isApprover: boolean;
-  contact: string;
-  email: string;
+  username?: string;
+  firstName?: string;
+  middleName?: string;
+  suffix?: string;
+  lastName?: string;
+  position?: string;
+  isActive?: boolean;
+  isApprover?: boolean;
+  contact?: string;
+  email?: string;
   password?: string;
-  confPassword: string | undefined;
-  departmentOnDuty: string;
+  confPassword?: string | undefined;
+  departmentOnDuty?: string;
   updated_at?: string;
   created_at?: string;
+
+  attachments_image?: any;
+  profilePicture?: any;
 };

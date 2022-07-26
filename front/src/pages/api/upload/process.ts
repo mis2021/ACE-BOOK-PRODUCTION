@@ -37,7 +37,7 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
             //
         });
     }).catch(e => {
-        console.log(e);
+      
         status = 500;
         resultBody = {
             status: 'fail', message: 'Upload error'
@@ -49,22 +49,8 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
     if (files?.length) {
 
         /* Create directory for uploads */
-        const targetPath = `/mnt/nas/uploads/${pathUpload}/`;
-        // const targetPath = path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
-        // const targetPath = path.join(process.cwd(), `/public/uploads2/${pathUpload}/` ) ;
-
-
-
-        // const targetPath = process.env.NODE_ENV == "production" ?  `/public/uploads/${pathUpload}/` : path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
-        // const targetPath = process.env.NODE_ENV == "production" ?  `\\\\172.16.12.30\\misbackup\\acebook\\public\\uploads\\${pathUpload}` : path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
-        // const targetPath = "\\\\172.16.12.30\\mis\\JACKY\\storage\\acebook\\files\\";
-    console.log("targetPath", targetPath)
-        // const targetPath = "http://172.16.12.30:5000/misbackup/acebook/public/uploads";
-        // const targetPath = "C:\Users\ACEMCB\Documents\storage\acebook";
-
-        // const targetPath = path.join(process.cwd(), pathUpload);
-        // const targetPath = path.join(process.cwd(), pathUpload);
-
+        const targetPath = path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
+        
         try {
             await fs.access(targetPath);
         } catch (e) {
@@ -74,13 +60,12 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
         /* Move uploaded files to directory */
         for (const file of files) {
             const tempPath = file[1].filepath;
-            // await mv(tempPath, targetPath + file[1].originalFilename,  {mkdirp: true});
-            await fs.rename(tempPath, targetPath + file[1].originalFilename);
-            // await fs.rename(path.join(process.cwd(), `/public/favicon.ico` ), path.join(process.cwd(), `/public/uploads/${pathUpload}/` ));
-            // await mv(path.join(process.cwd(), `/public/master.png` ), path.join(process.cwd(), `/public/uploads/${pathUpload}/` ),  {mkdirp: true});
+
+            await fs.copyFile(tempPath, targetPath + file[1].originalFilename);
+
         }
     }
-    console.log("resultBody", resultBody)
+   
     res.status(status).json(resultBody);
 }
 

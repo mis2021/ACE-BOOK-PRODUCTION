@@ -26,6 +26,7 @@ export class GetAccArgs extends PaginationArgs {
   orderBy?: QueryUsersOrderByOrderByClause[];
   text?: string;
   id?: string;
+  name?: string;
 }
 
 @InputType()

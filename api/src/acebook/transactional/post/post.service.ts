@@ -36,14 +36,13 @@ const objectFilters = (args: PostPaginatorArg) => {
         { taggedUsers: args.user },
         { privacy: 'Public' }
       ]
-
-
     }
-
-
     return samp
   }
 
+  if (args._id ) {
+    return { _id: args._id }
+  }
   return {}
 
 }
@@ -88,7 +87,8 @@ export class PostService {
       .populate({ path: 'createdBy', populate: { path: 'departmentOnDuty', model: 'Department' } })
       .populate('createdByDepartment')
       .populate('taggedDepartments')
-      .populate('attachments');
+      .populate('attachments')
+      .populate('ticket');
 
     let curPage = payload.skip / limit;
 
@@ -114,6 +114,8 @@ export class PostService {
       // ),
     };
   }
+
+
 }
 
 

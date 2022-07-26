@@ -6,6 +6,7 @@ import HeaderDetails from '@/components/ui/headers/header-details';
 import ACDataTable from '@/components/tables/data-table';
 import DepartmentForm from '@/app/department/deptForm';
 import AccountForm from '@/app/accounts/accForm';
+import { adminOnly } from '@/utils/auth-utils';
 
 const breadcrumbs = [
   {
@@ -30,5 +31,8 @@ const CreateAccountPage: NextPageWithLayout = () => {
   );
 };
 CreateAccountPage.getLayout = getLayout;
+CreateAccountPage.authenticate = {
+  permissions: adminOnly,
+};
 
 export default CreateAccountPage;

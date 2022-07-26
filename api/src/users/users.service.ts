@@ -81,7 +81,7 @@ export class UsersService {
       department: cui.department,
     });
     await newUser.save();
-   newUser = await  newUser.populate('departmentOnDuty');
+    newUser = await newUser.populate('departmentOnDuty');
 
     return {
       _id: newUser._id,
@@ -119,9 +119,9 @@ export class UsersService {
     // }
 
     return {
-     user: savedData,
-     _id: savedData._id,
-     username: savedData.username
+      user: savedData,
+      _id: savedData._id,
+      username: savedData.username
     };
   }
 
@@ -139,7 +139,7 @@ export class UsersService {
       return {
         token: token,
         permissions: ['super_admin', 'store_owner', 'customer'],
-        _id:user._id,
+        _id: user._id,
         user: user
         // permissions: ['super_admin', 'store_owner', 'customer'],
       };
@@ -238,4 +238,35 @@ export class UsersService {
       paginatorInfo: paginate(data.length, page, first, data.length),
     };
   }
+
+  async searchUser({ page, first, name }: GetAccArgs) {
+
+    let data: UserEntAB[] = []
+
+    if (name !== "") {
+      data = await MUser.find(
+        {
+          $or: [
+            // {firstName: { $regex: '.*' + name + '.*' } },
+            { firstName: new RegExp('\\b' + name + '\\b', 'i') },
+            { middleName: new RegExp('\\b' + name + '\\b', 'i') },
+            { lastName: new RegExp('\\b' + name + '\\b', 'i') },
+            { username: new RegExp('\\b' + name + '\\b', 'i') },
+            { email: new RegExp('\\b' + name + '\\b', 'i') },
+          ]
+        }
+      )
+        .collation({ locale: 'en_US' })
+        // const data: UserEntAB[] = await MUser.find({id: "628f3358a8f49813a48c7df3"})
+        .populate('departmentOnDuty')
+        .populate('department');
+    }
+
+    return {
+      data: data,
+      paginatorInfo: paginate(data.length, page, first, data.length),
+    };
+  }
+
+
 }

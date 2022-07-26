@@ -47,14 +47,14 @@ const CommentForm = (props: Props) => {
             user: userId
         }
 
-        console.log("payload", payload)
+     
         upsertDept({
             variables: {
                 input: payload,
             },
         })
             .then((resp) => {
-                console.log("resp", resp)
+             
                 toast.success("Comment posted")
                 dispatch({ type: "refetch", modalData: true })
                 reset()
@@ -68,7 +68,7 @@ const CommentForm = (props: Props) => {
             <form >
                 <div className='absolute pt-[0.33rem] pl-1'>
                     <Avatar
-                        src={'/_next/static/media/avatar.c9441dc8.svg'}
+                        src={_.get(user, "profilePicture") ? `/uploads/profiles/${_.get(user, "profilePicture")}` :    '/_next/static/media/avatar.c9441dc8.svg'}
                         title="user name"
                         className="h-9 w-9"
                     />

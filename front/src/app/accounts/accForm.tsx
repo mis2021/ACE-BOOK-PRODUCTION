@@ -1,36 +1,13 @@
-import Input from '@admin/components/ui/input';
-import { Control, FieldErrors, useForm } from 'react-hook-form';
+
+import { useForm } from 'react-hook-form';
 import Button from '@admin/components/ui/button';
-import TextArea from '@admin/components/ui/text-area';
-import Label from '@admin/components/ui/label';
-// import { useTypesQuery } from "@graphql/type.graphql";
-import Card from '@/components/common/card';
-import Description from '@admin/components/ui/description';
-import * as categoriesIcon from '@/components/icons/category';
-import { getIcon } from '@/utils/get-icon';
 import { useRouter } from 'next/router';
-// import { ROUTES } from "@utils/routes";
-import { getErrorMessage } from '@/utils/form-error';
-import ValidationError from '@admin/components/ui/form-validation-error';
 import { toast } from 'react-toastify';
-// import { tagIcons } from "./tag-icons";
 import { useTranslation } from 'next-i18next';
-import FileInput from '@admin/components/ui/file-input';
-// import SelectInput from "@components/ui/select-input";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getFormattedImage } from '@/utils/get-formatted-image';
-import { getLayout } from '@/components/layouts/layout';
-// import {
-//   useCreateTagMutation,
-//   useUpdateTagMutation,
-// } from "@graphql/tags.graphql";
 import { accValidationSchema, accValidationSchemaUpdate } from './formvalidations/acc-validation-schema';
-// import { tagValidationSchema } from "./tag-validation-schema";
-import { Tag } from '__generated__/__types__';
-import { NextPageWithLayout } from '@/types';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { UPSERT_ACCOUNT } from '@graphql/operations/accounts/accountMutations';
-import cn from 'classnames';
 import AccBasicInfo from './basicInfo';
 import AccEmpInfo from './employeeInfo';
 import BorderDashed from '@/components/ui/border';
@@ -40,9 +17,8 @@ import {
   AccFormSubmission,
   AccFormValues,
 } from '@/types/accounts/accountTypes';
-import { DepartmentGenType } from '@/types/departments/departmentTypes';
 import _ from 'lodash';
-import { getAuthCredentials, isAuthenticated } from "@utils/auth-utils";
+import { getAuthCredentials } from "@utils/auth-utils";
 import {
   setAuthCredentials,
 } from '@/utils/auth-utils';

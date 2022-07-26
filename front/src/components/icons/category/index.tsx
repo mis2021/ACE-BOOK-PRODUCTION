@@ -42,3 +42,4 @@ export { Table } from "./table";
 export {Template} from "./template"
 export {Accounts} from "./accounts"
 export {Tickets} from "./ticket"
+export {SettingsIcon} from "./settings"

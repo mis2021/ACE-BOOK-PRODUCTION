@@ -1,26 +1,31 @@
 import React from 'react';
 import Avatar from '@/components/ui/avatar';
 import _ from 'lodash';
+import { getAuthCredentials } from "@utils/auth-utils";
+
 type Props = {
   firstName?: any;
   lastName?: any;
   department?: any;
+  profilePicture?: any;
 };
 
-const PostedByDetails = ({firstName, lastName, department}: Props) => {
- 
+const PostedByDetails = ({ firstName, lastName, department, profilePicture }: Props) => {
+  const { user } = getAuthCredentials();
+
+
   return (
     <div>
       <div className="mb-2 flex items-center space-x-3">
         <Avatar
-          src={'/_next/static/media/avatar.c9441dc8.svg'}
+          src={profilePicture ? `/uploads/profiles/${profilePicture}` : `/uploads/profiles/${_.get(user, 'profilePicture')}`}
           title="user name"
           className="h-10 w-10"
         />
         <div>
           <div>
             <span className="text-sm font-semibold text-heading md:text-base capitalize">
-             {firstName} {lastName}
+              {firstName} {lastName}
             </span>
             <span className="text-xl text-gray-400">|</span>
             <span className="text-xs text-body md:text-sm">{department}</span>

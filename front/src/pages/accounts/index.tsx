@@ -14,6 +14,7 @@ import ActionButtons from "@admin/components/common/action-buttons";
 import {
   SortOrder,
 } from '__generated__/__types__';
+import { adminOnly } from '@/utils/auth-utils';
 
 const initialState = {
   accData: [],
@@ -114,4 +115,7 @@ const AccountsPage: NextPageWithLayout = () => {
 };
 AccountsPage.getLayout = getLayout;
 
+AccountsPage.authenticate = {
+  permissions: adminOnly,
+};
 export default AccountsPage;

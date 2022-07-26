@@ -37,7 +37,7 @@ export class UserEntAB extends CoreEntityMg {
   // password: string;
   // role: string;
   // token: string;
-
+  profilePicture?: string;
   suffix?: string;
   username?: string;
   firstName?: string;
@@ -63,6 +63,7 @@ export class UserEntABInput extends CoreEntityMg {
   // password: string;
   // role: string;
   // token: string;
+  profilePicture?: string;
   suffix?: string;
   username?: string;
   firstName?: string;

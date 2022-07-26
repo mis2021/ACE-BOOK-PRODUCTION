@@ -29,7 +29,8 @@ function SignOut() {
     });
   }, [signOut, router, client]);
 
-  return <Loader text={t("common:signing-out-text")} />;
+  return <Loader text={"Signing Out"} />;
+  // return <Loader text={t("common:signing-out-text")} />;
 }
 
 export default SignOut;

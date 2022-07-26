@@ -23,6 +23,10 @@ const postSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Department'
     },
+    ticket: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Ticket'
+    },
     taggedDepartments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Department',

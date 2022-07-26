@@ -10,6 +10,7 @@ export type PostFormValues = {
   createdByDepartment?: string | null;
   taggedDepartments?: string[] | null;
   tags?: object[] | null;
+  ticket?: any;
 
   tempAttachments?: any
   attachments_image?: any;

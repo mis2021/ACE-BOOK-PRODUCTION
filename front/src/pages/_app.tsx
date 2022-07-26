@@ -20,6 +20,7 @@ import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
 import PostProvider from '@/reducers/posts/postProvider';
+import GeneralRestriction from '@/app/restrictions/general';
 
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
@@ -47,11 +48,14 @@ function CustomApp({
                   <DefaultSeo />
                   {authProps ? (
                     <PrivateRoute authProps={authProps}>
+
                       {getLayout(<Component {...pageProps} />)}
+
                     </PrivateRoute>
                   ) : (
-                    getLayout(<Component {...pageProps} />)
-                  )}
+                      getLayout(<Component {...pageProps} />)
+                  )
+                  }
                   <ManagedModal />
                   <ManagedDrawer />
                   <ToastContainer autoClose={2000} theme="colored" />

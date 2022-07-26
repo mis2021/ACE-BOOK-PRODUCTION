@@ -12,6 +12,7 @@ query Comments($first: Int, $page: Int, $postId: String) {
         _id
         firstName
         lastName
+        profilePicture
       }
       post {
         _id

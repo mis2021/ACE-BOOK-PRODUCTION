@@ -11,7 +11,13 @@ export class TicketPaginator {
   paginatorInfo: PaginatorInfo;
 }
 
-
+@ArgsType()
+export class TicketPaginatorArg extends PaginationArgs {
+  _id?: string;
+  type?: string;
+  userId?: string;
+  departmentId?: string;
+}
 
 // @ArgsType()
 // export class GetMusersArgs extends PaginationArgs {

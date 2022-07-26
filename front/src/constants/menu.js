@@ -128,4 +128,28 @@ export const ACEBOOK_MENU = [
         "name": "Tickets",
         "slug": "tickets"
     }
-  }]
+  },{
+    "children": [],
+    "id": "1",
+    "route": '/configurations',
+    "name": "Configurations",
+    "slug": "configurations",
+    "details": null,
+    "parent_id": null,
+    "products_count": null,
+    "image": {
+        "__typename": "Attachment",
+        "id": null,
+        "original": null,
+        "thumbnail": null
+    },
+    "icon": "SettingsIcon",
+    "type": {
+        "__typename": "Type",
+        "id": "1",
+        "name": "Configurations",
+        "slug": "configurations"
+    }
+  }
+
+]

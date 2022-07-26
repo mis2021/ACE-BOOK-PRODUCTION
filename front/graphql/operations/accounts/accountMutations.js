@@ -14,6 +14,7 @@ mutation RegisterMU($input: RegisterInputMU!) {
         name
         _id
       }
+      profilePicture
     }
     _id
     username

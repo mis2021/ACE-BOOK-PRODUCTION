@@ -77,3 +77,23 @@ query Accounts($first: Int, $page: Int, $id: String) {
   }
 }
 `
+
+
+export const SEARCH_ACCS = gql`
+query Search_accounts($name: String) {
+  search_accounts(name: $name) {
+    data {
+      firstName
+      middleName
+      lastName
+      _id
+      departmentOnDuty {
+        _id
+        name
+      }
+    }
+  }
+}
+`
+
+
