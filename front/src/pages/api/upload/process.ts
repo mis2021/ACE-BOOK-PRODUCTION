@@ -25,9 +25,9 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
     /* Get files using formidable */
     const files = await new Promise<ProcessedFiles | undefined>((resolve, reject) => {
         const form = new formidable.IncomingForm();
-       
+
         const files: ProcessedFiles = [];
-        
+
         form.on('file', function (field, file) {
             files.push([field, file]);
         })
@@ -37,20 +37,20 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
             //
         });
     }).catch(e => {
-      
+
         status = 500;
         resultBody = {
             status: 'fail', message: 'Upload error'
         }
     });
 
-    
+
 
     if (files?.length) {
 
         /* Create directory for uploads */
         const targetPath = path.join(process.cwd(), `/public/uploads/${pathUpload}/` ) ;
-        
+
         try {
             await fs.access(targetPath);
         } catch (e) {
@@ -65,7 +65,7 @@ const UploadProcess = async (req: NextApiRequest, res: NextApiResponse, pathUplo
 
         }
     }
-   
+
     res.status(status).json(resultBody);
 }
 
