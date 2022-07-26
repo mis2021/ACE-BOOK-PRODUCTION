@@ -36,7 +36,8 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
           <UserOutlinedIcon className="h-5 w-5" />
         ) : (
           <Avatar
-            src={  _.get(cookieUser, 'profilePicture') ? `/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+              src={  _.get(cookieUser, 'profilePicture') ? `${window.location.origin}/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ? `/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
             // src={me?.profile?.avatar?.thumbnail ?? avatarPlaceholder}
             title="user name"
             className="h-10 w-10"
