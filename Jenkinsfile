@@ -11,8 +11,8 @@ pipeline {
         }
         stage('Clearing') {
             steps {  
-	  'docker rm ace_book-app-front-1  ace_book-app-api-1 -f'
-      'docker rmi ace_book_app-front ace_book_app-api'
+	 sh 'docker rm ace_book-app-front-1  ace_book-app-api-1 -f'
+     sh 'docker rmi ace_book_app-front ace_book_app-api'
 
             }
         }
