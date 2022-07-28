@@ -11,6 +11,7 @@ import { useLogout, useUser } from '@/framework/user';
 import { ROUTES } from '@/lib/routes';
 import _ from 'lodash';
 import { getAuthCredentials, hasAccess } from "@utils/auth-utils";
+import path from "path";
 
 const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
   const { mutate: logout } = useLogout();
@@ -25,7 +26,7 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
     router.push(path);
   }
 
-
+console.log("window",window.location.origin)
   return (
     <Menu
       as="div"
@@ -36,7 +37,11 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
           <UserOutlinedIcon className="h-5 w-5" />
         ) : (
           <Avatar
-              src={  _.get(cookieUser, 'profilePicture') ? `${window.location.origin}/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ?  `file://172.16.12.30/misbackup/profiles/clauie2.jpg `: (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ?  require(`\\172.16.12.30\\misbackup\\profiles\\clauie2.jpg /uploads/profiles/${_.get(cookieUser, 'profilePicture')}`) : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ? path.join(process.cwd(), `/public/uploads/${_.get(cookieUser, 'profilePicture')}` ) : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ? path.join(process.cwd(), `/public/uploads/${_.get(cookieUser, 'profilePicture')}/` ) : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            src={  _.get(cookieUser, 'profilePicture') ? `${window.location.origin}/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
             // src={  _.get(cookieUser, 'profilePicture') ? `/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
             // src={me?.profile?.avatar?.thumbnail ?? avatarPlaceholder}
             title="user name"

@@ -30,6 +30,10 @@ import { AttachmentModule } from './acebook/transactional/attachment/attachment.
 import { PostModule } from './acebook/transactional/post/post.modules';
 import { TicketModule } from './acebook/transactional/ticket/ticket.modules';
 import { TicketTypeModule } from './acebook/transactional/ticketType/ticketType.modules';
+import { FbCategoryModule } from './mono/feedback/masterdata/fbCategory/fbCategory.modules';
+import { FbQuestionModule } from './mono/feedback/masterdata/fbQuestion/fbQuestion.modules';
+import { FbCategoryQuestionModule } from './mono/feedback/transactional/fbCategoryQuestion/fbCategoryQuestion.modules';
+import { FeedbackModule } from './mono/feedback/transactional/feedback/feedback.modules';
 
 @Module({
   imports: [
@@ -66,7 +70,14 @@ import { TicketTypeModule } from './acebook/transactional/ticketType/ticketType.
     AttachmentModule,
     PostModule,
     TicketModule,
-    TicketTypeModule
+    TicketTypeModule,
+
+
+    // === FEEDBACK ===
+    FbCategoryModule,
+    FbQuestionModule,
+    FbCategoryQuestionModule,
+    FeedbackModule
   ],
   controllers: [],
   providers: [],
