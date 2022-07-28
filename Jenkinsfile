@@ -9,6 +9,13 @@ pipeline {
             git 'https://github.com/mis2021/ACE-BOOK-PRODUCTION.git'
             }
         }
+        stage('Clearing') {
+            steps {  
+	  'docker rm ace_book-app-front-1  ace_book-app-api-1 -f'
+      'docker rmi ace_book_app-front ace_book_app-api'
+
+            }
+        }
 
         stage('Build and Run docker Backend') {
             steps {  
