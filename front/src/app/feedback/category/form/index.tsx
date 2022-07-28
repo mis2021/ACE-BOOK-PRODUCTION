@@ -10,9 +10,12 @@ import { UPSERT_FBCATEGORY, UPSERT_FBQUESCATEGORY } from '@graphql/operations/fe
 import { toast } from 'react-toastify';
 import FormQuestion from './formQuestion';
 
-type Props = {}
+type Props = {
+    defaultValues ?:any;
+    itemId?: any;
+}
 
-const FbCategoryForm = (props: Props) => {
+const FbCategoryForm = ({defaultValues, itemId}: Props) => {
 
     const [upsertCat] = useMutation(UPSERT_FBQUESCATEGORY);
 
@@ -22,9 +25,10 @@ const FbCategoryForm = (props: Props) => {
         control,
         formState: { errors },
         getValues,
-        setValue
+        setValue,
+        watch
     } = useForm<FBCatFormValues>({
-        defaultValues: {},
+        defaultValues: defaultValues?? {},
         // defaultValues: defaultValues ?? {},
 
         // resolver: yupResolver(defaultValues ? accValidationSchemaUpdate : accValidationSchema),
@@ -32,14 +36,16 @@ const FbCategoryForm = (props: Props) => {
 
     const onSubmit = (data: any) => {
         let payload = {
+            categoryId:  itemId,
             category: {
                 name: data.name,
                 description: data.description,
+                _id: itemId
             },
             questions: data.submQuestions
         }
 
-       
+       console.log("payload", payload)
 
         if (confirm("Are you sure you want to save details?")) {
 
@@ -94,7 +100,7 @@ const FbCategoryForm = (props: Props) => {
 
                 </div>
 
-                <FormQuestion control={control} register={register} getValues={getValues} setValue={setValue} />
+                <FormQuestion itemId={itemId} control={control} register={register} getValues={getValues} setValue={setValue} watch={watch}/>
 
                 <div className="text-end mb-4 ">
                     <Button loading={false}>Save Details</Button>
