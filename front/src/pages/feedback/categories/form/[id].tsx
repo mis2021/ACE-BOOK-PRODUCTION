@@ -11,6 +11,7 @@ import FbCategoryForm from '@/app/feedback/category/form';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_FBCATQUE } from '@graphql/operations/feedbacks/feedbackQueries';
 import { useRouter } from 'next/router';
+import _ from 'lodash';
 
 type Props = {}
 
@@ -23,7 +24,7 @@ const breadcrumbs = [
     {
         title: 'Feedback settings',
         route: '/feedback/categories',
-        
+
     },
     {
         title: 'Update',
@@ -36,7 +37,7 @@ const FbSpecCatForm: NextPageWithLayout = () => {
     const { query } = useRouter();
     const { searchType, id, ...restQuery } = query;
 
-    const { data: allFbCQs, refetch } = useQuery(GET_ALL_FBCATQUE, {
+    const { data: allFbCQs, refetch, loading } = useQuery(GET_ALL_FBCATQUE, {
         variables: {
             categoryId: id
         },
@@ -44,14 +45,21 @@ const FbSpecCatForm: NextPageWithLayout = () => {
         nextFetchPolicy: 'cache-first',
     });
 
-    console.log("allFbCQs", allFbCQs)
+
+    const defaultValues = {
+        name: _.get(allFbCQs, "fbCategoryQuestions.data[0].category.name"),
+        description: _.get(allFbCQs, "fbCategoryQuestions.data[0].category.description"),
+        submQuestionsTEMP:  _.get(allFbCQs, "fbCategoryQuestions.data[0].questions")
+    }
+
+    // console.log("desc", _.get(allFbCQs, "fbCategoryQuestions.data[0].questions"))
 
 
     return (
         <>
             <ModClassicLayout breadcrumb={breadcrumbs}>
                 <>
-                    <FbCategoryForm />
+                    {!loading && <FbCategoryForm defaultValues={defaultValues}  itemId={id}/>}
                 </>
             </ModClassicLayout>
         </>

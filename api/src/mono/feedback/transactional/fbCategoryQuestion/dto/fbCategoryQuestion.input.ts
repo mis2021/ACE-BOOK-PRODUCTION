@@ -17,6 +17,7 @@ registerEnumType(Permission, { name: 'restrictionfbcq' });
 @InputType()
 export class UpsertFbCategoryQuestionInput extends PickType(FbCategoryQuestionInput, [
   'category',
+  'categoryId',
   'questions',
   '_id'
 ]){permission: Permission = Permission.CUSTOMER;}

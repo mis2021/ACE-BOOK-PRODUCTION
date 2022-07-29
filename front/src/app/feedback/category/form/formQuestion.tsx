@@ -24,7 +24,7 @@ type StateType = {
     slctQuestion?: any;
 }
 
-const FormQuestion = ({ register, errors, control, getValues, setValue }: PropForm) => {
+const FormQuestion = ({ register, errors, control, getValues, setValue, watch, itemId }: PropForm) => {
 
     const [state, setState] = useState<StateType>({ slctQuestion: [] })
 
@@ -36,8 +36,26 @@ const FormQuestion = ({ register, errors, control, getValues, setValue }: PropFo
 
     useEffect(() => {
         register("submQuestions")
+        register("submQuestionsTEMP")
     }, [])
-    
+
+    useEffect(() => {
+        if (getValues("submQuestionsTEMP") && itemId) {
+            let restruct = getValues("submQuestionsTEMP").map((item: any) => {
+                let clonePay = _.cloneDeep(item)
+                delete clonePay.__typename
+
+                return clonePay
+            })
+
+            setState((p) => ({ ...p, slctQuestion: [...restruct] }))
+            setValue("submQuestions", restruct)
+
+        }
+
+
+    }, [watch("submQuestionsTEMP")])
+
 
     const processSltData = (data: any) => {
         let searchDup = state.slctQuestion.filter((item: any) => {
@@ -69,7 +87,7 @@ const FormQuestion = ({ register, errors, control, getValues, setValue }: PropFo
         }
     }
 
-    const handleRemove = (data:any)=>{
+    const handleRemove = (data: any) => {
 
         let searchDup = state.slctQuestion.filter((item: any) => {
             return data.question !== item.question
@@ -137,7 +155,7 @@ const FormQuestion = ({ register, errors, control, getValues, setValue }: PropFo
                                         <div className='bg-teal-600 text-zinc-100 w-6 h-5 flex pb-[1.5rem] justify-center rounded-full'>{index + 1}</div>
                                         <div className='pl-2 flex w-full'>
                                             <div className='w-[97%]'> {_.get(item, "question")}</div>
-                                            <div className='w-5 cursor-pointer' onClick={()=>handleRemove(item)} ><XCircleIcon /></div>
+                                            <div className='w-5 cursor-pointer' onClick={() => handleRemove(item)} ><XCircleIcon /></div>
                                         </div>
                                     </div>
                                 ))
