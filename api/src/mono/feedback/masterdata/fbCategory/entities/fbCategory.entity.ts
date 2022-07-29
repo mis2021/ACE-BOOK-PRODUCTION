@@ -1,9 +1,19 @@
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { CoreEntity, CoreEntityMg } from 'src/common/entities/core.entity';
 
-@InputType('FbCategoryInputType', { isAbstract: true })
+@InputType('FbCategoryType', { isAbstract: true })
 @ObjectType()
 export class FbCategoryEnt extends CoreEntityMg {
   name: string;
   description: string;
+  _id:string
+}
+
+
+@InputType('FbCategoryInputType', { isAbstract: true })
+@ObjectType()
+export class FbCategoryInpt  {
+  name: string;
+  description: string;
+  _id?:string
 }

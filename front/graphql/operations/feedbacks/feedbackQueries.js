@@ -37,7 +37,6 @@ query Data($id: String, $categoryId: String) {
       questions {
         _id
         question
-        description
       }
     }
   }

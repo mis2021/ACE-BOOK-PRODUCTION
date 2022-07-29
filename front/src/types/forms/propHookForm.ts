@@ -6,4 +6,6 @@ export type PropForm = {
     watch?: any
     setValue?: any
     getValues?:any
+
+    itemId?: any
 };
