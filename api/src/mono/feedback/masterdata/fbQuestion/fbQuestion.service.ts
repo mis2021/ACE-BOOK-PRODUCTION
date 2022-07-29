@@ -4,8 +4,11 @@ import { FbQuestionEnt } from './entities/fbQuestion.entity';
 import moment from 'moment';
 // import  FbQuestion  from './entities/fbQuestion.entity';
 import FbQuestion from '@models/Feedback/Masterdata/Question';
-import {   FbQuestionId, UpsertFbQuestionInput } from './dto/fbQuestion.input';
+import { FbQuestionId, UpsertFbQuestionInput } from './dto/fbQuestion.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
+import { UpsertFbCategoryQuestionInput } from '../../transactional/fbCategoryQuestion/dto/fbCategoryQuestion.input';
+import { QuestionInpt } from '../../transactional/fbCategoryQuestion/entities/fbCategoryQuestion.entity';
+var ObjectId = require('mongoose').Types.ObjectId;
 
 @Injectable()
 export class FbQuestionService {
@@ -48,4 +51,28 @@ export class FbQuestionService {
       ),
     };
   }
+}
+
+
+export async function saveQuestion(upsertInput: UpsertFbCategoryQuestionInput) {
+
+  let ques = []
+  if (upsertInput.questions) {
+    upsertInput.questions.map(async (item: QuestionInpt) => {
+      if (item._id) {
+        ques.push(new ObjectId(item._id))
+      } else {
+        let savedDataQs = new FbQuestion({
+          question: item.question,
+          description: '',
+        });
+        ques.push(savedDataQs._id)
+        await savedDataQs.save();
+      }
+    })
+  }
+
+  return ques
+
+
 }

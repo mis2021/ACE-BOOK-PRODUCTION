@@ -6,6 +6,8 @@ import { CoreEntity, CoreEntityMg } from 'src/common/entities/core.entity';
 export class FbCategoryEnt extends CoreEntityMg {
   name: string;
   description: string;
+  icon?: string;
+  color?: string;
   _id:string
 }
 
@@ -15,5 +17,7 @@ export class FbCategoryEnt extends CoreEntityMg {
 export class FbCategoryInpt  {
   name: string;
   description: string;
+  icon?: string;
+  color?: string;
   _id?:string
 }
