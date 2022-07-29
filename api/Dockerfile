@@ -4,8 +4,8 @@ COPY package*.json ./
 
 
 RUN yarn
-RUN yarn build
 COPY . .
+RUN yarn build
 EXPOSE 4000
 # RUN yarn build:gql
 # RUN yarn start
