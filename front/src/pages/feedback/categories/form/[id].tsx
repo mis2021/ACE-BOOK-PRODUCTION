@@ -49,6 +49,8 @@ const FbSpecCatForm: NextPageWithLayout = () => {
     const defaultValues = {
         name: _.get(allFbCQs, "fbCategoryQuestions.data[0].category.name"),
         description: _.get(allFbCQs, "fbCategoryQuestions.data[0].category.description"),
+        color:_.get(allFbCQs, "fbCategoryQuestions.data[0].category.color"),
+        icon:_.get(allFbCQs, "fbCategoryQuestions.data[0].category.icon"),
         submQuestionsTEMP:  _.get(allFbCQs, "fbCategoryQuestions.data[0].questions")
     }
 

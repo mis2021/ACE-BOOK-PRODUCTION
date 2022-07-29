@@ -32,6 +32,8 @@ query Data($id: String, $categoryId: String) {
       category {
         _id
         name
+        color
+        icon
         description
       }
       questions {
