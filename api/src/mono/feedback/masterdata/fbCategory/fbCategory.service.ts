@@ -6,6 +6,8 @@ import moment from 'moment';
 import FbCategory from '@models/Feedback/Masterdata/Category';
 import {   FbCategoryId, UpsertFbCategoryInput } from './dto/fbCategory.input';
 import { PaginationArgs } from 'src/common/dto/pagination.args';
+import { UpsertFbCategoryQuestionInput } from '../../transactional/fbCategoryQuestion/dto/fbCategoryQuestion.input';
+var ObjectId = require('mongoose').Types.ObjectId;
 
 @Injectable()
 export class FbCategoryService {
@@ -49,3 +51,46 @@ export class FbCategoryService {
     };
   }
 }
+
+
+
+export async function saveCategory(upsertInput: UpsertFbCategoryQuestionInput){
+
+  let cat = null
+     
+      if (upsertInput.categoryId) {
+
+        let savedDataCat =  await FbCategory.findOneAndUpdate(
+          { _id: upsertInput.categoryId },
+          {
+            $set: {
+              name: upsertInput.category.name,
+              description: upsertInput.category.description,
+              color: upsertInput.category.color,
+              icon: upsertInput.category.icon
+            }
+          },
+          { new: true },
+        );
+        await savedDataCat.save();
+        cat = new ObjectId(upsertInput.categoryId) 
+
+
+      } else {
+        let savedDataCat = new FbCategory({
+          name: upsertInput.category.name,
+          description: upsertInput.category.description,
+          color: upsertInput.category.color,
+          icon: upsertInput.category.icon
+        });
+        await savedDataCat.save();
+
+        cat = savedDataCat._id
+      }
+
+      return cat
+
+}
+
+
+

@@ -39,6 +39,8 @@ const FbCategoryForm = ({defaultValues, itemId}: Props) => {
             categoryId:  itemId,
             category: {
                 name: data.name,
+                color: data.color,
+                icon: data.icon,
                 description: data.description,
                 _id: itemId
             },
@@ -90,6 +92,24 @@ const FbCategoryForm = ({defaultValues, itemId}: Props) => {
                                     label={'Description'}
                                     {...register('description')}
                                     error={errors.description?.message!}
+                                    variant="outline"
+                                    className="mb-5"
+                                />
+                            </div>
+                            <div>
+                                <Input
+                                    label={'Color'}
+                                    {...register('color')}
+                                    error={errors.color?.message!}
+                                    variant="outline"
+                                    className="mb-5"
+                                />
+                            </div>
+                             <div>
+                                <Input
+                                    label={'Icon'}
+                                    {...register('icon')}
+                                    error={errors.icon?.message!}
                                     variant="outline"
                                     className="mb-5"
                                 />
