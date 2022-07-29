@@ -4,8 +4,8 @@ COPY package*.json ./
 
 
 RUN yarn
-RUN yarn build:gql
 COPY . .
+RUN yarn build:gql
 EXPOSE 3000
 
 
