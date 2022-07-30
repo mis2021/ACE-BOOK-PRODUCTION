@@ -16,3 +16,12 @@ mutation UpsertFbCategoryQuestion($input: UpsertFbCategoryQuestionInput!) {
   }
 }
 `
+
+export const DELETE_FBQUESCATEGORY = gql`
+mutation DeleteFbCategoryQuestion($input: FbCategoryQuestionId!) {
+  deleteFbCategoryQuestion(input: $input) {
+    _id
+  }
+}
+
+`

@@ -34,22 +34,6 @@ export class FbCategoryQuestionService {
     let ques = await saveQuestion(upsertInput)
     let cat = await saveCategory(upsertInput)
 
-    // if (upsertInput.questions) {
-    //   upsertInput.questions.map(async (item: QuestionInpt) => {
-    //     if (item._id) {
-    //       ques.push( new ObjectId(item._id) )
-    //     } else {
-    //       let savedDataQs = new FbQuestion({
-    //         question: item.question,
-    //         description: '',
-    //       });
-    //       ques.push(savedDataQs._id)
-    //       await savedDataQs.save();
-    //     }
-    //   })
-    // }
-
-
     if (upsertInput.categoryId) {
 
       savedData = await FbCategoryQuestion.findOneAndUpdate(
@@ -81,8 +65,16 @@ export class FbCategoryQuestionService {
 
   async delete(upsertInput: FbCategoryQuestionId): Promise<FbCategoryQuestionEnt> {
     let removedData = await FbCategoryQuestion.findOneAndDelete({
-      _id: upsertInput._id,
+      category: new ObjectId(upsertInput.categoryId) ,
     });
+
+    await FbCategory.findOneAndDelete({
+      _id: new ObjectId(upsertInput.categoryId) ,
+    });
+
+// let removedData = await FbCategoryQuestion.findOneAndDelete({
+//       _id: upsertInput._id,
+//     });
 
     return removedData;
   }

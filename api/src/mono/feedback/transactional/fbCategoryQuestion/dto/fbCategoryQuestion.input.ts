@@ -23,6 +23,7 @@ export class UpsertFbCategoryQuestionInput extends PickType(FbCategoryQuestionIn
 ]){permission: Permission = Permission.CUSTOMER;}
 
 @InputType()
-export class FbCategoryQuestionId extends PickType(FbCategoryQuestionEnt, [
-  '_id'
+export class FbCategoryQuestionId extends PickType(FbCategoryQuestionInput, [
+  '_id',
+  'categoryId'
 ]){permission: Permission = Permission.CUSTOMER;}

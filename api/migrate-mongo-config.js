@@ -1,11 +1,15 @@
 // In this file you can configure migrate-mongo
 require('dotenv').config();
+
 const MONGODB = process.env.DATABASE_URL;
+const MONGODB_DEV = process.env.DATABASE_URL_DEV;
 
 const config = {
   mongodb: {
     // TODO Change (or review) the url to your MongoDB:
-    url:  process.env.DATABASE_URL,
+    // url:  process.env.DATABASE_URL,
+    // url:   MONGODB_DEV,
+    url:  process.env.NODE_ENV === 'production'  ? MONGODB : MONGODB_DEV,
 
     // TODO Change this to your database name:
     databaseName:  process.env.DATABASE_NAME,
