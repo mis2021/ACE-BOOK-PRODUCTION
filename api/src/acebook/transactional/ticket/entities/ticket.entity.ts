@@ -50,6 +50,11 @@ export class TicketInput extends TicketEntCommon {
   requestingDepartment?: string;
 }
 
+@ObjectType()
+export class TicketCounterEnt extends CoreEntityMg {
+  forApproval?: number;
+}
+
 // @InputType('TicketInputType', { isAbstract: true })
 // @ObjectType()
 // export class TicketEnt extends CoreEntityMg {

@@ -113,4 +113,18 @@ export class TicketService {
     };
   }
 
+
+  async ticketCounter(payload: TicketPaginatorArg){
+    let filtersFA = objectFilters({userId: payload.userId, type: "FOR_APPROVAL"});
+    const ticketFA: TicketEnt[] = await Ticket.find(filtersFA).count()
+
+   
+
+    return {
+      data: {
+        forApproval: ticketFA
+      }
+    }
+  }
+
 }
