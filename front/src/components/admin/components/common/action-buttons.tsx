@@ -22,6 +22,8 @@ type Props = {
   showAddWalletPoints?: boolean;
   showMakeAdminButton?: boolean;
   changeRefundStatus?: boolean;
+  callbackFunction?: any;
+  callbackType?: string;
 };
 
 const ActionButtons = ({
@@ -36,6 +38,8 @@ const ActionButtons = ({
   showAddWalletPoints = false,
   showMakeAdminButton = false,
   changeRefundStatus = false,
+  callbackFunction,
+  callbackType
 }: Props) => {
   const { t } = useTranslation();
   const { openModal } = useModalAction();
@@ -93,6 +97,16 @@ const ActionButtons = ({
       {deleteModalView && (
         <button
           onClick={handleDelete}
+          className="text-red-500 transition duration-200 hover:text-red-600 focus:outline-none"
+          title={t("common:text-delete")}
+        >
+          <Trash width={16} />
+        </button>
+      )}
+      
+      {callbackType == "REMOVE" && (
+        <button
+          onClick={()=>callbackFunction("REMOVE")}
           className="text-red-500 transition duration-200 hover:text-red-600 focus:outline-none"
           title={t("common:text-delete")}
         >

@@ -5,10 +5,11 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import mongoose from 'mongoose';
 require('dotenv').config();
 const MONGODB = process.env.DATABASE_URL;
+const MONGODB_DEV = process.env.DATABASE_URL_DEV;
 
 async function bootstrap() {
   mongoose
-    .connect(MONGODB)
+    .connect(process.env.NODE_ENV === 'production'  ? MONGODB : MONGODB_DEV)
     .then( async () => {
       const app = await NestFactory.create(AppModule);
       app.enableCors();

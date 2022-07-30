@@ -44,3 +44,19 @@ query Data($id: String, $categoryId: String) {
   }
 }
 `
+
+
+export const GET_LIST_FBCATQUE = gql`
+query ExampleQuery {
+  fbCategoryQuestions {
+    data {
+      _id
+      category {
+        _id
+        name
+      }
+    }
+  }
+}
+
+`
