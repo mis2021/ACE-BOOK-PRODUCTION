@@ -111,3 +111,13 @@ query Data($code: String) {
 }
 `
 
+export const GET_TICKET_COUNTS = gql`
+query TicketCounts($userId: String, $type: String) {
+  ticketCounts(userId: $userId, type: $type) {
+    data {
+      forApproval
+    }
+  }
+}
+`
+
