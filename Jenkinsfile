@@ -10,19 +10,14 @@ pipeline {
             }
         }
 
-        stage('Build and Run docker Backend') {
+        stage('Build and Run docker ') {
             steps {  
-	  sh 'docker-compose up -d app-api'
+	  sh 'docker-compose up -d'
 
             }
         }
 
-         stage('Build and Run docker Frontend') {
-                    steps {
-        	  sh 'docker-compose up -d app-front'
 
-                    }
-                }
  	
         stage('login to dockerhub') {
             steps{

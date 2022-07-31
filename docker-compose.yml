@@ -7,7 +7,9 @@ services:
       - "4000:4000"
     restart: always
     volumes:
-      - api:/usr/src/app/acebook/api
+      - /var/lib/jenkins/workspace/ace_book/api:/usr/src/app/acebook/api
+      - /usr/src/app/acebook/api/dist
+      - /usr/src/app/acebook/api/node_modules
 
   app-front:
     build: ./front
@@ -17,8 +19,12 @@ services:
       - "3000:3000"
     restart: always
     volumes:
-      - front:/usr/src/app/acebook/front
+      - /var/lib/jenkins/workspace/ace_book/front:/usr/src/app/acebook/front
       - /mnt/nas:/usr/src/app/acebook/front/public/uploads
+      - /usr/src/app/acebook/front/node_modules
+      - /usr/src/app/acebook/front/.next
+    depends_on:
+      - "app-api"
 
 
   mongodb:
@@ -49,6 +55,3 @@ volumes:
   api:
   front:
   database-data:
-
-
-  
