@@ -21,9 +21,12 @@ import { CommentContext } from '@/reducers/comments/commentContext';
 type Props = {}
 
 const CommentForm = (props: Props) => {
-    const [state, dispatch] = React.useContext(CommentContext)
+    const [state, dispatch] = React.useContext<any>(CommentContext)
     const postContext = useContext(PostContext);
     const { id: userId, user } = getAuthCredentials();
+
+    const [imgerror, setImgerror] = React.useState<boolean>(false)
+
     const {
         register,
         handleSubmit,
@@ -35,7 +38,7 @@ const CommentForm = (props: Props) => {
         // defaultValues: defaultValuesPost,
         resolver: yupResolver(commentValidationSchema),
     });
-    const [upsertDept, {loading: commentLoading}] = useMutation(UPSERT_COMMENT);
+    const [upsertDept, { loading: commentLoading }] = useMutation(UPSERT_COMMENT);
 
 
 
@@ -47,14 +50,14 @@ const CommentForm = (props: Props) => {
             user: userId
         }
 
-     
+
         upsertDept({
             variables: {
                 input: payload,
             },
         })
             .then((resp) => {
-             
+
                 toast.success("Comment posted")
                 dispatch({ type: "refetch", modalData: true })
                 reset()
@@ -68,16 +71,16 @@ const CommentForm = (props: Props) => {
             <form >
                 <div className='absolute pt-[0.33rem] pl-1'>
                     <Avatar
-                        src={_.get(user, "profilePicture") ? `/uploads/profiles/${_.get(user, "profilePicture")}` :    '/_next/static/media/avatar.c9441dc8.svg'}
+                        fileName={_.get(user, "profilePicture")}
+                        // src={_.get(user, "profilePicture") ? `/uploads/profiles/${_.get(user, "profilePicture")}` :    '/_next/static/media/avatar.c9441dc8.svg'}
                         title="user name"
                         className="h-9 w-9"
                     />
                 </div>
                 <div className='absolute pt-[0.97rem] right-3'>
                     {
-                        commentLoading ? <SmallLoader/> :  <SendIcon className="text-gray-500 transition-colors hover:text-accent cursor-pointer" onClick={handleSubmit(onSubmit)} />
+                        commentLoading ? <SmallLoader /> : <SendIcon className="text-gray-500 transition-colors hover:text-accent cursor-pointer" onClick={handleSubmit(onSubmit)} />
                     }
-                   
                 </div>
 
                 <div className=''>

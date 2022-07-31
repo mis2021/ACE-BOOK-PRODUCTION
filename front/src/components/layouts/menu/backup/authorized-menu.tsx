@@ -1,4 +1,3 @@
-import React from 'react'
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { siteSettings } from '@/settings/site';
@@ -20,12 +19,14 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
   const router = useRouter();
   const { t } = useTranslation('common');
   const { user: cookieUser } = getAuthCredentials();
+ 
 
 
   function handleClick(path: string) {
     router.push(path);
   }
 
+console.log("window",window.location.origin)
   return (
     <Menu
       as="div"
@@ -36,7 +37,13 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
           <UserOutlinedIcon className="h-5 w-5" />
         ) : (
           <Avatar
-            fileName={_.get(cookieUser, 'profilePicture')}
+            // src={  _.get(cookieUser, 'profilePicture') ?  `file://172.16.12.30/misbackup/profiles/clauie2.jpg `: (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ?  require(`\\172.16.12.30\\misbackup\\profiles\\clauie2.jpg /uploads/profiles/${_.get(cookieUser, 'profilePicture')}`) : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ? path.join(process.cwd(), `/public/uploads/${_.get(cookieUser, 'profilePicture')}` ) : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ? path.join(process.cwd(), `/public/uploads/${_.get(cookieUser, 'profilePicture')}/` ) : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            src={  _.get(cookieUser, 'profilePicture') ? `${window.location.origin}/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={  _.get(cookieUser, 'profilePicture') ? `/uploads/profiles/${_.get(cookieUser, 'profilePicture')}` : (me?.profile?.avatar?.thumbnail ?? avatarPlaceholder)}
+            // src={me?.profile?.avatar?.thumbnail ?? avatarPlaceholder}
             title="user name"
             className="h-10 w-10"
           />
@@ -71,7 +78,31 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
               <span>{me?.wallet?.available_points ?? 0}</span>
             </li>
           </Menu.Item>
-
+          {/* <Menu.Item>
+            <li className="flex w-full items-center justify-between bg-accent-500 px-6 py-4 text-xs font-semibold capitalize text-light focus:outline-none ltr:text-left rtl:text-right">
+              <span>Points</span> */}
+          {/* <span>{t('text-points')}</span> */}
+          {/* <span>{me?.wallet?.available_points ?? 0}</span>
+            </li>
+          </Menu.Item> */}
+          {/* {siteSettings.authorizedLinks.map(({ href, label }) => (
+            <Menu.Item key={`${href}${label}`}>
+              {({ active }) => (
+                <li>
+                  <button
+                    onClick={() => handleClick(href)}
+                    className={cn(
+                      'block w-full py-2.5 px-6 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent focus:outline-none ltr:text-left rtl:text-right',
+                      active ? 'text-accent' : 'text-heading'
+                    )}
+                  >
+                    {t(label)}
+                  </button>
+                </li>
+              )}
+            </Menu.Item>
+          ))} */}
+          {/* {siteSettings.authorizedLinks.map(({ href, label }) => ( */}
           <Menu.Item >
             {/* {({ active }) => ( */}
             <li>
@@ -88,7 +119,7 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
             </li>
             {/* )} */}
           </Menu.Item>
-          <Menu.Item >
+           <Menu.Item >
             {/* {({ active }) => ( */}
             <li>
               <button
