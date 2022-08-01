@@ -59,16 +59,16 @@ const PostImageContent = ({ attachments }: Props) => {
 
                 <div className='flex  justify-center  content-center'>
                   <div className='max-w-sm  max-h-[30rem]   rounded-lg object-cover object-center  aspect-auto'>
-{/* 
-                    <img
+
+                    {/* <img
                       key={index}
                       className=" rounded-lg object-cover object-center "
                       src={UPLOAD_LINK('images', i.path)}
                       alt="new"
                     /> */}
 
-
-                    <ImageView index={index} className='rounded-lg object-cover object-center' fileName={i.path} />
+                    
+                    <ImageView index={index} className='rounded-lg object-cover object-center' fileName={'images/'+i.path} />
 
 
                   </div>

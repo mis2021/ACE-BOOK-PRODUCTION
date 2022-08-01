@@ -21,10 +21,13 @@ let imageUrl= DEFAULT_IMAGE
         case 'post':
             imageUrl = data.fileName ?(pathUrl+data.fileName) : DEFAULT_IMAGE 
             break;
+        case 'preview':
+            imageUrl = data.fileName ?(pathUrl+data.fileName) : 'fdsujfds.jpg' 
+            break;
         default:
             break;
     }
-
+    console.log("imageUrl", imageUrl)
     return imageUrl
 
 }

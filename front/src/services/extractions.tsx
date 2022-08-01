@@ -2,6 +2,8 @@ import { UPLOAD_DOMAIN, UPLOAD_LINK } from "@/constants/uploads";
 import { ApproverType } from "@/types/tickets/ticketType";
 import _ from "lodash";
 import moment from "moment";
+import { ConsoleView } from "react-device-detect";
+import { fileImport } from "./fileManangement";
 
 type AttchDataType = {
     size?: number;
@@ -38,13 +40,21 @@ export const extractFileBlob = async (attachments: any, type: string) => {
 
     const test = async () => {
 
-        const map1 = await Promise.all(attachments.map(async (item: any) => await fetch( UPLOAD_LINK(type,item.path)).then(async r => {
-        // const map1 = await Promise.all(attachments.map(async (item: any) => await fetch(UPLOAD_DOMAIN + UPLOAD_LINK(`${type}/` + item.path)).then(async r => {
-            let blobdata = await r.blob()
-            let file = new File([blobdata], r.url.substring(r.url.lastIndexOf('/') + 1))
-            return file
-        }
-        )
+        const map1 = await Promise.all(attachments.map(async (item: any) => await fetch(fileImport({ type: "preview", fileName: type + '/' + item.path }),
+            {
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
+            .then(async r => {
+                // const map1 = await Promise.all(attachments.map(async (item: any) => await fetch( UPLOAD_LINK(type,item.path)).then(async r => {
+                // const map1 = await Promise.all(attachments.map(async (item: any) => await fetch(UPLOAD_DOMAIN + UPLOAD_LINK(`${type}/` + item.path)).then(async r => {
+                let blobdata = await r.blob()
+                let file = new File([blobdata], r.url.substring(r.url.lastIndexOf('/') + 1))
+                return file
+            }
+            )
         ));
         return map1;
     }
@@ -55,13 +65,13 @@ export const extractFileBlob = async (attachments: any, type: string) => {
     return await blobImage;
 }
 
-export const restructApprover = (data: any) =>{
+export const restructApprover = (data: any) => {
 
-    let result= null
+    let result = null
 
-    if(data){
-        result   = data.map((item: any)=>{
-            return {user : item._id, status: "pending", updatedAt: moment(new Date()).format("YYYY-MM-DD") }
+    if (data) {
+        result = data.map((item: any) => {
+            return { user: item._id, status: "pending", updatedAt: moment(new Date()).format("YYYY-MM-DD") }
         })
     }
 
