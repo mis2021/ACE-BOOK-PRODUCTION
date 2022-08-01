@@ -18,7 +18,8 @@ const PostedByDetails = ({ firstName, lastName, department, profilePicture }: Pr
     <div>
       <div className="mb-2 flex items-center space-x-3">
         <Avatar
-          src={profilePicture ? `/uploads/profiles/${profilePicture}` : `/uploads/profiles/${_.get(user, 'profilePicture')}`}
+          fileName={profilePicture}
+          // src={profilePicture ? `/uploads/profiles/${profilePicture}` : `/uploads/profiles/${_.get(user, 'profilePicture')}`}
           title="user name"
           className="h-10 w-10"
         />

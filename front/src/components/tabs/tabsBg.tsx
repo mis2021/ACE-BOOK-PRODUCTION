@@ -1,9 +1,9 @@
 import { TabMenuType } from '@/types/custom';
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 type Props = {
-    action?:any;
-    menu?:any;
+    action?: any;
+    menu?: any;
     currentTab?: string;
 }
 
@@ -11,7 +11,7 @@ type Props = {
 
 
 
-const TabsBg = ({action, menu, currentTab}: Props) => {
+const TabsBg = ({ action, menu, currentTab }: Props) => {
 
     const [current, setCurrent] = useState<string>(currentTab as string)
 
@@ -24,14 +24,14 @@ const TabsBg = ({action, menu, currentTab}: Props) => {
                             menu.map((item: TabMenuType) => (
 
                                 <li className="mr-2">
-                                    <a href="#" 
-                                    onClick={()=>{
-                                        action? action(item.fetchCode) : {}
-                                        setCurrent(item.name as string)
-                                    }}
-                                    className={`
-                                    ${current === item.name ? 'text-teal-600 bg-gray-300 active':''}
-                                    ${current === item.name ? '':'hover:text-gray-600 hover:bg-gray-50'}
+                                    <a href="#"
+                                        onClick={() => {
+                                            action ? action(item.fetchCode) : {}
+                                            setCurrent(item.name as string)
+                                        }}
+                                        className={`
+                                    ${current === item.name ? 'text-teal-600 bg-gray-300 active' : ''}
+                                    ${current === item.name ? '' : 'hover:text-gray-600 hover:bg-gray-50'}
                                     inline-block
                                     p-3
                                     rounded-t-lg
@@ -39,6 +39,9 @@ const TabsBg = ({action, menu, currentTab}: Props) => {
                                     dark:hover:text-gray-300
                                     `}>
                                         {item.label}
+                                       { (item.count as any > 0 ) && <span className="inline-flex justify-center items-center ml-2 w-4 h-4 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+                                            {item.count} 
+                                        </span>}
                                     </a>
                                 </li>
                             ))

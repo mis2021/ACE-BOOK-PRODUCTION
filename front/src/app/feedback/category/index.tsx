@@ -1,24 +1,49 @@
 import HeaderDetails from '@/components/ui/headers/header-details'
 import React from 'react'
-import { useQuery } from '@apollo/client';
-import { GET_ALL_FBCATEGORY } from '@graphql/operations/feedbacks/feedbackQueries';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_ALL_FBCATEGORY, GET_LIST_FBCATQUE } from '@graphql/operations/feedbacks/feedbackQueries';
 import TitleWithSort from '@admin/components/ui/title-with-sort';
 import ActionButtons from "@admin/components/common/action-buttons";
 import { useIsRTL } from '@/utils/locals';
 import ACDataTable from '@/components/tables/data-table';
-import _ from 'lodash';
+import _, { conforms } from 'lodash';
+import { DELETE_FBQUESCATEGORY } from '@graphql/operations/feedbacks/feedbackMutations';
+import { toast } from 'react-toastify';
 
 type Props = {}
 
 const FeedbackCategoryApp = (props: Props) => {
   const { alignLeft, alignRight } = useIsRTL();
 
+  const [delCat] = useMutation(DELETE_FBQUESCATEGORY);
+
   const { data: allFbCats, refetch } = useQuery(GET_ALL_FBCATEGORY, {
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first',
   });
 
-  console.log("allFbCats", allFbCats)
+
+
+  const deleteCat = (id: string) => {
+    console.log("deleted", id)
+
+    if (confirm("Are you sure you want to delete category?")) {
+      delCat({
+        variables: {
+          input: {
+            categoryId: id
+          },
+        },
+      })
+        .then((resp) => {
+          toast.success('Category successfully deleted');
+          refetch()
+        })
+        .catch((error) => {
+          toast.error('Category failed to delete');
+        });
+    }
+  }
 
   const columns = [
     {
@@ -46,7 +71,9 @@ const FeedbackCategoryApp = (props: Props) => {
           id={id}
           editUrl={`/feedback/categories/form/${id}`}
           // editUrl={`${ROUTES.TAGS}/${id}/edit`}
-          deleteModalView="DELETE_TAG"
+          // deleteModalView={deleteCat}
+          callbackType={"REMOVE"}
+          callbackFunction={() => deleteCat(id)}
         />
       ),
     },

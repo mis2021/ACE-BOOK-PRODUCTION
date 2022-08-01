@@ -9,7 +9,7 @@ import TitleWithSort from '@admin/components/ui/title-with-sort';
 import { useIsRTL } from '@/utils/locals';
 import ACDataTable from '@/components/tables/data-table';
 import { useQuery } from '@apollo/client';
-import { GET_ALL_TICKETS } from '@graphql/operations/tickets/ticketQueries';
+import { GET_ALL_TICKETS, GET_TICKET_COUNTS } from '@graphql/operations/tickets/ticketQueries';
 import _ from 'lodash';
 import { TicketFormValues, TicketVarType } from '@/types/tickets/ticketType';
 import { ticketStatusIdentifier, ticketTypeIdentifier } from '@/constants/options';
@@ -21,13 +21,15 @@ import { TabMenuType } from '@/types/custom';
 type Props = {}
 
 type StateType = {
+    currentTab?: string;
     ticketData: any[];
     currentDropdown?: string;
 }
 
 const initialData: StateType = {
     ticketData: [],
-    currentDropdown: "My Requests"
+    currentDropdown: "My Requests",
+    currentTab: "MY_REQUESTS"
 }
 
 const TicketMain = (props: Props) => {
@@ -44,6 +46,17 @@ const TicketMain = (props: Props) => {
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first',
     });
+
+
+    const { data: ticketCounter, refetch: refetchCount, error:errorCount } = useQuery(GET_TICKET_COUNTS, {
+        variables: {
+            userId: _.get(user, "_id")
+        },
+        fetchPolicy: 'cache-and-network',
+        nextFetchPolicy: 'cache-first',
+    });
+
+    console.log("ticketCounter", ticketCounter)
 
     const columns = [
         // {
@@ -122,7 +135,7 @@ const TicketMain = (props: Props) => {
     }, [allTickets]);
 
 
-    const refetchingData = (data: string)=>{
+    const refetchingData = (data: string) => {
         console.log("passed", data)
         switch (data) {
             case "all":
@@ -155,70 +168,74 @@ const TicketMain = (props: Props) => {
     }
 
     const tabAction = (data: any) => {
-            // refetchingData(data)
-            refetch({
-                type:data,
-                userId: _.get(user, "_id")
-            })
+        // refetchingData(data)
+
+        refetch({
+            type: data,
+            userId: _.get(user, "_id")
+        })
+        setState((p) => ({ ...p, currentTab: data }));
     }
 
-    const dropAction = (data:TabMenuType)=>{
+    const dropAction = (data: TabMenuType) => {
         console.log("data.fetchCode", data.fetchCode)
         refetch({
             type: data.fetchCode,
             userId: _.get(user, "_id"),
-            departmentId:  _.get(user, "departmentOnDuty._id")
+            departmentId: _.get(user, "departmentOnDuty._id")
         })
         setState((p) => ({ ...p, currentDropdown: data.label }));
     }
 
-    
-const menuTab: TabMenuType[] = [
-    {
-        name: 'all',
-        label: 'All',
-        fetchCode: 'MY_REQUESTS',
-        default: true
-    },
-    {
-        name: 'myApprovals',
-        fetchCode: 'FOR_APPROVAL',
-        label: 'My Approvals',
-        default: false
-    },
-    {
-        name: 'approved',
-        fetchCode: 'APPROVED', 
-        label: 'Approved',
-        default: false
-    },
 
-]
+    const menuTab: TabMenuType[] = [
+        {
+            name: 'all',
+            label: 'All',
+            fetchCode: 'MY_REQUESTS',
+            default: true
+        },
+        {
+            name: 'myApprovals',
+            fetchCode: 'FOR_APPROVAL',
+            label: 'My Approvals',
+            default: false,
+            count: _.get(ticketCounter, "ticketCounts.data.forApproval")
+        },
+        {
+            name: 'approved',
+            fetchCode: 'APPROVED',
+            label: 'Approved',
+            default: false
+        },
 
-const menuDropdown: TabMenuType[] = [
-    {
-        name: 'MY_REQUESTS ',
-        fetchCode: 'MY_REQUESTS',
-        label: 'My Requests'
-    },
-    {
-        name: 'ALL_APPR_ASSIG',
-        fetchCode: 'ALL_APPR_ASSIG',
-        label: 'My Assignatories',
-    },
-    {
-        name: 'DEPARTMENT_TICKETS',
-        fetchCode: 'DEPARTMENT_TICKETS',
-        label: 'Department Tickets',
-    }
+    ]
 
-]
+    const menuDropdown: TabMenuType[] = [
+        {
+            name: 'MY_REQUESTS ',
+            fetchCode: 'MY_REQUESTS',
+            label: 'My Requests'
+        },
+        {
+            name: 'ALL_APPR_ASSIG',
+            fetchCode: 'ALL_APPR_ASSIG',
+            label: 'My Assignatories',
+        },
+        {
+            name: 'DEPARTMENT_TICKETS',
+            fetchCode: 'DEPARTMENT_TICKETS',
+            label: 'Department Tickets',
+        }
+
+    ]
 
     return (
         <div>
-            <TabsBg action={tabAction} menu={menuTab} currentTab="all"/>
+
+            <TabsBg action={tabAction} menu={menuTab} currentTab="all" />
             <div className='flex justify-start pl-2 pb-5'>
-                <Dropdown menu={menuDropdown} btnName={state.currentDropdown} action={dropAction}/>
+                {state.currentTab === "MY_REQUESTS" && <Dropdown menu={menuDropdown} btnName={state.currentDropdown} action={dropAction} />}
             </div>
             <ACDataTable columns={columns} data={state.ticketData} />
         </div>

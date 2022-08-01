@@ -10,8 +10,18 @@ pipeline {
             }
         }
 
-        stage('Build and Run docker ') {
+        stage('Build docker ') {
             steps {  
+	  sh 'docker-compose build'
+	  sh 'docker-compose down'
+
+            }
+        }
+
+ stage('run docker ') {
+            steps {  
+	  sh 'docker-compose up -d app-api --build'
+	  sh 'docker-compose up -d app-file-srv --build'
 	  sh 'docker-compose up -d'
 
             }

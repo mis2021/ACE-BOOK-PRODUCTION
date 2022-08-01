@@ -11,4 +11,5 @@ export type TabMenuType = {
     label?: string;
     default?: boolean;
     fetchCode?: string;
+    count?: number
 }

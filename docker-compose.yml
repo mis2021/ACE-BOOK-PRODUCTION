@@ -11,6 +11,17 @@ services:
       - /usr/src/app/acebook/api/dist
       - /usr/src/app/acebook/api/node_modules
 
+  app-file:
+      build: ./file-srv
+      user: root
+      ports:
+        - "3002:3002"
+      restart: always
+      volumes:
+        - /var/lib/jenkins/workspace/ace_book/file-srv:/usr/src/app/acebook/file-srv
+        - /usr/src/app/acebook/file-srv/dist
+        - /usr/src/app/acebook/file-srv/node_modules
+
   app-front:
     build: ./front
     user: root
@@ -53,5 +64,6 @@ services:
 
 volumes:
   api:
+  file-srv:
   front:
   database-data:

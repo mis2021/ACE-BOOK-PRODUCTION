@@ -158,6 +158,7 @@ const PostForm = ({ data: defaults }: Props) => {
                                     firstName={defaults ? defaults?.postedBy?.firstName : _.get(user, 'firstName')}
                                     lastName={defaults ? defaults?.postedBy?.lastName : _.get(user, 'lastName')}
                                     department={defaults ? defaults?.postedBy?.department : _.get(user, 'departmentOnDuty.name')}
+                                    profilePicture={defaults ? defaults?.postedBy?.profilePicture : _.get(user, 'profilePicture')}
                                 />
                             </div>
                             <div className="row-span-3 place-self-end"><Button loading={false}>Post</Button></div>
