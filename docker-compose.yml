@@ -19,8 +19,7 @@ services:
       restart: always
       volumes:
         - /var/lib/jenkins/workspace/ace_book/file-srv:/usr/src/app/acebook/file-srv
-        - /usr/src/app/acebook/file-srv/dist
-        - /usr/src/app/acebook/file-srv/node_modules
+        - /mnt/nas:/usr/src/app/acebook/file-srv/public/ftp/uploads
 
   app-front:
     build: ./front
