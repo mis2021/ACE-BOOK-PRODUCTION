@@ -79,7 +79,7 @@ const LoginForm = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input
-          label={t('Username - CHNGE')}
+          label={t('Username')}
           {...register('username')}
           type="text"
           // type="email"
