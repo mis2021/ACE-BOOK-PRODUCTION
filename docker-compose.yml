@@ -20,6 +20,7 @@ services:
       volumes:
         - /var/lib/jenkins/workspace/ace_book/file-srv:/usr/src/app/acebook/file-srv
         - /mnt/nas:/usr/src/app/acebook/file-srv/public/ftp/uploads
+        - /usr/src/app/acebook/file-srv/node_modules
 
   app-front:
     build: ./front
