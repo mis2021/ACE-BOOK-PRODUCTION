@@ -21,7 +21,6 @@ pipeline {
  stage('run docker ') {
             steps {  
 	  sh 'docker-compose up -d app-api --build'
-	  sh 'docker-compose up -d app-file-srv --build'
 	  sh 'docker-compose up -d'
 
             }
