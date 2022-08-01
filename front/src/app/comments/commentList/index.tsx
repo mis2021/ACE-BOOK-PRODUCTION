@@ -11,7 +11,7 @@ import { CommentContext } from '@/reducers/comments/commentContext';
 type Props = {}
 
 const CommentList = (props: Props) => {
-    const [state, dispatch] = React.useContext(CommentContext)
+    const [state, dispatch] = React.useContext<any>(CommentContext)
     const postContext = useContext(PostContext);
 
     const { data: postComments, refetch, loading: commentLoading } = useQuery(GET_POST_COMMENTS, {

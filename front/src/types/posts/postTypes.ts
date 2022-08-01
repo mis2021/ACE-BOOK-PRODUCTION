@@ -25,6 +25,7 @@ export type PostedByType = {
   firstName: string;
   lastName: string;
   department: string;
+  profilePicture?: string;
 }
 
 export type PostFormDefaultType = {

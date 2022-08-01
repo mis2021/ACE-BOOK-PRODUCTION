@@ -15,7 +15,8 @@ const CommentedByDetails = ({ firstName, lastName, created_at, profilePicture }:
     <div>
       <div className=" flex items-center space-x-3">
         <Avatar
-          src={ profilePicture ? `/uploads/profiles/${profilePicture}` :  '/_next/static/media/avatar.c9441dc8.svg'}
+          fileName={profilePicture}
+          // src={ profilePicture ? `/uploads/profiles/${profilePicture}` :  '/_next/static/media/avatar.c9441dc8.svg'}
           title="user name"
           className="h-7 w-7"
         />

@@ -9,7 +9,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import ImageView from '@/components/attachments/imageView';
 
 type Props = {
   attachments?: any;
@@ -41,6 +40,9 @@ const PostImageContent = ({ attachments }: Props) => {
       <div className="relative">
         <Swiper
           id="POST"
+          //TODO: need discussion
+          // loop={true}
+          // breakpoints={offerSliderBreakpoints}
           modules={[Navigation]}
           slidesPerView={attachments.length == 1 ? 1 : 2}
           spaceBetween={16}
@@ -59,17 +61,28 @@ const PostImageContent = ({ attachments }: Props) => {
 
                 <div className='flex  justify-center  content-center'>
                   <div className='max-w-sm  max-h-[30rem]   rounded-lg object-cover object-center  aspect-auto'>
+                  {/* <div className='max-w-sm  max-h-[27rem] px-4 rounded-lg object-cover object-center  aspect-auto'> */}
+                    {/* <div className='max-h-96 rounded-lg object-cover object-center  aspect-auto'> */}
 
-                    {/* <img
+                    {/* <Image
+                    key={index}
+                    className="w-full h-auto rounded-lg object-cover object-center"
+                    // className="block h-full w-full rounded-lg object-cover object-center "
+                    src={require('../../../../uploads/' + i.path) ? require('../../../../uploads/' + i.path)  : ''}
+                    // src={i.image}
+                    alt={'sample'}
+                    layout="responsive"
+                  /> */}
+                    <img
                       key={index}
                       className=" rounded-lg object-cover object-center "
-                      src={UPLOAD_LINK('images', i.path)}
+                      // className="w-full h-auto rounded-lg object-cover object-center"
+                      // src={'https://data-flair.training/blogs/wp-content/uploads/sites/2/2020/07/image-5Images-folder-one-level-up-the-current-web-page%E2%80%99s-folder.png'}
+                      src={UPLOAD_LINK('images',i.path)}
+                      // src={UPLOAD_LINK('images/' + i.path)}
+                      // src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
                       alt="new"
-                    /> */}
-
-                    
-                    <ImageView index={index} className='rounded-lg object-cover object-center' fileName={'images/'+i.path} />
-
+                    />
 
                   </div>
                 </div>
