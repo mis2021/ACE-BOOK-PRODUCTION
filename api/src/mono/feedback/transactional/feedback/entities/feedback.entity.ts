@@ -14,7 +14,7 @@ export class FeedbackEnt extends CoreEntityMg {
 @InputType('FeedbackInputType', { isAbstract: true })
 @ObjectType()
 export class FeedbackInput extends CoreEntityMg {
- remarks: string;
+ remarks?: string;
  category: string;
  feedback: FeedbackQAInput[]
 }

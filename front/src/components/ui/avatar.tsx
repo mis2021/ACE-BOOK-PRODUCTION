@@ -28,6 +28,7 @@ const Avatar: React.FC<AvatarProps> = ({ src, className, title, fileName, ...res
       <Image alt={title}   
       onError={() => setImgerror(true)}
       src={src ?? (imgerror ? DEFAULT_IMAGE : fileImport({ type: "profile", fileName: 'profiles/'+fileName }))} layout="fill" priority={true} />
+      {/* src={src ?? (imgerror ? DEFAULT_IMAGE : fileImport({ type: "profile", fileName: 'profiles/'+fileName }))} layout="fill" priority={true} /> */}
       {/* <Image alt={title} src={src} layout="fill" priority={true} /> */}
     </div>
   );
