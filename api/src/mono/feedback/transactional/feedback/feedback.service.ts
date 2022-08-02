@@ -38,7 +38,10 @@ export class FeedbackService {
   }
 
   async findAll({ page, first }: PaginationArgs) {
-    const feedback: FeedbackEnt[] = await Feedback.find();
+    const feedback: FeedbackEnt[] = await Feedback.find()
+    .populate('category')
+    .populate({ path: 'feedback.question',  model: 'FBQuestion' })
+    ;
     return {
       data: feedback,
       paginatorInfo: paginate(
