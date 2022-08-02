@@ -48,7 +48,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - database-data:/data/db
+      - /root/mongodb:/data/db
 
 
   mongo-express:

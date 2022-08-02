@@ -60,3 +60,25 @@ query ExampleQuery {
 }
 
 `
+
+export const GET_FEEDBACKS = gql`
+query Data {
+  feedbacks {
+    data {
+      _id
+      created_at
+      remarks
+      category {
+        name
+      }
+      feedback {
+        question {
+          question
+        }
+        answer
+      }
+      
+    }
+  }
+}
+`
